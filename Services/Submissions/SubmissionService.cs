@@ -3,6 +3,7 @@ using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Models;
 using IntelligentProgrammingPlatform.Models.Enums;
 using IntelligentProgrammingPlatform.Services.CodeExecution;
+using IntelligentProgrammingPlatform.Services.Leaderboards;
 using IntelligentProgrammingPlatform.ViewModels.Submissions;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,16 +16,18 @@ public sealed class SubmissionService
     private readonly SubmissionExecutionGate _gate;
     private readonly IHostApplicationLifetime _lifetime;
     private readonly ILogger<SubmissionService> _logger;
+    private readonly LeaderboardService _leaderboard;
 
     // Сақтау, Docker орындау және параллельдік шектеу қызметтерін біріктіреді.
     public SubmissionService(ApplicationDbContext db, DockerCodeRunner runner, SubmissionExecutionGate gate,
-        IHostApplicationLifetime lifetime, ILogger<SubmissionService> logger)
+        IHostApplicationLifetime lifetime, ILogger<SubmissionService> logger, LeaderboardService leaderboard)
     {
         _db = db;
         _runner = runner;
         _gate = gate;
         _lifetime = lifetime;
         _logger = logger;
+        _leaderboard = leaderboard;
     }
 
     // Рұқсат етілген жіберілімді алдымен сақтап, Docker аяқталған соң нәтижесін жаңартады.
@@ -153,10 +156,24 @@ public sealed class SubmissionService
             submission.ExecutionTimeMs = measured.Count == 0 ? null : measured.Sum(result => result.ExecutionTimeMs!.Value);
             // Сұрау жабылса да, соңғы күйді қысқа жеке операциямен сақтауға тырысамыз.
             using var saveDeadline = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-            try { await _db.SaveChangesAsync(saveDeadline.Token); }
+            var saved = false;
+            try
+            {
+                await _db.SaveChangesAsync(saveDeadline.Token);
+                saved = true;
+            }
             catch (Exception exception)
             {
                 _logger.LogError(exception, "Could not persist final state for submission {SubmissionId}", submission.Id);
+            }
+            if (saved)
+            {
+                using var summaryDeadline = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+                try { await _leaderboard.RecalculateUserAsync(submission.UserId, summaryDeadline.Token); }
+                catch (Exception exception)
+                {
+                    _logger.LogError(exception, "Leaderboard update failed after submission {SubmissionId}; an admin can rebuild it", submission.Id);
+                }
             }
         }
     }

@@ -222,7 +222,7 @@ def main():
     finally:
         # Only this run's unique accounts and fixtures are removed, in FK order.
         addresses = ','.join("'" + email + "'" for email in emails)
-        sql(f"DELETE e FROM ExecutionResults e JOIN Submissions s ON s.Id=e.SubmissionId JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email IN ({addresses}); DELETE s FROM Submissions s JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email IN ({addresses}); DELETE FROM TestCases WHERE ProgrammingTaskId IN (SELECT Id FROM ProgrammingTasks WHERE Slug='{fixture_slug}'); DELETE FROM ProgrammingTasks WHERE Slug='{fixture_slug}'; DELETE FROM Runtimes WHERE LanguageKey='{fixture_slug}'; DELETE FROM AspNetUsers WHERE Email IN ({addresses});")
+        sql(f"DELETE e FROM ExecutionResults e JOIN Submissions s ON s.Id=e.SubmissionId JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email IN ({addresses}); DELETE s FROM Submissions s JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email IN ({addresses}); DELETE FROM TestCases WHERE ProgrammingTaskId IN (SELECT Id FROM ProgrammingTasks WHERE Slug='{fixture_slug}'); DELETE FROM ProgrammingTasks WHERE Slug='{fixture_slug}'; DELETE FROM Runtimes WHERE LanguageKey='{fixture_slug}'; DELETE l FROM Leaderboards l JOIN AspNetUsers u ON u.Id=l.UserId WHERE u.Email IN ({addresses}); DELETE FROM AspNetUsers WHERE Email IN ({addresses});")
         print('Removed this run\'s verification accounts, submissions and fixture rows.', flush=True)
 
 
@@ -249,7 +249,7 @@ def verify_unavailable():
         check(student.request('/Tasks')[0] == 200, 'Application remains available without Docker')
         print('DOCKER-UNAVAILABLE VERIFICATION PASSED (including cached failure).', flush=True)
     finally:
-        sql(f"DELETE e FROM ExecutionResults e JOIN Submissions s ON s.Id=e.SubmissionId JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email='{email}'; DELETE s FROM Submissions s JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email='{email}'; DELETE FROM AspNetUsers WHERE Email='{email}';")
+        sql(f"DELETE e FROM ExecutionResults e JOIN Submissions s ON s.Id=e.SubmissionId JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email='{email}'; DELETE s FROM Submissions s JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email='{email}'; DELETE l FROM Leaderboards l JOIN AspNetUsers u ON u.Id=l.UserId WHERE u.Email='{email}'; DELETE FROM AspNetUsers WHERE Email='{email}';")
         print('Removed unavailable-check fixture data.', flush=True)
 
 

@@ -2,6 +2,7 @@ using System.Security.Claims;
 using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Services.CodeExecution;
 using IntelligentProgrammingPlatform.Services.Submissions;
+using IntelligentProgrammingPlatform.Services.AI;
 using IntelligentProgrammingPlatform.ViewModels.Submissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,15 +18,17 @@ public class SubmissionsController : Controller
     private readonly SubmissionService _submissions;
     private readonly TaskPageService _pages;
     private readonly ILogger<SubmissionsController> _logger;
+    private readonly OpenAiTutorService _ai;
 
     // Контроллерге тексеру, қауіпсіз бет құру және сақтау қызметтерін береді.
     public SubmissionsController(ApplicationDbContext db, SubmissionService submissions, TaskPageService pages,
-        ILogger<SubmissionsController> logger)
+        ILogger<SubmissionsController> logger, OpenAiTutorService ai)
     {
         _db = db;
         _submissions = submissions;
         _pages = pages;
         _logger = logger;
+        _ai = ai;
     }
 
     [HttpPost, RequestSizeLimit(512 * 1024)]
@@ -105,6 +108,29 @@ public class SubmissionsController : Controller
                     ErrorMessage = result.TestCase.IsHidden ? null : result.ErrorMessage
                 }).ToList()
             }).SingleOrDefaultAsync(cancellationToken);
-        return model == null ? NotFound() : View(model);
+        if (model == null) return NotFound();
+        model.AiConfigured = _ai.IsConfigured;
+        model.AiFeedback = await _ai.GetExistingAsync(id, userId!, cancellationToken);
+        return View(model);
+    }
+
+    [HttpPost]
+    // Иесінің жіберіліміне AI талдауын тек CSRF қорғалған айқын сұраумен бастайды.
+    public async Task<IActionResult> Analyze(long id, CancellationToken cancellationToken)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null) return Challenge();
+        var result = await _ai.AnalyzeAsync(id, userId, cancellationToken);
+        if (result.Status == AiAnalysisStatus.NotFound) return NotFound();
+        TempData["AiMessage"] = result.Status switch
+        {
+            AiAnalysisStatus.Saved => "AI feedback is ready. Treat it as advice and check it against the task.",
+            AiAnalysisStatus.Existing => "Showing the existing AI feedback; no new analysis was requested.",
+            AiAnalysisStatus.NotFinished => "Wait until the submission has finished before requesting AI feedback.",
+            AiAnalysisStatus.NotConfigured => "AI feedback is not configured.",
+            AiAnalysisStatus.Busy => "AI feedback is busy or was requested recently. Please wait 30 seconds and try again.",
+            _ => "AI feedback is temporarily unavailable."
+        };
+        return RedirectToAction(nameof(Details), new { id });
     }
 }

@@ -298,7 +298,7 @@ def main():
             DELETE FROM TestCases WHERE ProgrammingTaskId IN (SELECT Id FROM ProgrammingTasks WHERE Slug='{slug}');
             DELETE FROM ProgrammingTasks WHERE Slug='{slug}';
             DELETE FROM Topics WHERE Name='{topic_name}';
-            DELETE FROM AspNetUsers WHERE Email='{email}';
+            DELETE l FROM Leaderboards l JOIN AspNetUsers u ON u.Id=l.UserId WHERE u.Email='{email}'; DELETE FROM AspNetUsers WHERE Email='{email}';
             COMMIT;
         """)
         print("Removed this run's temporary verification data.", flush=True)

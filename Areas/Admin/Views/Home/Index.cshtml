@@ -6,3 +6,11 @@
     <a class="list-group-item list-group-item-action" asp-controller="ProgrammingTasks" asp-action="Index">Programming tasks</a>
     <a class="list-group-item list-group-item-action" asp-controller="TestCases" asp-action="Index">Test cases</a>
 </div>
+<section class="mt-4">
+    <h2 class="h4">Leaderboard</h2>
+    <p>Recalculate cached scores and counts from submission history.</p>
+    @if (TempData["Error"] is string error) { <div class="alert alert-warning">@error</div> }
+    <form asp-controller="Leaderboard" asp-action="Rebuild" method="post">
+        <button class="btn btn-outline-primary" type="submit">Rebuild leaderboard</button>
+    </form>
+</section>

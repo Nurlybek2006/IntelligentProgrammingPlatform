@@ -29,6 +29,36 @@
 }
 <h2 class="h4">Submitted source code</h2>
 <pre class="source-fallback p-3"><code>@Model.SourceCode</code></pre>
+<section class="card my-4" aria-labelledby="ai-tutor-heading">
+    <div class="card-body">
+        <h2 id="ai-tutor-heading" class="h4">AI Tutor</h2>
+        @if (TempData["AiMessage"] is string message) { <p class="alert alert-info" role="status">@message</p> }
+        @if (Model.AiFeedback is { } feedback)
+        {
+            <p><strong>@feedback.Summary</strong></p>
+            <p>Error category: <span class="badge bg-secondary">@feedback.ErrorCategory</span></p>
+            <div class="text-content mb-3">@feedback.Explanation</div>
+            <h3 class="h6">Hints</h3>
+            <ol>@foreach (var hint in feedback.Hints) { <li>@hint</li> }</ol>
+            <p class="text-muted">AI advice can be mistaken. Edit and submit your code yourself to verify it.</p>
+        }
+        else if (Model.FinishedAt == null || Model.Status is SubmissionStatus.Pending or SubmissionStatus.Compiling or SubmissionStatus.Running)
+        {
+            <p>AI feedback is available after the submission finishes.</p>
+        }
+        else if (!Model.AiConfigured)
+        {
+            <p>AI feedback is not configured.</p>
+        }
+        else
+        {
+            <p>Get an explanation and hints without a ready-made solution. This sends your code, task text and visible failed-test details to OpenAI. Hidden test content is excluded.</p>
+            <form asp-action="Analyze" asp-route-id="@Model.Id" method="post">
+                <button class="btn btn-outline-primary" type="submit">Analyze with AI</button>
+            </form>
+        }
+    </div>
+</section>
 <h2 class="h4">Test results</h2>
 @foreach (var result in Model.Results)
 {

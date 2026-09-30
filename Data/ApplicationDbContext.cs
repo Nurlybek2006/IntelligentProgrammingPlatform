@@ -20,6 +20,7 @@ namespace IntelligentProgrammingPlatform.Data
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<ExecutionResult> ExecutionResults { get; set; }
         public DbSet<Leaderboard> Leaderboards { get; set; }
+        public DbSet<AiFeedback> AiFeedbacks { get; set; }
 
         // Identity мен домен кестелерінің байланыстарын және шектеулерін баптайды.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -118,6 +119,23 @@ namespace IntelligentProgrammingPlatform.Data
                     .WithMany(testCase => testCase.ExecutionResults)
                     .HasForeignKey(result => result.TestCaseId)
                     .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            modelBuilder.Entity<AiFeedback>(entity =>
+            {
+                entity.Property(feedback => feedback.UserId).HasMaxLength(450).IsRequired();
+                entity.Property(feedback => feedback.Model).HasMaxLength(100).IsRequired();
+                entity.Property(feedback => feedback.Summary).HasMaxLength(600).IsRequired();
+                entity.Property(feedback => feedback.Explanation).HasMaxLength(3000).IsRequired();
+                entity.Property(feedback => feedback.HintsJson).HasMaxLength(6000).IsRequired();
+                entity.Property(feedback => feedback.ErrorCategory).HasMaxLength(30).IsRequired();
+                entity.HasIndex(feedback => feedback.SubmissionId).IsUnique();
+                entity.HasOne(feedback => feedback.Submission)
+                    .WithOne(submission => submission.AiFeedback)
+                    .HasForeignKey<AiFeedback>(feedback => feedback.SubmissionId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(feedback => feedback.User).WithMany()
+                    .HasForeignKey(feedback => feedback.UserId).OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Leaderboard>(entity =>

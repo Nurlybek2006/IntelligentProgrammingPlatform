@@ -2,6 +2,9 @@ using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Models;
 using IntelligentProgrammingPlatform.Services.CodeExecution;
 using IntelligentProgrammingPlatform.Services.Submissions;
+using IntelligentProgrammingPlatform.Services.Leaderboards;
+using IntelligentProgrammingPlatform.Services.Progress;
+using IntelligentProgrammingPlatform.Services.AI;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +51,18 @@ builder.Services.AddSingleton<DockerCodeRunner>();
 builder.Services.AddSingleton<SubmissionExecutionGate>();
 builder.Services.AddScoped<SubmissionService>();
 builder.Services.AddScoped<TaskPageService>();
+
+// Прогресті тарихтан есептеп, рейтинг summary жаңартуларын реттейді.
+builder.Services.AddScoped<ProgressService>();
+builder.Services.AddSingleton<LeaderboardUpdateGate>();
+builder.Services.AddScoped<LeaderboardService>();
+
+// API кілтін конфигурациядан алып, AI шақыруын студенттің жеке әрекетіне ғана қосады.
+builder.Services.Configure<AiTutorOptions>(builder.Configuration.GetSection("OpenAI"));
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<AiRequestGate>();
+builder.Services.AddSingleton<IAiFeedbackClient, OpenAiFeedbackClient>();
+builder.Services.AddScoped<OpenAiTutorService>();
 
 var app = builder.Build();
 

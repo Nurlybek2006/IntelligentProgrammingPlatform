@@ -19,6 +19,8 @@ public class SubmissionDetailsViewModel
     public DateTime? StartedAt { get; set; }
     public DateTime? FinishedAt { get; set; }
     public List<TestResultViewModel> Results { get; set; } = new();
+    public AiFeedbackViewModel? AiFeedback { get; set; }
+    public bool AiConfigured { get; set; }
 }
 
 public class TestResultViewModel
