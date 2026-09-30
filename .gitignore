@@ -1,0 +1,34 @@
+# Visual Studio
+.vs/
+.vscode/
+
+# Build files
+bin/
+obj/
+
+# User-specific Visual Studio files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets.json
+
+# Local development settings that may contain secrets
+appsettings.Development.json
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
