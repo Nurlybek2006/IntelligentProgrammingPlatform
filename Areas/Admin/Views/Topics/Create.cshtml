@@ -1,0 +1,9 @@
+@model TopicFormViewModel
+@{ ViewData["Title"] = "Create topic"; }
+<h1>Create topic</h1>
+<form asp-action="Create" method="post" class="col-lg-8">
+    <partial name="_Form" model="Model" />
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts { <partial name="/Views/Shared/_ValidationScriptsPartial.cshtml" /> }

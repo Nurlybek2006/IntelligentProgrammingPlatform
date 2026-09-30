@@ -1,0 +1,31 @@
+@model ProgrammingTask
+@{ ViewData["Title"] = Model.Title; }
+<a asp-action="Index">Back to task management</a>
+<h1 class="mt-3">@Model.Title</h1>
+<p>@Model.Topic.Name · @Model.Difficulty · @(Model.IsPublished ? "Published" : "Unpublished")</p>
+<dl class="row">
+    <dt class="col-sm-3">Slug</dt><dd class="col-sm-9">@Model.Slug</dd>
+    <dt class="col-sm-3">Time / memory limit</dt><dd class="col-sm-9">@Model.TimeLimitMs ms / @Model.MemoryLimitMb MB</dd>
+    <dt class="col-sm-3">Created (UTC)</dt><dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+</dl>
+<div class="text-content mb-3">@Model.Description</div>
+<p>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit task</a>
+    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete task</a>
+    @if (Model.IsPublished)
+    {
+        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.Slug">Public page</a>
+    }
+</p>
+<h2>Test cases</h2>
+<p><a class="btn btn-primary" asp-controller="TestCases" asp-action="Create" asp-route-taskId="@Model.Id">Add test case</a>
+<a class="btn btn-outline-secondary" asp-controller="TestCases" asp-action="Index" asp-route-taskId="@Model.Id">Manage test cases</a></p>
+<div class="table-responsive"><table class="table">
+<thead><tr><th>Order</th><th>Input</th><th>Expected output</th><th>Hidden</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var test in Model.TestCases)
+{
+    <tr><td>@test.Order</td><td><pre class="test-data">@test.Input</pre></td><td><pre class="test-data">@test.ExpectedOutput</pre></td><td>@(test.IsHidden ? "Yes" : "No")</td><td><a asp-controller="TestCases" asp-action="Edit" asp-route-id="@test.Id">Edit</a> | <a asp-controller="TestCases" asp-action="Delete" asp-route-id="@test.Id">Delete</a></td></tr>
+}
+</tbody>
+</table></div>

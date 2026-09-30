@@ -1,0 +1,26 @@
+@using IntelligentProgrammingPlatform.Models.Enums
+@model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskCatalogViewModel
+@{ ViewData["Title"] = "Tasks"; }
+<h1>Programming tasks</h1>
+<form asp-action="Index" method="get" class="row g-3 mb-4">
+    <div class="col-md-4"><label asp-for="Search" class="form-label">Title</label><input asp-for="Search" class="form-control" placeholder="Search tasks" /></div>
+    <div class="col-md-3"><label asp-for="TopicId" class="form-label">Topic</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">All topics</option></select></div>
+    <div class="col-md-3"><label asp-for="Difficulty" class="form-label"></label><select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<Difficulty>()" class="form-select"><option value="">All difficulties</option></select></div>
+    <div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary" type="submit">Filter</button><a asp-action="Index" class="btn btn-link">Reset</a></div>
+</form>
+@if (Model.Tasks.Count == 0)
+{
+    <p>No published tasks match these filters.</p>
+}
+else
+{
+    <div class="table-responsive"><table class="table table-striped">
+        <thead><tr><th>Title</th><th>Topic</th><th>Difficulty</th></tr></thead>
+        <tbody>
+        @foreach (var task in Model.Tasks)
+        {
+            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td>@task.Difficulty</td></tr>
+        }
+        </tbody>
+    </table></div>
+}

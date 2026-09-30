@@ -1,0 +1,17 @@
+@model IReadOnlyList<ProgrammingTask>
+@{ ViewData["Title"] = "Manage tasks"; }
+<a asp-controller="Home" asp-action="Index">Admin</a>
+<h1>Programming tasks</h1>
+<p><a class="btn btn-primary" asp-action="Create">Create task</a></p>
+<div class="table-responsive"><table class="table">
+    <thead><tr><th>Title</th><th>Topic</th><th>Difficulty</th><th>Published</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var task in Model)
+    {
+        <tr><td><a asp-action="Details" asp-route-id="@task.Id">@task.Title</a></td><td>@task.Topic.Name</td><td>@task.Difficulty</td><td>@(task.IsPublished ? "Yes" : "No")</td><td>
+            <a asp-action="Edit" asp-route-id="@task.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@task.Id">Delete</a>
+        </td></tr>
+    }
+    </tbody>
+</table></div>

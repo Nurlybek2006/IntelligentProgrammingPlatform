@@ -1,0 +1,9 @@
+@model ProgrammingTask
+@{ ViewData["Title"] = "Delete task"; }
+<h1>Delete task</h1>
+<p>Delete <strong>@Model.Title</strong>? Tasks with submissions are protected. Remove unused test cases first.</p>
+<div asp-validation-summary="All" class="text-danger" role="alert"></div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button class="btn btn-danger" type="submit">Delete task</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+</form>

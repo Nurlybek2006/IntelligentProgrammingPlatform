@@ -1,0 +1,25 @@
+@model IReadOnlyList<TestCase>
+@{ ViewData["Title"] = "Test cases"; }
+<a asp-controller="ProgrammingTasks" asp-action="Index">Programming tasks</a>
+<h1>Test cases</h1>
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-md-6"><label for="taskId" class="form-label">Programming task</label><select name="taskId" id="taskId" asp-items="ViewBag.Tasks" class="form-select"><option value="">All tasks</option></select></div>
+    <div class="col-auto d-flex align-items-end"><button class="btn btn-secondary" type="submit">Filter</button></div>
+</form>
+@if (ViewBag.TaskId != null)
+{
+    <p><a class="btn btn-primary" asp-action="Create" asp-route-taskId="@ViewBag.TaskId">Add test case</a> <a asp-controller="ProgrammingTasks" asp-action="Details" asp-route-id="@ViewBag.TaskId">Task details</a></p>
+}
+else
+{
+    <p>Select a task to add a test case.</p>
+}
+<div class="table-responsive"><table class="table">
+<thead><tr><th>Task</th><th>Order</th><th>Input</th><th>Expected output</th><th>Hidden</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var test in Model)
+{
+    <tr><td>@test.ProgrammingTask.Title</td><td>@test.Order</td><td><pre class="test-data">@test.Input</pre></td><td><pre class="test-data">@test.ExpectedOutput</pre></td><td>@(test.IsHidden ? "Yes" : "No")</td><td><a asp-action="Edit" asp-route-id="@test.Id">Edit</a> | <a asp-action="Delete" asp-route-id="@test.Id">Delete</a></td></tr>
+}
+</tbody>
+</table></div>

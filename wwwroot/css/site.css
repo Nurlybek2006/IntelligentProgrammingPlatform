@@ -21,6 +21,9 @@ body {
   margin-bottom: 60px;
 }
 
+.text-content { white-space: pre-wrap; overflow-wrap: anywhere; }
+.test-data { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 16rem; overflow: auto; }
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;

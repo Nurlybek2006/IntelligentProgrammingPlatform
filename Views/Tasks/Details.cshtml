@@ -1,0 +1,23 @@
+@model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskDetailsViewModel
+@{ ViewData["Title"] = Model.Title; }
+<a asp-action="Index">Back to tasks</a>
+<h1 class="mt-3">@Model.Title</h1>
+<p><span class="badge bg-secondary">@Model.TopicName</span> <span class="badge bg-primary">@Model.Difficulty</span></p>
+<p>Time limit: <strong>@Model.TimeLimitMs ms</strong> · Memory limit: <strong>@Model.MemoryLimitMb MB</strong></p>
+<div class="text-content mb-4">@Model.Description</div>
+<h2>Examples</h2>
+@if (Model.Examples.Count == 0)
+{
+    <p>No examples are available.</p>
+}
+@for (var index = 0; index < Model.Examples.Count; index++)
+{
+    var example = Model.Examples[index];
+    <section class="card mb-3">
+        <div class="card-body">
+            <h3 class="h5">Example @(index + 1)</h3>
+            <h4 class="h6">Input</h4><pre class="test-data">@example.Input</pre>
+            <h4 class="h6">Expected output</h4><pre class="test-data">@example.ExpectedOutput</pre>
+        </div>
+    </section>
+}

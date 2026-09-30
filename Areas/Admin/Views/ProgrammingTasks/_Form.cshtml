@@ -1,0 +1,14 @@
+@model ProgrammingTaskFormViewModel
+<div asp-validation-summary="All" class="text-danger" role="alert"></div>
+<div class="mb-3"><label asp-for="Title" class="form-label"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Slug" class="form-label"></label><input asp-for="Slug" class="form-control" /><span asp-validation-for="Slug" class="text-danger"></span><div class="form-text">Example: sum-of-two-numbers. Saved in lowercase.</div></div>
+<div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="7"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+<div class="row">
+    <div class="col-md-6 mb-3"><label asp-for="TopicId" class="form-label"></label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">Select a topic</option></select><span asp-validation-for="TopicId" class="text-danger"></span></div>
+    <div class="col-md-6 mb-3"><label asp-for="Difficulty" class="form-label"></label><select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<Difficulty>()" class="form-select"></select><span asp-validation-for="Difficulty" class="text-danger"></span></div>
+</div>
+<div class="row">
+    <div class="col-md-6 mb-3"><label asp-for="TimeLimitMs" class="form-label"></label><input asp-for="TimeLimitMs" class="form-control" /><span asp-validation-for="TimeLimitMs" class="text-danger"></span></div>
+    <div class="col-md-6 mb-3"><label asp-for="MemoryLimitMb" class="form-label"></label><input asp-for="MemoryLimitMb" class="form-control" /><span asp-validation-for="MemoryLimitMb" class="text-danger"></span></div>
+</div>
+<div class="form-check mb-3"><input asp-for="IsPublished" class="form-check-input" /><label asp-for="IsPublished" class="form-check-label"></label></div>
