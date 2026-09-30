@@ -6,6 +6,7 @@
     var currentUser = await UserManager.GetUserAsync(User);
     <li class="nav-item"><span class="navbar-text me-2">@currentUser?.DisplayName</span></li>
     <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
+    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Submissions" asp-action="My">My submissions</a></li>
     @if (User.IsInRole(RoleNames.Admin))
     {
         <li class="nav-item"><a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>

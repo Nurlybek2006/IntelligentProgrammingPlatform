@@ -6,6 +6,7 @@ namespace IntelligentProgrammingPlatform.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        // EF Core контекстіне SQL Server қосылым баптауын береді.
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -20,6 +21,7 @@ namespace IntelligentProgrammingPlatform.Data
         public DbSet<ExecutionResult> ExecutionResults { get; set; }
         public DbSet<Leaderboard> Leaderboards { get; set; }
 
+        // Identity мен домен кестелерінің байланыстарын және шектеулерін баптайды.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

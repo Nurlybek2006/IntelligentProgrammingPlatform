@@ -1,4 +1,5 @@
 using IntelligentProgrammingPlatform.Data;
+using IntelligentProgrammingPlatform.Services.Submissions;
 using IntelligentProgrammingPlatform.Models.Enums;
 using IntelligentProgrammingPlatform.ViewModels.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +14,17 @@ public class TasksController : Controller
 {
     private readonly ApplicationDbContext _db;
 
-    public TasksController(ApplicationDbContext db) => _db = db;
+    private readonly TaskPageService _pages;
+
+    // Каталог пен қауіпсіз есеп бетіне қажетті қызметтерді қабылдайды.
+    public TasksController(ApplicationDbContext db, TaskPageService pages)
+    {
+        _db = db;
+        _pages = pages;
+    }
 
     [HttpGet("/Tasks")]
+    // Жарияланған есептерді сүзгілер бойынша каталогқа шығарады.
     public async Task<IActionResult> Index(string? search, int? topicId, Difficulty? difficulty)
     {
         var query = _db.ProgrammingTasks.AsNoTracking().Where(task => task.IsPublished);
@@ -39,22 +48,10 @@ public class TasksController : Controller
     }
 
     [HttpGet("/Tasks/{slug}")]
-    public async Task<IActionResult> Details(string slug)
+    // Ашық мысалдары бар есеп бетін және код формасын көрсетеді.
+    public async Task<IActionResult> Details(string slug, CancellationToken cancellationToken)
     {
-        // Filter in SQL and project only public fields. Hidden tests never enter the ViewModel.
-        var model = await _db.ProgrammingTasks.AsNoTracking()
-            .Where(task => task.IsPublished && task.Slug == slug)
-            .Select(task => new TaskDetailsViewModel
-            {
-                Title = task.Title, TopicName = task.Topic.Name, Difficulty = task.Difficulty,
-                Description = task.Description, TimeLimitMs = task.TimeLimitMs, MemoryLimitMb = task.MemoryLimitMb,
-                Examples = task.TestCases.Where(test => !test.IsHidden).OrderBy(test => test.Order)
-                    .Select(test => new TaskExampleViewModel
-                    {
-                        Input = test.Input, ExpectedOutput = test.ExpectedOutput
-                    }).ToList()
-            }).SingleOrDefaultAsync();
-
+        var model = await _pages.GetAsync(slug, null, cancellationToken);
         return model == null ? NotFound() : View(model);
     }
 }

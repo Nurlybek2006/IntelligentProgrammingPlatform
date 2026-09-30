@@ -1,0 +1,25 @@
+@using System.Security.Claims
+@model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmitViewModel
+<link rel="stylesheet" href="~/js/editor/code-editor.css" asp-append-version="true" />
+<form asp-controller="Submissions" asp-action="Submit" method="post" id="submission-form"
+      data-draft-key="ipp-source-@User.FindFirstValue(ClaimTypes.NameIdentifier)-@Model.ProgrammingTaskId"
+      data-validation-failed="@(!ViewData.ModelState.IsValid ? "true" : "false")">
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+    <input asp-for="ProgrammingTaskId" type="hidden" />
+    <div class="mb-3">
+        <label asp-for="RuntimeId" class="form-label"></label>
+        <select asp-for="RuntimeId" asp-items="Model.Runtimes" class="form-select"></select>
+        <span asp-validation-for="RuntimeId" class="text-danger"></span>
+    </div>
+    <label asp-for="SourceCode" class="form-label"></label>
+    <textarea asp-for="SourceCode" class="form-control source-fallback" spellcheck="false" aria-describedby="source-help"></textarea>
+    <div id="code-editor" class="code-editor" hidden></div>
+    <span asp-validation-for="SourceCode" class="text-danger"></span>
+    <p id="source-help" class="form-text">C++ 20 · Maximum source size: 64 KB. Your draft is kept in this browser tab.</p>
+    <button type="submit" class="btn btn-primary" id="submit-code" disabled="@(Model.Runtimes.Count == 0)">Submit solution</button>
+    <span id="submission-progress" class="ms-2" role="status"></span>
+    @if (Model.Runtimes.Count == 0)
+    {
+        <p class="text-warning mt-2">No enabled C++ runtime is available.</p>
+    }
+</form>

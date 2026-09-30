@@ -9,5 +9,6 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class HomeController : Controller
 {
     [HttpGet]
+    // Әкімшіге басқару бөлімдерінің сілтемелерін көрсетеді.
     public IActionResult Index() => View();
 }

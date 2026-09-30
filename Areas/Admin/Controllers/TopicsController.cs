@@ -12,16 +12,20 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class TopicsController : Controller
 {
     private readonly ApplicationDbContext _db;
+    // Контроллерге дерекқор және қажетті қызметтерді береді.
     public TopicsController(ApplicationDbContext db) => _db = db;
 
     [HttpGet]
+    // Әкімшіге тақырып жазбаларының тізімін көрсетеді.
     public async Task<IActionResult> Index() =>
         View(await _db.Topics.AsNoTracking().OrderBy(topic => topic.Name).ToListAsync());
 
     [HttpGet]
+    // Жаңа тақырып енгізу формасын дайындайды.
     public IActionResult Create() => View(new TopicFormViewModel());
 
     [HttpPost]
+    // Тексерілген жаңа тақырып жазбасын сақтайды.
     public async Task<IActionResult> Create(TopicFormViewModel model)
     {
         await ValidateNameAsync(model);
@@ -40,6 +44,7 @@ public class TopicsController : Controller
     }
 
     [HttpGet]
+    // Бар тақырып жазбасын өзгерту формасына жүктейді.
     public async Task<IActionResult> Edit(int id)
     {
         var topic = await _db.Topics.FindAsync(id);
@@ -50,6 +55,7 @@ public class TopicsController : Controller
     }
 
     [HttpPost]
+    // Рұқсат етілген тақырып өрістерін тексеріп жаңартады.
     public async Task<IActionResult> Edit(int id, TopicFormViewModel model)
     {
         var topic = await _db.Topics.FindAsync(id);
@@ -71,6 +77,7 @@ public class TopicsController : Controller
     }
 
     [HttpGet]
+    // Тақырып жазбасын өшіруді растау бетін көрсетеді.
     public async Task<IActionResult> Delete(int id)
     {
         var topic = await _db.Topics.AsNoTracking().SingleOrDefaultAsync(topic => topic.Id == id);
@@ -78,6 +85,7 @@ public class TopicsController : Controller
     }
 
     [HttpPost, ActionName("Delete")]
+    // Тәуелді тарих жоқ болса ғана тақырып жазбасын өшіреді.
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var topic = await _db.Topics.FindAsync(id);
@@ -99,6 +107,7 @@ public class TopicsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // Тақырып атауын қалыпқа келтіріп, қайталануын тексереді.
     private async Task ValidateNameAsync(TopicFormViewModel model, int? id = null)
     {
         model.Name = model.Name?.Trim() ?? string.Empty;

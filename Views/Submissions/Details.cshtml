@@ -1,0 +1,48 @@
+@using IntelligentProgrammingPlatform.Models.Enums
+@model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionDetailsViewModel
+@{ ViewData["Title"] = $"Submission #{Model.Id}"; }
+<a asp-action="My">My submissions</a>
+<h1 class="mt-3">Submission #@Model.Id</h1>
+<h2 class="h4"><a asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">@Model.TaskTitle</a></h2>
+<dl class="row">
+    <dt class="col-sm-3">Runtime</dt><dd class="col-sm-9">@Model.RuntimeName</dd>
+    <dt class="col-sm-3">Status</dt><dd class="col-sm-9" id="submission-status">@Model.Status</dd>
+    <dt class="col-sm-3">Compilation</dt><dd class="col-sm-9">@(Model.CompileSucceeded.HasValue ? (Model.CompileSucceeded.Value ? "Succeeded" : "Failed") : "Not completed")</dd>
+    <dt class="col-sm-3">Passed / total</dt><dd class="col-sm-9">@Model.PassedTests / @Model.TotalTests</dd>
+    <dt class="col-sm-3">Test container time</dt><dd class="col-sm-9">@(Model.ExecutionTimeMs.HasValue ? Model.ExecutionTimeMs + " ms (wall clock, total)" : "Not measured")</dd>
+    <dt class="col-sm-3">Created (UTC)</dt><dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+    <dt class="col-sm-3">Started (UTC)</dt><dd class="col-sm-9">@(Model.StartedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "Not started")</dd>
+    <dt class="col-sm-3">Finished (UTC)</dt><dd class="col-sm-9">@(Model.FinishedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "Not finished")</dd>
+</dl>
+@if (Model.Status == SubmissionStatus.InternalError)
+{
+    <div class="alert alert-warning">Execution service is temporarily unavailable.</div>
+}
+@if (Model.Status is SubmissionStatus.Pending or SubmissionStatus.Compiling or SubmissionStatus.Running)
+{
+    <p role="status">Your submission is being checked. <a asp-action="Details" asp-route-id="@Model.Id">Refresh results</a>.</p>
+}
+@if (Model.CompileSucceeded == false)
+{
+    <h2 class="h4">Compilation failed</h2>
+    <pre class="test-data">@Model.CompilerOutput</pre>
+}
+<h2 class="h4">Submitted source code</h2>
+<pre class="source-fallback p-3"><code>@Model.SourceCode</code></pre>
+<h2 class="h4">Test results</h2>
+@foreach (var result in Model.Results)
+{
+    <section class="card mb-3">
+        <div class="card-body">
+            <h3 class="h5">@(result.IsHidden ? "Hidden test" : "Test") #@result.Number</h3>
+            <p>Status: <strong>@result.Status</strong> · Time: @(result.ExecutionTimeMs.HasValue ? result.ExecutionTimeMs + " ms" : "Not measured")</p>
+            @if (!result.IsHidden)
+            {
+                <h4 class="h6">Input</h4><pre class="test-data">@result.Input</pre>
+                <h4 class="h6">Expected output</h4><pre class="test-data">@result.ExpectedOutput</pre>
+                <h4 class="h6">Actual output</h4><pre class="test-data">@result.ActualOutput</pre>
+                @if (!string.IsNullOrEmpty(result.ErrorMessage)) { <pre class="test-data">@result.ErrorMessage</pre> }
+            }
+        </div>
+    </section>
+}

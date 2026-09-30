@@ -23,6 +23,8 @@ body {
 
 .text-content { white-space: pre-wrap; overflow-wrap: anywhere; }
 .test-data { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 16rem; overflow: auto; }
+.code-editor { height: 420px; border: 1px solid #555; }
+.source-fallback { min-height: 420px; background: #1e1e1e; color: #eee; font-family: monospace; tab-size: 4; }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);

@@ -1,0 +1,25 @@
+@model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionHistoryViewModel
+@{ ViewData["Title"] = "My submissions"; }
+<h1>My submissions</h1>
+@if (Model.Items.Count == 0)
+{
+    <p>No submissions on this page. <a asp-controller="Tasks" asp-action="Index">Browse tasks</a>.</p>
+}
+else
+{
+    <div class="table-responsive"><table class="table table-striped">
+        <thead><tr><th>Submission</th><th>Task</th><th>Runtime</th><th>Status</th><th>Passed / total</th><th>Created (UTC)</th></tr></thead>
+        <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr><td><a asp-action="Details" asp-route-id="@item.Id">#@item.Id</a></td><td>@item.TaskTitle</td>
+                <td>@item.RuntimeName</td><td>@item.Status</td><td>@item.PassedTests / @item.TotalTests</td>
+                <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
+        }
+        </tbody>
+    </table></div>
+}
+<nav aria-label="Submission pages">
+    @if (Model.Page > 1) { <a asp-action="My" asp-route-page="@(Model.Page - 1)" class="btn btn-outline-secondary">Previous</a> }
+    @if (Model.HasNextPage) { <a asp-action="My" asp-route-page="@(Model.Page + 1)" class="btn btn-outline-secondary">Next</a> }
+</nav>

@@ -13,13 +13,16 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class ProgrammingTasksController : Controller
 {
     private readonly ApplicationDbContext _db;
+    // Контроллерге дерекқор және қажетті қызметтерді береді.
     public ProgrammingTasksController(ApplicationDbContext db) => _db = db;
 
     [HttpGet]
+    // Әкімшіге есеп жазбаларының тізімін көрсетеді.
     public async Task<IActionResult> Index() => View(await _db.ProgrammingTasks.AsNoTracking()
         .Include(task => task.Topic).OrderBy(task => task.Title).ToListAsync());
 
     [HttpGet]
+    // Әкімшіге есептің толық деректерін және тесттерін көрсетеді.
     public async Task<IActionResult> Details(int id)
     {
         var task = await _db.ProgrammingTasks.AsNoTracking().Include(task => task.Topic)
@@ -29,6 +32,7 @@ public class ProgrammingTasksController : Controller
     }
 
     [HttpGet]
+    // Жаңа есеп енгізу формасын дайындайды.
     public async Task<IActionResult> Create()
     {
         var model = new ProgrammingTaskFormViewModel();
@@ -37,6 +41,7 @@ public class ProgrammingTasksController : Controller
     }
 
     [HttpPost]
+    // Тексерілген жаңа есеп жазбасын сақтайды.
     public async Task<IActionResult> Create(ProgrammingTaskFormViewModel model)
     {
         await ValidateAsync(model);
@@ -60,6 +65,7 @@ public class ProgrammingTasksController : Controller
     }
 
     [HttpGet]
+    // Бар есеп жазбасын өзгерту формасына жүктейді.
     public async Task<IActionResult> Edit(int id)
     {
         var task = await _db.ProgrammingTasks.FindAsync(id);
@@ -75,6 +81,7 @@ public class ProgrammingTasksController : Controller
     }
 
     [HttpPost]
+    // Рұқсат етілген есеп өрістерін тексеріп жаңартады.
     public async Task<IActionResult> Edit(int id, ProgrammingTaskFormViewModel model)
     {
         var task = await _db.ProgrammingTasks.FindAsync(id);
@@ -99,6 +106,7 @@ public class ProgrammingTasksController : Controller
     }
 
     [HttpGet]
+    // Есеп жазбасын өшіруді растау бетін көрсетеді.
     public async Task<IActionResult> Delete(int id)
     {
         var task = await _db.ProgrammingTasks.AsNoTracking().SingleOrDefaultAsync(task => task.Id == id);
@@ -106,6 +114,7 @@ public class ProgrammingTasksController : Controller
     }
 
     [HttpPost, ActionName("Delete")]
+    // Тәуелді тарих жоқ болса ғана есеп жазбасын өшіреді.
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var task = await _db.ProgrammingTasks.FindAsync(id);
@@ -129,6 +138,7 @@ public class ProgrammingTasksController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // Slug бірегейлігін және тақырыптың бар екенін тексереді.
     private async Task ValidateAsync(ProgrammingTaskFormViewModel model, int? id = null)
     {
         model.Title = model.Title?.Trim() ?? string.Empty;
@@ -139,10 +149,12 @@ public class ProgrammingTasksController : Controller
             ModelState.AddModelError(nameof(model.TopicId), "Select an existing topic.");
     }
 
+    // Есеп формасына арналған тақырып dropdown тізімін дайындайды.
     private async Task LoadTopicsAsync(ProgrammingTaskFormViewModel model) =>
         model.Topics = await _db.Topics.AsNoTracking().OrderBy(topic => topic.Name)
             .Select(topic => new SelectListItem(topic.Name, topic.Id.ToString())).ToListAsync();
 
+    // ViewModel-дегі рұқсат етілген өрістерді есеп entity-іне көшіреді.
     private static void MapFields(ProgrammingTaskFormViewModel model, ProgrammingTask task)
     {
         task.Title = model.Title;

@@ -16,6 +16,7 @@ public class AccountController : Controller
     private readonly SignInManager<ApplicationUser> _signIn;
     private readonly ApplicationDbContext _db;
 
+    // Контроллерге дерекқор және қажетті қызметтерді береді.
     public AccountController(UserManager<ApplicationUser> users,
         SignInManager<ApplicationUser> signIn, ApplicationDbContext db)
     {
@@ -25,9 +26,11 @@ public class AccountController : Controller
     }
 
     [AllowAnonymous, HttpGet]
+    // Жаңа аккаунт тіркеу формасын көрсетеді.
     public IActionResult Register() => View(new RegisterViewModel());
 
     [AllowAnonymous, HttpPost]
+    // Форманы тексеріп, жаңа Student аккаунтын жасайды.
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
         if (!ModelState.IsValid)
@@ -79,6 +82,7 @@ public class AccountController : Controller
     }
 
     [AllowAnonymous, HttpGet]
+    // Пайдаланушыға жүйеге кіру бетін көрсетеді.
     public IActionResult Login(string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = Url.IsLocalUrl(returnUrl) ? returnUrl : null;
@@ -86,6 +90,7 @@ public class AccountController : Controller
     }
 
     [AllowAnonymous, HttpPost]
+    // Парольді тексеріп, қауіпсіз кіру cookie-сін жасайды.
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = Url.IsLocalUrl(returnUrl) ? returnUrl : null;
@@ -108,6 +113,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
+    // Ағымдағы пайдаланушының кіру cookie-сін жояды.
     public async Task<IActionResult> Logout()
     {
         await _signIn.SignOutAsync();
@@ -115,6 +121,7 @@ public class AccountController : Controller
     }
 
     [HttpGet]
+    // Ағымдағы пайдаланушының қауіпсіз профиль деректерін көрсетеді.
     public async Task<IActionResult> Profile()
     {
         var user = await _users.GetUserAsync(User);
@@ -132,6 +139,7 @@ public class AccountController : Controller
     }
 
     [AllowAnonymous, HttpGet]
+    // Рұқсаты жеткіліксіз пайдаланушыға 403 бетін қайтарады.
     public IActionResult AccessDenied()
     {
         Response.StatusCode = StatusCodes.Status403Forbidden;

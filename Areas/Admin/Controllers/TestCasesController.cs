@@ -13,9 +13,11 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class TestCasesController : Controller
 {
     private readonly ApplicationDbContext _db;
+    // Контроллерге дерекқор және қажетті қызметтерді береді.
     public TestCasesController(ApplicationDbContext db) => _db = db;
 
     [HttpGet]
+    // Әкімшіге тест жазбаларының тізімін көрсетеді.
     public async Task<IActionResult> Index(int? taskId)
     {
         if (taskId.HasValue && !await _db.ProgrammingTasks.AnyAsync(task => task.Id == taskId))
@@ -29,6 +31,7 @@ public class TestCasesController : Controller
     }
 
     [HttpGet]
+    // Жаңа тест енгізу формасын дайындайды.
     public async Task<IActionResult> Create(int taskId)
     {
         if (!await LoadTaskAsync(taskId)) return NotFound();
@@ -38,6 +41,7 @@ public class TestCasesController : Controller
     }
 
     [HttpPost]
+    // Тексерілген жаңа тест жазбасын сақтайды.
     public async Task<IActionResult> Create(TestCaseFormViewModel model)
     {
         if (!await LoadTaskAsync(model.ProgrammingTaskId)) return NotFound();
@@ -57,6 +61,7 @@ public class TestCasesController : Controller
     }
 
     [HttpGet]
+    // Бар тест жазбасын өзгерту формасына жүктейді.
     public async Task<IActionResult> Edit(int id)
     {
         var test = await _db.TestCases.FindAsync(id);
@@ -70,6 +75,7 @@ public class TestCasesController : Controller
     }
 
     [HttpPost]
+    // Рұқсат етілген тест өрістерін тексеріп жаңартады.
     public async Task<IActionResult> Edit(int id, TestCaseFormViewModel model)
     {
         var test = await _db.TestCases.FindAsync(id);
@@ -91,6 +97,7 @@ public class TestCasesController : Controller
     }
 
     [HttpGet]
+    // Тест жазбасын өшіруді растау бетін көрсетеді.
     public async Task<IActionResult> Delete(int id)
     {
         var test = await _db.TestCases.AsNoTracking().Include(test => test.ProgrammingTask)
@@ -99,6 +106,7 @@ public class TestCasesController : Controller
     }
 
     [HttpPost, ActionName("Delete")]
+    // Тәуелді тарих жоқ болса ғана тест жазбасын өшіреді.
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var test = await _db.TestCases.Include(test => test.ProgrammingTask).SingleOrDefaultAsync(test => test.Id == id);
@@ -120,6 +128,7 @@ public class TestCasesController : Controller
         return RedirectToAction(nameof(Index), new { taskId = test.ProgrammingTaskId });
     }
 
+    // Тест тиесілі есептің бар екенін тексеріп, атауын жүктейді.
     private async Task<bool> LoadTaskAsync(int taskId)
     {
         var task = await _db.ProgrammingTasks.AsNoTracking().SingleOrDefaultAsync(task => task.Id == taskId);
@@ -127,6 +136,7 @@ public class TestCasesController : Controller
         return task != null;
     }
 
+    // Есеп ішіндегі тест ретінің қайталанбауын тексереді.
     private async Task ValidateOrderAsync(TestCaseFormViewModel model, int? id = null)
     {
         if (await _db.TestCases.AnyAsync(test => test.ProgrammingTaskId == model.ProgrammingTaskId
@@ -134,6 +144,7 @@ public class TestCasesController : Controller
             ModelState.AddModelError(nameof(model.Order), "This task already has a test case with this order.");
     }
 
+    // ViewModel-дегі рұқсат етілген өрістерді тест entity-іне көшіреді.
     private static void MapFields(TestCaseFormViewModel model, TestCase test)
     {
         test.Input = model.Input;

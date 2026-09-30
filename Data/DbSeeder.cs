@@ -1,5 +1,6 @@
 using IntelligentProgrammingPlatform.Models;
 using IntelligentProgrammingPlatform.Models.Enums;
+using IntelligentProgrammingPlatform.Services.CodeExecution;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace IntelligentProgrammingPlatform.Data;
 
 public static class DbSeeder
 {
+    // Рөлдерді және даму ортасының бастапқы деректерін қайталамай дайындайды.
     public static async Task SeedAsync(IServiceProvider services, IConfiguration configuration,
         IWebHostEnvironment environment)
     {
@@ -30,9 +32,25 @@ public static class DbSeeder
         var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         await SeedAdminAsync(users, configuration, logger);
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await SeedRuntimeAsync(db);
         await SeedTasksAsync(db);
     }
 
+    // C++ тілінің бір ғана даму runtime жазбасын қайталамай қосады.
+    private static async Task SeedRuntimeAsync(ApplicationDbContext db)
+    {
+        if (await db.Runtimes.AnyAsync(runtime => runtime.LanguageKey == CodeRunnerOptions.LanguageKey))
+            return;
+        db.Runtimes.Add(new Runtime
+        {
+            Name = "C++ 20", LanguageKey = CodeRunnerOptions.LanguageKey, Version = "GCC 14.3.0",
+            FileExtension = ".cpp", DockerImage = CodeRunnerOptions.Image, IsEnabled = true,
+            CompileCommand = "Managed by the trusted C++ runner", RunCommand = "Managed by the trusted C++ runner"
+        });
+        await db.SaveChangesAsync();
+    }
+
+    // User Secrets баптауынан жергілікті әкімші аккаунтын қауіпсіз жасайды.
     private static async Task SeedAdminAsync(UserManager<ApplicationUser> users,
         IConfiguration configuration, ILogger logger)
     {
@@ -83,6 +101,7 @@ public static class DbSeeder
         logger.LogInformation("Development admin account created from configured User Secrets.");
     }
 
+    // Үш оқу есебін және тесттерін тек жоқ болғанда қосады.
     private static async Task SeedTasksAsync(ApplicationDbContext db)
     {
         await using var transaction = await db.Database.BeginTransactionAsync();
