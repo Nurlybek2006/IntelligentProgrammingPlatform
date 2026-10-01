@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace IntelligentProgrammingPlatform.Services.CodeExecution;
 
 public sealed class SubmissionWorkspace
@@ -24,6 +26,16 @@ public sealed class SubmissionWorkspace
                 | UnixFileMode.GroupRead | UnixFileMode.GroupWrite | UnixFileMode.GroupExecute
                 | UnixFileMode.OtherRead | UnixFileMode.OtherWrite | UnixFileMode.OtherExecute);
         }
+    }
+
+    // Кодты shell-ге қоспай, ортақ UTF-8 файлға compiler оқитындай жазады.
+    public async Task WriteSourceAsync(string sourceCode, CancellationToken cancellationToken)
+    {
+        var sourcePath = Path.Combine(Source, "main.cpp");
+        await File.WriteAllTextAsync(sourcePath, sourceCode, new UTF8Encoding(false), cancellationToken);
+        if (!OperatingSystem.IsWindows())
+            File.SetUnixFileMode(sourcePath, UnixFileMode.UserRead | UnixFileMode.UserWrite
+                | UnixFileMode.GroupRead | UnixFileMode.OtherRead);
     }
 
     // Тек осы жіберілімнің тексерілген уақытша бумасын жояды.

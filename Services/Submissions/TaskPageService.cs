@@ -10,13 +10,18 @@ namespace IntelligentProgrammingPlatform.Services.Submissions;
 public sealed class TaskPageService
 {
     private readonly ApplicationDbContext _db;
+    private readonly AttemptJourneyService _journeys;
 
     // Есеп бетін құратын қызметке дерекқор контекстін береді.
-    public TaskPageService(ApplicationDbContext db) => _db = db;
+    public TaskPageService(ApplicationDbContext db, AttemptJourneyService journeys)
+    {
+        _db = db;
+        _journeys = journeys;
+    }
 
     // Жарияланған есептің тек ашық мысалдарын және рұқсат етілген runtime тізімін дайындайды.
     public async Task<TaskDetailsViewModel?> GetAsync(string slug, SubmitViewModel? form,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken, string? userId = null)
     {
         var model = await _db.ProgrammingTasks.AsNoTracking()
             .Where(task => task.IsPublished && task.Slug == slug)
@@ -40,6 +45,8 @@ public sealed class TaskPageService
             .ToListAsync(cancellationToken);
         if (form == null && model.Submission.Runtimes.Count > 0)
             model.Submission.RuntimeId = int.Parse(model.Submission.Runtimes[0].Value);
+        if (userId != null)
+            model.Journey = await _journeys.GetAsync(slug, userId, cancellationToken, compact: true);
         return model;
     }
 }

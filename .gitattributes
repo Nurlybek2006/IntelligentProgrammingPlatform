@@ -1,0 +1,2 @@
+# Generated Monaco template literals contain meaningful end-of-line spaces.
+wwwroot/js/editor/code-editor.js whitespace=-blank-at-eol

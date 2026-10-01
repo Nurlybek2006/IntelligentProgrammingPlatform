@@ -94,11 +94,7 @@ public sealed class SubmissionService
 
             var imageId = await _runner.GetTrustedImageAsync(linked.Token);
             workspace = new SubmissionWorkspace();
-            var sourcePath = Path.Combine(workspace.Source, "main.cpp");
-            await File.WriteAllTextAsync(sourcePath, submission.SourceCode, new UTF8Encoding(false), linked.Token);
-            if (!OperatingSystem.IsWindows())
-                File.SetUnixFileMode(sourcePath, UnixFileMode.UserRead | UnixFileMode.UserWrite
-                    | UnixFileMode.GroupRead | UnixFileMode.OtherRead);
+            await workspace.WriteSourceAsync(submission.SourceCode, linked.Token);
 
             var compilation = await _runner.CompileAsync(workspace, imageId, linked.Token);
             submission.CompileSucceeded = compilation.Succeeded;

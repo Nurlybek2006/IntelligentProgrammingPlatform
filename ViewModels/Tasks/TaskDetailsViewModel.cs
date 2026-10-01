@@ -6,6 +6,7 @@ namespace IntelligentProgrammingPlatform.ViewModels.Tasks;
 public class TaskDetailsViewModel
 {
     public int Id { get; set; }
+    public AttemptJourneyViewModel? Journey { get; set; }
     public SubmitViewModel Submission { get; set; } = new();
     public string Title { get; set; } = string.Empty;
     public string TopicName { get; set; } = string.Empty;

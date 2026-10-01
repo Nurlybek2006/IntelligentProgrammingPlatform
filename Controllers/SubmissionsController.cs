@@ -60,7 +60,7 @@ public class SubmissionsController : Controller
                 ModelState.AddModelError(string.Empty, CodeRunnerOptions.UnavailableMessage);
             }
         }
-        var page = await _pages.GetAsync(slug, model, cancellationToken);
+        var page = await _pages.GetAsync(slug, model, cancellationToken, userId);
         return page == null ? NotFound() : View("~/Views/Tasks/Details.cshtml", page);
     }
 
@@ -112,6 +112,26 @@ public class SubmissionsController : Controller
         model.AiConfigured = _ai.IsConfigured;
         model.AiFeedback = await _ai.GetExistingAsync(id, userId!, cancellationToken);
         return View(model);
+    }
+
+    [HttpGet]
+    // Екі кодты тек бір иеге және бір есепке тиесілі болғанда хронологиялық ретпен салыстырады.
+    public async Task<IActionResult> Compare(long olderId, long newerId, CancellationToken cancellationToken)
+    {
+        if (olderId <= 0 || newerId <= 0 || olderId == newerId) return NotFound();
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var attempts = await _db.Submissions.AsNoTracking()
+            .Where(item => item.UserId == userId && (item.Id == olderId || item.Id == newerId))
+            .OrderBy(item => item.CreatedAt).ThenBy(item => item.Id)
+            .Select(item => new ComparedAttemptViewModel
+            {
+                Id = item.Id, ProgrammingTaskId = item.ProgrammingTaskId, TaskSlug = item.ProgrammingTask.Slug,
+                TaskTitle = item.ProgrammingTask.Title, SourceCode = item.SourceCode, Status = item.Status,
+                CreatedAt = item.CreatedAt, ExecutionTimeMs = item.ExecutionTimeMs
+            }).ToListAsync(cancellationToken);
+        if (attempts.Count != 2 || attempts[0].ProgrammingTaskId != attempts[1].ProgrammingTaskId)
+            return NotFound();
+        return View(new SubmissionComparisonViewModel { Previous = attempts[0], Current = attempts[1] });
     }
 
     [HttpPost]

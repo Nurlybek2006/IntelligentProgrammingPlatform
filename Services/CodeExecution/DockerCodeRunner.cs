@@ -89,6 +89,22 @@ public sealed class DockerCodeRunner : IDisposable
     public async Task<TestRunResult> RunTestAsync(SubmissionWorkspace workspace, string imageId,
         string input, string expectedOutput, int timeLimitMs, int memoryLimitMb, CancellationToken cancellationToken)
     {
+        var result = await RunProgramAsync(workspace, imageId, input, timeLimitMs, memoryLimitMb, cancellationToken);
+        return result.Status == ExecutionStatus.Passed
+            ? result with { Status = NormalizeOutput(result.ActualOutput) == NormalizeOutput(expectedOutput)
+                ? ExecutionStatus.Passed : ExecutionStatus.WrongAnswer }
+            : result;
+    }
+
+    // Custom input-ты сол sandbox ішінде орындап, expected output-пен салыстырмайды.
+    public Task<TestRunResult> RunCustomAsync(SubmissionWorkspace workspace, string imageId,
+        string input, int timeLimitMs, int memoryLimitMb, CancellationToken cancellationToken) =>
+        RunProgramAsync(workspace, imageId, input, timeLimitMs, memoryLimitMb, cancellationToken, includeFailureDiagnostics: true);
+
+    // Judge пен Custom Run үшін бірдей контейнер шектерін және нәтиже өңдеуін қолданады.
+    private async Task<TestRunResult> RunProgramAsync(SubmissionWorkspace workspace, string imageId,
+        string input, int timeLimitMs, int memoryLimitMb, CancellationToken cancellationToken, bool includeFailureDiagnostics = false)
+    {
         timeLimitMs = Math.Clamp(timeLimitMs, 100, 30000);
         memoryLimitMb = Math.Clamp(memoryLimitMb, 16, 1024);
         var name = "ipp-run-" + Guid.NewGuid().ToString("N");
@@ -103,24 +119,23 @@ public sealed class DockerCodeRunner : IDisposable
         var result = await RunContainerAsync(name, arguments, input,
             TimeSpan.FromMilliseconds(timeLimitMs + 5000), cancellationToken);
         var output = result.Command.Output;
+        var status = ExecutionStatus.Passed;
+        string? failure = null;
         if (result.Command.OutputLimitExceeded)
-            return new TestRunResult(ExecutionStatus.RuntimeError, output, "Output limit exceeded.",
-                result.ExitCode, result.ElapsedMs);
-        if (result.OomKilled)
-            return new TestRunResult(ExecutionStatus.MemoryLimitExceeded, output, "Memory limit exceeded.",
-                result.ExitCode, result.ElapsedMs);
-        if (result.Command.TimedOut || (result.ExitCode is 124 or 137 && result.ElapsedMs >= timeLimitMs))
-            return new TestRunResult(ExecutionStatus.TimeLimitExceeded, output, "Time limit exceeded.",
-                result.ExitCode, result.ElapsedMs);
-        if (result.ExitCode != 0)
-            return new TestRunResult(ExecutionStatus.RuntimeError, output, "Runtime error.",
-                result.ExitCode, result.ElapsedMs);
+            (status, failure) = (ExecutionStatus.RuntimeError, "Output limit exceeded.");
+        else if (result.OomKilled)
+            (status, failure) = (ExecutionStatus.MemoryLimitExceeded, "Memory limit exceeded.");
+        else if (result.Command.TimedOut || (result.ExitCode is 124 or 137 && result.ElapsedMs >= timeLimitMs))
+            (status, failure) = (ExecutionStatus.TimeLimitExceeded, "Time limit exceeded.");
+        else if (result.ExitCode != 0)
+            (status, failure) = (ExecutionStatus.RuntimeError, "Runtime error.");
 
-        var status = NormalizeOutput(output) == NormalizeOutput(expectedOutput)
-            ? ExecutionStatus.Passed : ExecutionStatus.WrongAnswer;
         // STDERR сақталуы мүмкін, бірақ hidden тест үшін контроллер оны ешқашан қайтармайды.
         var error = string.IsNullOrEmpty(result.Command.Error) ? null
             : SanitizeDiagnostics(result.Command.Error, workspace);
+        if (failure != null)
+            error = includeFailureDiagnostics && !string.IsNullOrEmpty(error)
+                ? SanitizeDiagnostics(failure + "\n" + error, workspace) : failure;
         return new TestRunResult(status, output, error, result.ExitCode, result.ElapsedMs);
     }
 

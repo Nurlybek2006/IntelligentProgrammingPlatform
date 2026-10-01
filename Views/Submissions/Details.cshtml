@@ -10,6 +10,7 @@
     };
 }
 <a class="small" asp-action="My">← My submissions</a>
+<a class="small ms-3" asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.TaskSlug">View attempt journey</a>
 <div class="page-heading mt-3"><div><p class="eyebrow">Submission #@Model.Id</p><h1>@statusTitle</h1><p><a asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">@Model.TaskTitle</a></p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">Return to editor →</a></div>
 <section class="panel result-banner @Model.Status" aria-label="Submission overview">
     <dl class="result-facts mt-0">

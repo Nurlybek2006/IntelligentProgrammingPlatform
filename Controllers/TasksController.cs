@@ -56,7 +56,7 @@ public class TasksController : Controller
     // Ашық мысалдары бар есеп бетін және код формасын көрсетеді.
     public async Task<IActionResult> Details(string slug, CancellationToken cancellationToken)
     {
-        var model = await _pages.GetAsync(slug, null, cancellationToken);
+        var model = await _pages.GetAsync(slug, null, cancellationToken, User.FindFirstValue(ClaimTypes.NameIdentifier));
         return model == null ? NotFound() : View(model);
     }
 }

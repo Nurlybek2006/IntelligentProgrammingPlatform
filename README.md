@@ -121,6 +121,15 @@ python scripts/verify_phase5_live.py --finish
 
 `--live` requests two paid analyses at most, with no automatic API retries. Do not run it repeatedly just to check UI changes. The temporary authentication session is stored only in ignored `obj/` until `--finish`; keep both stages on the same development machine. `--live-wrong-only` is a one-call recovery option when the compilation case has already been verified.
 
+## Learning Journey Features
+
+- **Custom Run:** enter your own input and select **Run** to see temporary stdout, diagnostics and execution time without leaving the task. It shares the pinned Docker sandbox and execution limit with Submit. Source/input limits are 64/32 KiB UTF-8.
+- **Run vs Submit:** Run does not judge against official answers or save anything to submission history, AI feedback, Progress or Leaderboard. **Submit** checks official tests and records an attempt normally.
+- **Attempt Journey:** the task page shows your latest five attempts; `/Tasks/{slug}/Journey` provides the full chronological history, twenty per page. Saved AI feedback is marked factually; attempts link to existing result pages.
+- **Code Diff:** **Compare with previous** opens a read-only Monaco comparison. Both attempts must belong to you and the same task. The diff reuses the existing nonce/scoped Monaco CSP and switches to an inline view on narrow screens.
+
+Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement2_ui.mjs` for the new regressions. See [study-enhancement2.md](study-enhancement2.md) and [manual-enhancement2-checklist.md](manual-enhancement2-checklist.md). Real browser verification remains pending.
+
 ## Demo workflow
 
 1. Register/login, open **Tasks**, select **Sum of Two Numbers**.

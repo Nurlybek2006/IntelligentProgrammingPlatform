@@ -66,6 +66,8 @@ builder.Services.AddSingleton<DockerCli>();
 builder.Services.AddSingleton<DockerCodeRunner>();
 builder.Services.AddSingleton<SubmissionExecutionGate>();
 builder.Services.AddScoped<SubmissionService>();
+builder.Services.AddScoped<CustomRunService>();
+builder.Services.AddScoped<AttemptJourneyService>();
 builder.Services.AddScoped<TaskPageService>();
 
 // Прогресті тарихтан есептеп, рейтинг summary жаңартуларын реттейді.

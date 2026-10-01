@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="~/js/editor/code-editor.css" asp-append-version="true" />
 <form asp-controller="Submissions" asp-action="Submit" method="post" id="submission-form"
       data-draft-key="ipp-source-@User.FindFirstValue(ClaimTypes.NameIdentifier)-@Model.ProgrammingTaskId"
-      data-validation-failed="@(!ViewData.ModelState.IsValid ? "true" : "false")">
+      data-validation-failed="@(!ViewData.ModelState.IsValid ? "true" : "false")"
+      data-run-url="@Url.Action("Run", "CustomRuns")">
     <div asp-validation-summary="All" class="text-danger" role="alert"></div>
     <input asp-for="ProgrammingTaskId" type="hidden" />
     <div class="mb-3">
@@ -17,10 +18,27 @@
     <div id="code-editor" class="code-editor" hidden></div>
     <span asp-validation-for="SourceCode" class="text-danger"></span>
     <p id="source-help" class="form-text">C++ 20 · Maximum source size: 64 KB. Your draft is kept in this browser tab.</p>
-    <button type="submit" class="btn btn-primary" id="submit-code" disabled="@(Model.Runtimes.Count == 0)">Submit solution</button>
+    <div class="custom-input-panel mb-3">
+        <label for="CustomInput" class="form-label">Custom input</label>
+        <textarea id="CustomInput" name="CustomInput" class="form-control custom-input" rows="4" maxlength="32768" spellcheck="false" aria-describedby="custom-input-help"></textarea>
+        <p id="custom-input-help" class="form-text mb-0">Up to 32 KiB (UTF-8). Run uses only this input and does not save an attempt or affect your score.</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-outline-primary" id="run-code" disabled="@(Model.Runtimes.Count == 0)">Run</button>
+        <button type="submit" class="btn btn-primary" id="submit-code" disabled="@(Model.Runtimes.Count == 0)">Submit solution</button>
+    </div>
+    <p class="form-text">Submit checks the official tests and saves an attempt in your journey.</p>
     <span id="submission-progress" class="ms-2" role="status"></span>
     @if (Model.Runtimes.Count == 0)
     {
         <p class="text-warning mt-2">No enabled C++ runtime is available.</p>
     }
 </form>
+<section id="custom-run-result" class="custom-run-result mt-4" aria-labelledby="run-result-heading" hidden>
+    <div class="d-flex flex-wrap justify-content-between gap-2 align-items-center"><h3 id="run-result-heading" class="h5 mb-0">Run result</h3><span id="run-status" class="status-badge" role="status" aria-live="polite"></span></div>
+    <p id="run-summary" class="small text-muted mt-2"></p>
+    <p id="run-time" class="small text-muted"></p>
+    <h4 class="h6">Output</h4><pre id="run-output" class="test-data" tabindex="0"></pre>
+    <div id="run-error-panel" hidden><h4 class="h6">Diagnostic / stderr</h4><pre id="run-error" class="test-data" tabindex="0"></pre></div>
+    <div id="run-compiler-panel" hidden><h4 class="h6">Compiler output</h4><pre id="run-compiler" class="test-data" tabindex="0"></pre></div>
+</section>

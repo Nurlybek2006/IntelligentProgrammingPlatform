@@ -5,6 +5,8 @@ public static class CodeRunnerOptions
     public const string LanguageKey = "cpp";
     public const string Image = "gcc@sha256:5e927c284bf55a7dc796262e311a0703344f62f41f5621eb56843111b1d37e15";
     public const int MaxSourceBytes = 64 * 1024;
+    public const int MaxCustomInputBytes = 32 * 1024;
+    public const int CustomRunTimeoutSeconds = 90;
     public const int MaxOutputBytes = 64 * 1024;
     public const int CompileTimeoutSeconds = 15;
     public const int CompileMemoryMb = 512;

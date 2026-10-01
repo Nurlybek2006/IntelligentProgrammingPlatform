@@ -31,10 +31,15 @@
         }
     </section>
 </div>
+@if (Model.Journey != null)
+{
+    <partial name="_AttemptJourney" model="Model.Journey" />
+}
 @section Scripts {
     @if (User.Identity?.IsAuthenticated == true)
     {
         <partial name="_ValidationScriptsPartial" />
         <script type="module" src="~/js/editor/code-editor.js" asp-append-version="true"></script>
+        <script type="module" src="~/js/custom-run.js" asp-append-version="true"></script>
     }
 }

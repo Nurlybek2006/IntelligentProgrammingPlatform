@@ -2,6 +2,14 @@ import * as monaco from "monaco-editor/editor/editor.api.js";
 import "monaco-editor/languages/definitions/cpp/register.js";
 
 const form = document.getElementById("submission-form");
+const diffElement = document.getElementById("code-diff");
+if (form || diffElement) {
+    globalThis.MonacoEnvironment = {
+        getWorker() {
+            return new Worker(new URL("./editor.worker.js", import.meta.url), { type: "module" });
+        }
+    };
+}
 if (form) {
     const source = document.getElementById("SourceCode");
     const editorElement = document.getElementById("code-editor");
@@ -13,11 +21,6 @@ if (form) {
         if (draft !== null && form.dataset.validationFailed !== "true") source.value = draft;
     } catch { /* Storage restrictions must not prevent editing or submitting. */ }
 
-    globalThis.MonacoEnvironment = {
-        getWorker() {
-            return new Worker(new URL("./editor.worker.js", import.meta.url), { type: "module" });
-        }
-    };
     editorElement.hidden = false;
     const editor = monaco.editor.create(editorElement, {
         value: source.value,
@@ -38,6 +41,7 @@ if (form) {
         } catch { /* The form field still preserves the source without browser storage. */ }
     };
     editor.onDidChangeModelContent(sync);
+    form.addEventListener("source-sync", sync);
     form.addEventListener("submit", event => {
         sync();
         if (!source.value.trim() || new TextEncoder().encode(source.value).length > 64 * 1024) {
@@ -55,4 +59,23 @@ if (form) {
         status.textContent = "";
     });
     window.addEventListener("pagehide", sync);
+}
+
+if (diffElement) {
+    const original = monaco.editor.createModel(document.getElementById("previous-source").value, "cpp");
+    const modified = monaco.editor.createModel(document.getElementById("current-source").value, "cpp");
+    diffElement.hidden = false;
+    const diff = monaco.editor.createDiffEditor(diffElement, {
+        theme: "vs-dark", readOnly: true, originalEditable: false,
+        automaticLayout: true, renderSideBySide: true,
+        useInlineViewWhenSpaceIsLimited: true, renderSideBySideInlineBreakpoint: 800,
+        minimap: { enabled: false }, fontSize: 14, scrollBeyondLastLine: false,
+        maxComputationTime: 5000, originalAriaLabel: "Previous attempt source",
+        modifiedAriaLabel: "Current attempt source"
+    });
+    diff.setModel({ original, modified });
+    document.getElementById("diff-fallback").hidden = true;
+    window.addEventListener("pagehide", event => {
+        if (!event.persisted) { diff.dispose(); original.dispose(); modified.dispose(); }
+    });
 }

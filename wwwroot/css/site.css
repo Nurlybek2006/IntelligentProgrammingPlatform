@@ -114,6 +114,22 @@ h2 { font-size: 1.5rem; } h3 { font-size: 1.15rem; }
 pre, code { font-family: Consolas, "Cascadia Code", monospace; }
 .code-editor { height: 460px; width: 100%; min-width: 0; border: 1px solid #52617a; border-radius: .5rem; overflow: hidden; }
 .source-fallback { min-height: 460px; background: #1e1e1e; color: #eee; font-family: Consolas, monospace; tab-size: 4; }
+.custom-input { font-family: Consolas, monospace; resize: vertical; min-height: 7rem; }
+.custom-input-panel, .custom-run-result { border-top: 1px solid var(--border); padding-top: 1rem; }
+.attempt-timeline { list-style: none; padding: 0 0 0 .6rem; margin: 1.5rem 0; }
+.attempt-node { position: relative; border-left: 2px solid #52617a; padding: 0 0 1.5rem 1.5rem; min-width: 0; }
+.attempt-node:last-child { padding-bottom: .25rem; }
+.attempt-node::before { content: ""; position: absolute; top: .2rem; left: -.4rem; width: .7rem; height: .7rem; background: var(--text-muted); border-radius: 50%; }
+.attempt-accepted::before { background: var(--success); }
+.ai-hint-marker { font-size: .8rem; color: #d6cfff; border: 1px solid #655986; border-radius: .4rem; padding: .1rem .5rem; }
+.comparison-info { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.comparison-info > *, .journey-panel { min-width: 0; }
+.code-diff { width: 100%; min-width: 0; height: 650px; border: 1px solid #52617a; border-radius: .5rem; overflow: hidden; }
+@media (max-width: 767.98px) {
+  .comparison-info { grid-template-columns: minmax(0, 1fr); }
+  .code-diff { height: 500px; }
+  .attempt-node { padding-left: 1rem; }
+}
 .editor-panel { padding: 1.25rem; border-top: 3px solid var(--primary); }
 .editor-panel h2 { font-size: 1.2rem; }
 #submission-progress { display: block; margin: .8rem 0 0 !important; font-size: .9rem; color: var(--warning); }
