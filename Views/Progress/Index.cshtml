@@ -1,44 +1,45 @@
 @model IntelligentProgrammingPlatform.ViewModels.Progress.ProgressViewModel
 @{ ViewData["Title"] = "My progress"; }
-<h1>My progress</h1>
-<p>Published tasks solved: <strong id="published-progress">@Model.PublishedSolvedTasks / @Model.PublishedTasks</strong></p>
+<div class="page-heading"><div><p class="eyebrow">Small steps, visible growth</p><h1>My progress</h1><p>Published tasks solved: <strong id="published-progress">@Model.PublishedSolvedTasks / @Model.PublishedTasks</strong></p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">Keep practicing →</a></div>
 <div class="row g-3 mb-4">
-    <div class="col-sm-6 col-lg-3"><div class="card card-body"><h2 class="h6">Solved tasks (all history)</h2><strong id="solved-tasks">@Model.SolvedTasks</strong></div></div>
-    <div class="col-sm-6 col-lg-3"><div class="card card-body"><h2 class="h6">Completed submissions</h2><strong id="total-submissions">@Model.TotalSubmissions</strong></div></div>
-    <div class="col-sm-6 col-lg-3"><div class="card card-body"><h2 class="h6">Accepted submissions</h2><strong id="accepted-submissions">@Model.AcceptedSubmissions</strong></div></div>
-    <div class="col-sm-6 col-lg-3"><div class="card card-body"><h2 class="h6">Compilation errors</h2><strong id="compilation-errors">@Model.CompilationErrors</strong></div></div>
-    <div class="col-sm-6 col-lg-4"><div class="card card-body"><h2 class="h6">Success rate</h2><strong id="success-rate">@Model.SuccessRate.ToString("0.0")%</strong></div></div>
-    <div class="col-sm-6 col-lg-4"><div class="card card-body"><h2 class="h6">Average solving time</h2><strong id="average-solve-time">@(Model.AverageSolveSeconds.HasValue ? (Model.AverageSolveSeconds.Value / 60).ToString("0.0") + " minutes" : "Not yet available")</strong></div></div>
-    <div class="col-sm-6 col-lg-4"><div class="card card-body"><h2 class="h6">Rating score</h2><strong id="rating-score">@Model.Score</strong></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="panel metric-card"><h2>Solved tasks (all history)</h2><strong id="solved-tasks">@Model.SolvedTasks</strong></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="panel metric-card"><h2>Completed submissions</h2><strong id="total-submissions">@Model.TotalSubmissions</strong></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="panel metric-card"><h2>Accepted submissions</h2><strong id="accepted-submissions">@Model.AcceptedSubmissions</strong></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="panel metric-card"><h2>Compilation errors</h2><strong id="compilation-errors">@Model.CompilationErrors</strong></div></div>
+    <div class="col-sm-6 col-lg-4"><div class="panel metric-card"><h2>Successful attempt percentage</h2><strong id="success-rate">@Model.SuccessRate.ToString("0.0")%</strong><p class="small text-muted mb-0 mt-2">Accepted / completed attempts</p></div></div>
+    <div class="col-sm-6 col-lg-4"><div class="panel metric-card"><h2>Average solving time</h2><strong id="average-solve-time">@(Model.AverageSolveSeconds.HasValue ? (Model.AverageSolveSeconds.Value / 60).ToString("0.0") + " minutes" : "Not yet available")</strong><p class="small text-muted mb-0 mt-2">First attempt to first Accepted</p></div></div>
+    <div class="col-sm-6 col-lg-4"><div class="panel metric-card accent"><h2>Rating score</h2><strong id="rating-score">@Model.Score</strong><p class="small text-muted mb-0 mt-2">Each solved task counts once</p></div></div>
 </div>
-<p class="text-muted">Solving time runs from your first submission to your first Accepted submission for each solved task. It is not program execution time. Repeated Accepted submissions count as one solved task.</p>
-<h2 class="h4">Progress by difficulty</h2>
-@foreach (var group in Model.Difficulties)
-{
-    <div class="mb-3">
-        <p class="mb-1">@group.Name: <strong>@group.Solved / @group.Total</strong></p>
-        <div class="progress" role="progressbar" aria-label="@group.Name progress" aria-valuenow="@group.Solved" aria-valuemin="0" aria-valuemax="@Math.Max(1, group.Total)">
-            <div class="progress-bar" style="width: @group.Percentage%">@group.Percentage%</div>
-        </div>
-    </div>
-}
-<h2 class="h4 mt-4">Progress by topic</h2>
-<table class="table"><thead><tr><th>Topic</th><th>Solved</th><th>Published tasks</th></tr></thead><tbody>
-@foreach (var topic in Model.Topics)
-{
-    <tr><td>@topic.Name</td><td>@topic.Solved</td><td>@topic.Total</td></tr>
-}
-</tbody></table>
-<p class="text-muted">Difficulty and topic progress include published tasks. Historical solved counts and rating retain tasks that were later unpublished.</p>
-<h2 class="h4 mt-4">Recent activity</h2>
-@if (Model.Recent.Count == 0) { <p>No submissions yet. <a asp-controller="Tasks" asp-action="Index">Choose a task</a> to get started.</p> }
-else
-{
-    <table class="table"><thead><tr><th>Task</th><th>Status</th><th>Passed / total</th><th>Created (UTC)</th></tr></thead><tbody>
-    @foreach (var item in Model.Recent)
-    {
-        <tr><td><a asp-controller="Submissions" asp-action="Details" asp-route-id="@item.Id">@item.TaskTitle</a></td><td>@item.Status</td><td>@item.PassedTests / @item.TotalTests</td><td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
-    }
-    </tbody></table>
-    <a asp-controller="Submissions" asp-action="My">All my submissions</a>
-}
+<div class="row g-4">
+    <section class="col-lg-5" aria-labelledby="difficulty-heading"><div class="panel h-100">
+        <h2 id="difficulty-heading" class="h5 mb-4">Progress by difficulty</h2>
+        @foreach (var group in Model.Difficulties)
+        {
+            <div class="mb-4">
+                <p class="d-flex justify-content-between mb-2"><span class="difficulty @group.Name">@group.Name</span><strong>@group.Solved / @group.Total</strong></p>
+                <div class="progress" role="progressbar" aria-label="@group.Name progress" aria-valuenow="@group.Solved" aria-valuemin="0" aria-valuemax="@Math.Max(1, group.Total)">
+                    <div class="progress-bar" style="width: @group.Percentage%">@(group.Percentage > 0 ? group.Percentage + "%" : "")</div>
+                </div>
+            </div>
+        }
+        <p class="small text-muted mb-0">Repeated Accepted submissions count as one solved task.</p>
+    </div></section>
+    <section class="col-lg-7" aria-labelledby="topic-heading"><div class="panel h-100">
+        <h2 id="topic-heading" class="h5 mb-4">Progress by topic</h2>
+        @if (Model.Topics.Count == 0) { <p class="text-muted">Topics will appear here when tasks are published.</p> }
+        else
+        {
+            <div class="table-responsive" role="region" aria-label="Progress by topic" tabindex="0">
+            <table class="table"><thead><tr><th scope="col">Topic</th><th scope="col">Solved</th><th scope="col">Published tasks</th></tr></thead><tbody>
+            @foreach (var topic in Model.Topics) { <tr><td>@topic.Name</td><td>@topic.Solved</td><td>@topic.Total</td></tr> }
+            </tbody></table></div>
+        }
+        <p class="small text-muted mb-0">Difficulty and topic progress include published tasks. Historical solved counts and rating retain tasks that were later unpublished.</p>
+    </div></section>
+</div>
+<p class="small text-muted mt-3">Solving time runs from your first submission to your first Accepted submission for each solved task. It is not program execution time.</p>
+<section aria-labelledby="recent-heading">
+    <div class="section-heading"><h2 id="recent-heading">Recent activity</h2><a asp-controller="Submissions" asp-action="My">All my submissions →</a></div>
+    @if (Model.Recent.Count == 0) { <div class="empty-state"><h3>Your progress starts with a first attempt</h3><p><a asp-controller="Tasks" asp-action="Index">Choose a task</a> to get started.</p></div> }
+    else { <partial name="_RecentSubmissions" model="Model.Recent" /> }
+</section>

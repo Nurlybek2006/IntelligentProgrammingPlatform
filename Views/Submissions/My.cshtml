@@ -1,25 +1,23 @@
 @model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionHistoryViewModel
 @{ ViewData["Title"] = "My submissions"; }
-<h1>My submissions</h1>
+<div class="page-heading"><div><p class="eyebrow">Your learning history</p><h1>My submissions</h1><p>Every attempt is a chance to understand a little more.</p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">Solve a task →</a></div>
 @if (Model.Items.Count == 0)
 {
-    <p>No submissions on this page. <a asp-controller="Tasks" asp-action="Index">Browse tasks</a>.</p>
+    <div class="empty-state"><h2>@(Model.Page == 1 ? "You haven't submitted a solution yet." : "No submissions on this page.")</h2><p><a asp-controller="Tasks" asp-action="Index">Browse tasks</a> to start your learning history.</p></div>
 }
 else
 {
-    <div class="table-responsive"><table class="table table-striped">
-        <thead><tr><th>Submission</th><th>Task</th><th>Runtime</th><th>Status</th><th>Passed / total</th><th>Created (UTC)</th></tr></thead>
-        <tbody>
+    <div class="table-responsive" role="region" aria-label="Submission history" tabindex="0"><table class="table table-striped">
+        <thead><tr><th scope="col">Submission</th><th scope="col">Task</th><th scope="col">Runtime</th><th scope="col">Status</th><th scope="col">Passed / total</th><th scope="col">Created (UTC)</th></tr></thead><tbody>
         @foreach (var item in Model.Items)
         {
-            <tr><td><a asp-action="Details" asp-route-id="@item.Id">#@item.Id</a></td><td>@item.TaskTitle</td>
-                <td>@item.RuntimeName</td><td>@item.Status</td><td>@item.PassedTests / @item.TotalTests</td>
-                <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
+            <tr><td><a asp-action="Details" asp-route-id="@item.Id">#@item.Id</a></td><td>@item.TaskTitle</td><td>@item.RuntimeName</td><td><span class="status-badge @item.Status">@item.Status</span></td><td>@item.PassedTests / @item.TotalTests</td><td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
         }
         </tbody>
     </table></div>
 }
-<nav aria-label="Submission pages">
+<nav class="d-flex gap-2 align-items-center" aria-label="Submission pages">
     @if (Model.Page > 1) { <a asp-action="My" asp-route-page="@(Model.Page - 1)" class="btn btn-outline-secondary">Previous</a> }
+    @if (Model.Page > 1 || Model.HasNextPage) { <span class="text-muted">Page @Model.Page</span> }
     @if (Model.HasNextPage) { <a asp-action="My" asp-route-page="@(Model.Page + 1)" class="btn btn-outline-secondary">Next</a> }
 </nav>

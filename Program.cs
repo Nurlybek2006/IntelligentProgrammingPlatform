@@ -14,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 // MVC беттерін және барлық өзгертетін сұраулардың CSRF қорғанысын тіркейді.
 builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+// Қауіпсіздік және уақытша хабар cookie-лерін тек HTTPS арқылы жібереді.
+builder.Services.AddAntiforgery(options => options.Cookie.SecurePolicy = CookieSecurePolicy.Always);
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.CookieTempDataProviderOptions>(options =>
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always);
 // EF Core контекстін қолданыстағы SQL Server базасына қосады.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
@@ -40,6 +44,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/AccessDenied";
     options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.ExpireTimeSpan = TimeSpan.FromDays(7);
     options.SlidingExpiration = true;
@@ -67,12 +72,20 @@ builder.Services.AddScoped<OpenAiTutorService>();
 var app = builder.Build();
 
 // HTTP сұрауларын HTTPS және қауіпсіз қате өңдеу middleware-лері арқылы өткізеді.
-if (!app.Environment.IsDevelopment())
+app.UseExceptionHandler("/Home/Error");
+if (!app.Environment.IsDevelopment()) app.UseHsts();
+
+// Браузер мүмкіндіктерін шектеп, Monaco-ға кедергі келтірмейтін жауап тақырыптарын қосады.
+app.Use(async (context, next) =>
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    context.Response.Headers.XContentTypeOptions = "nosniff";
+    context.Response.Headers.XFrameOptions = "DENY";
+    context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+    context.Response.Headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()";
+    await next();
+});
+// Бос қате жауаптарын бастапқы HTTP күйін сақтайтын қауіпсіз бетке қайта орындайды.
+app.UseStatusCodePagesWithReExecute("/Home/HttpError", "?code={0}");
 
 app.UseHttpsRedirection();
 app.UseRouting();

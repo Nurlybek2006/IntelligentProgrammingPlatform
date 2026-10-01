@@ -1,26 +1,24 @@
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
-<ul class="navbar-nav align-items-md-center">
+@{
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+<ul class="navbar-nav account-nav">
 @if (User.Identity?.IsAuthenticated == true)
 {
     var currentUser = await UserManager.GetUserAsync(User);
-    <li class="nav-item"><span class="navbar-text me-2">@currentUser?.DisplayName</span></li>
-    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
-    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Submissions" asp-action="My">My submissions</a></li>
-    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Progress" asp-action="Index">My progress</a></li>
+    <li class="nav-item"><span class="navbar-text display-name">@currentUser?.DisplayName</span></li>
+    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Profile" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
     @if (User.IsInRole(RoleNames.Admin))
     {
-        <li class="nav-item"><a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" aria-current="@(ViewContext.RouteData.Values["area"]?.ToString() == "Admin" ? "page" : null)" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
     }
-    <li class="nav-item">
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
-            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <li class="nav-item"><form asp-area="" asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="nav-link btn btn-link">Logout</button></form></li>
 }
 else
 {
-    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
-    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Login" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+    <li class="nav-item"><a class="btn btn-primary btn-sm" asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
 }
 </ul>

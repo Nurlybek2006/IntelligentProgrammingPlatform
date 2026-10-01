@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · Intelligent Programming Platform</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header"><div class="app-width py-3"><a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>Intelligent Programming Platform</a></div></header>
+    <main id="main-content" class="app-width page-shell" tabindex="-1">@RenderBody()</main>
+</body>
+</html>

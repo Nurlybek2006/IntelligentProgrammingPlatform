@@ -1,17 +1,25 @@
 @model IntelligentProgrammingPlatform.ViewModels.Leaderboard.LeaderboardViewModel
 @{ ViewData["Title"] = "Leaderboard"; }
-<h1>Leaderboard</h1>
-<p>Each solved task scores once: Easy 100 · Medium 200 · Hard 300.</p>
-<div class="table-responsive">
-<table class="table table-striped"><thead><tr><th>Rank</th><th>Display name</th><th>Solved tasks</th><th>Accepted</th><th>Completed</th><th>Success rate</th><th>Score</th></tr></thead><tbody>
-@foreach (var row in Model.Rows)
+<div class="page-heading"><div><p class="eyebrow">Practice adds up</p><h1>Leaderboard</h1><p>Keep learning. Every new task you solve moves you forward.</p></div></div>
+<div class="d-flex flex-wrap gap-2 mb-4"><span class="difficulty Easy">Easy · 100 points</span><span class="difficulty Medium">Medium · 200 points</span><span class="difficulty Hard">Hard · 300 points</span></div>
+<p class="small text-muted">Each solved task scores once. Repeated Accepted submissions do not add extra points.</p>
+@if (Model.Rows.Count == 0)
 {
-    <tr class="@(row.IsCurrentUser ? "table-primary" : "")"><td>@row.Rank</td><td>@row.DisplayName @if (row.IsCurrentUser) { <span class="badge bg-primary">You</span> }</td><td>@row.SolvedTasks</td><td>@row.SuccessfulSubmissions</td><td>@row.TotalSubmissions</td><td>@row.SuccessRate.ToString("0.0")%</td><td>@row.Score</td></tr>
+    <div class="empty-state"><h2>No ranked users yet.</h2><p>Start solving to build your score.</p><a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">Browse tasks</a></div>
 }
-</tbody></table>
-</div>
-@if (Model.Rows.Count == 0) { <p>No leaderboard entries yet.</p> }
-<nav aria-label="Leaderboard pages">
+else
+{
+    <div class="table-responsive" role="region" aria-label="Student leaderboard" tabindex="0">
+    <table class="table table-striped"><thead><tr><th scope="col">Rank</th><th scope="col">Display name</th><th scope="col">Solved tasks</th><th scope="col">Accepted</th><th scope="col">Completed</th><th scope="col">Success rate</th><th scope="col">Score</th></tr></thead><tbody>
+    @foreach (var row in Model.Rows)
+    {
+        <tr class="@(row.IsCurrentUser ? "table-primary" : "")"><td><span class="rank-marker @(row.Rank <= 3 ? "rank-" + row.Rank : "")">@row.Rank</span></td><td>@row.DisplayName @if (row.IsCurrentUser) { <span class="badge bg-primary">You</span> }</td><td>@row.SolvedTasks</td><td>@row.SuccessfulSubmissions</td><td>@row.TotalSubmissions</td><td>@row.SuccessRate.ToString("0.0")%</td><td><strong>@row.Score</strong></td></tr>
+    }
+    </tbody></table>
+    </div>
+}
+<nav class="d-flex gap-2 align-items-center" aria-label="Leaderboard pages">
     @if (Model.Page > 1) { <a class="btn btn-outline-secondary" asp-action="Index" asp-route-page="@(Model.Page - 1)">Previous</a> }
+    @if (Model.Page > 1 || Model.HasNextPage) { <span class="text-muted">Page @Model.Page</span> }
     @if (Model.HasNextPage) { <a class="btn btn-outline-secondary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Next</a> }
 </nav>

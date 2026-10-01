@@ -1,38 +1,36 @@
 @model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskDetailsViewModel
 @{ ViewData["Title"] = Model.Title; }
-<a asp-controller="Tasks" asp-action="Index">Back to tasks</a>
-<h1 class="mt-3">@Model.Title</h1>
-<p><span class="badge bg-secondary">@Model.TopicName</span> <span class="badge bg-primary">@Model.Difficulty</span></p>
-<p>Time limit: <strong>@Model.TimeLimitMs ms</strong> · Memory limit: <strong>@Model.MemoryLimitMb MB</strong></p>
-<div class="text-content mb-4">@Model.Description</div>
-<h2>Examples</h2>
-@if (Model.Examples.Count == 0)
-{
-    <p>No examples are available.</p>
-}
-@for (var index = 0; index < Model.Examples.Count; index++)
-{
-    var example = Model.Examples[index];
-    <section class="card mb-3">
-        <div class="card-body">
-            <h3 class="h5">Example @(index + 1)</h3>
-            <h4 class="h6">Input</h4><pre class="test-data">@example.Input</pre>
-            <h4 class="h6">Expected output</h4><pre class="test-data">@example.ExpectedOutput</pre>
-        </div>
+<a class="small" asp-controller="Tasks" asp-action="Index">← Back to tasks</a>
+<div class="page-heading mt-3"><div><p class="eyebrow">@Model.TopicName</p><h1>@Model.Title</h1></div><span class="difficulty @Model.Difficulty">@Model.Difficulty</span></div>
+<div class="solve-grid">
+    <section class="panel" aria-labelledby="problem-heading">
+        <h2 id="problem-heading">The task</h2>
+        <div class="limit-list"><span>Time limit<strong>@Model.TimeLimitMs ms</strong></span><span>Memory limit<strong>@Model.MemoryLimitMb MB</strong></span><span>Language<strong>C++ 20</strong></span></div>
+        <div class="text-content task-description mb-4">@Model.Description</div>
+        <h2 class="h5">Examples</h2>
+        @if (Model.Examples.Count == 0) { <p class="text-muted">No examples are available.</p> }
+        @for (var index = 0; index < Model.Examples.Count; index++)
+        {
+            var example = Model.Examples[index];
+            <section class="card example-card"><div class="card-body">
+                <h3 class="h6 mb-3">Example @(index + 1)</h3>
+                <h4 class="h6 text-muted">Input</h4><pre class="test-data">@example.Input</pre>
+                <h4 class="h6 text-muted">Expected output</h4><pre class="test-data mb-0">@example.ExpectedOutput</pre>
+            </div></section>
+        }
     </section>
-}
-<section class="mt-4" aria-labelledby="solution-heading">
-    <h2 id="solution-heading">Your solution</h2>
-    @if (User.Identity?.IsAuthenticated == true)
-    {
-        <partial name="~/Views/Tasks/_SubmissionForm.cshtml" model="Model.Submission" />
-    }
-    else
-    {
-        <p><a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Login</a>
-            or <a asp-controller="Account" asp-action="Register">register</a> to write and submit a C++ solution.</p>
-    }
-</section>
+    <section class="panel editor-panel" aria-labelledby="solution-heading">
+        <h2 id="solution-heading" class="mb-3">Your solution</h2>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <partial name="~/Views/Tasks/_SubmissionForm.cshtml" model="Model.Submission" />
+        }
+        else
+        {
+            <div class="empty-state my-3"><h3>Ready to give it a try?</h3><p>Sign in to write C++ in the editor and check your solution.</p><a class="btn btn-primary" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Login</a> <a class="btn btn-outline-secondary" asp-controller="Account" asp-action="Register">Register</a></div>
+        }
+    </section>
+</div>
 @section Scripts {
     @if (User.Identity?.IsAuthenticated == true)
     {

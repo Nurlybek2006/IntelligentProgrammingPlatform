@@ -3,8 +3,14 @@
 <a asp-controller="Home" asp-action="Index">Admin</a>
 <h1>Topics</h1>
 <p><a class="btn btn-primary" asp-action="Create">Create topic</a></p>
-<div class="table-responsive"><table class="table">
-    <thead><tr><th>Name</th><th>Description</th><th>Actions</th></tr></thead>
+@if (Model.Count == 0)
+{
+    <div class="empty-state"><h2>No records to show yet.</h2><p>Use the controls above to add a record or choose another task.</p></div>
+}
+else
+{
+<div class="table-responsive" role="region" aria-label="Management records" tabindex="0"><table class="table">
+    <thead><tr><th scope="col">Name</th><th scope="col">Description</th><th scope="col">Actions</th></tr></thead>
     <tbody>
     @foreach (var topic in Model)
     {
@@ -15,3 +21,5 @@
     }
     </tbody>
 </table></div>
+
+}

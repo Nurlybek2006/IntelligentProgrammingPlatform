@@ -20,8 +20,8 @@
 <h2>Test cases</h2>
 <p><a class="btn btn-primary" asp-controller="TestCases" asp-action="Create" asp-route-taskId="@Model.Id">Add test case</a>
 <a class="btn btn-outline-secondary" asp-controller="TestCases" asp-action="Index" asp-route-taskId="@Model.Id">Manage test cases</a></p>
-<div class="table-responsive"><table class="table">
-<thead><tr><th>Order</th><th>Input</th><th>Expected output</th><th>Hidden</th><th>Actions</th></tr></thead>
+<div class="table-responsive" role="region" aria-label="Management records" tabindex="0"><table class="table">
+<thead><tr><th scope="col">Order</th><th scope="col">Input</th><th scope="col">Expected output</th><th scope="col">Hidden</th><th scope="col">Actions</th></tr></thead>
 <tbody>
 @foreach (var test in Model.TestCases)
 {

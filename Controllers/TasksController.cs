@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Services.Submissions;
 using IntelligentProgrammingPlatform.Models.Enums;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IntelligentProgrammingPlatform.Controllers;
 
 [AllowAnonymous]
+[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
 public class TasksController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -27,6 +29,7 @@ public class TasksController : Controller
     // Жарияланған есептерді сүзгілер бойынша каталогқа шығарады.
     public async Task<IActionResult> Index(string? search, int? topicId, Difficulty? difficulty)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var query = _db.ProgrammingTasks.AsNoTracking().Where(task => task.IsPublished);
         if (!string.IsNullOrWhiteSpace(search))
             query = query.Where(task => task.Title.Contains(search.Trim()));
@@ -42,7 +45,9 @@ public class TasksController : Controller
                 .Select(topic => new SelectListItem(topic.Name, topic.Id.ToString())).ToListAsync(),
             Tasks = await query.OrderBy(task => task.Title).Select(task => new TaskListItemViewModel
             {
-                Title = task.Title, Slug = task.Slug, TopicName = task.Topic.Name, Difficulty = task.Difficulty
+                Title = task.Title, Slug = task.Slug, TopicName = task.Topic.Name, Difficulty = task.Difficulty,
+                IsSolved = userId != null && task.Submissions.Any(submission => submission.UserId == userId
+                    && submission.Status == SubmissionStatus.Accepted)
             }).ToListAsync()
         });
     }

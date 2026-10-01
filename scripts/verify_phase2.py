@@ -44,7 +44,8 @@ class Inputs(HTMLParser):
 
 
 class Client:
-    def __init__(self):
+    def __init__(self, timeout=30):
+        self.timeout = timeout
         self.cookies = http.cookiejar.CookieJar()
         # Only the loopback development certificate is accepted without CA validation.
         context = ssl._create_unverified_context()
@@ -60,7 +61,7 @@ class Client:
             data=None if data is None else urllib.parse.urlencode(data).encode(),
             headers={"Content-Type": "application/x-www-form-urlencoded"} if data is not None else {})
         try:
-            response = self.opener.open(request, timeout=30)
+            response = self.opener.open(request, timeout=self.timeout)
         except urllib.error.HTTPError as error:
             response = error
         with response:

@@ -101,7 +101,7 @@ public static class DbSeeder
         logger.LogInformation("Development admin account created from configured User Secrets.");
     }
 
-    // Үш оқу есебін және тесттерін тек жоқ болғанда қосады.
+    // Төрт оқу есебін және тесттерін тек жоқ болғанда қосады.
     private static async Task SeedTasksAsync(ApplicationDbContext db)
     {
         await using var transaction = await db.Database.BeginTransactionAsync();
@@ -116,6 +116,19 @@ public static class DbSeeder
             StringComparer.OrdinalIgnoreCase);
         var tasks = new[]
         {
+            new ProgrammingTask
+            {
+                Title = "Longest Increasing Subsequence", Slug = "longest-increasing-subsequence",
+                TopicId = topics["Algorithms"], Difficulty = Difficulty.Hard, IsPublished = true,
+                Description = "Read n (1 <= n <= 100000), then n integers between -1000000000 and 1000000000. Print the length of the longest strictly increasing subsequence. A subsequence keeps the original order but may skip elements. Equal values do not form an increase.",
+                TestCases = new List<TestCase>
+                {
+                    new() { Input = "6\n3 1 4 2 5 6", ExpectedOutput = "4", Order = 1 },
+                    new() { Input = "4\n7 7 7 7", ExpectedOutput = "1", Order = 2 },
+                    new() { Input = "8\n10 9 2 5 3 7 101 18", ExpectedOutput = "4", Order = 3, IsHidden = true },
+                    new() { Input = "5\n-5 -4 -3 -2 -1", ExpectedOutput = "5", Order = 4, IsHidden = true }
+                }
+            },
             new ProgrammingTask
             {
                 Title = "Sum of Two Numbers", Slug = "sum-of-two-numbers",

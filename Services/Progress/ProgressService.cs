@@ -1,6 +1,7 @@
 using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Models.Enums;
 using IntelligentProgrammingPlatform.ViewModels.Progress;
+using IntelligentProgrammingPlatform.ViewModels.Home;
 using IntelligentProgrammingPlatform.ViewModels.Submissions;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,30 @@ public sealed class ProgressService
 
     // Статистикаға тек жіберілім тарихын оқитын контекст береді.
     public ProgressService(ApplicationDbContext db) => _db = db;
+
+    // Басты бетке екі шағын SQL проекциясымен ұпай, шешілген есеп және соңғы әрекеттерді береді.
+    public async Task<HomeViewModel> GetHomeAsync(string userId, CancellationToken cancellationToken)
+    {
+        var submissions = _db.Submissions.AsNoTracking().Where(item => item.UserId == userId);
+        var solved = await _db.ProgrammingTasks.AsNoTracking().Where(task => submissions.Any(
+                item => item.ProgrammingTaskId == task.Id && item.Status == SubmissionStatus.Accepted))
+            .GroupBy(_ => 1).Select(group => new
+            {
+                Count = group.Count(),
+                Score = group.Sum(task => task.Difficulty == Difficulty.Easy ? 100
+                    : task.Difficulty == Difficulty.Medium ? 200 : task.Difficulty == Difficulty.Hard ? 300 : 0)
+            }).SingleOrDefaultAsync(cancellationToken);
+        return new HomeViewModel
+        {
+            SolvedTasks = solved?.Count ?? 0, Score = solved?.Score ?? 0,
+            Recent = await submissions.OrderByDescending(item => item.CreatedAt).ThenByDescending(item => item.Id)
+                .Take(3).Select(item => new SubmissionListItemViewModel
+                {
+                    Id = item.Id, TaskTitle = item.ProgrammingTask.Title, RuntimeName = item.Runtime.Name,
+                    Status = item.Status, PassedTests = item.PassedTests, TotalTests = item.TotalTests, CreatedAt = item.CreatedAt
+                }).ToListAsync(cancellationToken)
+        };
+    }
 
     // Пайдаланушы нәтижелерін, шешу уақытын және жарияланған есептер прогресін есептейді.
     public async Task<ProgressViewModel> GetAsync(string userId, CancellationToken cancellationToken)

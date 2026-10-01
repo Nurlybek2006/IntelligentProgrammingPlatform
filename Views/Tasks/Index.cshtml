@@ -1,25 +1,27 @@
 @using IntelligentProgrammingPlatform.Models.Enums
 @model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskCatalogViewModel
 @{ ViewData["Title"] = "Tasks"; }
-<h1>Programming tasks</h1>
-<form asp-action="Index" method="get" class="row g-3 mb-4">
-    <div class="col-md-4"><label asp-for="Search" class="form-label">Title</label><input asp-for="Search" class="form-control" placeholder="Search tasks" /></div>
-    <div class="col-md-3"><label asp-for="TopicId" class="form-label">Topic</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">All topics</option></select></div>
-    <div class="col-md-3"><label asp-for="Difficulty" class="form-label"></label><select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<Difficulty>()" class="form-select"><option value="">All difficulties</option></select></div>
-    <div class="col-md-2 d-flex align-items-end"><button class="btn btn-primary" type="submit">Filter</button><a asp-action="Index" class="btn btn-link">Reset</a></div>
+<div class="page-heading"><div><p class="eyebrow">Practice library</p><h1>Find your next challenge</h1><p>Build confidence with the basics, then stretch your skills with arrays and algorithms.</p></div><span class="text-muted">@Model.Tasks.Count matching tasks</span></div>
+<form asp-action="Index" method="get" class="panel filter-panel row g-3 mx-0">
+    <div class="col-lg-4"><label asp-for="Search" class="form-label">Search by title</label><input asp-for="Search" class="form-control" placeholder="Find a programming task…" /></div>
+    <div class="col-sm-6 col-lg-3"><label asp-for="TopicId" class="form-label">Topic</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">All topics</option></select></div>
+    <div class="col-sm-6 col-lg-3"><label asp-for="Difficulty" class="form-label"></label><select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<Difficulty>()" class="form-select"><option value="">All difficulties</option></select></div>
+    <div class="col-lg-2 d-flex align-items-end gap-1"><button class="btn btn-primary" type="submit">Filter</button><a asp-action="Index" class="btn btn-link">Reset</a></div>
 </form>
 @if (Model.Tasks.Count == 0)
 {
-    <p>No published tasks match these filters.</p>
+    <div class="empty-state"><h2>No tasks match your filters.</h2><p>Try another title, topic or difficulty.</p><a asp-action="Index" class="btn btn-outline-primary">Show all tasks</a></div>
 }
 else
 {
-    <div class="table-responsive"><table class="table table-striped">
-        <thead><tr><th>Title</th><th>Topic</th><th>Difficulty</th></tr></thead>
+    <div class="table-responsive" role="region" aria-label="Programming tasks" tabindex="0"><table class="table table-striped">
+        <thead><tr><th scope="col">Task</th><th scope="col">Topic</th><th scope="col">Difficulty</th>@if (User.Identity?.IsAuthenticated == true) { <th scope="col">Your progress</th> }<th scope="col"><span class="visually-hidden">Open task</span></th></tr></thead>
         <tbody>
         @foreach (var task in Model.Tasks)
         {
-            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td>@task.Difficulty</td></tr>
+            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td><span class="difficulty @task.Difficulty">@task.Difficulty</span></td>
+                @if (User.Identity?.IsAuthenticated == true) { <td>@if (task.IsSolved) { <span class="solved-badge">✓ Solved</span> } else { <span class="text-muted">To explore</span> }</td> }
+                <td><a asp-action="Details" asp-route-slug="@task.Slug" class="btn btn-sm btn-outline-secondary" aria-label="Solve @task.Title">Solve <span aria-hidden="true">→</span></a></td></tr>
         }
         </tbody>
     </table></div>
