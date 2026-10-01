@@ -217,7 +217,8 @@ def main():
         check(not temporary_root.exists() or not any(temporary_root.iterdir()), 'No per-submission temporary directories remain')
         history = student.request('/Submissions/My')[2]
         links = [int(value) for value in re.findall(r'href="/Submissions/Details/(\d+)"', history)]
-        check(links == sorted(links, reverse=True), 'History lists submissions newest first')
+        expected = [int(value) for value in sql(f"SELECT TOP (20) s.Id FROM Submissions s JOIN AspNetUsers u ON u.Id=s.UserId WHERE u.Email='{emails[0]}' ORDER BY s.CreatedAt DESC, s.Id DESC;").splitlines()]
+        check(links == expected, 'History lists submissions by CreatedAt then Id, newest first')
         print(f'PHASE 3 VERIFICATION PASSED: {len(owned)} real submissions; fixtures will be removed.', flush=True)
     finally:
         # Only this run's unique accounts and fixtures are removed, in FK order.

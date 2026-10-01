@@ -5,11 +5,22 @@ using IntelligentProgrammingPlatform.Services.Submissions;
 using IntelligentProgrammingPlatform.Services.Leaderboards;
 using IntelligentProgrammingPlatform.Services.Progress;
 using IntelligentProgrammingPlatform.Services.AI;
+using IntelligentProgrammingPlatform.Services.Security;
+using Microsoft.AspNetCore.HostFiltering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Әр жауапқа жеке CSP nonce беріп, бос не wildcard хост тізімін қабылдамайды.
+builder.Services.AddScoped<ContentSecurityPolicy>();
+builder.Services.AddOptions<HostFilteringOptions>()
+    .Configure(options => { options.AllowEmptyHosts = false; options.IncludeFailureMessage = false; })
+    .Validate(options => options.AllowedHosts.Count > 0 && options.AllowedHosts.All(host =>
+        !string.IsNullOrWhiteSpace(host) && !host.Contains('*')),
+        "AllowedHosts must contain explicit host names; empty lists and wildcards are not allowed.")
+    .ValidateOnStart();
 
 // MVC беттерін және барлық өзгертетін сұраулардың CSRF қорғанысын тіркейді.
 builder.Services.AddControllersWithViews(options =>
@@ -72,18 +83,10 @@ builder.Services.AddScoped<OpenAiTutorService>();
 var app = builder.Build();
 
 // HTTP сұрауларын HTTPS және қауіпсіз қате өңдеу middleware-лері арқылы өткізеді.
+app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseExceptionHandler("/Home/Error");
 if (!app.Environment.IsDevelopment()) app.UseHsts();
 
-// Браузер мүмкіндіктерін шектеп, Monaco-ға кедергі келтірмейтін жауап тақырыптарын қосады.
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.XContentTypeOptions = "nosniff";
-    context.Response.Headers.XFrameOptions = "DENY";
-    context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
-    context.Response.Headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()";
-    await next();
-});
 // Бос қате жауаптарын бастапқы HTTP күйін сақтайтын қауіпсіз бетке қайта орындайды.
 app.UseStatusCodePagesWithReExecute("/Home/HttpError", "?code={0}");
 

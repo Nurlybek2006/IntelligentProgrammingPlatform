@@ -39,8 +39,17 @@ public static class DbSeeder
     // C++ тілінің бір ғана даму runtime жазбасын қайталамай қосады.
     private static async Task SeedRuntimeAsync(ApplicationDbContext db)
     {
-        if (await db.Runtimes.AnyAsync(runtime => runtime.LanguageKey == CodeRunnerOptions.LanguageKey))
+        var existing = await db.Runtimes.FirstOrDefaultAsync(runtime => runtime.LanguageKey == CodeRunnerOptions.LanguageKey);
+        if (existing is not null)
+        {
+            const string previousTag = "gcc:14.3.0-bookworm";
+            if (existing.DockerImage == previousTag || existing.DockerImage == CodeRunnerOptions.Image.Replace("gcc@", previousTag + "@", StringComparison.Ordinal))
+            {
+                existing.DockerImage = CodeRunnerOptions.Image;
+                await db.SaveChangesAsync();
+            }
             return;
+        }
         db.Runtimes.Add(new Runtime
         {
             Name = "C++ 20", LanguageKey = CodeRunnerOptions.LanguageKey, Version = "GCC 14.3.0",

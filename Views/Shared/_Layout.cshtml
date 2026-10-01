@@ -8,9 +8,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csp-nonce" content="@Csp.Nonce" />
     <meta name="description" content="Practice C++, learn from test results and AI hints, and follow your programming progress." />
     <title>@ViewData["Title"] · Intelligent Programming Platform</title>
-    <script type="importmap"></script>
+    <script type="importmap" nonce="@Csp.Nonce"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>

@@ -1,5 +1,11 @@
 @model IntelligentProgrammingPlatform.ViewModels.Progress.ProgressViewModel
 @{ ViewData["Title"] = "My progress"; }
+<style nonce="@Csp.Nonce">
+    @for (var i = 0; i < Model.Difficulties.Count; i++)
+    {
+        @:.difficulty-progress-@i { width: @(Math.Clamp(Model.Difficulties[i].Percentage, 0, 100))%; }
+    }
+</style>
 <div class="page-heading"><div><p class="eyebrow">Small steps, visible growth</p><h1>My progress</h1><p>Published tasks solved: <strong id="published-progress">@Model.PublishedSolvedTasks / @Model.PublishedTasks</strong></p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">Keep practicing →</a></div>
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-lg-3"><div class="panel metric-card"><h2>Solved tasks (all history)</h2><strong id="solved-tasks">@Model.SolvedTasks</strong></div></div>
@@ -13,12 +19,13 @@
 <div class="row g-4">
     <section class="col-lg-5" aria-labelledby="difficulty-heading"><div class="panel h-100">
         <h2 id="difficulty-heading" class="h5 mb-4">Progress by difficulty</h2>
-        @foreach (var group in Model.Difficulties)
+        @for (var i = 0; i < Model.Difficulties.Count; i++)
         {
+            var group = Model.Difficulties[i];
             <div class="mb-4">
                 <p class="d-flex justify-content-between mb-2"><span class="difficulty @group.Name">@group.Name</span><strong>@group.Solved / @group.Total</strong></p>
                 <div class="progress" role="progressbar" aria-label="@group.Name progress" aria-valuenow="@group.Solved" aria-valuemin="0" aria-valuemax="@Math.Max(1, group.Total)">
-                    <div class="progress-bar" style="width: @group.Percentage%">@(group.Percentage > 0 ? group.Percentage + "%" : "")</div>
+                    <div class="progress-bar difficulty-progress-@i">@(group.Percentage > 0 ? group.Percentage + "%" : "")</div>
                 </div>
             </div>
         }

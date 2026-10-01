@@ -55,6 +55,7 @@ h2 { font-size: 1.5rem; } h3 { font-size: 1.15rem; }
 .form-check-input:checked { background-color: #7662c8; border-color: var(--primary); }
 .text-danger, .field-validation-error { color: var(--danger) !important; }
 .validation-summary-valid { display: none; }
+.validation-summary-placeholder { display: none; }
 .validation-summary-errors { border-left: 3px solid var(--danger); padding: .7rem 1rem; margin-bottom: 1rem; background: #3c2330; border-radius: .4rem; }
 .validation-summary-errors ul { margin-bottom: 0; padding-left: 1.2rem; }
 .input-validation-error { border-color: var(--danger); }

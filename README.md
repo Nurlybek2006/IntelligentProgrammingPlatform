@@ -48,8 +48,10 @@ Docker results determine the submission status. AI is requested separately and n
 
    ```powershell
    docker info
-   docker pull gcc:14.3.0-bookworm
+   docker pull gcc@sha256:5e927c284bf55a7dc796262e311a0703344f62f41f5621eb56843111b1d37e15
    ```
+
+   This digest was resolved from the actual local `gcc:14.3.0-bookworm` RepoDigests and pulled/verified on 2026-10-01. The runner uses canonical `gcc@sha256:…` because Docker Desktop did not consistently resolve the combined tag-plus-digest lookup. It never falls back to a mutable tag. Updating GCC requires reviewing a newly resolved digest, updating the server constant and rerunning the runner regressions.
 
    Docker Desktop must remain running while solutions are submitted. The runner uses known Docker installation paths and does not execute command/image text from the database. On Windows, the supported installations are Docker Desktop under Program Files or the current user's LocalAppData Programs directory.
 
@@ -138,7 +140,9 @@ See [study-phase5.md](study-phase5.md) for the Kazakh defense script, detailed a
 - Hidden input, expected/actual output and diagnostics are excluded from student SQL projections and AI input. User-controlled content is Razor encoded.
 - Containers use a fixed image, no network, a non-root user, dropped capabilities, no-new-privileges, a read-only root, bounded mounts, CPU/memory/PID/time/output limits and cleanup. Student C++ never runs directly in the web-server process.
 - AI receives untrusted data separately from trusted instructions, returns validated JSON, and is limited by ownership, terminal status, concurrency, cooldown and one stored feedback per submission. Credentials and AI request bodies are not logged.
-- CSP was considered but not added without an available browser to validate Monaco workers and styles. Existing protections were retained. This is a single-process educational application, not a hardened public multi-tenant judging service; its gates are process-local.
+- CSP uses a random 256-bit nonce per request, local assets/workers, no script `unsafe-inline` or `unsafe-eval`, and denies framing, objects and base changes. Import maps, progress styles and Monaco-generated stylesheets carry the nonce. Only rendered editor pages permit style **attributes** (`style-src-attr 'unsafe-inline'`), required by Monaco's line layout; other pages deny them. `scripts/monaco-csp.mjs` adapts the two reviewed stylesheet factories and fails on an unreviewed Monaco upgrade. MVC's empty validation placeholder uses a CSS class. Browser confirmation remains pending.
+- `AllowedHosts` defaults to `localhost;127.0.0.1`, keeping `https://localhost:7115` working. The ignored Development settings file inherits this safe default. For Production, explicitly set `AllowedHosts` through deployment environment/configuration to your real semicolon-separated host names (no schemes or ports); no production domain is assumed. Until configured, only loopback host names are accepted. Empty lists and wildcard entries fail startup in every environment; unexpected Host headers receive 400. Behind a proxy, retain the intended Host and configure proxy trust separately.
+- Compilation OOM is reported as a memory failure when Docker confirms `OOMKilled`, even with exit 137. GNU timeout 124 or the host watchdog establishes a time failure; unexplained 137 gets a generic termination message. Unmeasured memory stays NULL. This remains a single-process educational application with process-local concurrency gates.
 
 ## Project phases and current verification
 
@@ -152,4 +156,6 @@ See [study-phase5.md](study-phase5.md) for the Kazakh defense script, detailed a
 
 On 2026-10-01, Phase 2–4 regressions and Phase 5 HTTP/SQL checks passed. Two actual OpenAI calls succeeded; the injection case returned hints without hidden values or a ready-made program, and repeat analysis reused stored feedback. The final HTTPS workflow reached Accepted and updated progress/ranking. Production-mode headers, HTTPS redirect and error routes were also checked.
 
-**Browser visual testing was unavailable.** Before the defense, manually review the main pages at 1440, 1024 and 390 px, including navigation collapse, Monaco typing/worker loading, draft restoration, validation and submitting state. HTTP/markup and contrast checks do not replace that review.
+Enhancement 1 adds `python scripts/verify_enhancement1.py`, `node scripts/verify_editor_csp.mjs` and `dotnet run --project tests/Enhancement1Checks/Enhancement1Checks.csproj`. The last command runs safely bounded real compilation tests (including test-only 32 MB OOM and 10 ms timeout limits). These checks do not request paid AI analysis. See [study-enhancement1.md](study-enhancement1.md) for the Kazakh hardening guide and verification record.
+
+**Browser visual testing was unavailable; actual viewports checked: 0.** Follow [manual-visual-checklist.md](manual-visual-checklist.md) at 1440 × 900, 1024 × 768 and 390 × 844. It covers all main pages, Monaco highlighting/input/worker/CSP console, drafts, submission, navigation and responsive layouts. HTTP, bundle and simulated editor checks do not replace that review.

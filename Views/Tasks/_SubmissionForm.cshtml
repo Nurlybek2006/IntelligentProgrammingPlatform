@@ -1,5 +1,6 @@
 @using System.Security.Claims
 @model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmitViewModel
+@{ Csp.EnableMonacoStyles(); }
 <link rel="stylesheet" href="~/js/editor/code-editor.css" asp-append-version="true" />
 <form asp-controller="Submissions" asp-action="Submit" method="post" id="submission-form"
       data-draft-key="ipp-source-@User.FindFirstValue(ClaimTypes.NameIdentifier)-@Model.ProgrammingTaskId"

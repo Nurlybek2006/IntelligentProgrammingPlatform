@@ -1,5 +1,6 @@
 import { build } from "esbuild";
 import { copyFile } from "node:fs/promises";
+import { monacoCspPlugin } from "./monaco-csp.mjs";
 
 await build({
     entryPoints: { "code-editor": "ClientScripts/code-editor.js",
@@ -11,6 +12,7 @@ await build({
     minify: true,
     target: ["es2022"],
     loader: { ".ttf": "file" },
-    legalComments: "linked"
+    legalComments: "linked",
+    plugins: [monacoCspPlugin]
 });
 await copyFile("node_modules/monaco-editor/LICENSE", "wwwroot/js/editor/MONACO-LICENSE.txt");

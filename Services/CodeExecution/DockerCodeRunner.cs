@@ -69,12 +69,9 @@ public sealed class DockerCodeRunner : IDisposable
         var result = await RunContainerAsync(name, arguments, null,
             TimeSpan.FromSeconds(CodeRunnerOptions.CompileTimeoutSeconds + 5), cancellationToken);
 
-        if (result.Command.OutputLimitExceeded)
-            return new CompileResult(false, "Compilation output limit exceeded.");
-        if (result.Command.TimedOut || result.ExitCode is 124 or 137)
-            return new CompileResult(false, "Compilation time or memory limit exceeded.");
-        if (result.OomKilled)
-            return new CompileResult(false, "Compilation memory limit exceeded.");
+        var failure = CompilationFailureClassifier.Classify(result.Command, result.ExitCode, result.OomKilled);
+        if (failure is not null)
+            return new CompileResult(false, failure);
         if (result.ExitCode is 125 or 126 or 127)
             throw new InvalidOperationException("The compiler container could not start its trusted command.");
 
