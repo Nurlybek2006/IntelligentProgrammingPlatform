@@ -27,9 +27,7 @@
   <data xml:space="preserve" name="Common_Status">
     <value>Статус</value>
   </data>
-  <data xml:space="preserve" name="Common_Runtime">
-    <value>Среда выполнения</value>
-  </data>
+  <data name="Common_Runtime" xml:space="preserve"><value>Язык программирования</value></data>
   <data xml:space="preserve" name="Common_PassedTotal">
     <value>Пройдено / всего</value>
   </data>
@@ -81,9 +79,7 @@
   <data xml:space="preserve" name="Common_Output">
     <value>Вывод</value>
   </data>
-  <data xml:space="preserve" name="Common_CompilerOutput">
-    <value>Сообщения компилятора</value>
-  </data>
+  <data name="Common_CompilerOutput" xml:space="preserve"><value>Диагностика компиляции / синтаксиса</value></data>
   <data xml:space="preserve" name="Common_NotMeasured">
     <value>Не измерено</value>
   </data>
@@ -117,9 +113,7 @@
   <data xml:space="preserve" name="Home_HeadingAccent">
     <value>Шаг за шагом.</value>
   </data>
-  <data xml:space="preserve" name="Home_Intro">
-    <value>Среда для практики C++. Решайте задачи, разбирайте результаты и находите следующий шаг с помощью подсказок.</value>
-  </data>
+  <data name="Home_Intro" xml:space="preserve"><value>Среда для практики C++ и Python. Решайте задачи, разбирайте результаты и находите следующий шаг с помощью подсказок.</value></data>
   <data xml:space="preserve" name="Home_Continue">
     <value>Продолжить решение</value>
   </data>
@@ -129,9 +123,7 @@
   <data xml:space="preserve" name="Home_ExploreLeaderboard">
     <value>Посмотреть рейтинг</value>
   </data>
-  <data xml:space="preserve" name="Home_Note">
-    <value>C++ 20 · От основ к алгоритмам · Учитесь в своём темпе</value>
-  </data>
+  <data name="Home_Note" xml:space="preserve"><value>C++ 20 / Python 3 · От основ к алгоритмам · Учитесь в своём темпе</value></data>
   <data xml:space="preserve" name="Home_JourneyLabel">
     <value>Ваш учебный путь</value>
   </data>
@@ -195,9 +187,7 @@
   <data xml:space="preserve" name="Home_ExecutionFeature">
     <value>Изолированное выполнение</value>
   </data>
-  <data xml:space="preserve" name="Home_ExecutionFeatureText">
-    <value>Проверяйте C++ решения на тестах и получайте понятный результат каждой попытки.</value>
-  </data>
+  <data name="Home_ExecutionFeatureText" xml:space="preserve"><value>Проверяйте код C++ или Python на тестах и получайте результат каждой попытки.</value></data>
   <data xml:space="preserve" name="Home_AiFeature">
     <value>Ваш ИИ-наставник</value>
   </data>
@@ -231,9 +221,7 @@
   <data xml:space="preserve" name="Privacy_StorageHeading">
     <value>Локальное хранилище браузера</value>
   </data>
-  <data xml:space="preserve" name="Privacy_StorageText">
-    <value>Cookie входа сохраняет сеанс. Защитные cookie обеспечивают безопасность форм. Редактор хранит черновик каждой задачи в хранилище сеанса этой вкладки; черновики не передаются другим учётным записям. Языковой cookie запоминает язык интерфейса.</value>
-  </data>
+  <data name="Privacy_StorageText" xml:space="preserve"><value>Cookie входа сохраняет сеанс аккаунта. Защитные cookie обеспечивают безопасность форм. Редактор хранит отдельный черновик для каждого аккаунта, задачи и языка программирования в session storage этой вкладки. Языковой cookie запоминает язык интерфейса.</value></data>
   <data xml:space="preserve" name="Privacy_SharedHeading">
     <value>Использование общего устройства</value>
   </data>
@@ -330,12 +318,8 @@
   <data xml:space="preserve" name="Task_GuestHeading">
     <value>Готовы попробовать?</value>
   </data>
-  <data xml:space="preserve" name="Task_GuestText">
-    <value>Войдите, чтобы написать C++ код в редакторе и проверить решение.</value>
-  </data>
-  <data xml:space="preserve" name="Editor_SourceHelp">
-    <value>C++ 20 · Максимальный размер кода: 64 КиБ. Черновик хранится в этой вкладке браузера.</value>
-  </data>
+  <data name="Task_GuestText" xml:space="preserve"><value>Войдите, чтобы писать код C++ или Python в редакторе и проверять решение.</value></data>
+  <data name="Editor_SourceHelp" xml:space="preserve"><value>Размер кода — до 64 КиБ (UTF-8). Черновик каждого языка хранится отдельно в этой вкладке браузера.</value></data>
   <data xml:space="preserve" name="Run_CustomInput">
     <value>Свои входные данные</value>
   </data>
@@ -351,9 +335,7 @@
   <data xml:space="preserve" name="Submit_Help">
     <value>Отправка проверяет решение на официальных тестах и сохраняет попытку в истории.</value>
   </data>
-  <data xml:space="preserve" name="Editor_NoRuntime">
-    <value>Нет доступной среды выполнения C++.</value>
-  </data>
+  <data name="Editor_NoRuntime" xml:space="preserve"><value>Нет включённых поддерживаемых исполнителей.</value></data>
   <data xml:space="preserve" name="Run_Result">
     <value>Результат запуска</value>
   </data>
@@ -552,9 +534,7 @@
   <data xml:space="preserve" name="Diff_CurrentAttempt">
     <value>Текущая попытка · №{0}</value>
   </data>
-  <data xml:space="preserve" name="Diff_Help">
-    <value>Сравнение C++ только для чтения. Удалённые и добавленные строки выделены; на узком экране редактор переходит к сравнению в одном столбце.</value>
-  </data>
+  <data name="Diff_Help" xml:space="preserve"><value>Сравнение только для чтения. Удалённые и добавленные строки выделены; на узком экране код показывается в одну колонку.</value></data>
   <data xml:space="preserve" name="Diff_Region">
     <value>Изменения кода между вашими попытками</value>
   </data>
@@ -618,9 +598,7 @@
   <data xml:space="preserve" name="Journey_AiCounts">
     <value>Подсказки ИИ: {0}/{1}</value>
   </data>
-  <data xml:space="preserve" name="Journey_Compare">
-    <value>Сравнить с предыдущей</value>
-  </data>
+  <data name="Journey_Compare" xml:space="preserve"><value>Сравнить с предыдущей попыткой на этом языке</value></data>
   <data xml:space="preserve" name="Journey_AiHelp">
     <value>Метка подсказок ИИ означает наличие анализа для попытки; она не объясняет причину улучшения следующих попыток.</value>
   </data>
@@ -915,4 +893,6 @@
   <data name="Lessons_Navigation" xml:space="preserve"><value>Переход между уроками темы</value></data>
   <data name="Lessons_Previous" xml:space="preserve"><value>Предыдущий урок</value></data>
   <data name="Lessons_Next" xml:space="preserve"><value>Следующий урок</value></data>
+  <data name="Editor_LanguageHelp" xml:space="preserve"><value>При смене языка открывается его черновик. Python: только стандартная библиотека, без установки пакетов из интернета.</value></data>
+  <data name="Diff_MixedLanguages" xml:space="preserve"><value>Языки этих попыток отличаются или не поддерживаются. Код сравнивается как обычный текст.</value></data>
 </root>

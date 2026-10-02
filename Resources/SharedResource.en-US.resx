@@ -7,7 +7,7 @@
   <data name="App_Name" xml:space="preserve"><value>Intelligent Programming Platform</value></data>
   <data name="App_Brand" xml:space="preserve"><value>Intelligent</value></data>
   <data name="App_Subtitle" xml:space="preserve"><value>Programming Platform</value></data>
-  <data name="App_Description" xml:space="preserve"><value>Practice C++, learn from test results and AI hints, and follow your programming progress.</value></data>
+  <data name="App_Description" xml:space="preserve"><value>Practice C++ and Python, learn from test results and AI hints, and follow your programming progress.</value></data>
   <data name="Nav_Home" xml:space="preserve"><value>Home</value></data>
   <data name="Nav_HomeLabel" xml:space="preserve"><value>Intelligent Programming Platform home</value></data>
   <data name="Nav_Skip" xml:space="preserve"><value>Skip to main content</value></data>
@@ -79,8 +79,8 @@
   <data name="Field_ConfirmPassword" xml:space="preserve"><value>Confirm password</value></data>
   <data name="Field_DisplayName" xml:space="preserve"><value>Display name</value></data>
   <data name="Field_RememberMe" xml:space="preserve"><value>Remember me</value></data>
-  <data name="Field_Runtime" xml:space="preserve"><value>Runtime</value></data>
-  <data name="Field_SourceCode" xml:space="preserve"><value>C++ source code</value></data>
+  <data name="Field_Runtime" xml:space="preserve"><value>Language</value></data>
+  <data name="Field_SourceCode" xml:space="preserve"><value>Source code</value></data>
   <data name="Field_Task" xml:space="preserve"><value>Task</value></data>
   <data name="Field_CustomInput" xml:space="preserve"><value>Custom input</value></data>
   <data name="Validation_Required" xml:space="preserve"><value>The {0} field is required.</value></data>
@@ -95,7 +95,7 @@
   <data name="Validation_SourceLimit" xml:space="preserve"><value>Enter source code of at most 64 KiB (UTF-8).</value></data>
   <data name="Validation_InputLimit" xml:space="preserve"><value>Custom input must not exceed 32 KiB (UTF-8).</value></data>
   <data name="Validation_PublishedTask" xml:space="preserve"><value>Select a published programming task.</value></data>
-  <data name="Validation_Runtime" xml:space="preserve"><value>Select an enabled C++ runtime.</value></data>
+  <data name="Validation_Runtime" xml:space="preserve"><value>Select an enabled C++ or Python runtime.</value></data>
   <data name="Account_DuplicateEmail" xml:space="preserve"><value>This email is already registered.</value></data>
   <data name="Account_RegistrationFailed" xml:space="preserve"><value>Registration could not be completed. Please try again.</value></data>
   <data name="Account_RegistrationConflict" xml:space="preserve"><value>Registration could not be completed. This email may already be registered.</value></data>
@@ -120,8 +120,8 @@
   <data name="Run_RuntimeError" xml:space="preserve"><value>Runtime error.</value></data>
   <data name="Run_MemoryLimit" xml:space="preserve"><value>Memory limit exceeded.</value></data>
   <data name="Run_TimeLimit" xml:space="preserve"><value>Time limit exceeded.</value></data>
-  <data name="Editor_AriaLabel" xml:space="preserve"><value>C++ source code editor</value></data>
-  <data name="Editor_Submitting" xml:space="preserve"><value>Compiling and checking your solution…</value></data>
+  <data name="Editor_AriaLabel" xml:space="preserve"><value>Source code editor</value></data>
+  <data name="Editor_Submitting" xml:space="preserve"><value>Preparing and checking your solution…</value></data>
   <data name="Diff_PreviousSource" xml:space="preserve"><value>Previous attempt source</value></data>
   <data name="Diff_CurrentSource" xml:space="preserve"><value>Current attempt source</value></data>
   <data name="Run_Temporary" xml:space="preserve"><value>Temporary result only. No attempt is saved.</value></data>

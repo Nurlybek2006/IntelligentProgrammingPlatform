@@ -7,10 +7,12 @@ public sealed class SubmissionWorkspace
     public string Root { get; }
     public string Source { get; }
     public string Build { get; }
+    public RunnerLanguage Language { get; }
 
     // Бір жіберілімге арналған кездейсоқ, пайдаланушы деректерінен тәуелсіз бумаларды жасайды.
-    public SubmissionWorkspace()
+    public SubmissionWorkspace(RunnerLanguage? language = null)
     {
+        Language = language ?? RunnerLanguage.Cpp;
         Root = Path.Combine(CodeRunnerOptions.TemporaryRoot, Guid.NewGuid().ToString("N"));
         Source = Path.Combine(Root, "source");
         Build = Path.Combine(Root, "build");
@@ -31,7 +33,7 @@ public sealed class SubmissionWorkspace
     // Кодты shell-ге қоспай, ортақ UTF-8 файлға compiler оқитындай жазады.
     public async Task WriteSourceAsync(string sourceCode, CancellationToken cancellationToken)
     {
-        var sourcePath = Path.Combine(Source, "main.cpp");
+        var sourcePath = Path.Combine(Source, Language.SourceFile);
         await File.WriteAllTextAsync(sourcePath, sourceCode, new UTF8Encoding(false), cancellationToken);
         if (!OperatingSystem.IsWindows())
             File.SetUnixFileMode(sourcePath, UnixFileMode.UserRead | UnixFileMode.UserWrite

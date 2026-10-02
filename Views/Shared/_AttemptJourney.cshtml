@@ -21,7 +21,7 @@
                     <h3 class="h6 mb-0"><a asp-controller="Submissions" asp-action="Details" asp-route-id="@attempt.SubmissionId">@L["Journey_Attempt", attempt.Number]</a></h3>
                     <span class="status-badge @attempt.Status">@T[$"Status_{attempt.Status}"]</span>
                 </div>
-                <p class="small text-muted my-2"><time datetime="@attempt.CreatedAt.ToString("O")">@attempt.CreatedAt.ToString("G") UTC</time> · @L["Journey_Tests", attempt.PassedTests, attempt.TotalTests] · @(attempt.ExecutionTimeMs.HasValue ? L["Common_TestTotalTime", attempt.ExecutionTimeMs.Value] : L["Common_TimeNotMeasured"])</p>
+                <p class="small text-muted my-2">@attempt.RuntimeName · <time datetime="@attempt.CreatedAt.ToString("O")">@attempt.CreatedAt.ToString("G") UTC</time> · @L["Journey_Tests", attempt.PassedTests, attempt.TotalTests] · @(attempt.ExecutionTimeMs.HasValue ? L["Common_TestTotalTime", attempt.ExecutionTimeMs.Value] : L["Common_TimeNotMeasured"])</p>
                 <div class="d-flex flex-wrap gap-3 align-items-center">
                     @if (attempt.HasAiFeedback)
                     {

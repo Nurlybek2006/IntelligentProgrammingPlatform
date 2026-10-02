@@ -208,10 +208,10 @@ def main():
         sql(f"INSERT INTO Runtimes(Name,LanguageKey,Version,FileExtension,CompileCommand,RunCommand,DockerImage,IsEnabled) VALUES('Phase3 fixture','{fixture_slug}','test','.x','untrusted','untrusted','untrusted',1);")
         foreign_runtime = int(sql(f"SELECT Id FROM Runtimes WHERE LanguageKey='{fixture_slug}';"))
         response = student.form('/Submissions/Submit', {'ProgrammingTaskId': task_id, 'RuntimeId': foreign_runtime, 'SourceCode': GOOD}, token_path=task_path)
-        check(response[0] == 200 and 'Select an enabled C++ runtime.' in html.unescape(response[2]), 'Enabled unsupported runtime is rejected')
+        check(response[0] == 200 and 'Select an enabled C++ or Python runtime.' in html.unescape(response[2]), 'Enabled unsupported runtime is rejected')
         sql(f'UPDATE Runtimes SET IsEnabled=0 WHERE Id={foreign_runtime};')
         response = student.form('/Submissions/Submit', {'ProgrammingTaskId': task_id, 'RuntimeId': foreign_runtime, 'SourceCode': GOOD}, token_path=task_path)
-        check(response[0] == 200 and 'Select an enabled C++ runtime.' in html.unescape(response[2]), 'Disabled runtime is rejected')
+        check(response[0] == 200 and 'Select an enabled C++ or Python runtime.' in html.unescape(response[2]), 'Disabled runtime is rejected')
         check(docker('ps', '-a', '--filter', 'label=ipp.runner=phase3', '--format', '{{.Names}}') == '', 'No runner containers remain after success, failures and timeouts')
         temporary_root = Path(os.environ['TEMP']) / 'IntelligentProgrammingPlatformRunner'
         check(not temporary_root.exists() or not any(temporary_root.iterdir()), 'No per-submission temporary directories remain')

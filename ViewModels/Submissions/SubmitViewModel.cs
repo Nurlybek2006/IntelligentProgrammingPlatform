@@ -20,9 +20,9 @@ public class SubmitViewModel : IValidatableObject
     public string SourceCode { get; set; } = string.Empty;
 
     [ValidateNever]
-    public List<SelectListItem> Runtimes { get; set; } = new();
+    public List<RuntimeOptionViewModel> Runtimes { get; set; } = new();
 
-    public const string StarterCode = "#include <iostream>\nusing namespace std;\n\nint main()\n{\n    // Write your solution here\n\n    return 0;\n}\n";
+    public const string StarterCode = RunnerLanguage.CppStarter;
 
     // Код көлемін таңбамен ғана емес, UTF-8 байттарымен де тексереді.
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -30,4 +30,10 @@ public class SubmitViewModel : IValidatableObject
         if (Encoding.UTF8.GetByteCount(SourceCode ?? string.Empty) > CodeRunnerOptions.MaxSourceBytes)
             yield return new ValidationResult(validationContext.GetRequiredService<IStringLocalizer<SharedResource>>()["Validation_SourceLimit"], new[] { nameof(SourceCode) });
     }
+}
+
+public sealed class RuntimeOptionViewModel : SelectListItem
+{
+    public string LanguageKey { get; set; } = string.Empty;
+    public string StarterCode { get; set; } = string.Empty;
 }

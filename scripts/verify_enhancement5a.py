@@ -40,13 +40,12 @@ def main():
     try:
         seeds = ','.join(literal(slug) for slug in SEEDS)
         assert sql(f"SELECT COUNT(*) FROM Lessons WHERE Slug IN ({seeds}) AND IsPublished=1 AND LEN(Content)>500 AND LEN(CodeExample)>40;") == '5'
-        assert sql("SELECT COUNT(*) FROM Runtimes WHERE LanguageKey='python';") == '0'
         page(guest.request('/Lessons'), 'en-US', ('Student', 'Lessons_Title'))
         for slug in SEEDS:
             body = page(guest.request('/Lessons/' + slug), 'en-US', ('Student', 'Lessons_RelatedTasks'))
             assert any(link.startswith('/Tasks/') for link in links(body))
         assert guest.request('/Lessons/absent-' + prefix)[0] == 404
-        check(True, 'Five useful published seeds have related task links; Python is display-only')
+        check(True, 'Five useful published seeds have related task links; lesson examples remain display-only')
 
         for client, email in ((student, emails[0]), (admin, emails[1])):
             assert is_redirect(client.form('/Account/Register', {'DisplayName': prefix, 'Email': email,

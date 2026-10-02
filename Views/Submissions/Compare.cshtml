@@ -14,7 +14,9 @@
     <section class="panel"><h2 class="h5">@L["Diff_CurrentAttempt", Model.Current.Id]</h2><span class="status-badge @Model.Current.Status">@T[$"Status_{Model.Current.Status}"]</span><p class="small text-muted mt-2 mb-0">@Model.Current.CreatedAt.ToString("G") UTC<br />@(Model.Current.ExecutionTimeMs.HasValue ? L["Common_TestTotalTime", Model.Current.ExecutionTimeMs.Value] : L["Common_TimeNotMeasured"])</p></section>
 </div>
 <p class="small text-muted mt-3">@L["Diff_Help"]</p>
-<div id="code-diff" class="code-diff" data-previous-label="@T["Diff_PreviousSource"]" data-current-label="@T["Diff_CurrentSource"]" aria-label="@L["Diff_Region"]" hidden></div>
+<p class="small text-muted">@Model.Previous.RuntimeName → @Model.Current.RuntimeName</p>
+@if (Model.LanguageKey == "plaintext") { <p class="small text-muted">@L["Diff_MixedLanguages"]</p> }
+<div id="code-diff" class="code-diff" data-language="@Model.LanguageKey" data-previous-label="@T["Diff_PreviousSource"]" data-current-label="@T["Diff_CurrentSource"]" aria-label="@L["Diff_Region"]" hidden></div>
 <div id="diff-fallback" class="comparison-info">
     <div><label for="previous-source" class="form-label">@L["Diff_PreviousSource"]</label><textarea asp-for="Previous.SourceCode" id="previous-source" class="form-control source-fallback" readonly spellcheck="false"></textarea></div>
     <div><label for="current-source" class="form-label">@L["Diff_CurrentSource"]</label><textarea asp-for="Current.SourceCode" id="current-source" class="form-control source-fallback" readonly spellcheck="false"></textarea></div>

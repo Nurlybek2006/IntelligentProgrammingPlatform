@@ -1,5 +1,8 @@
 import * as monaco from "monaco-editor/editor/editor.api.js";
 import "monaco-editor/languages/definitions/cpp/register.js";
+import "monaco-editor/languages/definitions/python/register.js";
+
+const editorLanguage = value => ["cpp", "python"].includes(value) ? value : "plaintext";
 
 const form = document.getElementById("submission-form");
 const diffElement = document.getElementById("code-diff");
@@ -15,16 +18,37 @@ if (form) {
     const editorElement = document.getElementById("code-editor");
     const status = document.getElementById("submission-progress");
     const submit = document.getElementById("submit-code");
-    const key = form.dataset.draftKey;
+    const runtime = document.getElementById("RuntimeId");
+    const selected = () => runtime.selectedOptions[0];
+    let language = editorLanguage(selected()?.dataset.language);
+    const key = () => form.dataset.draftKey + ":" + language;
+    const drafts = new Map();
+    const loadDraft = () => {
+        try {
+            const draft = sessionStorage.getItem(key());
+            if (draft !== null) return draft;
+            // Migrate the existing C++ draft without ever assigning it to Python.
+            if (language === "cpp") {
+                const legacy = sessionStorage.getItem(form.dataset.draftKey);
+                if (legacy !== null) {
+                    sessionStorage.setItem(key(), legacy);
+                    sessionStorage.removeItem(form.dataset.draftKey);
+                    return legacy;
+                }
+            }
+        } catch { /* Storage restrictions must not prevent editing or submitting. */ }
+        return null;
+    };
     try {
-        const draft = sessionStorage.getItem(key);
+        const draft = loadDraft();
         if (draft !== null && form.dataset.validationFailed !== "true") source.value = draft;
     } catch { /* Storage restrictions must not prevent editing or submitting. */ }
+    drafts.set(language, source.value);
 
     editorElement.hidden = false;
     const editor = monaco.editor.create(editorElement, {
         value: source.value,
-        language: "cpp",
+        language,
         theme: "vs-dark",
         automaticLayout: true,
         minimap: { enabled: false },
@@ -36,11 +60,23 @@ if (form) {
 
     const sync = () => {
         source.value = editor.getValue();
+        drafts.set(language, source.value);
         try {
-            if (source.value.length <= 128 * 1024) sessionStorage.setItem(key, source.value);
+            if (source.value.length <= 128 * 1024) sessionStorage.setItem(key(), source.value);
         } catch { /* The form field still preserves the source without browser storage. */ }
     };
     editor.onDidChangeModelContent(sync);
+    runtime.addEventListener("change", () => {
+        sync();
+        language = editorLanguage(selected()?.dataset.language);
+        const restored = drafts.has(language) ? drafts.get(language) : loadDraft();
+        monaco.editor.setModelLanguage(editor.getModel(), language);
+        editor.setValue(restored ?? selected()?.dataset.starter ?? "");
+        sync();
+        status.textContent = "";
+        const runResult = document.getElementById("custom-run-result");
+        if (runResult) runResult.hidden = true;
+    });
     form.addEventListener("source-sync", sync);
     form.addEventListener("submit", event => {
         sync();
@@ -55,15 +91,16 @@ if (form) {
         status.textContent = form.dataset.submitProgress;
     });
     window.addEventListener("pageshow", () => {
-        submit.disabled = document.getElementById("RuntimeId").options.length === 0;
+        submit.disabled = runtime.options.length === 0;
         status.textContent = "";
     });
     window.addEventListener("pagehide", sync);
 }
 
 if (diffElement) {
-    const original = monaco.editor.createModel(document.getElementById("previous-source").value, "cpp");
-    const modified = monaco.editor.createModel(document.getElementById("current-source").value, "cpp");
+    const language = editorLanguage(diffElement.dataset.language);
+    const original = monaco.editor.createModel(document.getElementById("previous-source").value, language);
+    const modified = monaco.editor.createModel(document.getElementById("current-source").value, language);
     diffElement.hidden = false;
     const diff = monaco.editor.createDiffEditor(diffElement, {
         theme: "vs-dark", readOnly: true, originalEditable: false,

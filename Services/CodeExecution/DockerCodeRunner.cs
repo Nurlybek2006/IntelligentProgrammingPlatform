@@ -10,8 +10,7 @@ public sealed class DockerCodeRunner : IDisposable
     private readonly DockerCli _docker;
     private readonly ILogger<DockerCodeRunner> _logger;
     private readonly SemaphoreSlim _healthLock = new(1);
-    private DateTime _healthExpiresAt;
-    private string? _imageId;
+    private readonly Dictionary<string, (DateTime ExpiresAt, string? ImageId)> _images = new();
 
     // Docker клиентін және қауіпсіз серверлік журналды runner-ге береді.
     public DockerCodeRunner(DockerCli docker, ILogger<DockerCodeRunner> logger)
@@ -20,17 +19,17 @@ public sealed class DockerCodeRunner : IDisposable
         _logger = logger;
     }
 
-    // Linux Docker мен бекітілген GCC image қолжетімділігін қысқа уақытқа кэштейді.
-    public async Task<string> GetTrustedImageAsync(CancellationToken cancellationToken)
+    // Linux Docker мен әр тілдің бекітілген image қолжетімділігін бөлек кэштейді.
+    public async Task<string> GetTrustedImageAsync(CancellationToken cancellationToken, RunnerLanguage? language = null)
     {
+        language ??= RunnerLanguage.Cpp;
         await _healthLock.WaitAsync(cancellationToken);
         try
         {
-            if (DateTime.UtcNow < _healthExpiresAt)
-                return _imageId ?? throw new InvalidOperationException("Docker is unavailable (cached).");
-
-            _imageId = null;
-            _healthExpiresAt = DateTime.UtcNow.AddSeconds(15);
+            if (_images.TryGetValue(language.Key, out var cached) && DateTime.UtcNow < cached.ExpiresAt)
+                return cached.ImageId ?? throw new InvalidOperationException("Docker is unavailable (cached).");
+            var expiresAt = DateTime.UtcNow.AddSeconds(15);
+            _images[language.Key] = (expiresAt, null);
             var info = await _docker.ExecuteAsync(new[] { "info", "--format", "{{.OSType}}" }, null,
                 TimeSpan.FromSeconds(5), cancellationToken);
             RequireSuccess(info, "Docker health check");
@@ -38,34 +37,34 @@ public sealed class DockerCodeRunner : IDisposable
                 throw new InvalidOperationException("The runner requires Linux containers.");
 
             var image = await _docker.ExecuteAsync(
-                new[] { "image", "inspect", CodeRunnerOptions.Image, "--format", "{{.Id}}" },
+                new[] { "image", "inspect", language.Image, "--format", "{{.Id}}" },
                 null, TimeSpan.FromSeconds(5), cancellationToken);
             RequireSuccess(image, "Trusted image lookup");
             var imageId = image.Output.Trim();
             if (!imageId.StartsWith("sha256:", StringComparison.Ordinal) || imageId.Length != 71
                 || !imageId[7..].All(Uri.IsHexDigit))
                 throw new InvalidOperationException("The trusted image ID is invalid.");
-            _imageId = imageId;
+            _images[language.Key] = (expiresAt, imageId);
             return imageId;
         }
         finally { _healthLock.Release(); }
     }
 
-    // C++ бастапқы файлын шектеулі контейнерде бекітілген GCC аргументтерімен компиляциялайды.
+    // Ортақ sandbox ішінде C++ құрастырады немесе Python синтаксисін тексереді.
     public async Task<CompileResult> CompileAsync(SubmissionWorkspace workspace, string imageId,
         CancellationToken cancellationToken)
     {
         var name = "ipp-compile-" + Guid.NewGuid().ToString("N");
+        var language = workspace.Language;
         var arguments = CreateContainerArguments(name, CodeRunnerOptions.CompileMemoryMb, "1.0", 128);
-        AddMount(arguments, workspace.Source, "/source", readOnly: true);
-        AddMount(arguments, workspace.Build, "/build", readOnly: false);
+        AddMount(arguments, workspace.Source, language.ProducesExecutable ? "/source" : "/app", readOnly: true);
+        if (language.ProducesExecutable) AddMount(arguments, workspace.Build, "/build", readOnly: false);
         arguments.AddRange(new[]
         {
-            "--workdir", "/build", "--entrypoint", "/usr/bin/timeout", imageId,
-            "--signal=TERM", "--kill-after=0.1s", CodeRunnerOptions.CompileTimeoutSeconds + "s",
-            "/usr/local/bin/g++", "-std=c++20", "-O2", "-pipe", "-fdiagnostics-color=never",
-            "/source/main.cpp", "-o", "/build/program"
+            "--workdir", language.ProducesExecutable ? "/build" : "/tmp", "--entrypoint", "/usr/bin/timeout", imageId,
+            "--signal=TERM", "--kill-after=0.1s", CodeRunnerOptions.CompileTimeoutSeconds + "s"
         });
+        arguments.AddRange(language.CompileCommand);
         var result = await RunContainerAsync(name, arguments, null,
             TimeSpan.FromSeconds(CodeRunnerOptions.CompileTimeoutSeconds + 5), cancellationToken);
 
@@ -80,7 +79,7 @@ public sealed class DockerCodeRunner : IDisposable
             return new CompileResult(false, string.IsNullOrWhiteSpace(output) ? "Compilation failed." : output);
 
         var executable = Path.Combine(workspace.Build, "program");
-        if (!File.Exists(executable) || File.GetAttributes(executable).HasFlag(FileAttributes.ReparsePoint))
+        if (language.ProducesExecutable && (!File.Exists(executable) || File.GetAttributes(executable).HasFlag(FileAttributes.ReparsePoint)))
             throw new InvalidOperationException("The compiler did not produce a regular executable.");
         return new CompileResult(true, output);
     }
@@ -109,13 +108,14 @@ public sealed class DockerCodeRunner : IDisposable
         memoryLimitMb = Math.Clamp(memoryLimitMb, 16, 1024);
         var name = "ipp-run-" + Guid.NewGuid().ToString("N");
         var arguments = CreateContainerArguments(name, memoryLimitMb, "0.5", 16);
-        AddMount(arguments, workspace.Build, "/app", readOnly: true);
+        AddMount(arguments, workspace.Language.ProducesExecutable ? workspace.Build : workspace.Source, "/app", readOnly: true);
         arguments.AddRange(new[]
         {
             "--interactive", "--workdir", "/tmp", "--entrypoint", "/usr/bin/timeout", imageId,
             "--signal=TERM", "--kill-after=0.1s",
-            (timeLimitMs / 1000d).ToString("F3", CultureInfo.InvariantCulture) + "s", "/app/program"
+            (timeLimitMs / 1000d).ToString("F3", CultureInfo.InvariantCulture) + "s"
         });
+        arguments.AddRange(workspace.Language.RunCommand);
         var result = await RunContainerAsync(name, arguments, input,
             TimeSpan.FromMilliseconds(timeLimitMs + 5000), cancellationToken);
         var output = result.Command.Output;
@@ -236,6 +236,7 @@ public sealed class DockerCodeRunner : IDisposable
         output = output.Replace(workspace.Root, "[workspace]", StringComparison.OrdinalIgnoreCase)
             .Replace(CodeRunnerOptions.TemporaryRoot, "[workspace]", StringComparison.OrdinalIgnoreCase)
             .Replace("/source/main.cpp", "main.cpp", StringComparison.Ordinal)
+            .Replace("/app/main.py", "main.py", StringComparison.Ordinal)
             .Replace("/build/", "", StringComparison.Ordinal);
         var bytes = Encoding.UTF8.GetBytes(output);
         return bytes.Length <= CodeRunnerOptions.MaxOutputBytes ? output

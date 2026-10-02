@@ -5,7 +5,7 @@
 <div class="solve-grid">
     <section class="panel" aria-labelledby="problem-heading">
         <h2 id="problem-heading">@L["Task_Heading"]</h2>
-        <div class="limit-list"><span>@L["Task_TimeLimit"]<strong>@L["Common_Milliseconds", Model.TimeLimitMs]</strong></span><span>@L["Task_MemoryLimit"]<strong>@L["Task_Memory", Model.MemoryLimitMb]</strong></span><span>@L["Task_Language"]<strong>C++ 20</strong></span></div>
+        <div class="limit-list"><span>@L["Task_TimeLimit"]<strong>@L["Common_Milliseconds", Model.TimeLimitMs]</strong></span><span>@L["Task_MemoryLimit"]<strong>@L["Task_Memory", Model.MemoryLimitMb]</strong></span><span>@L["Task_Language"]<strong>@string.Join(" / ", Model.Submission.Runtimes.Select(runtime => runtime.Text))</strong></span></div>
         <div class="text-content task-description mb-4">@Model.Description</div>
         <h2 class="h5">@L["Task_Examples"]</h2>
         @if (Model.Examples.Count == 0) { <p class="text-muted">@L["Task_NoExamples"]</p> }

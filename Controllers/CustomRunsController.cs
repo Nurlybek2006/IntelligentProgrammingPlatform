@@ -35,12 +35,13 @@ public sealed class CustomRunsController : Controller
             .Where(task => task.Id == model.ProgrammingTaskId && task.IsPublished)
             .Select(task => new { task.TimeLimitMs, task.MemoryLimitMb }).SingleOrDefaultAsync(cancellationToken);
         if (task == null) return NotFound(new { error = _text["Validation_PublishedTask"].Value });
-        var language = await _db.Runtimes.AsNoTracking().Where(runtime => runtime.Id == model.RuntimeId && runtime.IsEnabled)
+        var languageKey = await _db.Runtimes.AsNoTracking().Where(runtime => runtime.Id == model.RuntimeId && runtime.IsEnabled)
             .Select(runtime => runtime.LanguageKey).SingleOrDefaultAsync(cancellationToken);
-        if (language != CodeRunnerOptions.LanguageKey)
+        var language = RunnerLanguage.Find(languageKey);
+        if (language == null)
             return BadRequest(new { error = _text["Validation_Runtime"].Value });
         var result = await _runs.RunAsync(model.SourceCode, model.CustomInput ?? string.Empty,
-            task.TimeLimitMs, task.MemoryLimitMb, cancellationToken);
+            task.TimeLimitMs, task.MemoryLimitMb, cancellationToken, language);
         return Json(new CustomRunResult
         {
             Status = result.Status, Output = result.Output, CompilerOutput = result.CompilerOutput,

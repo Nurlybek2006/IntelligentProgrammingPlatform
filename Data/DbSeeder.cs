@@ -33,6 +33,7 @@ public static class DbSeeder
         await SeedAdminAsync(users, configuration, logger);
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         await SeedRuntimeAsync(db);
+        await SeedPythonRuntimeAsync(db);
         await SeedTasksAsync(db);
         await LessonSeeder.SeedAsync(db);
     }
@@ -56,6 +57,21 @@ public static class DbSeeder
             Name = "C++ 20", LanguageKey = CodeRunnerOptions.LanguageKey, Version = "GCC 14.3.0",
             FileExtension = ".cpp", DockerImage = CodeRunnerOptions.Image, IsEnabled = true,
             CompileCommand = "Managed by the trusted C++ runner", RunCommand = "Managed by the trusted C++ runner"
+        });
+        await db.SaveChangesAsync();
+    }
+
+    // Python runtime метадеректерін бар жазбаны өзгертпей бір рет қосады.
+    private static async Task SeedPythonRuntimeAsync(ApplicationDbContext db)
+    {
+        var language = RunnerLanguage.Python;
+        if (await db.Runtimes.AnyAsync(runtime => runtime.LanguageKey == language.Key)) return;
+        db.Runtimes.Add(new Runtime
+        {
+            Name = language.Name, LanguageKey = language.Key, Version = language.Version,
+            FileExtension = language.FileExtension, DockerImage = language.Image, IsEnabled = true,
+            CompileCommand = "Syntax check managed by the trusted Python runner",
+            RunCommand = "Managed by the trusted Python runner"
         });
         await db.SaveChangesAsync();
     }
@@ -111,7 +127,7 @@ public static class DbSeeder
         logger.LogInformation("Development admin account created from configured User Secrets.");
     }
 
-    // Төрт оқу есебін және тесттерін тек жоқ болғанда қосады.
+    // Жеті оқу есебін және тілге тәуелсіз тесттерін тек жоқ болғанда қосады.
     private static async Task SeedTasksAsync(ApplicationDbContext db)
     {
         await using var transaction = await db.Database.BeginTransactionAsync();
@@ -176,7 +192,7 @@ public static class DbSeeder
             }
         };
 
-        foreach (var task in tasks)
+        foreach (var task in tasks.Concat(MultiLanguageTaskSeeds.Create(topics)))
         {
             if (!await db.ProgrammingTasks.AnyAsync(existing => existing.Slug == task.Slug))
                 db.ProgrammingTasks.Add(task);

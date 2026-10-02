@@ -1,12 +1,12 @@
 # Intelligent Programming Platform
 
-An ASP.NET Core MVC learning platform where students practice C++, inspect test results, ask an AI tutor for hints, and follow their progress. Built as a five-phase university project with a single MVC application and SQL Server database.
+An ASP.NET Core MVC learning platform where students practice C++ and Python, inspect test results, ask an AI tutor for hints, and follow their progress. Built as a five-phase university project with a single MVC application and SQL Server database.
 
 ## Features
 
 - Published tasks with search, topic/difficulty filters and personal solved badges.
-- Locally bundled Monaco editor with a per-account, per-task draft in tab session storage.
-- C++ 20 compilation and testing in isolated, resource-limited Docker containers.
+- Locally bundled Monaco editor with dynamic C++/Python highlighting and separate drafts per account, task and language in tab session storage.
+- C++ 20 and Python 3 execution in isolated Docker images pinned by immutable digest. Python supports the standard library only; no package installation.
 - Visible examples, protected hidden tests, saved submissions and execution results.
 - Optional AI Tutor using the OpenAI Responses API; structured advice is saved and reused.
 - Progress reports: solved tasks, compilation errors, successful attempt percentage, average solving time and rating score.
@@ -54,14 +54,17 @@ Task/topic titles and descriptions, source code, compiler diagnostics, custom in
 
 2. Ensure SQL Server is running. The development connection in `appsettings.json` targets `localhost`, database `IntelligentProgrammingPlatformDb`, using Windows authentication. Override `ConnectionStrings:DefaultConnection` through User Secrets when using another instance; do not commit a connection password. The development `TrustServerCertificate` setting is for local SQL only; configure a validated SQL certificate for deployment.
 
-3. Start Docker Desktop and pull the runner's fixed image:
+3. Start Docker Desktop and pull both fixed runner images:
 
    ```powershell
    docker info
    docker pull gcc@sha256:5e927c284bf55a7dc796262e311a0703344f62f41f5621eb56843111b1d37e15
+   docker pull python@sha256:5024f48ba9441d4b13a95d3945abc6365538e3a31109833367a1923523c6efed
    ```
 
    This digest was resolved from the actual local `gcc:14.3.0-bookworm` RepoDigests and pulled/verified on 2026-10-01. The runner uses canonical `gcc@sha256:…` because Docker Desktop did not consistently resolve the combined tag-plus-digest lookup. It never falls back to a mutable tag. Updating GCC requires reviewing a newly resolved digest, updating the server constant and rerunning the runner regressions.
+
+   The Python digest was resolved by actually pulling the official `python:3.13-slim-bookworm` image on 2026-10-02. The restricted container reported **Python 3.13.16**. Execution uses the immutable reference above, defined in `RunnerLanguage`; database image/command strings are metadata only. Python syntax checks and student code run only in Docker, with no host fallback.
 
    Docker Desktop must remain running while solutions are submitted. The runner uses known Docker installation paths and does not execute command/image text from the database. On Windows, the supported installations are Docker Desktop under Program Files or the current user's LocalAppData Programs directory.
 
@@ -98,7 +101,7 @@ Task/topic titles and descriptions, source code, compiler diagnostics, custom in
    dotnet run --launch-profile https
    ```
 
-   Open **https://localhost:7115**. The HTTPS profile is the default for `dotnet run`. Sign up for a Student account, or sign in with the configured development Admin. Development startup adds missing demo records without overwriting existing ones: four tasks across Basics, Arrays and Algorithms, including Easy, Medium and Hard, with visible and hidden tests. Production does not seed demo tasks or an Admin account.
+   Open **https://localhost:7115**. The HTTPS profile is the default for `dotnet run`. Sign up for a Student account, or sign in with the configured development Admin. Development startup adds missing demo records: seven tasks across Basics, Arrays and Algorithms, including Easy, Medium and Hard, with visible and hidden tests. The three new tasks are **Count Even Numbers**, **Palindrome Check** and **Binary Search**; each can be solved in either language. Existing tasks/tests are preserved. Production does not seed demo tasks or an Admin account.
 
 Monaco assets are intentionally committed under `wwwroot/js/editor`. Node.js is only needed to rebuild them after editor-source changes:
 
@@ -122,10 +125,13 @@ python scripts/verify_enhancement2.py
 python scripts/verify_enhancement3.py
 python scripts/verify_resources.py
 python scripts/verify_enhancement4.py
+python scripts/verify_enhancement5a.py
+python scripts/verify_enhancement5b.py
 node scripts/verify_editor_csp.mjs
 node scripts/verify_enhancement2_ui.mjs
 dotnet run --project tests/Enhancement1Checks
 dotnet run --project tests/Enhancement3Checks
+dotnet run --project tests/Enhancement5bChecks
 dotnet ef migrations has-pending-model-changes
 git diff --check
 ```
@@ -144,8 +150,8 @@ python scripts/verify_phase5_live.py --finish
 
 - **Custom Run:** enter your own input and select **Run** to see temporary stdout, diagnostics and execution time without leaving the task. It shares the pinned Docker sandbox and execution limit with Submit. Source/input limits are 64/32 KiB UTF-8.
 - **Run vs Submit:** Run does not judge against official answers or save anything to submission history, AI feedback, Progress or Leaderboard. **Submit** checks official tests and records an attempt normally.
-- **Attempt Journey:** the task page shows your latest five attempts; `/Tasks/{slug}/Journey` provides the full chronological history, twenty per page. Saved AI feedback is marked factually; attempts link to existing result pages.
-- **Code Diff:** **Compare with previous** opens a read-only Monaco comparison. Both attempts must belong to you and the same task. The diff reuses the existing nonce/scoped Monaco CSP and switches to an inline view on narrow screens.
+- **Attempt Journey:** the task page shows your latest five attempts with their runtime; `/Tasks/{slug}/Journey` provides the full chronological history, twenty per page. Saved AI feedback is marked factually; attempts link to existing result pages.
+- **Code Diff:** **Compare with previous** selects the previous attempt in the same language. Both attempts must belong to you and the same task. Same-language comparisons use C++/Python highlighting; an explicit mixed comparison uses plaintext. The diff reuses the existing nonce/scoped Monaco CSP and switches to an inline view on narrow screens.
 
 Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement2_ui.mjs` for the new regressions. See [study-enhancement2.md](study-enhancement2.md) and [manual-enhancement2-checklist.md](manual-enhancement2-checklist.md). Real browser verification remains pending.
 
@@ -155,11 +161,11 @@ Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement
 - `/Admin/Lessons` supports create, preview, edit, publish/unpublish and confirmed deletion. Slugs are unique lowercase URL identifiers; lesson order is positive and unique within its topic. Topics containing tasks or lessons cannot be deleted.
 - Apply `AddLessons` with `dotnet ef database update`. Development startup seeds five Kazakh lessons: Programming Basics, C++ Basics, Python Basics, Arrays Basics and Algorithm Basics. Existing slugs and edited content are preserved. A deleted demo slug is recreated on the next Development startup; unpublish it to hide it persistently.
 - UI supports Kazakh, Russian and English; database lesson text remains as authored. Text and `<pre><code>` examples use normal Razor encoding. No Markdown library or CSP relaxation was added.
-- **Python execution and lesson completion tracking are not implemented.** Python examples are reading material; the existing C++ runner remains unchanged.
+- Lesson code blocks remain reading material; students now select **Python 3** on a task page to Run or Submit. The untouched original Python lesson is upgraded to cover `input`, `print`, variables, `if`, `for` and lists. Admin-edited lesson bodies are preserved. Lesson completion tracking is not implemented.
 
 Run `python scripts/verify_enhancement5a.py` against the running HTTPS Development app. See [study-enhancement5a.md](study-enhancement5a.md) for the Kazakh guide, schema, security, verification and manual browser checklist. Real visual/keyboard/console checks at 1440, 1024 and 390 pixels remain pending because no browser was available.
 
-Enhancement 5A verification (2026-10-02): the new Lessons suite, all eight existing Phase 2–5 / Enhancement 1–4 HTTP suites, three C# suites, two Node suites and resource checks passed. Build: **0 errors, 0 warnings**. Database current; no pending model changes. Resources now contain **579 keys per language**. All 15 pre-existing database-table hashes survived migration/seeding; restarting preserved the five lesson rows exactly. No paid AI calls were made.
+Enhancement 5A verification (2026-10-02): the Lessons suite and all preceding regressions passed; database content was preserved. See [study-enhancement5b.md](study-enhancement5b.md) for the current Python architecture, three new tasks, actual verification results and manual browser checklist. Enhancement 5B requires no new migration and has **581 resource keys per language**.
 
 ## Intelligent Learning features (Enhancement 3)
 
@@ -187,7 +193,7 @@ The final localization explanation and verification boundaries are in [study-enh
 - Global antiforgery validation covers state-changing MVC actions; only read-only error rendering is exempt. Admin authorization and submission ownership are enforced on the server.
 - Identity cookies are HttpOnly, Secure and SameSite=Lax. HTTPS redirection and production HSTS remain enabled. Security headers include nosniff, frame denial, referrer policy and disabled unused device permissions.
 - Hidden input, expected/actual output and diagnostics are excluded from student SQL projections and AI input. User-controlled content is Razor encoded.
-- Containers use a fixed image, no network, a non-root user, dropped capabilities, no-new-privileges, a read-only root, bounded mounts, CPU/memory/PID/time/output limits and cleanup. Student C++ never runs directly in the web-server process.
+- Containers use pinned images, no network, a non-root user, dropped capabilities, no-new-privileges, a read-only root, bounded mounts, CPU/memory/PID/time/output limits and cleanup. Student C++ and Python never execute on the host. Both languages share the same two-slot execution gate for Run and Submit.
 - AI receives untrusted data separately from trusted instructions, returns validated JSON, and is limited by ownership, terminal status, concurrency, cooldown and one stored feedback per submission. Credentials and AI request bodies are not logged.
 - CSP uses a random 256-bit nonce per request, local assets/workers, no script `unsafe-inline` or `unsafe-eval`, and denies framing, objects and base changes. Import maps, progress styles and Monaco-generated stylesheets carry the nonce. Only rendered editor pages permit style **attributes** (`style-src-attr 'unsafe-inline'`), required by Monaco's line layout; other pages deny them. `scripts/monaco-csp.mjs` adapts the two reviewed stylesheet factories and fails on an unreviewed Monaco upgrade. MVC's empty validation placeholder uses a CSS class. Browser confirmation remains pending.
 - `AllowedHosts` defaults to `localhost;127.0.0.1`, keeping `https://localhost:7115` working. The ignored Development settings file inherits this safe default. For Production, explicitly set `AllowedHosts` through deployment environment/configuration to your real semicolon-separated host names (no schemes or ports); no production domain is assumed. Until configured, only loopback host names are accepted. Empty lists and wildcard entries fail startup in every environment; unexpected Host headers receive 400. Behind a proxy, retain the intended Host and configure proxy trust separately.

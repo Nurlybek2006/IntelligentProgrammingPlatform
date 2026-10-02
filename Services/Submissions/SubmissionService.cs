@@ -44,7 +44,8 @@ public sealed class SubmissionService
             .SingleOrDefaultAsync(runtime => runtime.Id == model.RuntimeId && runtime.IsEnabled, cancellationToken);
         if (task == null)
             return new SubmissionOutcome(null, "Validation_PublishedTask");
-        if (runtime == null || runtime.LanguageKey != CodeRunnerOptions.LanguageKey)
+        var language = RunnerLanguage.Find(runtime?.LanguageKey);
+        if (runtime == null || language == null)
             return new SubmissionOutcome(null, "Validation_Runtime");
 
         var testQuery = _db.TestCases.AsNoTracking().Where(test => test.ProgrammingTaskId == task.Id);
@@ -71,13 +72,13 @@ public sealed class SubmissionService
         _db.Submissions.Add(submission);
         // Бір қысқа SaveChanges операциясы тесттерді тарихтан кездейсоқ өшіруден де қорғайды.
         await _db.SaveChangesAsync(cancellationToken);
-        await ExecuteAsync(submission, tests, task.TimeLimitMs, task.MemoryLimitMb, cancellationToken);
+        await ExecuteAsync(submission, tests, task.TimeLimitMs, task.MemoryLimitMb, language, cancellationToken);
         return new SubmissionOutcome(submission.Id, null);
     }
 
     // SQL транзакциясын ашық ұстамай, компиляция мен тесттерді шектеулі орындау орны арқылы жүргізеді.
     private async Task ExecuteAsync(Submission submission, List<TestCase> tests, int timeLimitMs,
-        int memoryLimitMb, CancellationToken requestCancellation)
+        int memoryLimitMb, RunnerLanguage language, CancellationToken requestCancellation)
     {
         SubmissionWorkspace? workspace = null;
         var entered = false;
@@ -92,8 +93,8 @@ public sealed class SubmissionService
             submission.Status = SubmissionStatus.Compiling;
             await _db.SaveChangesAsync(linked.Token);
 
-            var imageId = await _runner.GetTrustedImageAsync(linked.Token);
-            workspace = new SubmissionWorkspace();
+            var imageId = await _runner.GetTrustedImageAsync(linked.Token, language);
+            workspace = new SubmissionWorkspace(language);
             await workspace.WriteSourceAsync(submission.SourceCode, linked.Token);
 
             var compilation = await _runner.CompileAsync(workspace, imageId, linked.Token);

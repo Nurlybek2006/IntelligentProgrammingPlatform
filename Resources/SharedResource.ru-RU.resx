@@ -7,7 +7,7 @@
   <data name="App_Name" xml:space="preserve"><value>Интеллектуальная платформа программирования</value></data>
   <data name="App_Brand" xml:space="preserve"><value>Интеллектуальная</value></data>
   <data name="App_Subtitle" xml:space="preserve"><value>Платформа программирования</value></data>
-  <data name="App_Description" xml:space="preserve"><value>Решайте задачи на C++, учитесь по результатам тестов и подсказкам ИИ, отслеживайте прогресс.</value></data>
+  <data name="App_Description" xml:space="preserve"><value>Решайте задачи на C++ и Python, учитесь по результатам тестов и подсказкам ИИ, отслеживайте прогресс.</value></data>
   <data name="Nav_Home" xml:space="preserve"><value>Главная</value></data>
   <data name="Nav_HomeLabel" xml:space="preserve"><value>Главная страница платформы программирования</value></data>
   <data name="Nav_Skip" xml:space="preserve"><value>Перейти к основному содержимому</value></data>
@@ -79,8 +79,8 @@
   <data name="Field_ConfirmPassword" xml:space="preserve"><value>Подтверждение пароля</value></data>
   <data name="Field_DisplayName" xml:space="preserve"><value>Отображаемое имя</value></data>
   <data name="Field_RememberMe" xml:space="preserve"><value>Запомнить меня</value></data>
-  <data name="Field_Runtime" xml:space="preserve"><value>Среда выполнения</value></data>
-  <data name="Field_SourceCode" xml:space="preserve"><value>Исходный код C++</value></data>
+  <data name="Field_Runtime" xml:space="preserve"><value>Язык программирования</value></data>
+  <data name="Field_SourceCode" xml:space="preserve"><value>Исходный код</value></data>
   <data name="Field_Task" xml:space="preserve"><value>Задача</value></data>
   <data name="Field_CustomInput" xml:space="preserve"><value>Свои входные данные</value></data>
   <data name="Validation_Required" xml:space="preserve"><value>Заполните поле «{0}».</value></data>
@@ -95,7 +95,7 @@
   <data name="Validation_SourceLimit" xml:space="preserve"><value>Введите исходный код размером не более 64 KiB (UTF-8).</value></data>
   <data name="Validation_InputLimit" xml:space="preserve"><value>Размер входных данных не должен превышать 32 KiB (UTF-8).</value></data>
   <data name="Validation_PublishedTask" xml:space="preserve"><value>Выберите опубликованную задачу.</value></data>
-  <data name="Validation_Runtime" xml:space="preserve"><value>Выберите включённую среду выполнения C++.</value></data>
+  <data name="Validation_Runtime" xml:space="preserve"><value>Выберите включённый исполнитель C++ или Python.</value></data>
   <data name="Account_DuplicateEmail" xml:space="preserve"><value>Этот адрес электронной почты уже зарегистрирован.</value></data>
   <data name="Account_RegistrationFailed" xml:space="preserve"><value>Не удалось завершить регистрацию. Повторите попытку.</value></data>
   <data name="Account_RegistrationConflict" xml:space="preserve"><value>Не удалось завершить регистрацию. Возможно, этот адрес уже зарегистрирован.</value></data>
@@ -120,8 +120,8 @@
   <data name="Run_RuntimeError" xml:space="preserve"><value>Ошибка выполнения.</value></data>
   <data name="Run_MemoryLimit" xml:space="preserve"><value>Превышен лимит памяти.</value></data>
   <data name="Run_TimeLimit" xml:space="preserve"><value>Превышен лимит времени.</value></data>
-  <data name="Editor_AriaLabel" xml:space="preserve"><value>Редактор исходного кода C++</value></data>
-  <data name="Editor_Submitting" xml:space="preserve"><value>Ваше решение компилируется и проверяется…</value></data>
+  <data name="Editor_AriaLabel" xml:space="preserve"><value>Редактор исходного кода</value></data>
+  <data name="Editor_Submitting" xml:space="preserve"><value>Подготовка и проверка кода…</value></data>
   <data name="Diff_PreviousSource" xml:space="preserve"><value>Код предыдущей попытки</value></data>
   <data name="Diff_CurrentSource" xml:space="preserve"><value>Код текущей попытки</value></data>
   <data name="Run_Temporary" xml:space="preserve"><value>Только временный результат. Попытка не сохраняется.</value></data>

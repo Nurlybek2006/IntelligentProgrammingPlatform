@@ -27,9 +27,7 @@
   <data xml:space="preserve" name="Common_Status">
     <value>Күйі</value>
   </data>
-  <data xml:space="preserve" name="Common_Runtime">
-    <value>Орындау ортасы</value>
-  </data>
+  <data name="Common_Runtime" xml:space="preserve"><value>Бағдарламалау тілі</value></data>
   <data xml:space="preserve" name="Common_PassedTotal">
     <value>Өткен / барлығы</value>
   </data>
@@ -81,9 +79,7 @@
   <data xml:space="preserve" name="Common_Output">
     <value>Шығыс деректері</value>
   </data>
-  <data xml:space="preserve" name="Common_CompilerOutput">
-    <value>Компилятор хабарламалары</value>
-  </data>
+  <data name="Common_CompilerOutput" xml:space="preserve"><value>Компиляция / синтаксис диагностикасы</value></data>
   <data xml:space="preserve" name="Common_NotMeasured">
     <value>Өлшенбеді</value>
   </data>
@@ -117,9 +113,7 @@
   <data xml:space="preserve" name="Home_HeadingAccent">
     <value>Әр шешіммен алға басыңыз.</value>
   </data>
-  <data xml:space="preserve" name="Home_Intro">
-    <value>C++ тілін жаттықтыруға арналған орта. Есеп шығарыңыз, нәтижеңізді түсініңіз және келесі қадамыңызды кеңестер арқылы табыңыз.</value>
-  </data>
+  <data name="Home_Intro" xml:space="preserve"><value>C++ және Python үйренуге арналған орта. Есеп шешіп, нәтижені талдаңыз және келесі қадамды кеңестер арқылы табыңыз.</value></data>
   <data xml:space="preserve" name="Home_Continue">
     <value>Шешуді жалғастыру</value>
   </data>
@@ -129,9 +123,7 @@
   <data xml:space="preserve" name="Home_ExploreLeaderboard">
     <value>Рейтингті қарау</value>
   </data>
-  <data xml:space="preserve" name="Home_Note">
-    <value>C++ 20 · Негіздерден алгоритмдерге дейін · Өз қарқыныңызбен үйреніңіз</value>
-  </data>
+  <data name="Home_Note" xml:space="preserve"><value>C++ 20 / Python 3 · Негіздерден алгоритмдерге дейін · Өз қарқыныңызбен үйреніңіз</value></data>
   <data xml:space="preserve" name="Home_JourneyLabel">
     <value>Сіздің оқу жолыңыз</value>
   </data>
@@ -195,9 +187,7 @@
   <data xml:space="preserve" name="Home_ExecutionFeature">
     <value>Оқшауланған орындау</value>
   </data>
-  <data xml:space="preserve" name="Home_ExecutionFeatureText">
-    <value>C++ шешімін тесттермен тексеріп, әр талпыныстың нақты нәтижесін алыңыз.</value>
-  </data>
+  <data name="Home_ExecutionFeatureText" xml:space="preserve"><value>C++ немесе Python кодын тесттермен тексеріп, әр әрекеттің нәтижесін көріңіз.</value></data>
   <data xml:space="preserve" name="Home_AiFeature">
     <value>Сіздің ЖИ тәлімгеріңіз</value>
   </data>
@@ -231,9 +221,7 @@
   <data xml:space="preserve" name="Privacy_StorageHeading">
     <value>Браузердегі жергілікті сақтау</value>
   </data>
-  <data xml:space="preserve" name="Privacy_StorageText">
-    <value>Кіру cookie файлы сеансыңызды сақтайды. Қауіпсіздік cookie файлдары пішіндерді қорғайды. Редактор әр есептің нобайын осы браузер қойындысының сеанс жадында сақтайды; нобайлар басқа тіркелгілермен бөлісілмейді. Тіл cookie файлы интерфейс тілін есте сақтайды.</value>
-  </data>
+  <data name="Privacy_StorageText" xml:space="preserve"><value>Кіру cookie-і аккаунт сессиясын сақтайды. Қауіпсіздік cookie-лері формаларды қорғайды. Редактор әр аккаунт, есеп және бағдарламалау тілі үшін нобайды осы қойындының session storage қоймасында бөлек сақтайды. Тіл cookie-і интерфейс тілін есте сақтайды.</value></data>
   <data xml:space="preserve" name="Privacy_SharedHeading">
     <value>Ортақ құрылғыны пайдалану</value>
   </data>
@@ -330,12 +318,8 @@
   <data xml:space="preserve" name="Task_GuestHeading">
     <value>Сынап көруге дайынсыз ба?</value>
   </data>
-  <data xml:space="preserve" name="Task_GuestText">
-    <value>Редакторда C++ кодын жазып, шешімді тексеру үшін кіріңіз.</value>
-  </data>
-  <data xml:space="preserve" name="Editor_SourceHelp">
-    <value>C++ 20 · Кодтың ең үлкен көлемі: 64 КиБ. Нобай осы браузер қойындысында сақталады.</value>
-  </data>
+  <data name="Task_GuestText" xml:space="preserve"><value>Редакторда C++ немесе Python кодын жазып, шешімді тексеру үшін кіріңіз.</value></data>
+  <data name="Editor_SourceHelp" xml:space="preserve"><value>Код көлемі ең көбі 64 КиБ (UTF-8). Әр тілдің нобайы осы браузер қойындысында бөлек сақталады.</value></data>
   <data xml:space="preserve" name="Run_CustomInput">
     <value>Өз кіріс деректеріңіз</value>
   </data>
@@ -351,9 +335,7 @@
   <data xml:space="preserve" name="Submit_Help">
     <value>Жіберу ресми тесттермен тексеріп, талпынысты оқу жолыңызда сақтайды.</value>
   </data>
-  <data xml:space="preserve" name="Editor_NoRuntime">
-    <value>Қолжетімді C++ орындау ортасы жоқ.</value>
-  </data>
+  <data name="Editor_NoRuntime" xml:space="preserve"><value>Қосылған қолдау көрсетілетін орындаушы жоқ.</value></data>
   <data xml:space="preserve" name="Run_Result">
     <value>Іске қосу нәтижесі</value>
   </data>
@@ -552,9 +534,7 @@
   <data xml:space="preserve" name="Diff_CurrentAttempt">
     <value>Қазіргі талпыныс · №{0}</value>
   </data>
-  <data xml:space="preserve" name="Diff_Help">
-    <value>C++ коды тек оқу үшін салыстырылады. Өшірілген және қосылған жолдар белгіленеді; тар экранда редактор бір бағанды салыстыруға ауысады.</value>
-  </data>
+  <data name="Diff_Help" xml:space="preserve"><value>Тек оқуға арналған салыстыру. Өшірілген және қосылған жолдар белгіленеді; тар экранда код бір бағанда көрсетіледі.</value></data>
   <data xml:space="preserve" name="Diff_Region">
     <value>Талпыныстар арасындағы код өзгерістері</value>
   </data>
@@ -618,9 +598,7 @@
   <data xml:space="preserve" name="Journey_AiCounts">
     <value>ЖИ кеңестері: {0}/{1}</value>
   </data>
-  <data xml:space="preserve" name="Journey_Compare">
-    <value>Алдыңғысымен салыстыру</value>
-  </data>
+  <data name="Journey_Compare" xml:space="preserve"><value>Осы тілдегі алдыңғы әрекетпен салыстыру</value></data>
   <data xml:space="preserve" name="Journey_AiHelp">
     <value>ЖИ кеңесі бар белгісі осы талпынысқа талдау сақталғанын білдіреді; кейінгі талпыныстың неліктен жақсарғанын дәлелдемейді.</value>
   </data>
@@ -915,4 +893,6 @@
   <data name="Lessons_Navigation" xml:space="preserve"><value>Тақырып сабақтары арасында өту</value></data>
   <data name="Lessons_Previous" xml:space="preserve"><value>Алдыңғы сабақ</value></data>
   <data name="Lessons_Next" xml:space="preserve"><value>Келесі сабақ</value></data>
+  <data name="Editor_LanguageHelp" xml:space="preserve"><value>Тілді ауыстырғанда сол тілдің нобайы ашылады. Python: тек стандартты кітапхана, интернеттен пакет орнатылмайды.</value></data>
+  <data name="Diff_MixedLanguages" xml:space="preserve"><value>Бұл әрекеттердің тілдері әртүрлі немесе қолдау көрсетілмейді. Код жай мәтін ретінде салыстырылады.</value></data>
 </root>

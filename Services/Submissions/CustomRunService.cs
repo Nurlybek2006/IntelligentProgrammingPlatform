@@ -24,7 +24,7 @@ public sealed class CustomRunService
 
     // Уақытша кодты студент input-ымен орындап, ешбір submission немесе статистика сақтамайды.
     public async Task<CustomRunResult> RunAsync(string source, string input, int timeLimitMs,
-        int memoryLimitMb, CancellationToken cancellationToken)
+        int memoryLimitMb, CancellationToken cancellationToken, RunnerLanguage? language = null)
     {
         SubmissionWorkspace? workspace = null;
         var entered = false;
@@ -38,8 +38,8 @@ public sealed class CustomRunService
                 throw new InvalidOperationException("Custom run input exceeds the validated limits.");
             entered = await _gate.EnterAsync(linked.Token);
             if (!entered) throw new InvalidOperationException("Runner capacity wait timed out.");
-            var image = await _runner.GetTrustedImageAsync(linked.Token);
-            workspace = new SubmissionWorkspace();
+            var image = await _runner.GetTrustedImageAsync(linked.Token, language);
+            workspace = new SubmissionWorkspace(language);
             await workspace.WriteSourceAsync(source, linked.Token);
             var compilation = await _runner.CompileAsync(workspace, image, linked.Token);
             if (!compilation.Succeeded)

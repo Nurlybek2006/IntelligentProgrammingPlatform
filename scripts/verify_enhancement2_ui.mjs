@@ -6,8 +6,9 @@ import vm from "node:vm";
 const marker = '</textarea></script><img src=x onerror=alert(1)>';
 const editorSource = (await readFile("ClientScripts/code-editor.js", "utf8"))
     .replace(/^import .*;\r?\n/gm, "").replaceAll("import.meta.url", '"https://localhost:7115/js/editor/code-editor.js"');
-function exerciseDiff(previousLabel, currentLabel) {
-const elements = { "code-diff": { hidden: true, dataset: { previousLabel, currentLabel } }, "diff-fallback": { hidden: false },
+function exerciseDiff(previousLabel, currentLabel, language = "cpp") {
+const expectedLanguage = ["cpp", "python"].includes(language) ? language : "plaintext";
+const elements = { "code-diff": { hidden: true, dataset: { previousLabel, currentLabel, language } }, "diff-fallback": { hidden: false },
     "previous-source": { value: "\n// " + marker }, "current-source": { value: "int main() {}" } };
 const models = [], windowHandlers = {};
 let options, selected, disposed = 0, workerUrl;
@@ -16,8 +17,8 @@ const diffContext = {
     Worker: class { constructor(url, config) { workerUrl = url.href; assert.equal(config.type, "module"); } },
     window: { addEventListener: (name, handler) => windowHandlers[name] = handler },
     monaco: { editor: {
-        createModel: (value, language) => {
-            assert.equal(language, "cpp");
+        createModel: (value, modelLanguage) => {
+            assert.equal(modelLanguage, expectedLanguage);
             const model = { value, dispose: () => disposed++ }; models.push(model); return model;
         },
         createDiffEditor: (element, config) => {
@@ -42,6 +43,8 @@ windowHandlers.pagehide({ persisted: false }); assert.equal(disposed, 3);
 }
 for (const labels of [["Алдыңғы әрекет коды", "Қазіргі әрекет коды"], ["Код предыдущей попытки", "Код текущей попытки"], ["Previous attempt source", "Current attempt source"]]) exerciseDiff(...labels);
 console.log("PASS: Diff uses localized server labels, textarea text, read-only C++ models, narrow-layout option, local worker and safe disposal");
+for (const language of ["python", "plaintext", "unsupported"]) exerciseDiff("Previous", "Current", language);
+console.log("PASS: Python diff highlighting and mixed/unsupported language plaintext fallback stay read-only");
 
 const runSource = await readFile("wwwroot/js/custom-run.js", "utf8");
 assert.equal(runSource.includes("innerHTML"), false);
@@ -73,13 +76,13 @@ function harness(culture = "en-US") {
     nodes["submission-form"].dispatchEvent = event => {
         assert.equal(event.type, "source-sync"); nodes.SourceCode.value = state.editorValue;
     };
-    nodes.RuntimeId.options = [1]; nodes.CustomInput.value = "2 3";
+    nodes.RuntimeId.options = [1]; nodes.RuntimeId.value = "python-runtime-id"; nodes.CustomInput.value = "2 3";
     let resolveRequest, rejectRequest;
     const state = { nodes, requests: 0, editorValue: "int main() {}", aborted: false };
     const lifecycle = {};
     vm.runInNewContext(runSource, {
         document: { getElementById: id => nodes[id], documentElement: { lang: culture } }, TextEncoder, URLSearchParams, AbortController, Event,
-        FormData: class { constructor() { return [["SourceCode", nodes.SourceCode.value], ["CustomInput", nodes.CustomInput.value], ["__RequestVerificationToken", "fixture-token"]]; } },
+        FormData: class { constructor() { assert.equal(nodes.RuntimeId.disabled, false); return [["RuntimeId", nodes.RuntimeId.value], ["SourceCode", nodes.SourceCode.value], ["CustomInput", nodes.CustomInput.value], ["__RequestVerificationToken", "fixture-token"]]; } },
         setTimeout: callback => { state.timeout = callback; return 1; }, clearTimeout: () => state.cleared = true,
         window: { addEventListener: (name, handler) => lifecycle[name] = handler },
         fetch: (url, request) => {
@@ -88,6 +91,8 @@ function harness(culture = "en-US") {
             assert.equal(request.body.get("__RequestVerificationToken"), "fixture-token");
             assert.equal(request.body.get("SourceCode"), state.editorValue);
             assert.equal(request.body.get("CustomInput"), nodes.CustomInput.value);
+            assert.equal(request.body.get("RuntimeId"), "python-runtime-id");
+            assert.equal(nodes.RuntimeId.disabled, true);
             return new Promise((resolve, reject) => {
                 resolveRequest = resolve; rejectRequest = reject;
                 request.signal.addEventListener("abort", () => { state.aborted = true; const failure = new Error("aborted"); failure.name = "AbortError"; reject(failure); });
@@ -108,6 +113,7 @@ await pending;
 for (const id of ["run-output", "run-error", "run-compiler"]) assert.equal(success.nodes[id].textContent, marker);
 assert.equal(success.nodes["run-status"].textContent, "Success");
 assert.equal(success.nodes["run-code"].disabled, false); assert.equal(success.nodes["submit-code"].disabled, false);
+assert.equal(success.nodes.RuntimeId.disabled, false);
 assert.equal(success.nodes["custom-run-result"].attributes["aria-busy"], "false");
 assert.equal(success.state.cleared, true);
 console.log("PASS: Run syncs source, sends POST/token/input, prevents duplicate clicks and renders hostile output as text");

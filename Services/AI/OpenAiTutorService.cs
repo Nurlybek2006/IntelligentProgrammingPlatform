@@ -98,7 +98,7 @@ public sealed class OpenAiTutorService
             .Select(item => new
             {
                 item.ProgrammingTask.Title, item.ProgrammingTask.Description, item.ProgrammingTask.Difficulty,
-                item.SourceCode, item.Status, item.CompilerOutput, item.PassedTests, item.TotalTests
+                item.SourceCode, item.Status, item.CompilerOutput, item.PassedTests, item.TotalTests, item.Runtime.LanguageKey
             }).SingleOrDefaultAsync(cancellationToken);
         if (item == null) return null;
         if (Encoding.UTF8.GetByteCount(item.SourceCode) > CodeRunnerOptions.MaxSourceBytes)
@@ -114,7 +114,7 @@ public sealed class OpenAiTutorService
         var hidden = await results.Where(result => result.TestCase.IsHidden).OrderBy(result => result.TestCase.Order)
             .Take(100).Select(result => new { result.TestCase.Order, result.Status, result.ExecutionTimeMs })
             .ToListAsync(cancellationToken);
-        return new AiTutorInput(Clean(item.Title, 200), Clean(item.Description, 8000), item.Difficulty.ToString(), "C++ 20",
+        return new AiTutorInput(Clean(item.Title, 200), Clean(item.Description, 8000), item.Difficulty.ToString(), RunnerLanguage.Find(item.LanguageKey)?.Name ?? "Unknown",
             Clean(item.SourceCode, CodeRunnerOptions.MaxSourceBytes), item.Status.ToString(),
             item.Status == SubmissionStatus.CompilationError ? Clean(item.CompilerOutput, 6000) : null,
             item.PassedTests, item.TotalTests,

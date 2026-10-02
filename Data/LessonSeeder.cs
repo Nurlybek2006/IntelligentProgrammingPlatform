@@ -60,22 +60,8 @@ public static class LessonSeeder
             new Lesson
             {
                 Title = "Python негіздері", Slug = "python-basics", TopicId = topics["Basics"], Order = 3,
-                Summary = "Python айнымалыларын, тізімді және шегініспен жазылатын циклді оқу арқылы түсініңіз.",
-                Content = """
-                    Python тілінде айнымалыны құрғанда типін бөлек жазбаймыз: names = [...] тізімге атау береді. Мәтін тырнақшамен, тізім квадрат жақшамен жазылады. len(names) тізімдегі элементтер санын қайтарады, ал print(...) мәнді экранға шығарады.
-
-                    for name in names: циклі тізімнің әр элементін кезекпен name айнымалысына береді. Қос нүктеден кейінгі шегініс цикл денесін анықтайды. Бір блоктағы жолдардың шегінісі бірдей болуы керек; әдетте төрт бос орын қолданылады.
-
-                    Мысал алдымен 2 санын шығарады. Кейін екі бөлек жолда Hello, Aida және Hello, Askar мәтіндері көрінеді. print ішіндегі екі аргумент арасына әдепкіде бос орын қойылады. Цикл аяқталғанша бірінші, содан кейін екінші есім өңделеді.
-
-                    Тізімге үшінші есімді қоссақ, неше жол шығады? Бос тізімде цикл денесі орындала ма? Осы сұрақтарға кодты оқу арқылы жауап беріңіз. Бұл сабақтағы Python коды тек көрсетіледі: платформада Python орындаушысы әлі қосылмаған. Байланысты есептерді әзірге қолжетімді C++ орындаушысымен шешуге болады.
-                    """,
-                CodeLanguage = "python", CodeExample = """
-                    names = ["Aida", "Askar"]
-                    print(len(names))
-                    for name in names:
-                        print("Hello,", name)
-                    """
+                Summary = PythonLessonContent.Summary, Content = PythonLessonContent.Content,
+                CodeLanguage = "python", CodeExample = PythonLessonContent.CodeExample
             },
             new Lesson
             {
@@ -132,6 +118,17 @@ public static class LessonSeeder
                     """
             }
         };
+
+        var previousPython = await db.Lessons.SingleOrDefaultAsync(lesson => lesson.Slug == "python-basics");
+        if (previousPython != null && previousPython.CodeLanguage == "python"
+            && previousPython.Summary == PythonLessonContent.LegacySummary
+            && previousPython.Content.Replace("\r\n", "\n") == PythonLessonContent.LegacyContent.Replace("\r\n", "\n")
+            && previousPython.CodeExample?.Replace("\r\n", "\n") == PythonLessonContent.LegacyCodeExample.Replace("\r\n", "\n"))
+        {
+            previousPython.Summary = PythonLessonContent.Summary;
+            previousPython.Content = PythonLessonContent.Content;
+            previousPython.CodeExample = PythonLessonContent.CodeExample;
+        }
 
         var existing = await db.Lessons.AsNoTracking().Select(lesson => new { lesson.Slug, lesson.TopicId, lesson.Order }).ToListAsync();
         var slugs = existing.Select(lesson => lesson.Slug).ToHashSet(StringComparer.OrdinalIgnoreCase);

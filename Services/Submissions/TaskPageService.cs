@@ -2,7 +2,6 @@ using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Services.CodeExecution;
 using IntelligentProgrammingPlatform.ViewModels.Submissions;
 using IntelligentProgrammingPlatform.ViewModels.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentProgrammingPlatform.Services.Submissions;
@@ -37,14 +36,25 @@ public sealed class TaskPageService
             }).SingleOrDefaultAsync(cancellationToken);
         if (model == null) return null;
 
-        model.Submission = form ?? new SubmitViewModel { ProgrammingTaskId = model.Id, SourceCode = SubmitViewModel.StarterCode };
-        model.Submission.Runtimes = await _db.Runtimes.AsNoTracking()
-            .Where(runtime => runtime.IsEnabled && runtime.LanguageKey == CodeRunnerOptions.LanguageKey)
+        model.Submission = form ?? new SubmitViewModel { ProgrammingTaskId = model.Id };
+        var runtimes = await _db.Runtimes.AsNoTracking()
+            .Where(runtime => runtime.IsEnabled && RunnerLanguage.Keys.Contains(runtime.LanguageKey))
             .OrderBy(runtime => runtime.Name)
-            .Select(runtime => new SelectListItem(runtime.Name, runtime.Id.ToString()))
+            .Select(runtime => new { runtime.Id, runtime.Name, runtime.LanguageKey })
             .ToListAsync(cancellationToken);
+        model.Submission.Runtimes = runtimes
+            .Select(runtime => new { runtime.Id, runtime.Name, Language = RunnerLanguage.Find(runtime.LanguageKey) })
+            .Where(runtime => runtime.Language != null)
+            .Select(runtime => new RuntimeOptionViewModel
+            {
+                Text = runtime.Name, Value = runtime.Id.ToString(), LanguageKey = runtime.Language!.Key,
+                StarterCode = runtime.Language.StarterCode
+            }).ToList();
         if (form == null && model.Submission.Runtimes.Count > 0)
+        {
             model.Submission.RuntimeId = int.Parse(model.Submission.Runtimes[0].Value);
+            model.Submission.SourceCode = model.Submission.Runtimes[0].StarterCode;
+        }
         if (userId != null)
             model.Journey = await _journeys.GetAsync(slug, userId, cancellationToken, compact: true);
         return model;

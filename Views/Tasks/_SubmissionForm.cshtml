@@ -12,8 +12,14 @@
     <input asp-for="ProgrammingTaskId" type="hidden" />
     <div class="mb-3">
         <label asp-for="RuntimeId" class="form-label"></label>
-        <select asp-for="RuntimeId" asp-items="Model.Runtimes" class="form-select"></select>
+        <select asp-for="RuntimeId" class="form-select" aria-describedby="language-help">
+            @foreach (var runtime in Model.Runtimes)
+            {
+                <option value="@runtime.Value" data-language="@runtime.LanguageKey" data-starter="@runtime.StarterCode">@runtime.Text</option>
+            }
+        </select>
         <span asp-validation-for="RuntimeId" class="text-danger"></span>
+        <p id="language-help" class="form-text">@L["Editor_LanguageHelp"]</p>
     </div>
     <label asp-for="SourceCode" class="form-label"></label>
     <textarea asp-for="SourceCode" class="form-control source-fallback" spellcheck="false" aria-describedby="source-help"></textarea>

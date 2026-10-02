@@ -30,12 +30,16 @@ public sealed class AttemptJourneyService
         var pages = Math.Max(1, (int)Math.Ceiling(total / 20d));
         page = Math.Clamp(page, 1, pages);
         var offset = compact ? Math.Max(0, total - 5) : (page - 1) * 20;
-        var predecessorCount = offset > 0 ? 1 : 0;
         var rows = await query.OrderBy(item => item.CreatedAt).ThenBy(item => item.Id)
-            .Skip(offset - predecessorCount).Take((compact ? 5 : 20) + predecessorCount)
+            .Skip(offset).Take(compact ? 5 : 20)
             .Select(item => new
             {
                 item.Id, item.Status, item.CreatedAt, item.PassedTests, item.TotalTests, item.ExecutionTimeMs,
+                RuntimeName = item.Runtime.Name,
+                PreviousId = query.Where(previous => previous.RuntimeId == item.RuntimeId
+                        && (previous.CreatedAt < item.CreatedAt || (previous.CreatedAt == item.CreatedAt && previous.Id < item.Id)))
+                    .OrderByDescending(previous => previous.CreatedAt).ThenByDescending(previous => previous.Id)
+                    .Select(previous => (long?)previous.Id).FirstOrDefault(),
                 FeedbackId = item.AiFeedback != null && item.AiFeedback.UserId == userId ? (long?)item.AiFeedback.Id : null,
                 HintsJson = item.AiFeedback != null && item.AiFeedback.UserId == userId ? item.AiFeedback.HintsJson : null,
                 Revealed = item.AiFeedback != null && item.AiFeedback.UserId == userId ? item.AiFeedback.RevealedHintCount : 0
@@ -47,22 +51,15 @@ public sealed class AttemptJourneyService
             return new JourneyAttemptViewModel
             {
                 SubmissionId = item.Id, Status = item.Status, CreatedAt = item.CreatedAt,
+                RuntimeName = item.RuntimeName, PreviousSubmissionId = item.PreviousId,
                 PassedTests = item.PassedTests, TotalTests = item.TotalTests, ExecutionTimeMs = item.ExecutionTimeMs,
                 HasAiFeedback = item.FeedbackId.HasValue, AvailableHintCount = count,
                 RevealedHintCount = Math.Clamp(item.Revealed, 0, count)
             };
         }).ToList();
-        long? previous = null;
-        if (predecessorCount > 0 && attempts.Count > 0)
-        {
-            previous = attempts[0].SubmissionId;
-            attempts.RemoveAt(0);
-        }
         for (var index = 0; index < attempts.Count; index++)
         {
             attempts[index].Number = offset + index + 1;
-            attempts[index].PreviousSubmissionId = previous;
-            previous = attempts[index].SubmissionId;
         }
         return new AttemptJourneyViewModel
         {

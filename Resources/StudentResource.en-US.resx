@@ -27,9 +27,7 @@
   <data xml:space="preserve" name="Common_Status">
     <value>Status</value>
   </data>
-  <data xml:space="preserve" name="Common_Runtime">
-    <value>Runtime</value>
-  </data>
+  <data name="Common_Runtime" xml:space="preserve"><value>Language</value></data>
   <data xml:space="preserve" name="Common_PassedTotal">
     <value>Passed / total</value>
   </data>
@@ -81,9 +79,7 @@
   <data xml:space="preserve" name="Common_Output">
     <value>Output</value>
   </data>
-  <data xml:space="preserve" name="Common_CompilerOutput">
-    <value>Compiler output</value>
-  </data>
+  <data name="Common_CompilerOutput" xml:space="preserve"><value>Compiler / syntax output</value></data>
   <data xml:space="preserve" name="Common_NotMeasured">
     <value>Not measured</value>
   </data>
@@ -117,9 +113,7 @@
   <data xml:space="preserve" name="Home_HeadingAccent">
     <value>One solution at a time.</value>
   </data>
-  <data xml:space="preserve" name="Home_Intro">
-    <value>A focused place to practice C++. Solve a task, understand your results, and use thoughtful hints to find your next step.</value>
-  </data>
+  <data name="Home_Intro" xml:space="preserve"><value>A focused place to practice C++ and Python. Solve a task, understand your results, and use hints to find your next step.</value></data>
   <data xml:space="preserve" name="Home_Continue">
     <value>Continue solving</value>
   </data>
@@ -129,9 +123,7 @@
   <data xml:space="preserve" name="Home_ExploreLeaderboard">
     <value>Explore leaderboard</value>
   </data>
-  <data xml:space="preserve" name="Home_Note">
-    <value>C++ 20 · From basics to algorithms · Learn at your own pace</value>
-  </data>
+  <data name="Home_Note" xml:space="preserve"><value>C++ 20 / Python 3 · From basics to algorithms · Learn at your own pace</value></data>
   <data xml:space="preserve" name="Home_JourneyLabel">
     <value>Your learning journey</value>
   </data>
@@ -195,9 +187,7 @@
   <data xml:space="preserve" name="Home_ExecutionFeature">
     <value>Isolated execution</value>
   </data>
-  <data xml:space="preserve" name="Home_ExecutionFeatureText">
-    <value>Run C++ against test cases and get a clear result for each attempt.</value>
-  </data>
+  <data name="Home_ExecutionFeatureText" xml:space="preserve"><value>Run C++ or Python against test cases and see a clear result for each attempt.</value></data>
   <data xml:space="preserve" name="Home_AiFeature">
     <value>Your AI tutor</value>
   </data>
@@ -231,9 +221,7 @@
   <data xml:space="preserve" name="Privacy_StorageHeading">
     <value>Local browser storage</value>
   </data>
-  <data xml:space="preserve" name="Privacy_StorageText">
-    <value>A sign-in cookie keeps you authenticated. Security cookies protect form submissions. The editor keeps a draft for each task in this browser tab's session storage; drafts are not shared with other accounts. A language cookie remembers your interface language.</value>
-  </data>
+  <data name="Privacy_StorageText" xml:space="preserve"><value>A sign-in cookie keeps you authenticated. Security cookies protect forms. The editor stores separate drafts for each account, task and programming language in this tab’s session storage. A language cookie remembers your interface language.</value></data>
   <data xml:space="preserve" name="Privacy_SharedHeading">
     <value>Using a shared device</value>
   </data>
@@ -330,12 +318,8 @@
   <data xml:space="preserve" name="Task_GuestHeading">
     <value>Ready to give it a try?</value>
   </data>
-  <data xml:space="preserve" name="Task_GuestText">
-    <value>Sign in to write C++ in the editor and check your solution.</value>
-  </data>
-  <data xml:space="preserve" name="Editor_SourceHelp">
-    <value>C++ 20 · Maximum source size: 64 KB. Your draft is kept in this browser tab.</value>
-  </data>
+  <data name="Task_GuestText" xml:space="preserve"><value>Sign in to write C++ or Python in the editor and check your solution.</value></data>
+  <data name="Editor_SourceHelp" xml:space="preserve"><value>Maximum source size: 64 KiB (UTF-8). Each language has its own draft in this browser tab.</value></data>
   <data xml:space="preserve" name="Run_CustomInput">
     <value>Custom input</value>
   </data>
@@ -351,9 +335,7 @@
   <data xml:space="preserve" name="Submit_Help">
     <value>Submit checks the official tests and saves an attempt in your journey.</value>
   </data>
-  <data xml:space="preserve" name="Editor_NoRuntime">
-    <value>No enabled C++ runtime is available.</value>
-  </data>
+  <data name="Editor_NoRuntime" xml:space="preserve"><value>No enabled supported runtime is available.</value></data>
   <data xml:space="preserve" name="Run_Result">
     <value>Run result</value>
   </data>
@@ -552,9 +534,7 @@
   <data xml:space="preserve" name="Diff_CurrentAttempt">
     <value>Current attempt · #{0}</value>
   </data>
-  <data xml:space="preserve" name="Diff_Help">
-    <value>Read-only C++ comparison. Removed and added lines are highlighted; on narrow screens the editor switches to an inline comparison.</value>
-  </data>
+  <data name="Diff_Help" xml:space="preserve"><value>Read-only comparison. Removed and added lines are highlighted; narrow screens use an inline comparison.</value></data>
   <data xml:space="preserve" name="Diff_Region">
     <value>Source changes between your attempts</value>
   </data>
@@ -618,9 +598,7 @@
   <data xml:space="preserve" name="Journey_AiCounts">
     <value>AI hints: {0}/{1}</value>
   </data>
-  <data xml:space="preserve" name="Journey_Compare">
-    <value>Compare with previous</value>
-  </data>
+  <data name="Journey_Compare" xml:space="preserve"><value>Compare with previous attempt in this language</value></data>
   <data xml:space="preserve" name="Journey_AiHelp">
     <value>AI Hint Used means feedback exists for that attempt; it does not establish why a later attempt improved.</value>
   </data>
@@ -915,4 +893,6 @@
   <data name="Lessons_Navigation" xml:space="preserve"><value>Navigate lessons in this topic</value></data>
   <data name="Lessons_Previous" xml:space="preserve"><value>Previous lesson</value></data>
   <data name="Lessons_Next" xml:space="preserve"><value>Next lesson</value></data>
+  <data name="Editor_LanguageHelp" xml:space="preserve"><value>Switching languages restores that language’s draft. Python supports the standard library; internet package installation is unavailable.</value></data>
+  <data name="Diff_MixedLanguages" xml:space="preserve"><value>These attempts use different or unsupported languages. The comparison uses plain text.</value></data>
 </root>

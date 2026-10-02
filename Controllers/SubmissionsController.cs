@@ -130,11 +130,17 @@ public class SubmissionsController : Controller
             {
                 Id = item.Id, ProgrammingTaskId = item.ProgrammingTaskId, TaskSlug = item.ProgrammingTask.Slug,
                 TaskTitle = item.ProgrammingTask.Title, SourceCode = item.SourceCode, Status = item.Status,
-                CreatedAt = item.CreatedAt, ExecutionTimeMs = item.ExecutionTimeMs
+                CreatedAt = item.CreatedAt, ExecutionTimeMs = item.ExecutionTimeMs,
+                RuntimeName = item.Runtime.Name, LanguageKey = item.Runtime.LanguageKey
             }).ToListAsync(cancellationToken);
         if (attempts.Count != 2 || attempts[0].ProgrammingTaskId != attempts[1].ProgrammingTaskId)
             return NotFound();
-        return View(new SubmissionComparisonViewModel { Previous = attempts[0], Current = attempts[1] });
+        var language = attempts[0].LanguageKey == attempts[1].LanguageKey
+            ? RunnerLanguage.Find(attempts[0].LanguageKey)?.Key : null;
+        return View(new SubmissionComparisonViewModel
+        {
+            Previous = attempts[0], Current = attempts[1], LanguageKey = language ?? "plaintext"
+        });
     }
 
     [HttpPost]

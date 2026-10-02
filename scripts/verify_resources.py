@@ -60,6 +60,8 @@ def main():
             "Lessons_NoTasks", "Lessons_RelatedTasks"} <= groups["StudentResource"]
     assert {"Lessons", "Lesson_Create", "Lesson_Edit", "Lesson_Delete", "Lesson_Constraint",
             "Validation_LessonSlug", "Validation_CodeLanguage", "Topic_HasLessons"} <= groups["AdminResource"]
+    assert {"Editor_LanguageHelp", "Diff_MixedLanguages", "Journey_Compare"} <= groups["StudentResource"]
+    assert {"Validation_Runtime", "Field_Runtime", "Editor_AriaLabel"} <= groups["SharedResource"]
     print(f"RESOURCE CHECKS PASSED: {len(GROUPS)*len(CULTURES)} files, {sum(map(len, groups.values()))} keys per language; no missing-key fallback used")
 
 

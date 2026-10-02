@@ -19,6 +19,7 @@ public sealed class JourneyAttemptViewModel
     public int Number { get; set; }
     public long SubmissionId { get; set; }
     public long? PreviousSubmissionId { get; set; }
+    public string RuntimeName { get; set; } = string.Empty;
     public SubmissionStatus Status { get; set; }
     public int PassedTests { get; set; }
     public int TotalTests { get; set; }

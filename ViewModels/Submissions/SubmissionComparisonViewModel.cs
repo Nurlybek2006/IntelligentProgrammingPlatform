@@ -6,6 +6,7 @@ public sealed class SubmissionComparisonViewModel
 {
     public ComparedAttemptViewModel Previous { get; set; } = new();
     public ComparedAttemptViewModel Current { get; set; } = new();
+    public string LanguageKey { get; set; } = "plaintext";
 }
 
 public sealed class ComparedAttemptViewModel
@@ -15,6 +16,8 @@ public sealed class ComparedAttemptViewModel
     public string TaskTitle { get; set; } = string.Empty;
     public string TaskSlug { get; set; } = string.Empty;
     public string SourceCode { get; set; } = string.Empty;
+    public string RuntimeName { get; set; } = string.Empty;
+    public string LanguageKey { get; set; } = string.Empty;
     public SubmissionStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public int? ExecutionTimeMs { get; set; }

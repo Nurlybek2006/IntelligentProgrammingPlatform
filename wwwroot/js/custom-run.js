@@ -2,6 +2,7 @@ const form = document.getElementById("submission-form");
 const run = document.getElementById("run-code");
 if (form && run) {
     const submit = document.getElementById("submit-code");
+    const runtime = document.getElementById("RuntimeId");
     const source = document.getElementById("SourceCode");
     const input = document.getElementById("CustomInput");
     const result = document.getElementById("custom-run-result");
@@ -41,13 +42,15 @@ if (form && run) {
         active = controller;
         const timeout = setTimeout(() => controller.abort(), 110000);
         const submitWasDisabled = submit.disabled;
+        const runtimeWasDisabled = runtime.disabled;
+        const body = new URLSearchParams(new FormData(form));
         run.disabled = true;
         submit.disabled = true;
+        runtime.disabled = true;
         result.setAttribute("aria-busy", "true");
         status.className = "status-badge";
         status.textContent = text.running;
         try {
-            const body = new URLSearchParams(new FormData(form));
             const response = await fetch(form.dataset.runUrl, {
                 method: "POST", body, credentials: "same-origin", signal: controller.signal,
                 headers: { Accept: "application/json" }
@@ -74,6 +77,7 @@ if (form && run) {
             active = null;
             run.disabled = document.getElementById("RuntimeId").options.length === 0;
             submit.disabled = submitWasDisabled;
+            runtime.disabled = runtimeWasDisabled;
             result.setAttribute("aria-busy", "false");
         }
     });
