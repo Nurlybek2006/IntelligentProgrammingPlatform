@@ -1,0 +1,897 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data xml:space="preserve" name="Common_Tasks">
+    <value>Задачи</value>
+  </data>
+  <data xml:space="preserve" name="Common_Task">
+    <value>Задача</value>
+  </data>
+  <data xml:space="preserve" name="Common_Topic">
+    <value>Тема</value>
+  </data>
+  <data xml:space="preserve" name="Common_Difficulty">
+    <value>Сложность</value>
+  </data>
+  <data xml:space="preserve" name="Common_Status">
+    <value>Статус</value>
+  </data>
+  <data xml:space="preserve" name="Common_Runtime">
+    <value>Среда выполнения</value>
+  </data>
+  <data xml:space="preserve" name="Common_PassedTotal">
+    <value>Пройдено / всего</value>
+  </data>
+  <data xml:space="preserve" name="Common_CreatedUtc">
+    <value>Создано (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Common_BrowseTasks">
+    <value>К списку задач</value>
+  </data>
+  <data xml:space="preserve" name="Common_Login">
+    <value>Войти</value>
+  </data>
+  <data xml:space="preserve" name="Common_Register">
+    <value>Регистрация</value>
+  </data>
+  <data xml:space="preserve" name="Common_MySubmissions">
+    <value>Мои отправки</value>
+  </data>
+  <data xml:space="preserve" name="Common_MyProgress">
+    <value>Мой прогресс</value>
+  </data>
+  <data xml:space="preserve" name="Common_Leaderboard">
+    <value>Рейтинг</value>
+  </data>
+  <data xml:space="preserve" name="Common_Previous">
+    <value>Назад</value>
+  </data>
+  <data xml:space="preserve" name="Common_Next">
+    <value>Далее</value>
+  </data>
+  <data xml:space="preserve" name="Common_Page">
+    <value>Страница {0}</value>
+  </data>
+  <data xml:space="preserve" name="Common_SolvedTasks">
+    <value>Решённые задачи</value>
+  </data>
+  <data xml:space="preserve" name="Common_DisplayName">
+    <value>Отображаемое имя</value>
+  </data>
+  <data xml:space="preserve" name="Common_Email">
+    <value>Электронная почта</value>
+  </data>
+  <data xml:space="preserve" name="Common_Input">
+    <value>Входные данные</value>
+  </data>
+  <data xml:space="preserve" name="Common_ExpectedOutput">
+    <value>Ожидаемый результат</value>
+  </data>
+  <data xml:space="preserve" name="Common_Output">
+    <value>Вывод</value>
+  </data>
+  <data xml:space="preserve" name="Common_CompilerOutput">
+    <value>Сообщения компилятора</value>
+  </data>
+  <data xml:space="preserve" name="Common_NotMeasured">
+    <value>Не измерено</value>
+  </data>
+  <data xml:space="preserve" name="Common_TimeNotMeasured">
+    <value>Время не измерено</value>
+  </data>
+  <data xml:space="preserve" name="Common_Milliseconds">
+    <value>{0} мс</value>
+  </data>
+  <data xml:space="preserve" name="Common_TestTotalTime">
+    <value>{0} мс (все тесты)</value>
+  </data>
+  <data xml:space="preserve" name="Common_TimeLabel">
+    <value>Время: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Common_Compilation">
+    <value>Компиляция</value>
+  </data>
+  <data xml:space="preserve" name="Common_RecentSubmissions">
+    <value>Последние отправки</value>
+  </data>
+  <data xml:space="preserve" name="Home_Title">
+    <value>Учитесь, решая задачи</value>
+  </data>
+  <data xml:space="preserve" name="Home_Eyebrow">
+    <value>Немного практики. Больше понимания.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Heading">
+    <value>Развивайте навыки.</value>
+  </data>
+  <data xml:space="preserve" name="Home_HeadingAccent">
+    <value>Шаг за шагом.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Intro">
+    <value>Среда для практики C++. Решайте задачи, разбирайте результаты и находите следующий шаг с помощью подсказок.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Continue">
+    <value>Продолжить решение</value>
+  </data>
+  <data xml:space="preserve" name="Home_Start">
+    <value>Начать решать</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExploreLeaderboard">
+    <value>Посмотреть рейтинг</value>
+  </data>
+  <data xml:space="preserve" name="Home_Note">
+    <value>C++ 20 · От основ к алгоритмам · Учитесь в своём темпе</value>
+  </data>
+  <data xml:space="preserve" name="Home_JourneyLabel">
+    <value>Ваш учебный путь</value>
+  </data>
+  <data xml:space="preserve" name="Home_LoopTitle">
+    <value>ВАШ СЛЕДУЮЩИЙ ШАГ</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepTask">
+    <value>Выберите задачу</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepTaskText">
+    <value>Изучите примеры. Напишите своё решение.</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepResult">
+    <value>Разберитесь в результате</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepResultText">
+    <value>Посмотрите, какие тесты пройдены и что проверить дальше.</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepLearn">
+    <value>Учитесь, исправляйте, пробуйте снова</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepLearnText">
+    <value>Получите подсказку. Исправьте решение сами. Продолжайте развиваться.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Snapshot">
+    <value>Продолжите с того места, где остановились</value>
+  </data>
+  <data xml:space="preserve" name="Home_ViewProgress">
+    <value>Посмотреть свой прогресс →</value>
+  </data>
+  <data xml:space="preserve" name="Home_YourScore">
+    <value>Ваши баллы</value>
+  </data>
+  <data xml:space="preserve" name="Home_EmptyHeading">
+    <value>Ваше первое решение начинается здесь</value>
+  </data>
+  <data xml:space="preserve" name="Home_EmptyText">
+    <value>Выберите задачу и сделайте первую попытку. Каждая попытка — часть обучения.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Features">
+    <value>Всё для дальнейшего обучения</value>
+  </data>
+  <data xml:space="preserve" name="Home_PracticeTag">
+    <value>01 / ПРАКТИКА</value>
+  </data>
+  <data xml:space="preserve" name="Home_CheckTag">
+    <value>02 / ПРОВЕРКА</value>
+  </data>
+  <data xml:space="preserve" name="Home_UnderstandTag">
+    <value>03 / ПОНИМАНИЕ</value>
+  </data>
+  <data xml:space="preserve" name="Home_GrowTag">
+    <value>04 / РАЗВИТИЕ</value>
+  </data>
+  <data xml:space="preserve" name="Home_TasksFeature">
+    <value>Задачи по программированию</value>
+  </data>
+  <data xml:space="preserve" name="Home_TasksFeatureText">
+    <value>Выбирайте темы и уровни сложности, опираясь на понятные примеры.</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExecutionFeature">
+    <value>Изолированное выполнение</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExecutionFeatureText">
+    <value>Проверяйте C++ решения на тестах и получайте понятный результат каждой попытки.</value>
+  </data>
+  <data xml:space="preserve" name="Home_AiFeature">
+    <value>Ваш ИИ-наставник</value>
+  </data>
+  <data xml:space="preserve" name="Home_AiFeatureText">
+    <value>Получайте объяснения и подсказки, продолжая решать задачу самостоятельно.</value>
+  </data>
+  <data xml:space="preserve" name="Home_ProgressFeature">
+    <value>Наглядный прогресс</value>
+  </data>
+  <data xml:space="preserve" name="Home_ProgressFeatureText">
+    <value>Следите за решёнными задачами, долей успешных попыток и баллами по мере развития навыков.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_Title">
+    <value>Конфиденциальность и данные</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_Eyebrow">
+    <value>Ваше обучение, ваши данные</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AccountHeading">
+    <value>Учётная запись и активность</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AccountText">
+    <value>Для истории обучения сохраняются учётная запись, отправленный код, результаты тестов и советы ИИ. Подробности отправок и прогресс доступны вашей учётной записи. Публичный рейтинг показывает ваше отображаемое имя и учебную статистику, но не электронную почту.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AiHeading">
+    <value>Анализ ИИ — ваш выбор</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AiText">
+    <value>При выборе анализа ИИ в OpenAI отправляются код, условие задачи, нужные сообщения компилятора и сведения об открытых непройденных тестах. Содержимое скрытых тестов и данные доступа исключены. Сохранение результата Responses в запросе отключено; применяются правила обработки данных OpenAI. Советы сохраняются с отправкой и используются при следующих просмотрах.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_StorageHeading">
+    <value>Локальное хранилище браузера</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_StorageText">
+    <value>Cookie входа сохраняет сеанс. Защитные cookie обеспечивают безопасность форм. Редактор хранит черновик каждой задачи в хранилище сеанса этой вкладки; черновики не передаются другим учётным записям. Языковой cookie запоминает язык интерфейса.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_SharedHeading">
+    <value>Использование общего устройства</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_SharedText">
+    <value>Завершив работу, выйдите из учётной записи и закройте вкладку. По вопросам учётной записи и данных обратитесь к администратору платформы.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Eyebrow">
+    <value>Библиотека практики</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Heading">
+    <value>Найдите следующую задачу</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Intro">
+    <value>Освойте основы, затем развивайте навыки на массивах и алгоритмах.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Matching">
+    <value>Найдено задач: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Search">
+    <value>Поиск по названию</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_SearchPlaceholder">
+    <value>Найти задачу по программированию…</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_AllTopics">
+    <value>Все темы</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_AllDifficulties">
+    <value>Все уровни сложности</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Filter">
+    <value>Применить</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Reset">
+    <value>Сбросить</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_EmptyHeading">
+    <value>По вашим фильтрам задачи не найдены.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_EmptyText">
+    <value>Попробуйте другое название, тему или уровень сложности.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_ShowAll">
+    <value>Показать все задачи</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_YourProgress">
+    <value>Ваш прогресс</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_OpenTask">
+    <value>Открыть задачу</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Solved">
+    <value>✓ Решено</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_ToExplore">
+    <value>Предстоит изучить</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Solve">
+    <value>Решить</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_SolveLabel">
+    <value>Решить задачу «{0}»</value>
+  </data>
+  <data xml:space="preserve" name="Task_Back">
+    <value>← К списку задач</value>
+  </data>
+  <data xml:space="preserve" name="Task_Heading">
+    <value>Условие задачи</value>
+  </data>
+  <data xml:space="preserve" name="Task_TimeLimit">
+    <value>Ограничение времени</value>
+  </data>
+  <data xml:space="preserve" name="Task_MemoryLimit">
+    <value>Ограничение памяти</value>
+  </data>
+  <data xml:space="preserve" name="Task_Memory">
+    <value>{0} МБ</value>
+  </data>
+  <data xml:space="preserve" name="Task_Language">
+    <value>Язык</value>
+  </data>
+  <data xml:space="preserve" name="Task_Examples">
+    <value>Примеры</value>
+  </data>
+  <data xml:space="preserve" name="Task_NoExamples">
+    <value>Примеры отсутствуют.</value>
+  </data>
+  <data xml:space="preserve" name="Task_Example">
+    <value>Пример {0}</value>
+  </data>
+  <data xml:space="preserve" name="Task_YourSolution">
+    <value>Ваше решение</value>
+  </data>
+  <data xml:space="preserve" name="Task_GuestHeading">
+    <value>Готовы попробовать?</value>
+  </data>
+  <data xml:space="preserve" name="Task_GuestText">
+    <value>Войдите, чтобы написать C++ код в редакторе и проверить решение.</value>
+  </data>
+  <data xml:space="preserve" name="Editor_SourceHelp">
+    <value>C++ 20 · Максимальный размер кода: 64 КиБ. Черновик хранится в этой вкладке браузера.</value>
+  </data>
+  <data xml:space="preserve" name="Run_CustomInput">
+    <value>Свои входные данные</value>
+  </data>
+  <data xml:space="preserve" name="Run_InputHelp">
+    <value>До 32 КиБ (UTF-8). Запуск использует только эти данные, не сохраняет попытку и не влияет на баллы.</value>
+  </data>
+  <data xml:space="preserve" name="Run_Button">
+    <value>Запустить</value>
+  </data>
+  <data xml:space="preserve" name="Submit_Button">
+    <value>Отправить решение</value>
+  </data>
+  <data xml:space="preserve" name="Submit_Help">
+    <value>Отправка проверяет решение на официальных тестах и сохраняет попытку в истории.</value>
+  </data>
+  <data xml:space="preserve" name="Editor_NoRuntime">
+    <value>Нет доступной среды выполнения C++.</value>
+  </data>
+  <data xml:space="preserve" name="Run_Result">
+    <value>Результат запуска</value>
+  </data>
+  <data xml:space="preserve" name="Run_Diagnostic">
+    <value>Диагностика / stderr</value>
+  </data>
+  <data xml:space="preserve" name="History_Eyebrow">
+    <value>Ваша история обучения</value>
+  </data>
+  <data xml:space="preserve" name="History_Intro">
+    <value>Каждая попытка — возможность понять немного больше.</value>
+  </data>
+  <data xml:space="preserve" name="History_Solve">
+    <value>Решить задачу →</value>
+  </data>
+  <data xml:space="preserve" name="History_EmptyFirst">
+    <value>Вы ещё не отправляли решений.</value>
+  </data>
+  <data xml:space="preserve" name="History_EmptyPage">
+    <value>На этой странице нет отправок.</value>
+  </data>
+  <data xml:space="preserve" name="History_StartText">
+    <value>и начните свою историю обучения.</value>
+  </data>
+  <data xml:space="preserve" name="History_Region">
+    <value>История отправок</value>
+  </data>
+  <data xml:space="preserve" name="History_Submission">
+    <value>Отправка</value>
+  </data>
+  <data xml:space="preserve" name="History_Pages">
+    <value>Страницы отправок</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Title">
+    <value>Отправка №{0}</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Back">
+    <value>← Мои отправки</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Journey">
+    <value>Посмотреть историю попыток</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Editor">
+    <value>Вернуться в редактор →</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Overview">
+    <value>Сводка отправки</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Succeeded">
+    <value>Успешно</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Failed">
+    <value>Неудачно</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotCompleted">
+    <value>Не завершено</value>
+  </data>
+  <data xml:space="preserve" name="Submission_ContainerTime">
+    <value>Время контейнеров тестов</value>
+  </data>
+  <data xml:space="preserve" name="Submission_WallTime">
+    <value>{0} мс (общее реальное время)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_StartedUtc">
+    <value>Начато (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_FinishedUtc">
+    <value>Завершено (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotStarted">
+    <value>Не начато</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotFinished">
+    <value>Не завершено</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Unavailable">
+    <value>Сервис выполнения временно недоступен. Попробуйте отправить решение позже.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Checking">
+    <value>Ваша отправка проверяется.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Refresh">
+    <value>Обновить результаты</value>
+  </data>
+  <data xml:space="preserve" name="Submission_CompilationFailed">
+    <value>Компиляция не удалась</value>
+  </data>
+  <data xml:space="preserve" name="Submission_CompilationHelp">
+    <value>Прочитайте первое сообщение, исправьте синтаксис и отправьте снова.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_TestResults">
+    <value>Результаты тестов</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NoResults">
+    <value>Результатов тестов пока нет.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_HiddenTest">
+    <value>Скрытый тест</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Test">
+    <value>Тест</value>
+  </data>
+  <data xml:space="preserve" name="Submission_HiddenHelp">
+    <value>Для этого теста показаны только результат и время.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_ActualOutput">
+    <value>Фактический результат</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Diagnostic">
+    <value>Диагностика</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Source">
+    <value>Отправленный исходный код</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Eyebrow">
+    <value>Поймите свой следующий шаг</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Title">
+    <value>ИИ-наставник</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Summary">
+    <value>Краткий итог</value>
+  </data>
+  <data xml:space="preserve" name="Ai_ErrorCategory">
+    <value>Категория ошибки:</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Explanation">
+    <value>Объяснение</value>
+  </data>
+  <data xml:space="preserve" name="Ai_ProgressiveHints">
+    <value>Пошаговые подсказки</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealedCount">
+    <value>Открыто подсказок: {0} / {1}</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Hint">
+    <value>Подсказка {0}</value>
+  </data>
+  <data xml:space="preserve" name="Ai_TryFirst">
+    <value>Попробуйте изменить решение до открытия новой подсказки. Нужно ещё немного помощи?</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Revealing">
+    <value>Открываем следующую подсказку…</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealFinal">
+    <value>Открыть последнюю подсказку</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealNext">
+    <value>Открыть следующую подсказку</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealHelp">
+    <value>Открытие сохранённой подсказки не запускает новый анализ ИИ.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_NoHints">
+    <value>Для этого анализа нет сохранённых подсказок.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AllRevealed">
+    <value>Все доступные подсказки открыты.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AfterFinish">
+    <value>Анализ ИИ доступен после завершения проверки отправки.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_NotConfigured">
+    <value>Анализ ИИ не настроен.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AnalyzeText">
+    <value>Проанализируйте эту отправку, чтобы получить подсказки.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Disclosure">
+    <value>Код, условие задачи и открытые диагностические данные отправляются в OpenAI. Содержимое скрытых тестов не отправляется. Наставник даёт подсказки, а не готовое решение.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Asking">
+    <value>Обращаемся к наставнику…</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Analyze">
+    <value>Проанализировать с ИИ</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Caution">
+    <value>Советы ИИ могут быть ошибочными. Проверяйте изменения повторной отправкой кода.</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Title">
+    <value>Сравнение попыток</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Eyebrow">
+    <value>Разберитесь, что изменилось</value>
+  </data>
+  <data xml:space="preserve" name="Diff_BackJourney">
+    <value>К истории попыток</value>
+  </data>
+  <data xml:space="preserve" name="Diff_BackSubmission">
+    <value>К отправке</value>
+  </data>
+  <data xml:space="preserve" name="Diff_PreviousAttempt">
+    <value>Предыдущая попытка · №{0}</value>
+  </data>
+  <data xml:space="preserve" name="Diff_CurrentAttempt">
+    <value>Текущая попытка · №{0}</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Help">
+    <value>Сравнение C++ только для чтения. Удалённые и добавленные строки выделены; на узком экране редактор переходит к сравнению в одном столбце.</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Region">
+    <value>Изменения кода между вашими попытками</value>
+  </data>
+  <data xml:space="preserve" name="Diff_PreviousSource">
+    <value>Предыдущий код</value>
+  </data>
+  <data xml:space="preserve" name="Diff_CurrentSource">
+    <value>Текущий код</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Title">
+    <value>История попыток</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Eyebrow">
+    <value>Учитесь на каждой попытке</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Count">
+    <value>Официальных попыток: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_BackEditor">
+    <value>В редактор</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Pages">
+    <value>Страницы истории попыток</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Earlier">
+    <value>Более ранние попытки</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Later">
+    <value>Более поздние попытки</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Page">
+    <value>Страница {0} из {1}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_YourJourney">
+    <value>Ваша история попыток</value>
+  </data>
+  <data xml:space="preserve" name="Journey_ViewFull">
+    <value>Вся история ({0} попыток) →</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Empty">
+    <value>Официальных попыток пока нет. Проверьте свои данные кнопкой «Запустить», затем отправьте решение, чтобы начать историю.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Order">
+    <value>Попытки от ранних к поздним. Результаты запуска временные и здесь не отображаются.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_LatestOrder">
+    <value>Последние попытки от ранних к поздним. Результаты запуска временные и здесь не отображаются.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Attempt">
+    <value>Попытка №{0}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Tests">
+    <value>Тесты: {0} / {1}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiMarker">
+    <value>Есть подсказки ИИ</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiTitle">
+    <value>Для этой попытки сохранён анализ ИИ. Это не означает, что именно он вызвал последующее улучшение.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiCounts">
+    <value>Подсказки ИИ: {0}/{1}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Compare">
+    <value>Сравнить с предыдущей</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiHelp">
+    <value>Метка подсказок ИИ означает наличие анализа для попытки; она не объясняет причину улучшения следующих попыток.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Eyebrow">
+    <value>Маленькие шаги, заметный рост</value>
+  </data>
+  <data xml:space="preserve" name="Progress_PublishedSolved">
+    <value>Решено опубликованных задач:</value>
+  </data>
+  <data xml:space="preserve" name="Progress_KeepPracticing">
+    <value>Продолжить практику →</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AllSolved">
+    <value>Решённые задачи (за всё время)</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Completed">
+    <value>Завершённые отправки</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Accepted">
+    <value>Принятые отправки</value>
+  </data>
+  <data xml:space="preserve" name="Progress_CompilationErrors">
+    <value>Ошибки компиляции</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SuccessPercentage">
+    <value>Доля успешных попыток</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SuccessHelp">
+    <value>Принятые / завершённые попытки</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AverageTime">
+    <value>Среднее время решения</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Minutes">
+    <value>{0} мин.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_NotAvailable">
+    <value>Пока недоступно</value>
+  </data>
+  <data xml:space="preserve" name="Progress_TimeHelp">
+    <value>От первой попытки до первого принятого решения</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Rating">
+    <value>Рейтинговые баллы</value>
+  </data>
+  <data xml:space="preserve" name="Progress_RatingHelp">
+    <value>Каждая решённая задача учитывается один раз</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ByDifficulty">
+    <value>Прогресс по сложности</value>
+  </data>
+  <data xml:space="preserve" name="Progress_DifficultyLabel">
+    <value>Прогресс: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Progress_RepeatedHelp">
+    <value>Повторные принятые отправки считаются одной решённой задачей.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ByTopic">
+    <value>Прогресс по темам</value>
+  </data>
+  <data xml:space="preserve" name="Progress_NoTopics">
+    <value>Темы появятся здесь после публикации задач.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Solved">
+    <value>Решено</value>
+  </data>
+  <data xml:space="preserve" name="Progress_PublishedTasks">
+    <value>Опубликованные задачи</value>
+  </data>
+  <data xml:space="preserve" name="Progress_HistoryHelp">
+    <value>Прогресс по сложности и темам учитывает опубликованные задачи. Общая история решений и рейтинг сохраняют задачи, снятые с публикации позднее.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SolvingTimeHelp">
+    <value>Время решения каждой задачи считается от первой отправки до первого принятого решения. Это не время выполнения программы.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Recent">
+    <value>Последние действия</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AllSubmissions">
+    <value>Все мои отправки →</value>
+  </data>
+  <data xml:space="preserve" name="Progress_EmptyHeading">
+    <value>Прогресс начинается с первой попытки</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ChooseTask">
+    <value>Выберите задачу</value>
+  </data>
+  <data xml:space="preserve" name="Progress_GetStarted">
+    <value>и начните практику.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Eyebrow">
+    <value>Найдите следующую практику</value>
+  </data>
+  <data xml:space="preserve" name="Map_Title">
+    <value>Карта обучения</value>
+  </data>
+  <data xml:space="preserve" name="Map_Intro">
+    <value>Сводка официальных попыток по опубликованным задачам. Временные запуски и системные ошибки не влияют на эти учебные показатели.</value>
+  </data>
+  <data xml:space="preserve" name="Map_GuideTitle">
+    <value>Как понимать уровень освоения</value>
+  </data>
+  <data xml:space="preserve" name="Map_Formula">
+    <value>Освоение = (доля решённых задач × 70% + доля успешных отправок × 30%). Каждая решённая задача учитывается один раз; успех — доля принятых среди завершённых попыток без системных ошибок.</value>
+  </data>
+  <data xml:space="preserve" name="Map_LevelsHelp">
+    <value>Нет завершённых попыток: {0}. Одна или две: {1}. При трёх и более: от 75% — {2}, от 45% — {3}, иначе — {4}. Метки описывают записанную практику, а не способности человека. Освоение не равно рейтинговым баллам.</value>
+  </data>
+  <data xml:space="preserve" name="Map_TopicStrength">
+    <value>Освоение темы</value>
+  </data>
+  <data xml:space="preserve" name="Map_Empty">
+    <value>Карта обучения появится после добавления тем.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Strength">
+    <value>уровень освоения</value>
+  </data>
+  <data xml:space="preserve" name="Map_StrengthLabel">
+    <value>Уровень освоения: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Map_SolvedPublished">
+    <value>Решено / опубликовано</value>
+  </data>
+  <data xml:space="preserve" name="Map_CompletedAttempts">
+    <value>Завершённые попытки</value>
+  </data>
+  <data xml:space="preserve" name="Map_Completion">
+    <value>Доля решённых задач</value>
+  </data>
+  <data xml:space="preserve" name="Map_Success">
+    <value>Успешность отправок</value>
+  </data>
+  <data xml:space="preserve" name="Map_FrequentIssue">
+    <value>Самая частая проблема:</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoPublished">
+    <value>В этой теме пока нет опубликованных задач.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Breakdown">
+    <value>Состав попыток</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorPatterns">
+    <value>Типы ошибок</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorHelp">
+    <value>Официальные результаты опубликованных задач. Ошибки инфраструктуры исключены.</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorLabel">
+    <value>Ошибки: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoErrors">
+    <value>В этих задачах ошибки учащегося не зафиксированы.</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiPatterns">
+    <value>Типы ошибок по анализу ИИ</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiHelp">
+    <value>Здесь представлены только отправки с сохранённым анализом ИИ, без системных ошибок. Эти категории не влияют на освоение или рейтинг.</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiLabel">
+    <value>Отправки с анализом ИИ: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoAi">
+    <value>Для этих задач пока нет сохранённого анализа ИИ. Карта обучения работает и без него.</value>
+  </data>
+  <data xml:space="preserve" name="Map_PracticeNext">
+    <value>Следующая практика</value>
+  </data>
+  <data xml:space="preserve" name="Map_Recommendation">
+    <value>Рекомендуемая практика</value>
+  </data>
+  <data xml:space="preserve" name="Map_Topic">
+    <value>Тема:</value>
+  </data>
+  <data xml:space="preserve" name="Map_Reason">
+    <value>{0}: {1}; решено {2} из {3} задач. Сначала учитывается приоритет практики, затем уровень освоения; предлагается самая простая оставшаяся задача темы.</value>
+  </data>
+  <data xml:space="preserve" name="Map_PracticeButton">
+    <value>Решить эту задачу →</value>
+  </data>
+  <data xml:space="preserve" name="Map_AllSolved">
+    <value>Вы решили все опубликованные задачи. Вернитесь к решению, чтобы обдумать подход, или приходите, когда появятся новые задачи.</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoPractice">
+    <value>Новая практика появится после публикации задач.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Eyebrow">
+    <value>Практика приносит результат</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Intro">
+    <value>Продолжайте учиться. Каждая новая решённая задача продвигает вас вперёд.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Points">
+    <value>{0} · {1} баллов</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_ScoreHelp">
+    <value>Баллы за задачу начисляются один раз. Повторные принятые отправки не добавляют баллов.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_EmptyHeading">
+    <value>В рейтинге пока нет участников.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_EmptyText">
+    <value>Начните решать задачи, чтобы набрать баллы.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Region">
+    <value>Рейтинг учащихся</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Rank">
+    <value>Место</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Accepted">
+    <value>Принято</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Completed">
+    <value>Завершено</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Success">
+    <value>Доля успеха</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Score">
+    <value>Баллы</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_You">
+    <value>Вы</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Pages">
+    <value>Страницы рейтинга</value>
+  </data>
+  <data xml:space="preserve" name="Account_AccessDenied">
+    <value>Доступ запрещён</value>
+  </data>
+  <data xml:space="preserve" name="Account_AccessDeniedText">
+    <value>У вас нет разрешения на доступ к этой странице.</value>
+  </data>
+  <data xml:space="preserve" name="Account_Welcome">
+    <value>С возвращением</value>
+  </data>
+  <data xml:space="preserve" name="Account_LoginIntro">
+    <value>Продолжите с того места, где остановились. Войдите для дальнейшей практики.</value>
+  </data>
+  <data xml:space="preserve" name="Account_Create">
+    <value>Создать учётную запись</value>
+  </data>
+  <data xml:space="preserve" name="Account_Profile">
+    <value>Профиль</value>
+  </data>
+  <data xml:space="preserve" name="Account_YourAccount">
+    <value>Ваша учётная запись</value>
+  </data>
+  <data xml:space="preserve" name="Account_ProfileIntro">
+    <value>Отображаемое имя видно в рейтинге. Электронная почта остаётся закрытой.</value>
+  </data>
+  <data xml:space="preserve" name="Account_JoinedUtc">
+    <value>Дата регистрации (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Account_Roles">
+    <value>Роли</value>
+  </data>
+  <data xml:space="preserve" name="Account_StartJourney">
+    <value>Начните свой учебный путь</value>
+  </data>
+  <data xml:space="preserve" name="Account_RegisterIntro">
+    <value>Создайте учётную запись учащегося и приступайте к первой задаче.</value>
+  </data>
+  <data xml:space="preserve" name="Account_PasswordHelp">
+    <value>Используйте 8–100 символов, включая заглавную и строчную буквы, цифру и специальный символ.</value>
+  </data>
+  <data xml:space="preserve" name="Account_AlreadyRegistered">
+    <value>Уже есть учётная запись?</value>
+  </data>
+  <data xml:space="preserve" name="Ai_LanguageHelp">
+    <value>Новый анализ использует текущий язык интерфейса. Сохранённые советы остаются на исходном языке.</value>
+  </data>
+</root>

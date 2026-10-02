@@ -11,8 +11,10 @@ if (form && run) {
     const error = document.getElementById("run-error");
     const compiler = document.getElementById("run-compiler");
     const time = document.getElementById("run-time");
-    const labels = { Success: "Success", CompilationError: "Compilation error", RuntimeError: "Runtime error",
-        TimeLimitExceeded: "Time limit exceeded", MemoryLimitExceeded: "Memory limit exceeded", InternalError: "Unavailable" };
+    const text = result.dataset;
+    const labels = { Success: text.statusSuccess, CompilationError: text.statusCompilationError, RuntimeError: text.statusRuntimeError,
+        TimeLimitExceeded: text.statusTimeLimitExceeded, MemoryLimitExceeded: text.statusMemoryLimitExceeded, InternalError: text.statusInternalError };
+    const localizedFailure = message => Object.assign(new Error(message), { isRunFeedback: true });
     let active;
     const showDiagnostic = (message, compilation = "") => {
         error.textContent = message || "";
@@ -26,13 +28,13 @@ if (form && run) {
         result.hidden = false;
         output.textContent = "";
         time.textContent = "";
-        summary.textContent = "Temporary result only. No attempt is saved.";
+        summary.textContent = text.temporary;
         showDiagnostic("");
         if (!source.value.trim() || new TextEncoder().encode(source.value).length > 64 * 1024
             || new TextEncoder().encode(input.value).length > 32 * 1024) {
-            status.textContent = "Check input";
+            status.textContent = text.checkInput;
             status.className = "status-badge";
-            showDiagnostic("Enter source of at most 64 KiB and custom input of at most 32 KiB (UTF-8).");
+            showDiagnostic(text.limits);
             return;
         }
         const controller = new AbortController();
@@ -43,29 +45,30 @@ if (form && run) {
         submit.disabled = true;
         result.setAttribute("aria-busy", "true");
         status.className = "status-badge";
-        status.textContent = "Running…";
+        status.textContent = text.running;
         try {
             const body = new URLSearchParams(new FormData(form));
             const response = await fetch(form.dataset.runUrl, {
                 method: "POST", body, credentials: "same-origin", signal: controller.signal,
                 headers: { Accept: "application/json" }
             });
-            if (response.redirected || response.status === 401) throw new Error("Sign in again to run your code.");
+            if (response.redirected || response.status === 401) throw localizedFailure(text.signIn);
             if (!response.headers.get("content-type")?.includes("application/json"))
-                throw new Error("Run could not finish. Reload the page and try again.");
+                throw localizedFailure(text.reload);
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || "Run could not finish. Please try again.");
+            if (!response.ok) throw localizedFailure(data.error || text.retry);
             const state = Object.hasOwn(labels, data.status) ? data.status : "InternalError";
             status.textContent = labels[state];
             status.className = "status-badge " + (state === "Success" ? "Accepted" : state);
             output.textContent = data.output || "";
             showDiagnostic(data.error, data.compilerOutput);
-            time.textContent = Number.isFinite(data.executionTimeMs) ? `Execution time: ${data.executionTimeMs} ms (wall clock)` : "Execution time: not measured";
-            if (state === "Success") summary.textContent = "Program finished. Output was not compared with an expected answer. No attempt saved.";
+            time.textContent = Number.isFinite(data.executionTimeMs)
+                ? text.timeFormat.replace("{0}", data.executionTimeMs.toLocaleString(document.documentElement.lang)) : text.timeUnmeasured;
+            if (state === "Success") summary.textContent = text.successSummary;
         } catch (failure) {
-            status.textContent = "Unavailable";
+            status.textContent = text.statusInternalError;
             status.className = "status-badge InternalError";
-            showDiagnostic(failure.name === "AbortError" ? "Run was interrupted. Please try again." : failure.message);
+            showDiagnostic(failure.name === "AbortError" ? text.interrupted : failure.isRunFeedback ? failure.message : text.retry);
         } finally {
             clearTimeout(timeout);
             active = null;

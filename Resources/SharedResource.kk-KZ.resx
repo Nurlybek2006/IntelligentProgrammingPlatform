@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="App_Name" xml:space="preserve"><value>Зияткерлік бағдарламалау платформасы</value></data>
+  <data name="App_Brand" xml:space="preserve"><value>Зияткерлік</value></data>
+  <data name="App_Subtitle" xml:space="preserve"><value>Бағдарламалау платформасы</value></data>
+  <data name="App_Description" xml:space="preserve"><value>C++ есептерін шығарып, тест нәтижелері мен AI кеңестері арқылы үйреніңіз және прогресіңізді бақылаңыз.</value></data>
+  <data name="Nav_Home" xml:space="preserve"><value>Басты бет</value></data>
+  <data name="Nav_HomeLabel" xml:space="preserve"><value>Бағдарламалау платформасының басты беті</value></data>
+  <data name="Nav_Skip" xml:space="preserve"><value>Негізгі мазмұнға өту</value></data>
+  <data name="Nav_Main" xml:space="preserve"><value>Негізгі навигация</value></data>
+  <data name="Nav_Toggle" xml:space="preserve"><value>Мәзірді ашу немесе жабу</value></data>
+  <data name="Nav_Tasks" xml:space="preserve"><value>Есептер</value></data>
+  <data name="Nav_Submissions" xml:space="preserve"><value>Жіберілімдерім</value></data>
+  <data name="Nav_Progress" xml:space="preserve"><value>Прогресс</value></data>
+  <data name="Nav_Leaderboard" xml:space="preserve"><value>Рейтинг</value></data>
+  <data name="Nav_Profile" xml:space="preserve"><value>Профиль</value></data>
+  <data name="Nav_Admin" xml:space="preserve"><value>Әкімші</value></data>
+  <data name="Nav_Login" xml:space="preserve"><value>Кіру</value></data>
+  <data name="Nav_Register" xml:space="preserve"><value>Тіркелу</value></data>
+  <data name="Nav_Logout" xml:space="preserve"><value>Шығу</value></data>
+  <data name="Nav_AdminLabel" xml:space="preserve"><value>Әкімші навигациясы</value></data>
+  <data name="Nav_Administration" xml:space="preserve"><value>Басқару</value></data>
+  <data name="Nav_Overview" xml:space="preserve"><value>Шолу</value></data>
+  <data name="Nav_Topics" xml:space="preserve"><value>Тақырыптар</value></data>
+  <data name="Nav_TestCases" xml:space="preserve"><value>Тесттер</value></data>
+  <data name="Footer_Learn" xml:space="preserve"><value>Есеп шығарып үйреніңіз.</value></data>
+  <data name="Footer_Privacy" xml:space="preserve"><value>Құпиялық және деректер</value></data>
+  <data name="Culture_Label" xml:space="preserve"><value>Интерфейс тілі</value></data>
+  <data name="Culture_Apply" xml:space="preserve"><value>Ауыстыру</value></data>
+  <data name="Error_AccessDenied" xml:space="preserve"><value>Қол жеткізуге тыйым салынған</value></data>
+  <data name="Error_NotFound" xml:space="preserve"><value>Бет табылмады</value></data>
+  <data name="Error_Server" xml:space="preserve"><value>Қате орын алды</value></data>
+  <data name="Error_Request" xml:space="preserve"><value>Сұрауды орындау мүмкін болмады</value></data>
+  <data name="Error_NotFoundText" xml:space="preserve"><value>Бұл бет көшірілген немесе енді қолжетімсіз болуы мүмкін.</value></data>
+  <data name="Error_AccessDeniedText" xml:space="preserve"><value>Бұл бетке кіруге рұқсатыңыз жоқ.</value></data>
+  <data name="Error_Retry" xml:space="preserve"><value>Есептер тізіміне оралып, қайталап көріңіз. Мәселе қайталанса, әкімшіге хабарласыңыз.</value></data>
+  <data name="Error_RequestId" xml:space="preserve"><value>Сұрау идентификаторы</value></data>
+  <data name="Button_BackToTasks" xml:space="preserve"><value>Есептерге оралу</value></data>
+  <data name="Status_Pending" xml:space="preserve"><value>Кезекте</value></data>
+  <data name="Status_Compiling" xml:space="preserve"><value>Компиляциялануда</value></data>
+  <data name="Status_Running" xml:space="preserve"><value>Орындалуда</value></data>
+  <data name="Status_Accepted" xml:space="preserve"><value>Қабылданды</value></data>
+  <data name="Status_Passed" xml:space="preserve"><value>Өтті</value></data>
+  <data name="Status_WrongAnswer" xml:space="preserve"><value>Қате жауап</value></data>
+  <data name="Status_CompilationError" xml:space="preserve"><value>Компиляция қатесі</value></data>
+  <data name="Status_RuntimeError" xml:space="preserve"><value>Орындау қатесі</value></data>
+  <data name="Status_TimeLimitExceeded" xml:space="preserve"><value>Уақыт шегінен асты</value></data>
+  <data name="Status_MemoryLimitExceeded" xml:space="preserve"><value>Жад шегінен асты</value></data>
+  <data name="Status_InternalError" xml:space="preserve"><value>Жүйелік қате</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>Өткізілді</value></data>
+  <data name="Status_Success" xml:space="preserve"><value>Сәтті аяқталды</value></data>
+  <data name="Difficulty_Easy" xml:space="preserve"><value>Оңай</value></data>
+  <data name="Difficulty_Medium" xml:space="preserve"><value>Орташа</value></data>
+  <data name="Difficulty_Hard" xml:space="preserve"><value>Қиын</value></data>
+  <data name="Strength_NotStarted" xml:space="preserve"><value>Басталмаған</value></data>
+  <data name="Strength_Exploring" xml:space="preserve"><value>Танысу кезеңі</value></data>
+  <data name="Strength_NeedsPractice" xml:space="preserve"><value>Жаттығу қажет</value></data>
+  <data name="Strength_Developing" xml:space="preserve"><value>Дамып келеді</value></data>
+  <data name="Strength_Strong" xml:space="preserve"><value>Жақсы меңгерілген</value></data>
+  <data name="ErrorPattern_Compilation" xml:space="preserve"><value>Компиляция</value></data>
+  <data name="ErrorPattern_WrongAnswer" xml:space="preserve"><value>Қате жауап / логика</value></data>
+  <data name="ErrorPattern_Runtime" xml:space="preserve"><value>Орындау</value></data>
+  <data name="ErrorPattern_TimeLimit" xml:space="preserve"><value>Уақыт шегі</value></data>
+  <data name="ErrorPattern_MemoryLimit" xml:space="preserve"><value>Жад шегі</value></data>
+  <data name="ErrorPattern_None" xml:space="preserve"><value>Қате тіркелмеген</value></data>
+  <data name="AiCategory_Compilation" xml:space="preserve"><value>Компиляция</value></data>
+  <data name="AiCategory_Logic" xml:space="preserve"><value>Логика</value></data>
+  <data name="AiCategory_Runtime" xml:space="preserve"><value>Орындау</value></data>
+  <data name="AiCategory_TimeLimit" xml:space="preserve"><value>Уақыт шегі</value></data>
+  <data name="AiCategory_Memory" xml:space="preserve"><value>Жад</value></data>
+  <data name="AiCategory_OutputFormat" xml:space="preserve"><value>Шығыс пішімі</value></data>
+  <data name="AiCategory_Unknown" xml:space="preserve"><value>Анықталмаған</value></data>
+  <data name="Field_Email" xml:space="preserve"><value>Электрондық пошта</value></data>
+  <data name="Field_Password" xml:space="preserve"><value>Құпиясөз</value></data>
+  <data name="Field_ConfirmPassword" xml:space="preserve"><value>Құпиясөзді растау</value></data>
+  <data name="Field_DisplayName" xml:space="preserve"><value>Көрсетілетін ат</value></data>
+  <data name="Field_RememberMe" xml:space="preserve"><value>Мені есте сақтау</value></data>
+  <data name="Field_Runtime" xml:space="preserve"><value>Орындау ортасы</value></data>
+  <data name="Field_SourceCode" xml:space="preserve"><value>C++ бастапқы коды</value></data>
+  <data name="Field_Task" xml:space="preserve"><value>Есеп</value></data>
+  <data name="Field_CustomInput" xml:space="preserve"><value>Өз кіріс деректеріңіз</value></data>
+  <data name="Validation_Required" xml:space="preserve"><value>«{0}» өрісін толтырыңыз.</value></data>
+  <data name="Validation_RequiredValue" xml:space="preserve"><value>Мәнді енгізіңіз.</value></data>
+  <data name="Validation_Email" xml:space="preserve"><value>Жарамды электрондық пошта мекенжайын енгізіңіз.</value></data>
+  <data name="Validation_StringLength" xml:space="preserve"><value>«{0}» өрісі {1} таңбадан аспауы керек.</value></data>
+  <data name="Validation_PasswordLength" xml:space="preserve"><value>«{0}» ұзындығы {2}–{1} таңба болуы керек.</value></data>
+  <data name="Validation_Compare" xml:space="preserve"><value>Құпиясөздер сәйкес келмейді.</value></data>
+  <data name="Validation_Range" xml:space="preserve"><value>«{0}» мәні {1} және {2} аралығында болуы керек.</value></data>
+  <data name="Validation_InvalidValue" xml:space="preserve"><value>«{0}» өрісінің мәні жарамсыз.</value></data>
+  <data name="Validation_Number" xml:space="preserve"><value>«{0}» өрісіне сан енгізіңіз.</value></data>
+  <data name="Validation_SourceLimit" xml:space="preserve"><value>Көлемі 64 KiB (UTF-8) аспайтын бастапқы кодты енгізіңіз.</value></data>
+  <data name="Validation_InputLimit" xml:space="preserve"><value>Кіріс деректер көлемі 32 KiB (UTF-8) аспауы керек.</value></data>
+  <data name="Validation_PublishedTask" xml:space="preserve"><value>Жарияланған есепті таңдаңыз.</value></data>
+  <data name="Validation_Runtime" xml:space="preserve"><value>Қосылған C++ орындау ортасын таңдаңыз.</value></data>
+  <data name="Account_DuplicateEmail" xml:space="preserve"><value>Бұл электрондық пошта бұрын тіркелген.</value></data>
+  <data name="Account_RegistrationFailed" xml:space="preserve"><value>Тіркелу аяқталмады. Қайталап көріңіз.</value></data>
+  <data name="Account_RegistrationConflict" xml:space="preserve"><value>Тіркелу аяқталмады. Бұл пошта бұрын тіркелген болуы мүмкін.</value></data>
+  <data name="Account_InvalidLogin" xml:space="preserve"><value>Электрондық пошта немесе құпиясөз қате.</value></data>
+  <data name="Identity_PasswordTooShort" xml:space="preserve"><value>Құпиясөз кемінде 8 таңбадан тұруы керек.</value></data>
+  <data name="Identity_PasswordRequiresNonAlphanumeric" xml:space="preserve"><value>Құпиясөзде кемінде бір арнайы таңба болуы керек.</value></data>
+  <data name="Identity_PasswordRequiresDigit" xml:space="preserve"><value>Құпиясөзде кемінде бір сан болуы керек.</value></data>
+  <data name="Identity_PasswordRequiresLower" xml:space="preserve"><value>Құпиясөзде кемінде бір кіші латын әрпі болуы керек.</value></data>
+  <data name="Identity_PasswordRequiresUpper" xml:space="preserve"><value>Құпиясөзде кемінде бір бас латын әрпі болуы керек.</value></data>
+  <data name="Identity_PasswordRequiresUniqueChars" xml:space="preserve"><value>Құпиясөзде әртүрлі таңбалар болуы керек.</value></data>
+  <data name="AiMessage_Saved" xml:space="preserve"><value>AI пікірі дайын. Оны кеңес ретінде қабылдап, есеп шартымен салыстырыңыз.</value></data>
+  <data name="AiMessage_Existing" xml:space="preserve"><value>Сақталған AI пікірі көрсетілді; жаңа талдау сұралмады.</value></data>
+  <data name="AiMessage_NotFinished" xml:space="preserve"><value>AI пікірін сұрамас бұрын тексерудің аяқталуын күтіңіз.</value></data>
+  <data name="AiMessage_NotConfigured" xml:space="preserve"><value>AI пікірі бапталмаған.</value></data>
+  <data name="AiMessage_Busy" xml:space="preserve"><value>AI бос емес немесе жаңа ғана сұралды. 30 секундтан кейін қайталап көріңіз.</value></data>
+  <data name="AiMessage_Unavailable" xml:space="preserve"><value>AI пікірі уақытша қолжетімсіз.</value></data>
+  <data name="Runner_Unavailable" xml:space="preserve"><value>Кодты орындау уақытша қолжетімсіз. Кейінірек қайталап көріңіз.</value></data>
+  <data name="Runner_TaskConfiguration" xml:space="preserve"><value>Бұл есеп орындауға бапталмаған. Әкімшіге хабарласыңыз.</value></data>
+  <data name="Runner_TestSize" xml:space="preserve"><value>Бұл есептің тест деректері рұқсат етілген көлемнен асады.</value></data>
+  <data name="Run_CompilationFailed" xml:space="preserve"><value>Компиляция сәтсіз аяқталды.</value></data>
+  <data name="Run_OutputLimit" xml:space="preserve"><value>Шығыс деректер көлемі шектен асты.</value></data>
+  <data name="Run_RuntimeError" xml:space="preserve"><value>Орындау қатесі.</value></data>
+  <data name="Run_MemoryLimit" xml:space="preserve"><value>Жад шегінен асты.</value></data>
+  <data name="Run_TimeLimit" xml:space="preserve"><value>Уақыт шегінен асты.</value></data>
+  <data name="Editor_AriaLabel" xml:space="preserve"><value>C++ бастапқы кодының редакторы</value></data>
+  <data name="Editor_Submitting" xml:space="preserve"><value>Шешіміңіз компиляцияланып, тексерілуде…</value></data>
+  <data name="Diff_PreviousSource" xml:space="preserve"><value>Алдыңғы әрекеттің коды</value></data>
+  <data name="Diff_CurrentSource" xml:space="preserve"><value>Ағымдағы әрекеттің коды</value></data>
+  <data name="Run_Temporary" xml:space="preserve"><value>Тек уақытша нәтиже. Әрекет сақталмайды.</value></data>
+  <data name="Run_CheckInput" xml:space="preserve"><value>Деректерді тексеріңіз</value></data>
+  <data name="Run_Limits" xml:space="preserve"><value>64 KiB аспайтын код және 32 KiB аспайтын кіріс деректерін (UTF-8) енгізіңіз.</value></data>
+  <data name="Run_Invalid" xml:space="preserve"><value>Есеп пен орындау ортасын таңдап, 64 KiB аспайтын код және 32 KiB аспайтын кіріс деректерін (UTF-8) енгізіңіз.</value></data>
+  <data name="Run_Running" xml:space="preserve"><value>Орындалуда…</value></data>
+  <data name="Run_SignIn" xml:space="preserve"><value>Кодты орындау үшін қайта кіріңіз.</value></data>
+  <data name="Run_Reload" xml:space="preserve"><value>Орындау аяқталмады. Бетті жаңартып, қайталап көріңіз.</value></data>
+  <data name="Run_Retry" xml:space="preserve"><value>Орындау аяқталмады. Қайталап көріңіз.</value></data>
+  <data name="Run_Interrupted" xml:space="preserve"><value>Орындау үзілді. Қайталап көріңіз.</value></data>
+  <data name="Run_TimeFormat" xml:space="preserve"><value>Орындау уақыты: {0} мс (нақты өткен уақыт)</value></data>
+  <data name="Run_TimeUnmeasured" xml:space="preserve"><value>Орындау уақыты: өлшенбеген</value></data>
+  <data name="Run_SuccessSummary" xml:space="preserve"><value>Бағдарлама аяқталды. Шығыс күтілетін жауаппен салыстырылмады. Әрекет сақталмады.</value></data>
+</root>
+

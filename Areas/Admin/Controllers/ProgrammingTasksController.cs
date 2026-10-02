@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 
@@ -13,8 +14,13 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class ProgrammingTasksController : Controller
 {
     private readonly ApplicationDbContext _db;
+    private readonly IStringLocalizer<AdminResource> _text;
     // Контроллерге дерекқор және қажетті қызметтерді береді.
-    public ProgrammingTasksController(ApplicationDbContext db) => _db = db;
+    public ProgrammingTasksController(ApplicationDbContext db, IStringLocalizer<AdminResource> text)
+    {
+        _db = db;
+        _text = text;
+    }
 
     [HttpGet]
     // Әкімшіге есеп жазбаларының тізімін көрсетеді.
@@ -56,11 +62,11 @@ public class ProgrammingTasksController : Controller
         try { await _db.SaveChangesAsync(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "The slug is already in use or the selected topic no longer exists.");
+            ModelState.AddModelError(string.Empty, _text["Task_Constraint"]);
             await LoadTopicsAsync(model);
             return View(model);
         }
-        TempData["Success"] = "Programming task created.";
+        TempData["Success"] = _text["Task_Created"].Value;
         return RedirectToAction(nameof(Details), new { task.Id });
     }
 
@@ -97,11 +103,11 @@ public class ProgrammingTasksController : Controller
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "The slug is already in use or the selected topic no longer exists.");
+            ModelState.AddModelError(string.Empty, _text["Task_Constraint"]);
             await LoadTopicsAsync(model);
             return View(model);
         }
-        TempData["Success"] = "Programming task updated.";
+        TempData["Success"] = _text["Task_Updated"].Value;
         return RedirectToAction(nameof(Details), new { id });
     }
 
@@ -120,9 +126,9 @@ public class ProgrammingTasksController : Controller
         var task = await _db.ProgrammingTasks.FindAsync(id);
         if (task == null) return NotFound();
         if (await _db.Submissions.AnyAsync(submission => submission.ProgrammingTaskId == id))
-            ModelState.AddModelError(string.Empty, "This task has submissions and cannot be deleted. Unpublish it to remove it from the catalog.");
+            ModelState.AddModelError(string.Empty, _text["Task_HasSubmissions"]);
         else if (await _db.TestCases.AnyAsync(test => test.ProgrammingTaskId == id))
-            ModelState.AddModelError(string.Empty, "Delete this task's test cases first. Test cases with saved results cannot be deleted.");
+            ModelState.AddModelError(string.Empty, _text["Task_HasTestCases"]);
 
         if (!ModelState.IsValid) return View("Delete", task);
 
@@ -131,10 +137,10 @@ public class ProgrammingTasksController : Controller
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "This task now has dependent records and cannot be deleted.");
+            ModelState.AddModelError(string.Empty, _text["Task_InUse"]);
             return View("Delete", task);
         }
-        TempData["Success"] = "Programming task deleted.";
+        TempData["Success"] = _text["Task_Deleted"].Value;
         return RedirectToAction(nameof(Index));
     }
 
@@ -144,9 +150,9 @@ public class ProgrammingTasksController : Controller
         model.Title = model.Title?.Trim() ?? string.Empty;
         model.Slug = model.Slug?.Trim().ToLowerInvariant() ?? string.Empty;
         if (await _db.ProgrammingTasks.AnyAsync(task => task.Slug == model.Slug && task.Id != id))
-            ModelState.AddModelError(nameof(model.Slug), "A task with this slug already exists.");
+            ModelState.AddModelError(nameof(model.Slug), _text["Task_DuplicateSlug"]);
         if (!await _db.Topics.AnyAsync(topic => topic.Id == model.TopicId))
-            ModelState.AddModelError(nameof(model.TopicId), "Select an existing topic.");
+            ModelState.AddModelError(nameof(model.TopicId), _text["Validation_Topic"]);
     }
 
     // Есеп формасына арналған тақырып dropdown тізімін дайындайды.

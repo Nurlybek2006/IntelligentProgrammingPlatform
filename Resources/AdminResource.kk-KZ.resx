@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Admin" xml:space="preserve"><value>Әкімші</value></data>
+  <data name="Dashboard_Eyebrow" xml:space="preserve"><value>Каталогты басқару</value></data>
+  <data name="Dashboard_Title" xml:space="preserve"><value>Әкімші панелі</value></data>
+  <data name="Dashboard_Intro" xml:space="preserve"><value>Студенттерге түсінікті есептер, дұрыс мысалдар және мазмұнды тесттер дайындаңыз.</value></data>
+  <data name="Dashboard_Organize" xml:space="preserve"><value>01 / ЖҮЙЕЛЕУ</value></data>
+  <data name="Dashboard_Publish" xml:space="preserve"><value>02 / ЖАРИЯЛАУ</value></data>
+  <data name="Dashboard_Verify" xml:space="preserve"><value>03 / ТЕКСЕРУ</value></data>
+  <data name="Dashboard_Topics" xml:space="preserve"><value>Жаттығу есептерін оқу тақырыптары бойынша топтастырыңыз.</value></data>
+  <data name="Dashboard_Tasks" xml:space="preserve"><value>Сипаттаманы, қиындықты, шектеулерді және жариялау күйін өзгертіңіз.</value></data>
+  <data name="Dashboard_TestCases" xml:space="preserve"><value>Ашық мысалдар мен қорғалған жасырын тесттерді басқарыңыз.</value></data>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Рейтингті басқару</value></data>
+  <data name="Leaderboard_Description" xml:space="preserve"><value>Каталог өзгергеннен кейін ұпайлар мен көрсеткіштерді жіберілімдер тарихы бойынша қайта есептеңіз. Бұрынғы жіберілімдер сақталады.</value></data>
+  <data name="Leaderboard_Busy" xml:space="preserve"><value>Рейтинг қайта есептелуде…</value></data>
+  <data name="Leaderboard_Rebuild" xml:space="preserve"><value>Рейтингті қайта есептеу</value></data>
+  <data name="Leaderboard_Rebuilt" xml:space="preserve"><value>Рейтинг жіберілімдер тарихы бойынша қайта есептелді.</value></data>
+  <data name="Leaderboard_Unavailable" xml:space="preserve"><value>Рейтингті қайта есептеу уақытша қолжетімсіз.</value></data>
+  <data name="Button_Save" xml:space="preserve"><value>Сақтау</value></data>
+  <data name="Button_Cancel" xml:space="preserve"><value>Бас тарту</value></data>
+  <data name="Button_Edit" xml:space="preserve"><value>Өзгерту</value></data>
+  <data name="Button_Delete" xml:space="preserve"><value>Өшіру</value></data>
+  <data name="Button_Filter" xml:space="preserve"><value>Сүзу</value></data>
+  <data name="Field_Name" xml:space="preserve"><value>Атауы</value></data>
+  <data name="Field_Title" xml:space="preserve"><value>Атауы</value></data>
+  <data name="Field_Description" xml:space="preserve"><value>Сипаттама</value></data>
+  <data name="Field_Slug" xml:space="preserve"><value>URL атауы</value></data>
+  <data name="Field_Difficulty" xml:space="preserve"><value>Қиындық</value></data>
+  <data name="Field_Topic" xml:space="preserve"><value>Тақырып</value></data>
+  <data name="Field_Task" xml:space="preserve"><value>Есеп</value></data>
+  <data name="Field_TimeLimit" xml:space="preserve"><value>Уақыт шегі (мс)</value></data>
+  <data name="Field_MemoryLimit" xml:space="preserve"><value>Жады шегі (МБ)</value></data>
+  <data name="Field_Published" xml:space="preserve"><value>Жарияланған</value></data>
+  <data name="Field_Unpublished" xml:space="preserve"><value>Жарияланбаған</value></data>
+  <data name="Field_Order" xml:space="preserve"><value>Реті</value></data>
+  <data name="Field_Input" xml:space="preserve"><value>Кіріс деректері</value></data>
+  <data name="Field_ExpectedOutput" xml:space="preserve"><value>Күтілетін нәтиже</value></data>
+  <data name="Field_Hidden" xml:space="preserve"><value>Жасырын</value></data>
+  <data name="Field_Actions" xml:space="preserve"><value>Әрекеттер</value></data>
+  <data name="Field_Limits" xml:space="preserve"><value>Уақыт / жады шегі</value></data>
+  <data name="Field_CreatedUtc" xml:space="preserve"><value>Құрылған уақыт (UTC)</value></data>
+  <data name="Limits_Value" xml:space="preserve"><value>{0} мс / {1} МБ</value></data>
+  <data name="Yes" xml:space="preserve"><value>Иә</value></data>
+  <data name="No" xml:space="preserve"><value>Жоқ</value></data>
+  <data name="Records_Label" xml:space="preserve"><value>Басқару жазбалары</value></data>
+  <data name="Records_Empty" xml:space="preserve"><value>Әзірше жазбалар жоқ.</value></data>
+  <data name="Records_EmptyHelp" xml:space="preserve"><value>Жазба қосу немесе басқа есепті таңдау үшін жоғарыдағы басқару элементтерін пайдаланыңыз.</value></data>
+  <data name="Topics" xml:space="preserve"><value>Тақырыптар</value></data>
+  <data name="Topic_Create" xml:space="preserve"><value>Тақырып қосу</value></data>
+  <data name="Topic_Edit" xml:space="preserve"><value>Тақырыпты өзгерту</value></data>
+  <data name="Topic_Delete" xml:space="preserve"><value>Тақырыпты өшіру</value></data>
+  <data name="Topic_DeletePrompt" xml:space="preserve"><value>«{0}» тақырыбын өшіресіз бе? Есептері бар тақырыптарды өшіру мүмкін емес.</value></data>
+  <data name="Topic_Duplicate" xml:space="preserve"><value>Мұндай атауы бар тақырып бұрыннан бар.</value></data>
+  <data name="Topic_Created" xml:space="preserve"><value>Тақырып қосылды.</value></data>
+  <data name="Topic_Updated" xml:space="preserve"><value>Тақырып жаңартылды.</value></data>
+  <data name="Topic_Deleted" xml:space="preserve"><value>Тақырып өшірілді.</value></data>
+  <data name="Topic_HasTasks" xml:space="preserve"><value>Бұл тақырыпта есептер бар. Тақырыпты өшірмес бұрын оларды басқа тақырыпқа ауыстырыңыз немесе өшіріңіз.</value></data>
+  <data name="Topic_InUse" xml:space="preserve"><value>Бұл тақырыпқа есеп байланыстырылғандықтан, оны өшіру мүмкін емес.</value></data>
+  <data name="Tasks" xml:space="preserve"><value>Есептер</value></data>
+  <data name="Task_Manage" xml:space="preserve"><value>Есептерді басқару</value></data>
+  <data name="Task_Back" xml:space="preserve"><value>Есептерді басқаруға оралу</value></data>
+  <data name="Task_Create" xml:space="preserve"><value>Есеп қосу</value></data>
+  <data name="Task_Edit" xml:space="preserve"><value>Есепті өзгерту</value></data>
+  <data name="Task_Delete" xml:space="preserve"><value>Есепті өшіру</value></data>
+  <data name="Task_Details" xml:space="preserve"><value>Есеп туралы мәлімет</value></data>
+  <data name="Task_PublicPage" xml:space="preserve"><value>Ашық бет</value></data>
+  <data name="Task_DeletePrompt" xml:space="preserve"><value>«{0}» есебін өшіресіз бе? Жіберілімдері бар есептер қорғалған. Алдымен қолданылмаған тесттерді өшіріңіз.</value></data>
+  <data name="Task_SlugHelp" xml:space="preserve"><value>Мысалы: sum-of-two-numbers. Кіші әріптермен сақталады.</value></data>
+  <data name="Task_SelectTopic" xml:space="preserve"><value>Тақырыпты таңдаңыз</value></data>
+  <data name="Task_All" xml:space="preserve"><value>Барлық есептер</value></data>
+  <data name="Task_ChooseForTest" xml:space="preserve"><value>Тест қосу үшін есепті таңдаңыз.</value></data>
+  <data name="Task_DuplicateSlug" xml:space="preserve"><value>Мұндай URL атауы бар есеп бұрыннан бар.</value></data>
+  <data name="Task_Constraint" xml:space="preserve"><value>Бұл URL атауы қолданылып тұр немесе таңдалған тақырып енді жоқ.</value></data>
+  <data name="Task_Created" xml:space="preserve"><value>Есеп қосылды.</value></data>
+  <data name="Task_Updated" xml:space="preserve"><value>Есеп жаңартылды.</value></data>
+  <data name="Task_Deleted" xml:space="preserve"><value>Есеп өшірілді.</value></data>
+  <data name="Task_HasSubmissions" xml:space="preserve"><value>Бұл есептің жіберілімдері бар, сондықтан оны өшіру мүмкін емес. Каталогтан алып тастау үшін жариялауды тоқтатыңыз.</value></data>
+  <data name="Task_HasTestCases" xml:space="preserve"><value>Алдымен осы есептің тесттерін өшіріңіз. Нәтижелері сақталған тесттерді өшіру мүмкін емес.</value></data>
+  <data name="Task_InUse" xml:space="preserve"><value>Бұл есепке тәуелді жазбалар пайда болғандықтан, оны өшіру мүмкін емес.</value></data>
+  <data name="TestCases" xml:space="preserve"><value>Тесттер</value></data>
+  <data name="TestCase_Create" xml:space="preserve"><value>Тест құру</value></data>
+  <data name="TestCase_Add" xml:space="preserve"><value>Тест қосу</value></data>
+  <data name="TestCase_Edit" xml:space="preserve"><value>Тестті өзгерту</value></data>
+  <data name="TestCase_Delete" xml:space="preserve"><value>Тестті өшіру</value></data>
+  <data name="TestCase_Manage" xml:space="preserve"><value>Тесттерді басқару</value></data>
+  <data name="TestCase_DeletePrompt" xml:space="preserve"><value>«{1}» есебінің {0}-тестін өшіресіз бе? Орындалу нәтижелері бар тесттер қорғалған.</value></data>
+  <data name="TestCase_TaskLabel" xml:space="preserve"><value>Есеп:</value></data>
+  <data name="TestCase_HiddenHelp" xml:space="preserve"><value>Жасырын тесттер тек әкімші беттерінде көрсетіледі.</value></data>
+  <data name="TestCase_Constraint" xml:space="preserve"><value>Бұл реттік нөмір қолданылып тұр немесе тиісті есеп енді жоқ.</value></data>
+  <data name="TestCase_DuplicateOrder" xml:space="preserve"><value>Бұл есепте осындай реттік нөмірі бар тест бұрыннан бар.</value></data>
+  <data name="TestCase_Created" xml:space="preserve"><value>Тест қосылды.</value></data>
+  <data name="TestCase_Updated" xml:space="preserve"><value>Тест жаңартылды.</value></data>
+  <data name="TestCase_Deleted" xml:space="preserve"><value>Тест өшірілді.</value></data>
+  <data name="TestCase_HasResults" xml:space="preserve"><value>Бұл тесттің орындалу нәтижелері бар, сондықтан оны өшіру мүмкін емес.</value></data>
+  <data name="TestCase_InUse" xml:space="preserve"><value>Бұл тесттің орындалу нәтижелері пайда болғандықтан, оны өшіру мүмкін емес.</value></data>
+  <data name="Validation_Required" xml:space="preserve"><value>«{0}» өрісін толтырыңыз.</value></data>
+  <data name="Validation_StringLength" xml:space="preserve"><value>«{0}» өрісінің ұзындығы {1} таңбадан аспауы тиіс.</value></data>
+  <data name="Validation_Range" xml:space="preserve"><value>«{0}» өрісінің мәні {1} мен {2} аралығында болуы тиіс.</value></data>
+  <data name="Validation_Slug" xml:space="preserve"><value>Латын әріптерін, сандарды және сөздер арасында бір дефисті қолданыңыз.</value></data>
+  <data name="Validation_Difficulty" xml:space="preserve"><value>Қиындық деңгейін дұрыс таңдаңыз.</value></data>
+  <data name="Validation_Topic" xml:space="preserve"><value>Бар тақырыпты таңдаңыз.</value></data>
+  <data name="Validation_Task" xml:space="preserve"><value>Бар есепті таңдаңыз.</value></data>
+</root>

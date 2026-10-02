@@ -30,7 +30,7 @@ if (form) {
         minimap: { enabled: false },
         fontSize: 14,
         tabSize: 4,
-        ariaLabel: "C++ source code editor"
+        ariaLabel: form.dataset.editorLabel
     });
     source.hidden = true;
 
@@ -46,13 +46,13 @@ if (form) {
         sync();
         if (!source.value.trim() || new TextEncoder().encode(source.value).length > 64 * 1024) {
             event.preventDefault();
-            status.textContent = "Enter source code of at most 64 KB (UTF-8).";
+            status.textContent = form.dataset.sourceLimit;
             editor.focus();
             return;
         }
         if (globalThis.jQuery && !globalThis.jQuery(form).valid()) return;
         submit.disabled = true;
-        status.textContent = "Compiling and checking your solution…";
+        status.textContent = form.dataset.submitProgress;
     });
     window.addEventListener("pageshow", () => {
         submit.disabled = document.getElementById("RuntimeId").options.length === 0;
@@ -70,8 +70,8 @@ if (diffElement) {
         automaticLayout: true, renderSideBySide: true,
         useInlineViewWhenSpaceIsLimited: true, renderSideBySideInlineBreakpoint: 800,
         minimap: { enabled: false }, fontSize: 14, scrollBeyondLastLine: false,
-        maxComputationTime: 5000, originalAriaLabel: "Previous attempt source",
-        modifiedAriaLabel: "Current attempt source"
+        maxComputationTime: 5000, originalAriaLabel: diffElement.dataset.previousLabel,
+        modifiedAriaLabel: diffElement.dataset.currentLabel
     });
     diff.setModel({ original, modified });
     document.getElementById("diff-fallback").hidden = true;

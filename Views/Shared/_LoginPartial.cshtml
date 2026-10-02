@@ -9,16 +9,16 @@
 {
     var currentUser = await UserManager.GetUserAsync(User);
     <li class="nav-item"><span class="navbar-text display-name">@currentUser?.DisplayName</span></li>
-    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Profile" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Profile" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Profile">@T["Nav_Profile"]</a></li>
     @if (User.IsInRole(RoleNames.Admin))
     {
-        <li class="nav-item"><a class="nav-link" aria-current="@(ViewContext.RouteData.Values["area"]?.ToString() == "Admin" ? "page" : null)" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" aria-current="@(ViewContext.RouteData.Values["area"]?.ToString() == "Admin" ? "page" : null)" asp-area="Admin" asp-controller="Home" asp-action="Index">@T["Nav_Admin"]</a></li>
     }
-    <li class="nav-item"><form asp-area="" asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="nav-link btn btn-link">Logout</button></form></li>
+    <li class="nav-item"><form asp-area="" asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="nav-link btn btn-link">@T["Nav_Logout"]</button></form></li>
 }
 else
 {
-    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Login" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
-    <li class="nav-item"><a class="btn btn-primary btn-sm" asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Login" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Login">@T["Nav_Login"]</a></li>
+    <li class="nav-item"><a class="btn btn-primary btn-sm" asp-area="" asp-controller="Account" asp-action="Register">@T["Nav_Register"]</a></li>
 }
 </ul>

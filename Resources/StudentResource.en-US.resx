@@ -1,0 +1,897 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data xml:space="preserve" name="Common_Tasks">
+    <value>Tasks</value>
+  </data>
+  <data xml:space="preserve" name="Common_Task">
+    <value>Task</value>
+  </data>
+  <data xml:space="preserve" name="Common_Topic">
+    <value>Topic</value>
+  </data>
+  <data xml:space="preserve" name="Common_Difficulty">
+    <value>Difficulty</value>
+  </data>
+  <data xml:space="preserve" name="Common_Status">
+    <value>Status</value>
+  </data>
+  <data xml:space="preserve" name="Common_Runtime">
+    <value>Runtime</value>
+  </data>
+  <data xml:space="preserve" name="Common_PassedTotal">
+    <value>Passed / total</value>
+  </data>
+  <data xml:space="preserve" name="Common_CreatedUtc">
+    <value>Created (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Common_BrowseTasks">
+    <value>Browse tasks</value>
+  </data>
+  <data xml:space="preserve" name="Common_Login">
+    <value>Login</value>
+  </data>
+  <data xml:space="preserve" name="Common_Register">
+    <value>Register</value>
+  </data>
+  <data xml:space="preserve" name="Common_MySubmissions">
+    <value>My submissions</value>
+  </data>
+  <data xml:space="preserve" name="Common_MyProgress">
+    <value>My progress</value>
+  </data>
+  <data xml:space="preserve" name="Common_Leaderboard">
+    <value>Leaderboard</value>
+  </data>
+  <data xml:space="preserve" name="Common_Previous">
+    <value>Previous</value>
+  </data>
+  <data xml:space="preserve" name="Common_Next">
+    <value>Next</value>
+  </data>
+  <data xml:space="preserve" name="Common_Page">
+    <value>Page {0}</value>
+  </data>
+  <data xml:space="preserve" name="Common_SolvedTasks">
+    <value>Solved tasks</value>
+  </data>
+  <data xml:space="preserve" name="Common_DisplayName">
+    <value>Display name</value>
+  </data>
+  <data xml:space="preserve" name="Common_Email">
+    <value>Email</value>
+  </data>
+  <data xml:space="preserve" name="Common_Input">
+    <value>Input</value>
+  </data>
+  <data xml:space="preserve" name="Common_ExpectedOutput">
+    <value>Expected output</value>
+  </data>
+  <data xml:space="preserve" name="Common_Output">
+    <value>Output</value>
+  </data>
+  <data xml:space="preserve" name="Common_CompilerOutput">
+    <value>Compiler output</value>
+  </data>
+  <data xml:space="preserve" name="Common_NotMeasured">
+    <value>Not measured</value>
+  </data>
+  <data xml:space="preserve" name="Common_TimeNotMeasured">
+    <value>Time not measured</value>
+  </data>
+  <data xml:space="preserve" name="Common_Milliseconds">
+    <value>{0} ms</value>
+  </data>
+  <data xml:space="preserve" name="Common_TestTotalTime">
+    <value>{0} ms (test total)</value>
+  </data>
+  <data xml:space="preserve" name="Common_TimeLabel">
+    <value>Time: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Common_Compilation">
+    <value>Compilation</value>
+  </data>
+  <data xml:space="preserve" name="Common_RecentSubmissions">
+    <value>Recent submissions</value>
+  </data>
+  <data xml:space="preserve" name="Home_Title">
+    <value>Learn by solving</value>
+  </data>
+  <data xml:space="preserve" name="Home_Eyebrow">
+    <value>A little practice. A clearer understanding.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Heading">
+    <value>Build your skills.</value>
+  </data>
+  <data xml:space="preserve" name="Home_HeadingAccent">
+    <value>One solution at a time.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Intro">
+    <value>A focused place to practice C++. Solve a task, understand your results, and use thoughtful hints to find your next step.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Continue">
+    <value>Continue solving</value>
+  </data>
+  <data xml:space="preserve" name="Home_Start">
+    <value>Start solving</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExploreLeaderboard">
+    <value>Explore leaderboard</value>
+  </data>
+  <data xml:space="preserve" name="Home_Note">
+    <value>C++ 20 · From basics to algorithms · Learn at your own pace</value>
+  </data>
+  <data xml:space="preserve" name="Home_JourneyLabel">
+    <value>Your learning journey</value>
+  </data>
+  <data xml:space="preserve" name="Home_LoopTitle">
+    <value>YOUR NEXT BREAKTHROUGH</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepTask">
+    <value>Take on a task</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepTaskText">
+    <value>Read the examples. Write your approach.</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepResult">
+    <value>Make sense of the result</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepResultText">
+    <value>See what passed and where to look next.</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepLearn">
+    <value>Learn, adjust, try again</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepLearnText">
+    <value>Get a hint. Make the fix yourself. Keep growing.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Snapshot">
+    <value>Pick up where you left off</value>
+  </data>
+  <data xml:space="preserve" name="Home_ViewProgress">
+    <value>View your progress →</value>
+  </data>
+  <data xml:space="preserve" name="Home_YourScore">
+    <value>Your score</value>
+  </data>
+  <data xml:space="preserve" name="Home_EmptyHeading">
+    <value>Your first solution starts here</value>
+  </data>
+  <data xml:space="preserve" name="Home_EmptyText">
+    <value>Choose a task and make your first attempt. Every attempt is part of learning.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Features">
+    <value>Everything you need to keep learning</value>
+  </data>
+  <data xml:space="preserve" name="Home_PracticeTag">
+    <value>01 / PRACTICE</value>
+  </data>
+  <data xml:space="preserve" name="Home_CheckTag">
+    <value>02 / CHECK</value>
+  </data>
+  <data xml:space="preserve" name="Home_UnderstandTag">
+    <value>03 / UNDERSTAND</value>
+  </data>
+  <data xml:space="preserve" name="Home_GrowTag">
+    <value>04 / GROW</value>
+  </data>
+  <data xml:space="preserve" name="Home_TasksFeature">
+    <value>Programming tasks</value>
+  </data>
+  <data xml:space="preserve" name="Home_TasksFeatureText">
+    <value>Explore topics and difficulties, with clear examples to get started.</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExecutionFeature">
+    <value>Isolated execution</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExecutionFeatureText">
+    <value>Run C++ against test cases and get a clear result for each attempt.</value>
+  </data>
+  <data xml:space="preserve" name="Home_AiFeature">
+    <value>Your AI tutor</value>
+  </data>
+  <data xml:space="preserve" name="Home_AiFeatureText">
+    <value>Ask for explanations and hints while keeping the problem solving yours.</value>
+  </data>
+  <data xml:space="preserve" name="Home_ProgressFeature">
+    <value>Visible progress</value>
+  </data>
+  <data xml:space="preserve" name="Home_ProgressFeatureText">
+    <value>Follow your solved tasks, success rate and score as your skills develop.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_Title">
+    <value>Privacy &amp; data</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_Eyebrow">
+    <value>Your learning, your data</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AccountHeading">
+    <value>Account and activity</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AccountText">
+    <value>Your account, submitted code, test results and saved AI advice are stored to support your learning history. Your submission details and progress are available to your signed-in account. The public leaderboard displays your display name and learning statistics; it does not display your email.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AiHeading">
+    <value>AI feedback is your choice</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AiText">
+    <value>Clicking Analyze with AI sends your code, the task description, compiler diagnostics where relevant, and visible failed-test details to OpenAI. Hidden test contents and account credentials are excluded. Requests disable stored Responses output; OpenAI's applicable service data policies still apply. Advice is saved with your submission and reused for later views.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_StorageHeading">
+    <value>Local browser storage</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_StorageText">
+    <value>A sign-in cookie keeps you authenticated. Security cookies protect form submissions. The editor keeps a draft for each task in this browser tab's session storage; drafts are not shared with other accounts. A language cookie remembers your interface language.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_SharedHeading">
+    <value>Using a shared device</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_SharedText">
+    <value>Log out and close the browser tab when you finish. Contact the platform administrator about account or data questions.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Eyebrow">
+    <value>Practice library</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Heading">
+    <value>Find your next challenge</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Intro">
+    <value>Build confidence with the basics, then stretch your skills with arrays and algorithms.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Matching">
+    <value>{0} matching tasks</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Search">
+    <value>Search by title</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_SearchPlaceholder">
+    <value>Find a programming task…</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_AllTopics">
+    <value>All topics</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_AllDifficulties">
+    <value>All difficulties</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Filter">
+    <value>Filter</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Reset">
+    <value>Reset</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_EmptyHeading">
+    <value>No tasks match your filters.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_EmptyText">
+    <value>Try another title, topic or difficulty.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_ShowAll">
+    <value>Show all tasks</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_YourProgress">
+    <value>Your progress</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_OpenTask">
+    <value>Open task</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Solved">
+    <value>✓ Solved</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_ToExplore">
+    <value>To explore</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Solve">
+    <value>Solve</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_SolveLabel">
+    <value>Solve {0}</value>
+  </data>
+  <data xml:space="preserve" name="Task_Back">
+    <value>← Back to tasks</value>
+  </data>
+  <data xml:space="preserve" name="Task_Heading">
+    <value>The task</value>
+  </data>
+  <data xml:space="preserve" name="Task_TimeLimit">
+    <value>Time limit</value>
+  </data>
+  <data xml:space="preserve" name="Task_MemoryLimit">
+    <value>Memory limit</value>
+  </data>
+  <data xml:space="preserve" name="Task_Memory">
+    <value>{0} MB</value>
+  </data>
+  <data xml:space="preserve" name="Task_Language">
+    <value>Language</value>
+  </data>
+  <data xml:space="preserve" name="Task_Examples">
+    <value>Examples</value>
+  </data>
+  <data xml:space="preserve" name="Task_NoExamples">
+    <value>No examples are available.</value>
+  </data>
+  <data xml:space="preserve" name="Task_Example">
+    <value>Example {0}</value>
+  </data>
+  <data xml:space="preserve" name="Task_YourSolution">
+    <value>Your solution</value>
+  </data>
+  <data xml:space="preserve" name="Task_GuestHeading">
+    <value>Ready to give it a try?</value>
+  </data>
+  <data xml:space="preserve" name="Task_GuestText">
+    <value>Sign in to write C++ in the editor and check your solution.</value>
+  </data>
+  <data xml:space="preserve" name="Editor_SourceHelp">
+    <value>C++ 20 · Maximum source size: 64 KB. Your draft is kept in this browser tab.</value>
+  </data>
+  <data xml:space="preserve" name="Run_CustomInput">
+    <value>Custom input</value>
+  </data>
+  <data xml:space="preserve" name="Run_InputHelp">
+    <value>Up to 32 KiB (UTF-8). Run uses only this input and does not save an attempt or affect your score.</value>
+  </data>
+  <data xml:space="preserve" name="Run_Button">
+    <value>Run</value>
+  </data>
+  <data xml:space="preserve" name="Submit_Button">
+    <value>Submit solution</value>
+  </data>
+  <data xml:space="preserve" name="Submit_Help">
+    <value>Submit checks the official tests and saves an attempt in your journey.</value>
+  </data>
+  <data xml:space="preserve" name="Editor_NoRuntime">
+    <value>No enabled C++ runtime is available.</value>
+  </data>
+  <data xml:space="preserve" name="Run_Result">
+    <value>Run result</value>
+  </data>
+  <data xml:space="preserve" name="Run_Diagnostic">
+    <value>Diagnostic / stderr</value>
+  </data>
+  <data xml:space="preserve" name="History_Eyebrow">
+    <value>Your learning history</value>
+  </data>
+  <data xml:space="preserve" name="History_Intro">
+    <value>Every attempt is a chance to understand a little more.</value>
+  </data>
+  <data xml:space="preserve" name="History_Solve">
+    <value>Solve a task →</value>
+  </data>
+  <data xml:space="preserve" name="History_EmptyFirst">
+    <value>You haven't submitted a solution yet.</value>
+  </data>
+  <data xml:space="preserve" name="History_EmptyPage">
+    <value>No submissions on this page.</value>
+  </data>
+  <data xml:space="preserve" name="History_StartText">
+    <value>to start your learning history.</value>
+  </data>
+  <data xml:space="preserve" name="History_Region">
+    <value>Submission history</value>
+  </data>
+  <data xml:space="preserve" name="History_Submission">
+    <value>Submission</value>
+  </data>
+  <data xml:space="preserve" name="History_Pages">
+    <value>Submission pages</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Title">
+    <value>Submission #{0}</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Back">
+    <value>← My submissions</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Journey">
+    <value>View attempt journey</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Editor">
+    <value>Return to editor →</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Overview">
+    <value>Submission overview</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Succeeded">
+    <value>Succeeded</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Failed">
+    <value>Failed</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotCompleted">
+    <value>Not completed</value>
+  </data>
+  <data xml:space="preserve" name="Submission_ContainerTime">
+    <value>Test container time</value>
+  </data>
+  <data xml:space="preserve" name="Submission_WallTime">
+    <value>{0} ms (wall clock, total)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_StartedUtc">
+    <value>Started (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_FinishedUtc">
+    <value>Finished (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotStarted">
+    <value>Not started</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotFinished">
+    <value>Not finished</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Unavailable">
+    <value>Execution service is temporarily unavailable. Please try submitting again later.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Checking">
+    <value>Your submission is being checked.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Refresh">
+    <value>Refresh results</value>
+  </data>
+  <data xml:space="preserve" name="Submission_CompilationFailed">
+    <value>Compilation failed</value>
+  </data>
+  <data xml:space="preserve" name="Submission_CompilationHelp">
+    <value>Read the first diagnostic, fix the syntax, then submit again.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_TestResults">
+    <value>Test results</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NoResults">
+    <value>No test results are available yet.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_HiddenTest">
+    <value>Hidden test</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Test">
+    <value>Test</value>
+  </data>
+  <data xml:space="preserve" name="Submission_HiddenHelp">
+    <value>Only the result and timing are shown for this test.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_ActualOutput">
+    <value>Actual output</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Diagnostic">
+    <value>Diagnostic</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Source">
+    <value>Submitted source code</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Eyebrow">
+    <value>Understand your next step</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Title">
+    <value>AI Tutor</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Summary">
+    <value>Summary</value>
+  </data>
+  <data xml:space="preserve" name="Ai_ErrorCategory">
+    <value>Error category:</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Explanation">
+    <value>Explanation</value>
+  </data>
+  <data xml:space="preserve" name="Ai_ProgressiveHints">
+    <value>Progressive hints</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealedCount">
+    <value>Hints revealed: {0} / {1}</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Hint">
+    <value>Hint {0}</value>
+  </data>
+  <data xml:space="preserve" name="Ai_TryFirst">
+    <value>Try updating your solution before revealing another hint. Need a little more direction?</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Revealing">
+    <value>Revealing your next hint…</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealFinal">
+    <value>Reveal final hint</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealNext">
+    <value>Reveal next hint</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealHelp">
+    <value>Revealing a saved hint does not request another AI analysis.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_NoHints">
+    <value>No saved hints are available for this feedback.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AllRevealed">
+    <value>All available hints revealed.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AfterFinish">
+    <value>AI feedback is available after the submission finishes.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_NotConfigured">
+    <value>AI feedback is not configured.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AnalyzeText">
+    <value>Analyze this submission to get hints.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Disclosure">
+    <value>Your code, task text and visible diagnostic data are sent to OpenAI. Hidden test contents are not sent. The tutor gives hints, not a final solution.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Asking">
+    <value>Asking your tutor…</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Analyze">
+    <value>Analyze with AI</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Caution">
+    <value>AI feedback can be mistaken. Verify changes by submitting code again.</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Title">
+    <value>Compare attempts</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Eyebrow">
+    <value>Understand what changed</value>
+  </data>
+  <data xml:space="preserve" name="Diff_BackJourney">
+    <value>Back to journey</value>
+  </data>
+  <data xml:space="preserve" name="Diff_BackSubmission">
+    <value>Back to submission</value>
+  </data>
+  <data xml:space="preserve" name="Diff_PreviousAttempt">
+    <value>Previous attempt · #{0}</value>
+  </data>
+  <data xml:space="preserve" name="Diff_CurrentAttempt">
+    <value>Current attempt · #{0}</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Help">
+    <value>Read-only C++ comparison. Removed and added lines are highlighted; on narrow screens the editor switches to an inline comparison.</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Region">
+    <value>Source changes between your attempts</value>
+  </data>
+  <data xml:space="preserve" name="Diff_PreviousSource">
+    <value>Previous source</value>
+  </data>
+  <data xml:space="preserve" name="Diff_CurrentSource">
+    <value>Current source</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Title">
+    <value>Attempt journey</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Eyebrow">
+    <value>Learn from each attempt</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Count">
+    <value>{0} official attempts</value>
+  </data>
+  <data xml:space="preserve" name="Journey_BackEditor">
+    <value>Back to editor</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Pages">
+    <value>Journey pages</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Earlier">
+    <value>Earlier attempts</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Later">
+    <value>Later attempts</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Page">
+    <value>Page {0} of {1}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_YourJourney">
+    <value>Your attempt journey</value>
+  </data>
+  <data xml:space="preserve" name="Journey_ViewFull">
+    <value>View full journey ({0} attempts) →</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Empty">
+    <value>No official attempts yet. Use Run to explore your input, then Submit to start your journey.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Order">
+    <value>Attempts, oldest first. Run results are temporary and do not appear here.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_LatestOrder">
+    <value>Latest attempts, oldest first. Run results are temporary and do not appear here.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Attempt">
+    <value>Attempt #{0}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Tests">
+    <value>{0} / {1} tests</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiMarker">
+    <value>AI Hint Used</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiTitle">
+    <value>AI feedback is saved for this attempt. This does not imply it caused a later improvement.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiCounts">
+    <value>AI hints: {0}/{1}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Compare">
+    <value>Compare with previous</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiHelp">
+    <value>AI Hint Used means feedback exists for that attempt; it does not establish why a later attempt improved.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Eyebrow">
+    <value>Small steps, visible growth</value>
+  </data>
+  <data xml:space="preserve" name="Progress_PublishedSolved">
+    <value>Published tasks solved:</value>
+  </data>
+  <data xml:space="preserve" name="Progress_KeepPracticing">
+    <value>Keep practicing →</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AllSolved">
+    <value>Solved tasks (all history)</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Completed">
+    <value>Completed submissions</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Accepted">
+    <value>Accepted submissions</value>
+  </data>
+  <data xml:space="preserve" name="Progress_CompilationErrors">
+    <value>Compilation errors</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SuccessPercentage">
+    <value>Successful attempt percentage</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SuccessHelp">
+    <value>Accepted / completed attempts</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AverageTime">
+    <value>Average solving time</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Minutes">
+    <value>{0} minutes</value>
+  </data>
+  <data xml:space="preserve" name="Progress_NotAvailable">
+    <value>Not yet available</value>
+  </data>
+  <data xml:space="preserve" name="Progress_TimeHelp">
+    <value>First attempt to first Accepted</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Rating">
+    <value>Rating score</value>
+  </data>
+  <data xml:space="preserve" name="Progress_RatingHelp">
+    <value>Each solved task counts once</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ByDifficulty">
+    <value>Progress by difficulty</value>
+  </data>
+  <data xml:space="preserve" name="Progress_DifficultyLabel">
+    <value>{0} progress</value>
+  </data>
+  <data xml:space="preserve" name="Progress_RepeatedHelp">
+    <value>Repeated Accepted submissions count as one solved task.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ByTopic">
+    <value>Progress by topic</value>
+  </data>
+  <data xml:space="preserve" name="Progress_NoTopics">
+    <value>Topics will appear here when tasks are published.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Solved">
+    <value>Solved</value>
+  </data>
+  <data xml:space="preserve" name="Progress_PublishedTasks">
+    <value>Published tasks</value>
+  </data>
+  <data xml:space="preserve" name="Progress_HistoryHelp">
+    <value>Difficulty and topic progress include published tasks. Historical solved counts and rating retain tasks that were later unpublished.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SolvingTimeHelp">
+    <value>Solving time runs from your first submission to your first Accepted submission for each solved task. It is not program execution time.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Recent">
+    <value>Recent activity</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AllSubmissions">
+    <value>All my submissions →</value>
+  </data>
+  <data xml:space="preserve" name="Progress_EmptyHeading">
+    <value>Your progress starts with a first attempt</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ChooseTask">
+    <value>Choose a task</value>
+  </data>
+  <data xml:space="preserve" name="Progress_GetStarted">
+    <value>to get started.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Eyebrow">
+    <value>Find your next practice</value>
+  </data>
+  <data xml:space="preserve" name="Map_Title">
+    <value>Learning Map</value>
+  </data>
+  <data xml:space="preserve" name="Map_Intro">
+    <value>A snapshot of your official attempts on currently published tasks. Temporary Runs and system errors do not affect these learning measures.</value>
+  </data>
+  <data xml:space="preserve" name="Map_GuideTitle">
+    <value>How to read your learning strength</value>
+  </data>
+  <data xml:space="preserve" name="Map_Formula">
+    <value>Strength = (task completion × 70% + submission success × 30%). Completion counts each solved task once; success counts Accepted attempts out of completed attempts, excluding system errors.</value>
+  </data>
+  <data xml:space="preserve" name="Map_LevelsHelp">
+    <value>No completed attempts: {0}. One or two: {1}. With at least three: {2} at 75% or above, {3} at 45% or above, otherwise {4}. These labels describe recorded practice, not personal ability. Learning strength is separate from your rating score.</value>
+  </data>
+  <data xml:space="preserve" name="Map_TopicStrength">
+    <value>Topic strength</value>
+  </data>
+  <data xml:space="preserve" name="Map_Empty">
+    <value>Your learning map will appear when topics are added.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Strength">
+    <value>learning strength</value>
+  </data>
+  <data xml:space="preserve" name="Map_StrengthLabel">
+    <value>{0} learning strength</value>
+  </data>
+  <data xml:space="preserve" name="Map_SolvedPublished">
+    <value>Solved / published</value>
+  </data>
+  <data xml:space="preserve" name="Map_CompletedAttempts">
+    <value>Completed attempts</value>
+  </data>
+  <data xml:space="preserve" name="Map_Completion">
+    <value>Task completion</value>
+  </data>
+  <data xml:space="preserve" name="Map_Success">
+    <value>Submission success</value>
+  </data>
+  <data xml:space="preserve" name="Map_FrequentIssue">
+    <value>Most frequent issue:</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoPublished">
+    <value>No published tasks in this topic yet.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Breakdown">
+    <value>Attempt breakdown</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorPatterns">
+    <value>Error patterns</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorHelp">
+    <value>Official results on published tasks. Infrastructure errors are excluded.</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorLabel">
+    <value>{0} errors</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoErrors">
+    <value>No student errors recorded in these tasks.</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiPatterns">
+    <value>AI-analyzed patterns</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiHelp">
+    <value>Only submissions with saved AI analysis are represented here, excluding system errors. These categories do not affect learning strength or rating.</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiLabel">
+    <value>{0} AI-analyzed submissions</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoAi">
+    <value>No saved AI analysis for these tasks yet. Your learning map works without it.</value>
+  </data>
+  <data xml:space="preserve" name="Map_PracticeNext">
+    <value>Practice Next</value>
+  </data>
+  <data xml:space="preserve" name="Map_Recommendation">
+    <value>Recommended next practice</value>
+  </data>
+  <data xml:space="preserve" name="Map_Topic">
+    <value>Topic:</value>
+  </data>
+  <data xml:space="preserve" name="Map_Reason">
+    <value>{0}: {1}; {2} of {3} tasks solved. Chosen by practice priority, then learning strength; the easiest remaining task in this topic comes first.</value>
+  </data>
+  <data xml:space="preserve" name="Map_PracticeButton">
+    <value>Practice this task →</value>
+  </data>
+  <data xml:space="preserve" name="Map_AllSolved">
+    <value>You have solved every published task. Revisit a solution to reflect on your approach, or return when new tasks are available.</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoPractice">
+    <value>New practice will appear when tasks are published.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Eyebrow">
+    <value>Practice adds up</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Intro">
+    <value>Keep learning. Every new task you solve moves you forward.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Points">
+    <value>{0} · {1} points</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_ScoreHelp">
+    <value>Each solved task scores once. Repeated Accepted submissions do not add extra points.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_EmptyHeading">
+    <value>No ranked users yet.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_EmptyText">
+    <value>Start solving to build your score.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Region">
+    <value>Student leaderboard</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Rank">
+    <value>Rank</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Accepted">
+    <value>Accepted</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Completed">
+    <value>Completed</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Success">
+    <value>Success rate</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Score">
+    <value>Score</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_You">
+    <value>You</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Pages">
+    <value>Leaderboard pages</value>
+  </data>
+  <data xml:space="preserve" name="Account_AccessDenied">
+    <value>Access denied</value>
+  </data>
+  <data xml:space="preserve" name="Account_AccessDeniedText">
+    <value>You do not have permission to access this page.</value>
+  </data>
+  <data xml:space="preserve" name="Account_Welcome">
+    <value>Welcome back</value>
+  </data>
+  <data xml:space="preserve" name="Account_LoginIntro">
+    <value>Pick up where you left off. Sign in to continue practicing.</value>
+  </data>
+  <data xml:space="preserve" name="Account_Create">
+    <value>Create an account</value>
+  </data>
+  <data xml:space="preserve" name="Account_Profile">
+    <value>Profile</value>
+  </data>
+  <data xml:space="preserve" name="Account_YourAccount">
+    <value>Your account</value>
+  </data>
+  <data xml:space="preserve" name="Account_ProfileIntro">
+    <value>Your display name appears on the leaderboard. Your email stays private.</value>
+  </data>
+  <data xml:space="preserve" name="Account_JoinedUtc">
+    <value>Joined (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Account_Roles">
+    <value>Roles</value>
+  </data>
+  <data xml:space="preserve" name="Account_StartJourney">
+    <value>Start your learning journey</value>
+  </data>
+  <data xml:space="preserve" name="Account_RegisterIntro">
+    <value>Create your student account and take on your first task.</value>
+  </data>
+  <data xml:space="preserve" name="Account_PasswordHelp">
+    <value>Use 8–100 characters with an uppercase letter, lowercase letter, digit, and symbol.</value>
+  </data>
+  <data xml:space="preserve" name="Account_AlreadyRegistered">
+    <value>Already have an account?</value>
+  </data>
+  <data xml:space="preserve" name="Ai_LanguageHelp">
+    <value>New analysis uses the current interface language. Saved feedback stays in its original language.</value>
+  </data>
+</root>

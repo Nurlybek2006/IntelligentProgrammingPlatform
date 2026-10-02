@@ -1,9 +1,9 @@
 @model IReadOnlyList<IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionListItemViewModel>
-<div class="table-responsive" role="region" aria-label="Recent submissions" tabindex="0">
-<table class="table"><thead><tr><th scope="col">Task</th><th scope="col">Status</th><th scope="col">Passed / total</th><th scope="col">Created (UTC)</th></tr></thead><tbody>
+<div class="table-responsive" role="region" aria-label="@L["Common_RecentSubmissions"]" tabindex="0">
+<table class="table"><thead><tr><th scope="col">@L["Common_Task"]</th><th scope="col">@L["Common_Status"]</th><th scope="col">@L["Common_PassedTotal"]</th><th scope="col">@L["Common_CreatedUtc"]</th></tr></thead><tbody>
 @foreach (var item in Model)
 {
-    <tr><td><a asp-controller="Submissions" asp-action="Details" asp-route-id="@item.Id">@item.TaskTitle</a></td><td><span class="status-badge @item.Status">@item.Status</span></td><td>@item.PassedTests / @item.TotalTests</td><td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
+    <tr><td><a asp-controller="Submissions" asp-action="Details" asp-route-id="@item.Id">@item.TaskTitle</a></td><td><span class="status-badge @item.Status">@T[$"Status_{item.Status}"]</span></td><td>@item.PassedTests / @item.TotalTests</td><td>@item.CreatedAt.ToString("G")</td></tr>
 }
 </tbody></table>
 </div>

@@ -1,4 +1,5 @@
 using System.Data.Common;
+using System.Globalization;
 using System.Text.Json;
 using IntelligentProgrammingPlatform.Controllers;
 using IntelligentProgrammingPlatform.Data;
@@ -73,7 +74,8 @@ static class Checks
             var insights = new LearningInsightsService(db);
             var model = await insights.GetAsync(owner, default);
             var strengths = topics.Select(topic => model.Topics.Single(item => item.TopicId == topic.Id)).ToArray();
-            Assert(strengths.Select(item => item.Label).SequenceEqual(new[] { "Strong", "Developing", "Needs practice", "Exploring", "Not started", "Not started", "Needs practice" }),
+            Assert(strengths.Select(item => item.Level).SequenceEqual(new[] { TopicStrengthLevel.Strong, TopicStrengthLevel.Developing,
+                TopicStrengthLevel.NeedsPractice, TopicStrengthLevel.Exploring, TopicStrengthLevel.NotStarted, TopicStrengthLevel.NotStarted, TopicStrengthLevel.NeedsPractice }),
                 "All five evidence-aware topic labels, including an empty topic");
             Assert(strengths[0].StrengthScore == 82.5m && strengths[1].StrengthScore == 47m
                 && strengths[1].CompletionRate == .5m && strengths[1].SubmissionSuccessRate == .4m, "Weighted formula: (2/4 * .70 + 2/5 * .30) * 100 = 47");
@@ -86,6 +88,7 @@ static class Checks
             Assert(model.ErrorPatterns.Select(item => item.Count).SequenceEqual(new[] { 1, 8, 1, 1, 1 }), "Official error profile counts the five result categories only");
             Assert(model.PracticeNext?.TaskId == byTopic[2][2].Id, "Needs practice precedes other labels; topic Id breaks ties; Easy precedes Medium/Hard and task Id breaks ties");
             Assert((await insights.GetAsync(owner, default)).PracticeNext?.TaskId == model.PracticeNext!.TaskId, "Recommendation ordering is stable");
+            await VerifyCultureIndependenceAsync(insights, owner, model);
 
             var duplicate = Submission(owner, byTopic[1][0].Id, runtime, SubmissionStatus.Accepted);
             db.Submissions.Add(duplicate); await db.SaveChangesAsync();
@@ -223,14 +226,37 @@ static class Checks
             "Injection remains data; trusted progressive/no-full-solution policy stays separate (offline boundary test)");
     }
 
+    // Тіл ауысқанда есептеу, қате кодтары және ұсыныс бірдей қалатынын тексереді.
+    private static async Task VerifyCultureIndependenceAsync(LearningInsightsService insights, string owner, LearningInsightsViewModel expected)
+    {
+        var originalCulture = CultureInfo.CurrentCulture;
+        var originalUiCulture = CultureInfo.CurrentUICulture;
+        var snapshot = JsonSerializer.Serialize(expected);
+        try
+        {
+            foreach (var culture in new[] { "kk-KZ", "ru-RU", "en-US" })
+            {
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo(culture);
+                CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+                Assert(JsonSerializer.Serialize(await insights.GetAsync(owner, default)) == snapshot,
+                    "Semantic strength, calculations, error codes and practice priority are culture independent: " + culture);
+            }
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = originalCulture;
+            CultureInfo.CurrentUICulture = originalUiCulture;
+        }
+    }
+
     // Шекаралық ұпайлар мен аз әрекет кезіндегі белгілерді тексереді.
     private static void VerifyThresholds()
     {
         Assert(new TopicStrengthViewModel { PublishedTasks = 10, SolvedTasks = 3, CompletedSubmissions = 5, AcceptedSubmissions = 4 }.StrengthScore == 45m
-            && new TopicStrengthViewModel { PublishedTasks = 10, SolvedTasks = 3, CompletedSubmissions = 5, AcceptedSubmissions = 4 }.Label == "Developing", "Exactly 45 is Developing");
+            && new TopicStrengthViewModel { PublishedTasks = 10, SolvedTasks = 3, CompletedSubmissions = 5, AcceptedSubmissions = 4 }.Level == TopicStrengthLevel.Developing, "Exactly 45 is Developing");
         Assert(new TopicStrengthViewModel { PublishedTasks = 10, SolvedTasks = 9, CompletedSubmissions = 25, AcceptedSubmissions = 10 }.StrengthScore == 75m
-            && new TopicStrengthViewModel { PublishedTasks = 10, SolvedTasks = 9, CompletedSubmissions = 25, AcceptedSubmissions = 10 }.Label == "Strong", "Exactly 75 is Strong");
-        Assert(new TopicStrengthViewModel { PublishedTasks = 1, SolvedTasks = 1, CompletedSubmissions = 2, AcceptedSubmissions = 2 }.Label == "Exploring", "One or two attempts remain Exploring even with high score");
+            && new TopicStrengthViewModel { PublishedTasks = 10, SolvedTasks = 9, CompletedSubmissions = 25, AcceptedSubmissions = 10 }.Level == TopicStrengthLevel.Strong, "Exactly 75 is Strong");
+        Assert(new TopicStrengthViewModel { PublishedTasks = 1, SolvedTasks = 1, CompletedSubmissions = 2, AcceptedSubmissions = 2 }.Level == TopicStrengthLevel.Exploring, "One or two attempts remain Exploring even with high score");
         Assert(new TopicStrengthViewModel { PublishedTasks = 1, SolvedTasks = 9, CompletedSubmissions = 1, AcceptedSubmissions = 9 }.StrengthScore == 100,
             "Strength score has an upper bound of 100");
     }

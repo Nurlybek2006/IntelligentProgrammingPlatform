@@ -1,16 +1,16 @@
 @model IntelligentProgrammingPlatform.ViewModels.Account.LoginViewModel
-@{ ViewData["Title"] = "Login"; }
+@{ ViewData["Title"] = L["Common_Login"]; }
 <section class="auth-card">
-<p class="eyebrow">Welcome back</p>
-<h1>Login</h1>
-<p class="text-muted mb-4">Pick up where you left off. Sign in to continue practicing.</p>
+<p class="eyebrow">@L["Account_Welcome"]</p>
+<h1>@L["Common_Login"]</h1>
+<p class="text-muted mb-4">@L["Account_LoginIntro"]</p>
 <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
     <div asp-validation-summary="All" class="text-danger" role="alert"></div>
     <div class="mb-3"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" autocomplete="username" /><span asp-validation-for="Email" class="text-danger"></span></div>
     <div class="mb-3"><label asp-for="Password" class="form-label"></label><input asp-for="Password" class="form-control" autocomplete="current-password" /><span asp-validation-for="Password" class="text-danger"></span></div>
     <div class="form-check mb-3"><input asp-for="RememberMe" class="form-check-input" /><label asp-for="RememberMe" class="form-check-label"></label></div>
-    <button class="btn btn-primary" type="submit">Login</button>
-    <a asp-action="Register" class="btn btn-link">Create an account</a>
+    <button class="btn btn-primary" type="submit">@L["Common_Login"]</button>
+    <a asp-action="Register" class="btn btn-link">@L["Account_Create"]</a>
 </form>
 </section>
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }

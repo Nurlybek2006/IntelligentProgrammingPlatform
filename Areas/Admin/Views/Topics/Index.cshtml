@@ -1,22 +1,22 @@
 @model IReadOnlyList<Topic>
-@{ ViewData["Title"] = "Topics"; }
-<a asp-controller="Home" asp-action="Index">Admin</a>
-<h1>Topics</h1>
-<p><a class="btn btn-primary" asp-action="Create">Create topic</a></p>
+@{ ViewData["Title"] = A["Topics"]; }
+<a asp-controller="Home" asp-action="Index">@A["Admin"]</a>
+<h1>@A["Topics"]</h1>
+<p><a class="btn btn-primary" asp-action="Create">@A["Topic_Create"]</a></p>
 @if (Model.Count == 0)
 {
-    <div class="empty-state"><h2>No records to show yet.</h2><p>Use the controls above to add a record or choose another task.</p></div>
+    <div class="empty-state"><h2>@A["Records_Empty"]</h2><p>@A["Records_EmptyHelp"]</p></div>
 }
 else
 {
-<div class="table-responsive" role="region" aria-label="Management records" tabindex="0"><table class="table">
-    <thead><tr><th scope="col">Name</th><th scope="col">Description</th><th scope="col">Actions</th></tr></thead>
+<div class="table-responsive" role="region" aria-label="@A["Records_Label"]" tabindex="0"><table class="table">
+    <thead><tr><th scope="col">@A["Field_Name"]</th><th scope="col">@A["Field_Description"]</th><th scope="col">@A["Field_Actions"]</th></tr></thead>
     <tbody>
     @foreach (var topic in Model)
     {
         <tr><td>@topic.Name</td><td>@topic.Description</td><td>
-            <a asp-action="Edit" asp-route-id="@topic.Id">Edit</a> |
-            <a asp-action="Delete" asp-route-id="@topic.Id">Delete</a>
+            <a asp-action="Edit" asp-route-id="@topic.Id">@A["Button_Edit"]</a> |
+            <a asp-action="Delete" asp-route-id="@topic.Id" class="text-danger">@A["Button_Delete"]</a>
         </td></tr>
     }
     </tbody>

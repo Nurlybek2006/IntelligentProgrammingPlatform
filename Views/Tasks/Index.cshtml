@@ -1,27 +1,32 @@
 @using IntelligentProgrammingPlatform.Models.Enums
+@using Microsoft.AspNetCore.Mvc.Rendering
 @model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskCatalogViewModel
-@{ ViewData["Title"] = "Tasks"; }
-<div class="page-heading"><div><p class="eyebrow">Practice library</p><h1>Find your next challenge</h1><p>Build confidence with the basics, then stretch your skills with arrays and algorithms.</p></div><span class="text-muted">@Model.Tasks.Count matching tasks</span></div>
+@{
+    ViewData["Title"] = L["Common_Tasks"];
+    var difficulties = Enum.GetValues<Difficulty>().Select(value =>
+        new SelectListItem(T[$"Difficulty_{value}"].Value, ((int)value).ToString(CultureInfo.InvariantCulture)));
+}
+<div class="page-heading"><div><p class="eyebrow">@L["Tasks_Eyebrow"]</p><h1>@L["Tasks_Heading"]</h1><p>@L["Tasks_Intro"]</p></div><span class="text-muted">@L["Tasks_Matching", Model.Tasks.Count]</span></div>
 <form asp-action="Index" method="get" class="panel filter-panel row g-3 mx-0">
-    <div class="col-lg-4"><label asp-for="Search" class="form-label">Search by title</label><input asp-for="Search" class="form-control" placeholder="Find a programming task…" /></div>
-    <div class="col-sm-6 col-lg-3"><label asp-for="TopicId" class="form-label">Topic</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">All topics</option></select></div>
-    <div class="col-sm-6 col-lg-3"><label asp-for="Difficulty" class="form-label"></label><select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<Difficulty>()" class="form-select"><option value="">All difficulties</option></select></div>
-    <div class="col-lg-2 d-flex align-items-end gap-1"><button class="btn btn-primary" type="submit">Filter</button><a asp-action="Index" class="btn btn-link">Reset</a></div>
+    <div class="col-lg-4"><label asp-for="Search" class="form-label">@L["Tasks_Search"]</label><input asp-for="Search" class="form-control" placeholder="@L["Tasks_SearchPlaceholder"]" /></div>
+    <div class="col-sm-6 col-lg-3"><label asp-for="TopicId" class="form-label">@L["Common_Topic"]</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">@L["Tasks_AllTopics"]</option></select></div>
+    <div class="col-sm-6 col-lg-3"><label asp-for="Difficulty" class="form-label">@L["Common_Difficulty"]</label><select asp-for="Difficulty" asp-items="difficulties" class="form-select"><option value="">@L["Tasks_AllDifficulties"]</option></select></div>
+    <div class="col-lg-2 d-flex align-items-end gap-1"><button class="btn btn-primary" type="submit">@L["Tasks_Filter"]</button><a asp-action="Index" class="btn btn-link">@L["Tasks_Reset"]</a></div>
 </form>
 @if (Model.Tasks.Count == 0)
 {
-    <div class="empty-state"><h2>No tasks match your filters.</h2><p>Try another title, topic or difficulty.</p><a asp-action="Index" class="btn btn-outline-primary">Show all tasks</a></div>
+    <div class="empty-state"><h2>@L["Tasks_EmptyHeading"]</h2><p>@L["Tasks_EmptyText"]</p><a asp-action="Index" class="btn btn-outline-primary">@L["Tasks_ShowAll"]</a></div>
 }
 else
 {
-    <div class="table-responsive" role="region" aria-label="Programming tasks" tabindex="0"><table class="table table-striped">
-        <thead><tr><th scope="col">Task</th><th scope="col">Topic</th><th scope="col">Difficulty</th>@if (User.Identity?.IsAuthenticated == true) { <th scope="col">Your progress</th> }<th scope="col"><span class="visually-hidden">Open task</span></th></tr></thead>
+    <div class="table-responsive" role="region" aria-label="@L["Home_TasksFeature"]" tabindex="0"><table class="table table-striped">
+        <thead><tr><th scope="col">@L["Common_Task"]</th><th scope="col">@L["Common_Topic"]</th><th scope="col">@L["Common_Difficulty"]</th>@if (User.Identity?.IsAuthenticated == true) { <th scope="col">@L["Tasks_YourProgress"]</th> }<th scope="col"><span class="visually-hidden">@L["Tasks_OpenTask"]</span></th></tr></thead>
         <tbody>
         @foreach (var task in Model.Tasks)
         {
-            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td><span class="difficulty @task.Difficulty">@task.Difficulty</span></td>
-                @if (User.Identity?.IsAuthenticated == true) { <td>@if (task.IsSolved) { <span class="solved-badge">✓ Solved</span> } else { <span class="text-muted">To explore</span> }</td> }
-                <td><a asp-action="Details" asp-route-slug="@task.Slug" class="btn btn-sm btn-outline-secondary" aria-label="Solve @task.Title">Solve <span aria-hidden="true">→</span></a></td></tr>
+            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td><span class="difficulty @task.Difficulty">@T[$"Difficulty_{task.Difficulty}"]</span></td>
+                @if (User.Identity?.IsAuthenticated == true) { <td>@if (task.IsSolved) { <span class="solved-badge">@L["Tasks_Solved"]</span> } else { <span class="text-muted">@L["Tasks_ToExplore"]</span> }</td> }
+                <td><a asp-action="Details" asp-route-slug="@task.Slug" class="btn btn-sm btn-outline-secondary" aria-label="@L["Tasks_SolveLabel", task.Title]">@L["Tasks_Solve"] <span aria-hidden="true">→</span></a></td></tr>
         }
         </tbody>
     </table></div>

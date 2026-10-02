@@ -4,6 +4,7 @@ using IntelligentProgrammingPlatform.ViewModels.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 
@@ -12,8 +13,13 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class TopicsController : Controller
 {
     private readonly ApplicationDbContext _db;
+    private readonly IStringLocalizer<AdminResource> _text;
     // Контроллерге дерекқор және қажетті қызметтерді береді.
-    public TopicsController(ApplicationDbContext db) => _db = db;
+    public TopicsController(ApplicationDbContext db, IStringLocalizer<AdminResource> text)
+    {
+        _db = db;
+        _text = text;
+    }
 
     [HttpGet]
     // Әкімшіге тақырып жазбаларының тізімін көрсетеді.
@@ -36,10 +42,10 @@ public class TopicsController : Controller
         try { await _db.SaveChangesAsync(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(nameof(model.Name), "A topic with this name already exists.");
+            ModelState.AddModelError(nameof(model.Name), _text["Topic_Duplicate"]);
             return View(model);
         }
-        TempData["Success"] = "Topic created.";
+        TempData["Success"] = _text["Topic_Created"].Value;
         return RedirectToAction(nameof(Index));
     }
 
@@ -69,10 +75,10 @@ public class TopicsController : Controller
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(nameof(model.Name), "A topic with this name already exists.");
+            ModelState.AddModelError(nameof(model.Name), _text["Topic_Duplicate"]);
             return View(model);
         }
-        TempData["Success"] = "Topic updated.";
+        TempData["Success"] = _text["Topic_Updated"].Value;
         return RedirectToAction(nameof(Index));
     }
 
@@ -92,7 +98,7 @@ public class TopicsController : Controller
         if (topic == null) return NotFound();
         if (await _db.ProgrammingTasks.AnyAsync(task => task.TopicId == id))
         {
-            ModelState.AddModelError(string.Empty, "This topic contains programming tasks. Move or delete them before deleting the topic.");
+            ModelState.AddModelError(string.Empty, _text["Topic_HasTasks"]);
             return View("Delete", topic);
         }
         _db.Topics.Remove(topic);
@@ -100,10 +106,10 @@ public class TopicsController : Controller
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "This topic is now used by a task and cannot be deleted.");
+            ModelState.AddModelError(string.Empty, _text["Topic_InUse"]);
             return View("Delete", topic);
         }
-        TempData["Success"] = "Topic deleted.";
+        TempData["Success"] = _text["Topic_Deleted"].Value;
         return RedirectToAction(nameof(Index));
     }
 
@@ -112,6 +118,6 @@ public class TopicsController : Controller
     {
         model.Name = model.Name?.Trim() ?? string.Empty;
         if (await _db.Topics.AnyAsync(topic => topic.Name == model.Name && topic.Id != id))
-            ModelState.AddModelError(nameof(model.Name), "A topic with this name already exists.");
+            ModelState.AddModelError(nameof(model.Name), _text["Topic_Duplicate"]);
     }
 }

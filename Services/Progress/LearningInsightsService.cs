@@ -66,23 +66,27 @@ public sealed class LearningInsightsService
             .OrderBy(PracticePriority).ThenBy(topic => topic.StrengthScore).ThenBy(topic => topic.TopicId).FirstOrDefault();
         var next = nextTopic == null ? null : eligible[nextTopic.TopicId];
         if (next != null)
-            next.Reason = $"{nextTopic!.Name}: {nextTopic.Label}; {nextTopic.SolvedTasks} of {nextTopic.PublishedTasks} tasks solved. "
-                + "Chosen by practice priority, then learning strength; the easiest remaining task in this topic comes first.";
+        {
+            next.Level = nextTopic!.Level;
+            next.SolvedTasks = nextTopic.SolvedTasks;
+            next.PublishedTasks = nextTopic.PublishedTasks;
+        }
         return new LearningInsightsViewModel
         {
             Topics = topics, AiPatterns = aiPatterns, PracticeNext = next,
             ErrorPatterns = new()
             {
-                new("Compilation", topics.Sum(item => item.CompilationErrors)), new("Wrong Answer / Logic", topics.Sum(item => item.WrongAnswers)),
-                new("Runtime", topics.Sum(item => item.RuntimeErrors)), new("Time Limit", topics.Sum(item => item.TimeLimitErrors)),
-                new("Memory Limit", topics.Sum(item => item.MemoryLimitErrors))
+                new("Compilation", topics.Sum(item => item.CompilationErrors)), new("WrongAnswer", topics.Sum(item => item.WrongAnswers)),
+                new("Runtime", topics.Sum(item => item.RuntimeErrors)), new("TimeLimit", topics.Sum(item => item.TimeLimitErrors)),
+                new("MemoryLimit", topics.Sum(item => item.MemoryLimitErrors))
             }
         };
     }
 
     // Бейтарап оқу белгілерін тұрақты жаттығу басымдығына айналдырады.
-    private static int PracticePriority(TopicStrengthViewModel topic) => topic.Label switch
+    private static int PracticePriority(TopicStrengthViewModel topic) => topic.Level switch
     {
-        "Needs practice" => 0, "Developing" => 1, "Exploring" => 2, "Not started" => 3, _ => 4
+        TopicStrengthLevel.NeedsPractice => 0, TopicStrengthLevel.Developing => 1,
+        TopicStrengthLevel.Exploring => 2, TopicStrengthLevel.NotStarted => 3, _ => 4
     };
 }

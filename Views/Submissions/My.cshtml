@@ -1,23 +1,23 @@
 @model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionHistoryViewModel
-@{ ViewData["Title"] = "My submissions"; }
-<div class="page-heading"><div><p class="eyebrow">Your learning history</p><h1>My submissions</h1><p>Every attempt is a chance to understand a little more.</p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">Solve a task →</a></div>
+@{ ViewData["Title"] = L["Common_MySubmissions"]; }
+<div class="page-heading"><div><p class="eyebrow">@L["History_Eyebrow"]</p><h1>@L["Common_MySubmissions"]</h1><p>@L["History_Intro"]</p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">@L["History_Solve"]</a></div>
 @if (Model.Items.Count == 0)
 {
-    <div class="empty-state"><h2>@(Model.Page == 1 ? "You haven't submitted a solution yet." : "No submissions on this page.")</h2><p><a asp-controller="Tasks" asp-action="Index">Browse tasks</a> to start your learning history.</p></div>
+    <div class="empty-state"><h2>@L[Model.Page == 1 ? "History_EmptyFirst" : "History_EmptyPage"]</h2><p><a asp-controller="Tasks" asp-action="Index">@L["Common_BrowseTasks"]</a> @L["History_StartText"]</p></div>
 }
 else
 {
-    <div class="table-responsive" role="region" aria-label="Submission history" tabindex="0"><table class="table table-striped">
-        <thead><tr><th scope="col">Submission</th><th scope="col">Task</th><th scope="col">Runtime</th><th scope="col">Status</th><th scope="col">Passed / total</th><th scope="col">Created (UTC)</th></tr></thead><tbody>
+    <div class="table-responsive" role="region" aria-label="@L["History_Region"]" tabindex="0"><table class="table table-striped">
+        <thead><tr><th scope="col">@L["History_Submission"]</th><th scope="col">@L["Common_Task"]</th><th scope="col">@L["Common_Runtime"]</th><th scope="col">@L["Common_Status"]</th><th scope="col">@L["Common_PassedTotal"]</th><th scope="col">@L["Common_CreatedUtc"]</th></tr></thead><tbody>
         @foreach (var item in Model.Items)
         {
-            <tr><td><a asp-action="Details" asp-route-id="@item.Id">#@item.Id</a></td><td>@item.TaskTitle</td><td>@item.RuntimeName</td><td><span class="status-badge @item.Status">@item.Status</span></td><td>@item.PassedTests / @item.TotalTests</td><td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
+            <tr><td><a asp-action="Details" asp-route-id="@item.Id">#@item.Id</a></td><td>@item.TaskTitle</td><td>@item.RuntimeName</td><td><span class="status-badge @item.Status">@T[$"Status_{item.Status}"]</span></td><td>@item.PassedTests / @item.TotalTests</td><td>@item.CreatedAt.ToString("G")</td></tr>
         }
         </tbody>
     </table></div>
 }
-<nav class="d-flex gap-2 align-items-center" aria-label="Submission pages">
-    @if (Model.Page > 1) { <a asp-action="My" asp-route-page="@(Model.Page - 1)" class="btn btn-outline-secondary">Previous</a> }
-    @if (Model.Page > 1 || Model.HasNextPage) { <span class="text-muted">Page @Model.Page</span> }
-    @if (Model.HasNextPage) { <a asp-action="My" asp-route-page="@(Model.Page + 1)" class="btn btn-outline-secondary">Next</a> }
+<nav class="d-flex gap-2 align-items-center" aria-label="@L["History_Pages"]">
+    @if (Model.Page > 1) { <a asp-action="My" asp-route-page="@(Model.Page - 1)" class="btn btn-outline-secondary">@L["Common_Previous"]</a> }
+    @if (Model.Page > 1 || Model.HasNextPage) { <span class="text-muted">@L["Common_Page", Model.Page]</span> }
+    @if (Model.HasNextPage) { <a asp-action="My" asp-route-page="@(Model.Page + 1)" class="btn btn-outline-secondary">@L["Common_Next"]</a> }
 </nav>

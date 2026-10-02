@@ -1,0 +1,10 @@
+<form asp-area="" asp-controller="Culture" asp-action="Set" method="post" class="culture-selector">
+    <input type="hidden" name="returnUrl" value="@(Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString)" />
+    <label class="visually-hidden" for="culture-choice">@T["Culture_Label"]</label>
+    <select id="culture-choice" name="culture" class="form-select form-select-sm">
+        <option value="kk-KZ" selected="@(CultureInfo.CurrentUICulture.Name == "kk-KZ")" lang="kk">Қазақша</option>
+        <option value="ru-RU" selected="@(CultureInfo.CurrentUICulture.Name == "ru-RU")" lang="ru">Русский</option>
+        <option value="en-US" selected="@(CultureInfo.CurrentUICulture.Name == "en-US")" lang="en">English</option>
+    </select>
+    <button type="submit" class="btn btn-outline-secondary btn-sm">@T["Culture_Apply"]</button>
+</form>

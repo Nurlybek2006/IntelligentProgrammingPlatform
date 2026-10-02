@@ -1,23 +1,23 @@
 @model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionComparisonViewModel
 @{
-    ViewData["Title"] = "Compare attempts";
+    ViewData["Title"] = L["Diff_Title"];
     Csp.EnableMonacoStyles();
 }
 <link rel="stylesheet" href="~/js/editor/code-editor.css" asp-append-version="true" />
-<div class="page-heading"><div><p class="eyebrow">Understand what changed</p><h1>Compare attempts</h1><p>@Model.Current.TaskTitle</p></div></div>
+<div class="page-heading"><div><p class="eyebrow">@L["Diff_Eyebrow"]</p><h1>@L["Diff_Title"]</h1><p>@Model.Current.TaskTitle</p></div></div>
 <div class="d-flex flex-wrap gap-2 mb-4">
-    <a class="btn btn-outline-secondary" asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.Current.TaskSlug">Back to journey</a>
-    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@Model.Current.Id">Back to submission</a>
+    <a class="btn btn-outline-secondary" asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.Current.TaskSlug">@L["Diff_BackJourney"]</a>
+    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@Model.Current.Id">@L["Diff_BackSubmission"]</a>
 </div>
 <div class="comparison-info">
-    <section class="panel"><h2 class="h5">Previous attempt · #@Model.Previous.Id</h2><span class="status-badge @Model.Previous.Status">@Model.Previous.Status</span><p class="small text-muted mt-2 mb-0">@Model.Previous.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss") UTC<br />@(Model.Previous.ExecutionTimeMs.HasValue ? Model.Previous.ExecutionTimeMs + " ms (test total)" : "Time not measured")</p></section>
-    <section class="panel"><h2 class="h5">Current attempt · #@Model.Current.Id</h2><span class="status-badge @Model.Current.Status">@Model.Current.Status</span><p class="small text-muted mt-2 mb-0">@Model.Current.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss") UTC<br />@(Model.Current.ExecutionTimeMs.HasValue ? Model.Current.ExecutionTimeMs + " ms (test total)" : "Time not measured")</p></section>
+    <section class="panel"><h2 class="h5">@L["Diff_PreviousAttempt", Model.Previous.Id]</h2><span class="status-badge @Model.Previous.Status">@T[$"Status_{Model.Previous.Status}"]</span><p class="small text-muted mt-2 mb-0">@Model.Previous.CreatedAt.ToString("G") UTC<br />@(Model.Previous.ExecutionTimeMs.HasValue ? L["Common_TestTotalTime", Model.Previous.ExecutionTimeMs.Value] : L["Common_TimeNotMeasured"])</p></section>
+    <section class="panel"><h2 class="h5">@L["Diff_CurrentAttempt", Model.Current.Id]</h2><span class="status-badge @Model.Current.Status">@T[$"Status_{Model.Current.Status}"]</span><p class="small text-muted mt-2 mb-0">@Model.Current.CreatedAt.ToString("G") UTC<br />@(Model.Current.ExecutionTimeMs.HasValue ? L["Common_TestTotalTime", Model.Current.ExecutionTimeMs.Value] : L["Common_TimeNotMeasured"])</p></section>
 </div>
-<p class="small text-muted mt-3">Read-only C++ comparison. Removed and added lines are highlighted; on narrow screens the editor switches to an inline comparison.</p>
-<div id="code-diff" class="code-diff" aria-label="Source changes between your attempts" hidden></div>
+<p class="small text-muted mt-3">@L["Diff_Help"]</p>
+<div id="code-diff" class="code-diff" data-previous-label="@T["Diff_PreviousSource"]" data-current-label="@T["Diff_CurrentSource"]" aria-label="@L["Diff_Region"]" hidden></div>
 <div id="diff-fallback" class="comparison-info">
-    <div><label for="previous-source" class="form-label">Previous source</label><textarea asp-for="Previous.SourceCode" id="previous-source" class="form-control source-fallback" readonly spellcheck="false"></textarea></div>
-    <div><label for="current-source" class="form-label">Current source</label><textarea asp-for="Current.SourceCode" id="current-source" class="form-control source-fallback" readonly spellcheck="false"></textarea></div>
+    <div><label for="previous-source" class="form-label">@L["Diff_PreviousSource"]</label><textarea asp-for="Previous.SourceCode" id="previous-source" class="form-control source-fallback" readonly spellcheck="false"></textarea></div>
+    <div><label for="current-source" class="form-label">@L["Diff_CurrentSource"]</label><textarea asp-for="Current.SourceCode" id="current-source" class="form-control source-fallback" readonly spellcheck="false"></textarea></div>
 </div>
 @section Scripts {
     <script type="module" src="~/js/editor/code-editor.js" asp-append-version="true"></script>

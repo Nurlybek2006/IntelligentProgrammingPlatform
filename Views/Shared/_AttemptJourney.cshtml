@@ -1,41 +1,41 @@
 @model IntelligentProgrammingPlatform.ViewModels.Submissions.AttemptJourneyViewModel
 <section class="panel journey-panel mt-4" aria-labelledby="journey-heading">
-    <div class="section-heading mt-0"><h2 id="journey-heading" class="h5">Your attempt journey</h2>
+    <div class="section-heading mt-0"><h2 id="journey-heading" class="h5">@L["Journey_YourJourney"]</h2>
         @if (Model.IsCompact && Model.TotalAttempts > Model.Attempts.Count)
         {
-            <a asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.TaskSlug">View full journey (@Model.TotalAttempts attempts) →</a>
+            <a asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.TaskSlug">@L["Journey_ViewFull", Model.TotalAttempts]</a>
         }
     </div>
     @if (Model.Attempts.Count == 0)
     {
-        <p class="text-muted mb-0">No official attempts yet. Use Run to explore your input, then Submit to start your journey.</p>
+        <p class="text-muted mb-0">@L["Journey_Empty"]</p>
     }
     else
     {
-        <p class="small text-muted">@(Model.IsCompact && Model.TotalAttempts > Model.Attempts.Count ? "Latest attempts, " : "Attempts, ")oldest first. Run results are temporary and do not appear here.</p>
+        <p class="small text-muted">@L[Model.IsCompact && Model.TotalAttempts > Model.Attempts.Count ? "Journey_LatestOrder" : "Journey_Order"]</p>
         <ol class="attempt-timeline">
         @foreach (var attempt in Model.Attempts)
         {
             <li class="attempt-node @(attempt.IsAccepted ? "attempt-accepted" : "")" data-attempt-number="@attempt.Number" data-submission-id="@attempt.SubmissionId" data-status="@attempt.Status">
                 <div class="d-flex flex-wrap justify-content-between gap-2 align-items-center">
-                    <h3 class="h6 mb-0"><a asp-controller="Submissions" asp-action="Details" asp-route-id="@attempt.SubmissionId">Attempt #@attempt.Number</a></h3>
-                    <span class="status-badge @attempt.Status">@attempt.Status</span>
+                    <h3 class="h6 mb-0"><a asp-controller="Submissions" asp-action="Details" asp-route-id="@attempt.SubmissionId">@L["Journey_Attempt", attempt.Number]</a></h3>
+                    <span class="status-badge @attempt.Status">@T[$"Status_{attempt.Status}"]</span>
                 </div>
-                <p class="small text-muted my-2"><time datetime="@attempt.CreatedAt.ToString("O")">@attempt.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss") UTC</time> · @attempt.PassedTests / @attempt.TotalTests tests · @(attempt.ExecutionTimeMs.HasValue ? attempt.ExecutionTimeMs + " ms (test total)" : "Time not measured")</p>
+                <p class="small text-muted my-2"><time datetime="@attempt.CreatedAt.ToString("O")">@attempt.CreatedAt.ToString("G") UTC</time> · @L["Journey_Tests", attempt.PassedTests, attempt.TotalTests] · @(attempt.ExecutionTimeMs.HasValue ? L["Common_TestTotalTime", attempt.ExecutionTimeMs.Value] : L["Common_TimeNotMeasured"])</p>
                 <div class="d-flex flex-wrap gap-3 align-items-center">
                     @if (attempt.HasAiFeedback)
                     {
-                        <span class="ai-hint-marker" title="AI feedback is saved for this attempt. This does not imply it caused a later improvement.">AI Hint Used</span>
-                        <span class="small journey-hint-count">AI hints: @attempt.RevealedHintCount/@attempt.AvailableHintCount</span>
+                        <span class="ai-hint-marker" title="@L["Journey_AiTitle"]">@L["Journey_AiMarker"]</span>
+                        <span class="small journey-hint-count">@L["Journey_AiCounts", attempt.RevealedHintCount, attempt.AvailableHintCount]</span>
                     }
                     @if (attempt.PreviousSubmissionId.HasValue)
                     {
-                        <a class="small" asp-controller="Submissions" asp-action="Compare" asp-route-olderId="@attempt.PreviousSubmissionId" asp-route-newerId="@attempt.SubmissionId">Compare with previous</a>
+                        <a class="small" asp-controller="Submissions" asp-action="Compare" asp-route-olderId="@attempt.PreviousSubmissionId" asp-route-newerId="@attempt.SubmissionId">@L["Journey_Compare"]</a>
                     }
                 </div>
             </li>
         }
         </ol>
-        <p class="small text-muted mb-0">AI Hint Used means feedback exists for that attempt; it does not establish why a later attempt improved.</p>
+        <p class="small text-muted mb-0">@L["Journey_AiHelp"]</p>
     }
 </section>

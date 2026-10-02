@@ -1,13 +1,13 @@
-@{ ViewData["Title"] = "Admin"; }
-<div class="page-heading"><div><p class="eyebrow">Catalog management</p><h1>Admin workspace</h1><p>Prepare clear tasks, reliable examples and meaningful tests for students.</p></div></div>
+@{ ViewData["Title"] = A["Dashboard_Title"]; }
+<div class="page-heading"><div><p class="eyebrow">@A["Dashboard_Eyebrow"]</p><h1>@A["Dashboard_Title"]</h1><p>@A["Dashboard_Intro"]</p></div></div>
 <div class="admin-actions">
-    <a class="panel" asp-controller="Topics" asp-action="Index"><span class="feature-number" aria-hidden="true">01 / ORGANIZE</span><h2 class="h4">Topics →</h2><p>Group practice tasks into useful learning areas.</p></a>
-    <a class="panel" asp-controller="ProgrammingTasks" asp-action="Index"><span class="feature-number" aria-hidden="true">02 / PUBLISH</span><h2 class="h4">Programming tasks →</h2><p>Edit descriptions, difficulty, limits and publication state.</p></a>
-    <a class="panel" asp-controller="TestCases" asp-action="Index"><span class="feature-number" aria-hidden="true">03 / VERIFY</span><h2 class="h4">Test cases →</h2><p>Manage visible examples and protected hidden tests.</p></a>
+    <a class="panel" asp-controller="Topics" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Dashboard_Organize"]</span><h2 class="h4">@A["Topics"] →</h2><p>@A["Dashboard_Topics"]</p></a>
+    <a class="panel" asp-controller="ProgrammingTasks" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Dashboard_Publish"]</span><h2 class="h4">@A["Tasks"] →</h2><p>@A["Dashboard_Tasks"]</p></a>
+    <a class="panel" asp-controller="TestCases" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Dashboard_Verify"]</span><h2 class="h4">@A["TestCases"] →</h2><p>@A["Dashboard_TestCases"]</p></a>
 </div>
 <section class="panel mt-4">
-    <h2 class="h4">Leaderboard maintenance</h2>
-    <p class="text-muted">Recalculate scores and counts from submission history after catalog changes. Existing submissions are preserved.</p>
+    <h2 class="h4">@A["Leaderboard_Title"]</h2>
+    <p class="text-muted">@A["Leaderboard_Description"]</p>
     @if (TempData["Error"] is string error) { <div class="alert alert-warning" role="alert">@error</div> }
-    <form asp-controller="Leaderboard" asp-action="Rebuild" method="post" data-busy-form="Rebuilding leaderboard…"><button class="btn btn-outline-primary" type="submit">Rebuild leaderboard</button><span class="d-block small mt-2" role="status"></span></form>
+    <form asp-controller="Leaderboard" asp-action="Rebuild" method="post" data-busy-form="@A["Leaderboard_Busy"]"><button class="btn btn-outline-primary" type="submit">@A["Leaderboard_Rebuild"]</button><span class="d-block small mt-2" role="status"></span></form>
 </section>

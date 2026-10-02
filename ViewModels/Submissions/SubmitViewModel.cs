@@ -3,19 +3,20 @@ using System.Text;
 using IntelligentProgrammingPlatform.Services.CodeExecution;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 
 namespace IntelligentProgrammingPlatform.ViewModels.Submissions;
 
 public class SubmitViewModel : IValidatableObject
 {
-    [Range(1, int.MaxValue)]
+    [Range(1, int.MaxValue, ErrorMessage = "Validation_Range"), Display(Name = "Field_Task")]
     public int ProgrammingTaskId { get; set; }
 
-    [Range(1, int.MaxValue), Display(Name = "Runtime")]
+    [Range(1, int.MaxValue, ErrorMessage = "Validation_Range"), Display(Name = "Field_Runtime")]
     public int RuntimeId { get; set; }
 
-    [Required, StringLength(CodeRunnerOptions.MaxSourceBytes)]
-    [Display(Name = "C++ source code")]
+    [Required(ErrorMessage = "Validation_Required"), StringLength(CodeRunnerOptions.MaxSourceBytes, ErrorMessage = "Validation_SourceLimit")]
+    [Display(Name = "Field_SourceCode")]
     public string SourceCode { get; set; } = string.Empty;
 
     [ValidateNever]
@@ -27,6 +28,6 @@ public class SubmitViewModel : IValidatableObject
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (Encoding.UTF8.GetByteCount(SourceCode ?? string.Empty) > CodeRunnerOptions.MaxSourceBytes)
-            yield return new ValidationResult("Source code must not exceed 64 KB (UTF-8).", new[] { nameof(SourceCode) });
+            yield return new ValidationResult(validationContext.GetRequiredService<IStringLocalizer<SharedResource>>()["Validation_SourceLimit"], new[] { nameof(SourceCode) });
     }
 }

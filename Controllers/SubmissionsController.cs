@@ -7,6 +7,7 @@ using IntelligentProgrammingPlatform.ViewModels.Submissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace IntelligentProgrammingPlatform.Controllers;
 
@@ -19,16 +20,18 @@ public class SubmissionsController : Controller
     private readonly TaskPageService _pages;
     private readonly ILogger<SubmissionsController> _logger;
     private readonly OpenAiTutorService _ai;
+    private readonly IStringLocalizer<SharedResource> _text;
 
     // Контроллерге тексеру, қауіпсіз бет құру және сақтау қызметтерін береді.
     public SubmissionsController(ApplicationDbContext db, SubmissionService submissions, TaskPageService pages,
-        ILogger<SubmissionsController> logger, OpenAiTutorService ai)
+        ILogger<SubmissionsController> logger, OpenAiTutorService ai, IStringLocalizer<SharedResource> text)
     {
         _db = db;
         _submissions = submissions;
         _pages = pages;
         _logger = logger;
         _ai = ai;
+        _text = text;
     }
 
     [HttpPost, RequestSizeLimit(512 * 1024)]
@@ -48,7 +51,7 @@ public class SubmissionsController : Controller
                 var outcome = await _submissions.SubmitAsync(userId, model, cancellationToken);
                 if (outcome.Id.HasValue)
                     return RedirectToAction(nameof(Details), new { id = outcome.Id.Value });
-                ModelState.AddModelError(string.Empty, outcome.Error ?? CodeRunnerOptions.UnavailableMessage);
+                ModelState.AddModelError(string.Empty, _text[outcome.Error ?? "Runner_Unavailable"]);
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
             {
@@ -57,7 +60,7 @@ public class SubmissionsController : Controller
             catch (Exception exception)
             {
                 _logger.LogError(exception, "Could not accept a submission");
-                ModelState.AddModelError(string.Empty, CodeRunnerOptions.UnavailableMessage);
+                ModelState.AddModelError(string.Empty, _text["Runner_Unavailable"]);
             }
         }
         var page = await _pages.GetAsync(slug, model, cancellationToken, userId);
@@ -142,15 +145,15 @@ public class SubmissionsController : Controller
         if (userId == null) return Challenge();
         var result = await _ai.AnalyzeAsync(id, userId, cancellationToken);
         if (result.Status == AiAnalysisStatus.NotFound) return NotFound();
-        TempData["AiMessage"] = result.Status switch
+        TempData["AiMessage"] = _text[result.Status switch
         {
-            AiAnalysisStatus.Saved => "AI feedback is ready. Treat it as advice and check it against the task.",
-            AiAnalysisStatus.Existing => "Showing the existing AI feedback; no new analysis was requested.",
-            AiAnalysisStatus.NotFinished => "Wait until the submission has finished before requesting AI feedback.",
-            AiAnalysisStatus.NotConfigured => "AI feedback is not configured.",
-            AiAnalysisStatus.Busy => "AI feedback is busy or was requested recently. Please wait 30 seconds and try again.",
-            _ => "AI feedback is temporarily unavailable."
-        };
+            AiAnalysisStatus.Saved => "AiMessage_Saved",
+            AiAnalysisStatus.Existing => "AiMessage_Existing",
+            AiAnalysisStatus.NotFinished => "AiMessage_NotFinished",
+            AiAnalysisStatus.NotConfigured => "AiMessage_NotConfigured",
+            AiAnalysisStatus.Busy => "AiMessage_Busy",
+            _ => "AiMessage_Unavailable"
+        }].Value;
         return RedirectToAction(nameof(Details), new { id });
     }
 }

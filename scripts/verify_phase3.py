@@ -91,7 +91,7 @@ def main():
         status, _, body = client.request(location)
         actual = sql(f'SELECT Status FROM Submissions WHERE Id={submission_id};')
         check(actual == str(expected), f'{STATES[expected]} persisted (submission {submission_id}, actual {actual})')
-        check(status == 200 and f'>{STATES[expected]}</dd>' in body, 'Owner sees stored result')
+        check(status == 200 and f'data-status="{STATES[expected]}"' in body, 'Owner sees stored result with invariant status metadata')
         check(sql(f'SELECT COUNT(*) FROM Submissions WHERE Id={submission_id} AND StartedAt IS NOT NULL AND FinishedAt>=StartedAt AND PassedTests<=TotalTests AND UserId<>\'forged-owner\' AND ISNULL(CompilerOutput,\'\')<>\'forged-output\';') == '1', 'Server owns timestamps, counters, owner and compiler result')
         check(sql(f'SELECT COUNT(*) FROM ExecutionResults WHERE SubmissionId={submission_id} AND MemoryUsedKb IS NOT NULL;') == '0', 'Unmeasured memory remains NULL')
         if selected_task == task_id:

@@ -1,0 +1,897 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data xml:space="preserve" name="Common_Tasks">
+    <value>Есептер</value>
+  </data>
+  <data xml:space="preserve" name="Common_Task">
+    <value>Есеп</value>
+  </data>
+  <data xml:space="preserve" name="Common_Topic">
+    <value>Тақырып</value>
+  </data>
+  <data xml:space="preserve" name="Common_Difficulty">
+    <value>Қиындық</value>
+  </data>
+  <data xml:space="preserve" name="Common_Status">
+    <value>Күйі</value>
+  </data>
+  <data xml:space="preserve" name="Common_Runtime">
+    <value>Орындау ортасы</value>
+  </data>
+  <data xml:space="preserve" name="Common_PassedTotal">
+    <value>Өткен / барлығы</value>
+  </data>
+  <data xml:space="preserve" name="Common_CreatedUtc">
+    <value>Құрылған уақыты (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Common_BrowseTasks">
+    <value>Есептерді қарау</value>
+  </data>
+  <data xml:space="preserve" name="Common_Login">
+    <value>Кіру</value>
+  </data>
+  <data xml:space="preserve" name="Common_Register">
+    <value>Тіркелу</value>
+  </data>
+  <data xml:space="preserve" name="Common_MySubmissions">
+    <value>Менің жіберілімдерім</value>
+  </data>
+  <data xml:space="preserve" name="Common_MyProgress">
+    <value>Менің ілгерілеуім</value>
+  </data>
+  <data xml:space="preserve" name="Common_Leaderboard">
+    <value>Рейтинг</value>
+  </data>
+  <data xml:space="preserve" name="Common_Previous">
+    <value>Алдыңғы</value>
+  </data>
+  <data xml:space="preserve" name="Common_Next">
+    <value>Келесі</value>
+  </data>
+  <data xml:space="preserve" name="Common_Page">
+    <value>{0}-бет</value>
+  </data>
+  <data xml:space="preserve" name="Common_SolvedTasks">
+    <value>Шешілген есептер</value>
+  </data>
+  <data xml:space="preserve" name="Common_DisplayName">
+    <value>Көрсетілетін есім</value>
+  </data>
+  <data xml:space="preserve" name="Common_Email">
+    <value>Электрондық пошта</value>
+  </data>
+  <data xml:space="preserve" name="Common_Input">
+    <value>Кіріс деректері</value>
+  </data>
+  <data xml:space="preserve" name="Common_ExpectedOutput">
+    <value>Күтілетін нәтиже</value>
+  </data>
+  <data xml:space="preserve" name="Common_Output">
+    <value>Шығыс деректері</value>
+  </data>
+  <data xml:space="preserve" name="Common_CompilerOutput">
+    <value>Компилятор хабарламалары</value>
+  </data>
+  <data xml:space="preserve" name="Common_NotMeasured">
+    <value>Өлшенбеді</value>
+  </data>
+  <data xml:space="preserve" name="Common_TimeNotMeasured">
+    <value>Уақыт өлшенбеді</value>
+  </data>
+  <data xml:space="preserve" name="Common_Milliseconds">
+    <value>{0} мс</value>
+  </data>
+  <data xml:space="preserve" name="Common_TestTotalTime">
+    <value>{0} мс (тесттердің жалпы уақыты)</value>
+  </data>
+  <data xml:space="preserve" name="Common_TimeLabel">
+    <value>Уақыт: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Common_Compilation">
+    <value>Компиляция</value>
+  </data>
+  <data xml:space="preserve" name="Common_RecentSubmissions">
+    <value>Соңғы жіберілімдер</value>
+  </data>
+  <data xml:space="preserve" name="Home_Title">
+    <value>Есеп шығарып үйреніңіз</value>
+  </data>
+  <data xml:space="preserve" name="Home_Eyebrow">
+    <value>Аздап жаттығу. Тереңірек түсіну.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Heading">
+    <value>Дағдыңызды дамытыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_HeadingAccent">
+    <value>Әр шешіммен алға басыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Intro">
+    <value>C++ тілін жаттықтыруға арналған орта. Есеп шығарыңыз, нәтижеңізді түсініңіз және келесі қадамыңызды кеңестер арқылы табыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Continue">
+    <value>Шешуді жалғастыру</value>
+  </data>
+  <data xml:space="preserve" name="Home_Start">
+    <value>Есеп шешуді бастау</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExploreLeaderboard">
+    <value>Рейтингті қарау</value>
+  </data>
+  <data xml:space="preserve" name="Home_Note">
+    <value>C++ 20 · Негіздерден алгоритмдерге дейін · Өз қарқыныңызбен үйреніңіз</value>
+  </data>
+  <data xml:space="preserve" name="Home_JourneyLabel">
+    <value>Сіздің оқу жолыңыз</value>
+  </data>
+  <data xml:space="preserve" name="Home_LoopTitle">
+    <value>СІЗДІҢ КЕЛЕСІ ЖЕТІСТІГІҢІЗ</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepTask">
+    <value>Есепті таңдаңыз</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepTaskText">
+    <value>Мысалдарды оқыңыз. Шешіміңізді жазыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepResult">
+    <value>Нәтижені түсініңіз</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepResultText">
+    <value>Қай тест өткенін және нені тексеру керегін көріңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepLearn">
+    <value>Үйреніңіз, түзетіңіз, қайта сынаңыз</value>
+  </data>
+  <data xml:space="preserve" name="Home_StepLearnText">
+    <value>Кеңес алыңыз. Қатені өзіңіз түзетіңіз. Дами беріңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Snapshot">
+    <value>Тоқтаған жерден жалғастырыңыз</value>
+  </data>
+  <data xml:space="preserve" name="Home_ViewProgress">
+    <value>Ілгерілеуіңізді көру →</value>
+  </data>
+  <data xml:space="preserve" name="Home_YourScore">
+    <value>Сіздің ұпайыңыз</value>
+  </data>
+  <data xml:space="preserve" name="Home_EmptyHeading">
+    <value>Алғашқы шешіміңіз осы жерден басталады</value>
+  </data>
+  <data xml:space="preserve" name="Home_EmptyText">
+    <value>Есепті таңдап, алғашқы шешімді жіберіңіз. Әр талпыныс — үйренудің бір бөлігі.</value>
+  </data>
+  <data xml:space="preserve" name="Home_Features">
+    <value>Оқуды жалғастыруға қажеттінің бәрі</value>
+  </data>
+  <data xml:space="preserve" name="Home_PracticeTag">
+    <value>01 / ЖАТТЫҒУ</value>
+  </data>
+  <data xml:space="preserve" name="Home_CheckTag">
+    <value>02 / ТЕКСЕРУ</value>
+  </data>
+  <data xml:space="preserve" name="Home_UnderstandTag">
+    <value>03 / ТҮСІНУ</value>
+  </data>
+  <data xml:space="preserve" name="Home_GrowTag">
+    <value>04 / ДАМУ</value>
+  </data>
+  <data xml:space="preserve" name="Home_TasksFeature">
+    <value>Бағдарламалау есептері</value>
+  </data>
+  <data xml:space="preserve" name="Home_TasksFeatureText">
+    <value>Тақырып пен қиындық деңгейін таңдаңыз; түсінікті мысалдар бастауға көмектеседі.</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExecutionFeature">
+    <value>Оқшауланған орындау</value>
+  </data>
+  <data xml:space="preserve" name="Home_ExecutionFeatureText">
+    <value>C++ шешімін тесттермен тексеріп, әр талпыныстың нақты нәтижесін алыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_AiFeature">
+    <value>Сіздің ЖИ тәлімгеріңіз</value>
+  </data>
+  <data xml:space="preserve" name="Home_AiFeatureText">
+    <value>Түсіндірме мен кеңес сұраңыз, ал есептің шешімін өзіңіз табыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Home_ProgressFeature">
+    <value>Көрінетін ілгерілеу</value>
+  </data>
+  <data xml:space="preserve" name="Home_ProgressFeatureText">
+    <value>Дағдыңыз дамыған сайын шешілген есептерді, сәттілік үлесін және ұпайды бақылаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_Title">
+    <value>Құпиялық және деректер</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_Eyebrow">
+    <value>Сіздің оқуыңыз, сіздің деректеріңіз</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AccountHeading">
+    <value>Тіркелгі және әрекеттер</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AccountText">
+    <value>Оқу тарихын сақтау үшін тіркелгіңіз, жіберілген код, тест нәтижелері және ЖИ кеңестері сақталады. Жіберілім мәліметтері мен ілгерілеу тек өз тіркелгіңізге қолжетімді. Ашық рейтингте көрсетілетін есіміңіз бен оқу статистикасы беріледі; электрондық поштаңыз көрсетілмейді.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AiHeading">
+    <value>ЖИ талдауын өзіңіз таңдайсыз</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_AiText">
+    <value>ЖИ арқылы талдауды таңдағанда код, есеп сипаттамасы, қажет болса компилятор хабарламалары және ашық өтпеген тесттердің мәліметтері OpenAI-ға жіберіледі. Жасырын тест мазмұны мен тіркелгі құпиялары жіберілмейді. Сұрауда Responses нәтижесін сақтау өшіріледі; OpenAI қызметінің деректер саясаты қолданылады. Кеңес жіберіліммен бірге сақталып, кейін қайта көрсетіледі.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_StorageHeading">
+    <value>Браузердегі жергілікті сақтау</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_StorageText">
+    <value>Кіру cookie файлы сеансыңызды сақтайды. Қауіпсіздік cookie файлдары пішіндерді қорғайды. Редактор әр есептің нобайын осы браузер қойындысының сеанс жадында сақтайды; нобайлар басқа тіркелгілермен бөлісілмейді. Тіл cookie файлы интерфейс тілін есте сақтайды.</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_SharedHeading">
+    <value>Ортақ құрылғыны пайдалану</value>
+  </data>
+  <data xml:space="preserve" name="Privacy_SharedText">
+    <value>Аяқтағанда тіркелгіден шығып, браузер қойындысын жабыңыз. Тіркелгі немесе деректер бойынша сұрақтарды платформа әкімшісіне қойыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Eyebrow">
+    <value>Жаттығу жинағы</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Heading">
+    <value>Келесі есебіңізді табыңыз</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Intro">
+    <value>Негіздерді меңгеріп, кейін массивтер мен алгоритмдер арқылы дағдыңызды дамытыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Matching">
+    <value>Табылған есептер: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Search">
+    <value>Атауы бойынша іздеу</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_SearchPlaceholder">
+    <value>Бағдарламалау есебін іздеу…</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_AllTopics">
+    <value>Барлық тақырыптар</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_AllDifficulties">
+    <value>Барлық деңгейлер</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Filter">
+    <value>Сүзу</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Reset">
+    <value>Тазарту</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_EmptyHeading">
+    <value>Сүзгілерге сәйкес есептер жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_EmptyText">
+    <value>Басқа атауды, тақырыпты немесе деңгейді таңдаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_ShowAll">
+    <value>Барлық есептерді көрсету</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_YourProgress">
+    <value>Сіздің ілгерілеуіңіз</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_OpenTask">
+    <value>Есепті ашу</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Solved">
+    <value>✓ Шешілген</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_ToExplore">
+    <value>Бастауға болады</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_Solve">
+    <value>Шешу</value>
+  </data>
+  <data xml:space="preserve" name="Tasks_SolveLabel">
+    <value>{0} есебін шешу</value>
+  </data>
+  <data xml:space="preserve" name="Task_Back">
+    <value>← Есептерге оралу</value>
+  </data>
+  <data xml:space="preserve" name="Task_Heading">
+    <value>Есеп шарты</value>
+  </data>
+  <data xml:space="preserve" name="Task_TimeLimit">
+    <value>Уақыт шегі</value>
+  </data>
+  <data xml:space="preserve" name="Task_MemoryLimit">
+    <value>Жад шегі</value>
+  </data>
+  <data xml:space="preserve" name="Task_Memory">
+    <value>{0} МБ</value>
+  </data>
+  <data xml:space="preserve" name="Task_Language">
+    <value>Тіл</value>
+  </data>
+  <data xml:space="preserve" name="Task_Examples">
+    <value>Мысалдар</value>
+  </data>
+  <data xml:space="preserve" name="Task_NoExamples">
+    <value>Мысалдар жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Task_Example">
+    <value>{0}-мысал</value>
+  </data>
+  <data xml:space="preserve" name="Task_YourSolution">
+    <value>Сіздің шешіміңіз</value>
+  </data>
+  <data xml:space="preserve" name="Task_GuestHeading">
+    <value>Сынап көруге дайынсыз ба?</value>
+  </data>
+  <data xml:space="preserve" name="Task_GuestText">
+    <value>Редакторда C++ кодын жазып, шешімді тексеру үшін кіріңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Editor_SourceHelp">
+    <value>C++ 20 · Кодтың ең үлкен көлемі: 64 КиБ. Нобай осы браузер қойындысында сақталады.</value>
+  </data>
+  <data xml:space="preserve" name="Run_CustomInput">
+    <value>Өз кіріс деректеріңіз</value>
+  </data>
+  <data xml:space="preserve" name="Run_InputHelp">
+    <value>32 КиБ дейін (UTF-8). Іске қосу тек осы деректерді қолданады, талпынысты сақтамайды және ұпайға әсер етпейді.</value>
+  </data>
+  <data xml:space="preserve" name="Run_Button">
+    <value>Іске қосу</value>
+  </data>
+  <data xml:space="preserve" name="Submit_Button">
+    <value>Шешімді жіберу</value>
+  </data>
+  <data xml:space="preserve" name="Submit_Help">
+    <value>Жіберу ресми тесттермен тексеріп, талпынысты оқу жолыңызда сақтайды.</value>
+  </data>
+  <data xml:space="preserve" name="Editor_NoRuntime">
+    <value>Қолжетімді C++ орындау ортасы жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Run_Result">
+    <value>Іске қосу нәтижесі</value>
+  </data>
+  <data xml:space="preserve" name="Run_Diagnostic">
+    <value>Диагностика / stderr</value>
+  </data>
+  <data xml:space="preserve" name="History_Eyebrow">
+    <value>Сіздің оқу тарихыңыз</value>
+  </data>
+  <data xml:space="preserve" name="History_Intro">
+    <value>Әр талпыныс — тереңірек түсінуге мүмкіндік.</value>
+  </data>
+  <data xml:space="preserve" name="History_Solve">
+    <value>Есепті шешу →</value>
+  </data>
+  <data xml:space="preserve" name="History_EmptyFirst">
+    <value>Сіз әлі шешім жібермедіңіз.</value>
+  </data>
+  <data xml:space="preserve" name="History_EmptyPage">
+    <value>Бұл бетте жіберілімдер жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="History_StartText">
+    <value>және оқу тарихын бастаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="History_Region">
+    <value>Жіберілімдер тарихы</value>
+  </data>
+  <data xml:space="preserve" name="History_Submission">
+    <value>Жіберілім</value>
+  </data>
+  <data xml:space="preserve" name="History_Pages">
+    <value>Жіберілім беттері</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Title">
+    <value>№{0} жіберілім</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Back">
+    <value>← Менің жіберілімдерім</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Journey">
+    <value>Талпыныстар жолын көру</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Editor">
+    <value>Редакторға оралу →</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Overview">
+    <value>Жіберілімнің қысқаша нәтижесі</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Succeeded">
+    <value>Сәтті</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Failed">
+    <value>Сәтсіз</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotCompleted">
+    <value>Аяқталмады</value>
+  </data>
+  <data xml:space="preserve" name="Submission_ContainerTime">
+    <value>Тест контейнерлерінің уақыты</value>
+  </data>
+  <data xml:space="preserve" name="Submission_WallTime">
+    <value>{0} мс (нақты өткен жалпы уақыт)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_StartedUtc">
+    <value>Басталған уақыты (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_FinishedUtc">
+    <value>Аяқталған уақыты (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotStarted">
+    <value>Басталмады</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NotFinished">
+    <value>Аяқталмады</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Unavailable">
+    <value>Орындау қызметі уақытша қолжетімсіз. Шешімді кейінірек қайта жіберіңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Checking">
+    <value>Жіберіліміңіз тексеріліп жатыр.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Refresh">
+    <value>Нәтижені жаңарту</value>
+  </data>
+  <data xml:space="preserve" name="Submission_CompilationFailed">
+    <value>Компиляция сәтсіз аяқталды</value>
+  </data>
+  <data xml:space="preserve" name="Submission_CompilationHelp">
+    <value>Алғашқы хабарламаны оқып, синтаксисті түзетіңіз де, қайта жіберіңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_TestResults">
+    <value>Тест нәтижелері</value>
+  </data>
+  <data xml:space="preserve" name="Submission_NoResults">
+    <value>Тест нәтижелері әлі жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_HiddenTest">
+    <value>Жасырын тест</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Test">
+    <value>Тест</value>
+  </data>
+  <data xml:space="preserve" name="Submission_HiddenHelp">
+    <value>Бұл тест үшін тек нәтиже мен уақыт көрсетіледі.</value>
+  </data>
+  <data xml:space="preserve" name="Submission_ActualOutput">
+    <value>Алынған нәтиже</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Diagnostic">
+    <value>Диагностика</value>
+  </data>
+  <data xml:space="preserve" name="Submission_Source">
+    <value>Жіберілген бастапқы код</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Eyebrow">
+    <value>Келесі қадамыңызды түсініңіз</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Title">
+    <value>ЖИ тәлімгері</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Summary">
+    <value>Қорытынды</value>
+  </data>
+  <data xml:space="preserve" name="Ai_ErrorCategory">
+    <value>Қате санаты:</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Explanation">
+    <value>Түсіндірме</value>
+  </data>
+  <data xml:space="preserve" name="Ai_ProgressiveHints">
+    <value>Кезеңдік кеңестер</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealedCount">
+    <value>Ашылған кеңестер: {0} / {1}</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Hint">
+    <value>{0}-кеңес</value>
+  </data>
+  <data xml:space="preserve" name="Ai_TryFirst">
+    <value>Келесі кеңесті ашпас бұрын шешімді түзетіп көріңіз. Қосымша бағыт керек пе?</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Revealing">
+    <value>Келесі кеңес ашылып жатыр…</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealFinal">
+    <value>Соңғы кеңесті ашу</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealNext">
+    <value>Келесі кеңесті ашу</value>
+  </data>
+  <data xml:space="preserve" name="Ai_RevealHelp">
+    <value>Сақталған кеңесті ашу ЖИ талдауын қайта сұратпайды.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_NoHints">
+    <value>Бұл талдау үшін сақталған кеңестер жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AllRevealed">
+    <value>Барлық қолжетімді кеңестер ашылды.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AfterFinish">
+    <value>ЖИ талдауы жіберілім аяқталғаннан кейін қолжетімді.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_NotConfigured">
+    <value>ЖИ талдауы бапталмаған.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_AnalyzeText">
+    <value>Кеңес алу үшін осы жіберілімді талдаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Disclosure">
+    <value>Кодыңыз, есеп мәтіні және ашық диагностикалық деректер OpenAI-ға жіберіледі. Жасырын тест мазмұны жіберілмейді. Тәлімгер дайын шешім емес, кеңес береді.</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Asking">
+    <value>Тәлімгерге сұрау жіберілуде…</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Analyze">
+    <value>ЖИ арқылы талдау</value>
+  </data>
+  <data xml:space="preserve" name="Ai_Caution">
+    <value>ЖИ кеңесінде қате болуы мүмкін. Өзгерістерді кодты қайта жіберіп тексеріңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Title">
+    <value>Талпыныстарды салыстыру</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Eyebrow">
+    <value>Не өзгергенін түсініңіз</value>
+  </data>
+  <data xml:space="preserve" name="Diff_BackJourney">
+    <value>Оқу жолына оралу</value>
+  </data>
+  <data xml:space="preserve" name="Diff_BackSubmission">
+    <value>Жіберілімге оралу</value>
+  </data>
+  <data xml:space="preserve" name="Diff_PreviousAttempt">
+    <value>Алдыңғы талпыныс · №{0}</value>
+  </data>
+  <data xml:space="preserve" name="Diff_CurrentAttempt">
+    <value>Қазіргі талпыныс · №{0}</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Help">
+    <value>C++ коды тек оқу үшін салыстырылады. Өшірілген және қосылған жолдар белгіленеді; тар экранда редактор бір бағанды салыстыруға ауысады.</value>
+  </data>
+  <data xml:space="preserve" name="Diff_Region">
+    <value>Талпыныстар арасындағы код өзгерістері</value>
+  </data>
+  <data xml:space="preserve" name="Diff_PreviousSource">
+    <value>Алдыңғы код</value>
+  </data>
+  <data xml:space="preserve" name="Diff_CurrentSource">
+    <value>Қазіргі код</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Title">
+    <value>Талпыныстар жолы</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Eyebrow">
+    <value>Әр талпыныстан үйреніңіз</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Count">
+    <value>Ресми талпыныстар: {0}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_BackEditor">
+    <value>Редакторға оралу</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Pages">
+    <value>Талпыныстар жолының беттері</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Earlier">
+    <value>Бұрынғы талпыныстар</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Later">
+    <value>Кейінгі талпыныстар</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Page">
+    <value>{0} / {1} бет</value>
+  </data>
+  <data xml:space="preserve" name="Journey_YourJourney">
+    <value>Сіздің талпыныстар жолыңыз</value>
+  </data>
+  <data xml:space="preserve" name="Journey_ViewFull">
+    <value>Толық жолды көру ({0} талпыныс) →</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Empty">
+    <value>Ресми талпыныстар әлі жоқ. Деректеріңізді Іске қосу арқылы тексеріп, кейін Шешімді жіберу арқылы оқу жолын бастаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Order">
+    <value>Талпыныстар ескісінен жаңасына қарай берілген. Іске қосу нәтижелері уақытша және мұнда көрсетілмейді.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_LatestOrder">
+    <value>Соңғы талпыныстар ескісінен жаңасына қарай берілген. Іске қосу нәтижелері уақытша және мұнда көрсетілмейді.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Attempt">
+    <value>№{0} талпыныс</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Tests">
+    <value>{0} / {1} тест</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiMarker">
+    <value>ЖИ кеңесі бар</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiTitle">
+    <value>Бұл талпыныс үшін ЖИ талдауы сақталған. Бұл кейінгі жақсаруға сол себеп болды дегенді білдірмейді.</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiCounts">
+    <value>ЖИ кеңестері: {0}/{1}</value>
+  </data>
+  <data xml:space="preserve" name="Journey_Compare">
+    <value>Алдыңғысымен салыстыру</value>
+  </data>
+  <data xml:space="preserve" name="Journey_AiHelp">
+    <value>ЖИ кеңесі бар белгісі осы талпынысқа талдау сақталғанын білдіреді; кейінгі талпыныстың неліктен жақсарғанын дәлелдемейді.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Eyebrow">
+    <value>Шағын қадамдар, көрінетін даму</value>
+  </data>
+  <data xml:space="preserve" name="Progress_PublishedSolved">
+    <value>Шешілген жария есептер:</value>
+  </data>
+  <data xml:space="preserve" name="Progress_KeepPracticing">
+    <value>Жаттығуды жалғастыру →</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AllSolved">
+    <value>Шешілген есептер (бүкіл тарих)</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Completed">
+    <value>Аяқталған жіберілімдер</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Accepted">
+    <value>Қабылданған жіберілімдер</value>
+  </data>
+  <data xml:space="preserve" name="Progress_CompilationErrors">
+    <value>Компиляция қателері</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SuccessPercentage">
+    <value>Сәтті талпыныстар үлесі</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SuccessHelp">
+    <value>Қабылданған / аяқталған талпыныстар</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AverageTime">
+    <value>Шешуге кеткен орташа уақыт</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Minutes">
+    <value>{0} минут</value>
+  </data>
+  <data xml:space="preserve" name="Progress_NotAvailable">
+    <value>Әлі қолжетімсіз</value>
+  </data>
+  <data xml:space="preserve" name="Progress_TimeHelp">
+    <value>Алғашқы талпыныстан алғашқы қабылданған шешімге дейін</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Rating">
+    <value>Рейтинг ұпайы</value>
+  </data>
+  <data xml:space="preserve" name="Progress_RatingHelp">
+    <value>Әр шешілген есеп бір рет саналады</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ByDifficulty">
+    <value>Қиындық бойынша ілгерілеу</value>
+  </data>
+  <data xml:space="preserve" name="Progress_DifficultyLabel">
+    <value>{0} деңгейіндегі ілгерілеу</value>
+  </data>
+  <data xml:space="preserve" name="Progress_RepeatedHelp">
+    <value>Қайталанған қабылданған жіберілімдер бір шешілген есеп болып саналады.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ByTopic">
+    <value>Тақырып бойынша ілгерілеу</value>
+  </data>
+  <data xml:space="preserve" name="Progress_NoTopics">
+    <value>Есептер жарияланғанда тақырыптар осында пайда болады.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Solved">
+    <value>Шешілген</value>
+  </data>
+  <data xml:space="preserve" name="Progress_PublishedTasks">
+    <value>Жарияланған есептер</value>
+  </data>
+  <data xml:space="preserve" name="Progress_HistoryHelp">
+    <value>Қиындық пен тақырып бойынша ілгерілеуге жария есептер кіреді. Тарихтағы шешілген есептер мен рейтинг кейін жарияланымнан алынған есептерді де сақтайды.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_SolvingTimeHelp">
+    <value>Әр шешілген есеп үшін шешу уақыты алғашқы жіберілімнен алғашқы қабылданған шешімге дейін есептеледі. Бұл бағдарламаның орындалу уақыты емес.</value>
+  </data>
+  <data xml:space="preserve" name="Progress_Recent">
+    <value>Соңғы әрекеттер</value>
+  </data>
+  <data xml:space="preserve" name="Progress_AllSubmissions">
+    <value>Барлық жіберілімдерім →</value>
+  </data>
+  <data xml:space="preserve" name="Progress_EmptyHeading">
+    <value>Ілгерілеу алғашқы талпыныстан басталады</value>
+  </data>
+  <data xml:space="preserve" name="Progress_ChooseTask">
+    <value>Есепті таңдаңыз</value>
+  </data>
+  <data xml:space="preserve" name="Progress_GetStarted">
+    <value>да, бастаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Eyebrow">
+    <value>Келесі жаттығуды табыңыз</value>
+  </data>
+  <data xml:space="preserve" name="Map_Title">
+    <value>Оқу картасы</value>
+  </data>
+  <data xml:space="preserve" name="Map_Intro">
+    <value>Қазір жарияланған есептердегі ресми талпыныстарыңыздың көрінісі. Уақытша іске қосулар мен жүйелік қателер бұл көрсеткіштерге әсер етпейді.</value>
+  </data>
+  <data xml:space="preserve" name="Map_GuideTitle">
+    <value>Меңгеру деңгейін қалай түсінуге болады</value>
+  </data>
+  <data xml:space="preserve" name="Map_Formula">
+    <value>Меңгеру = (есептерді шешу үлесі × 70% + сәтті жіберілімдер үлесі × 30%). Әр шешілген есеп бір рет саналады; сәттілік жүйелік қателерсіз аяқталған талпыныстардағы қабылданған шешімдер үлесіне тең.</value>
+  </data>
+  <data xml:space="preserve" name="Map_LevelsHelp">
+    <value>Аяқталған талпыныс жоқ: {0}. Бір не екі талпыныс: {1}. Кемінде үш талпыныста: 75%-дан бастап — {2}, 45%-дан бастап — {3}, қалғаны — {4}. Бұл белгілер адамның қабілетін емес, тіркелген тәжірибесін сипаттайды. Меңгеру деңгейі рейтинг ұпайынан бөлек.</value>
+  </data>
+  <data xml:space="preserve" name="Map_TopicStrength">
+    <value>Тақырыпты меңгеру</value>
+  </data>
+  <data xml:space="preserve" name="Map_Empty">
+    <value>Тақырыптар қосылғанда оқу картасы пайда болады.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Strength">
+    <value>меңгеру деңгейі</value>
+  </data>
+  <data xml:space="preserve" name="Map_StrengthLabel">
+    <value>{0}: меңгеру деңгейі</value>
+  </data>
+  <data xml:space="preserve" name="Map_SolvedPublished">
+    <value>Шешілген / жарияланған</value>
+  </data>
+  <data xml:space="preserve" name="Map_CompletedAttempts">
+    <value>Аяқталған талпыныстар</value>
+  </data>
+  <data xml:space="preserve" name="Map_Completion">
+    <value>Есептерді шешу үлесі</value>
+  </data>
+  <data xml:space="preserve" name="Map_Success">
+    <value>Сәтті жіберілімдер үлесі</value>
+  </data>
+  <data xml:space="preserve" name="Map_FrequentIssue">
+    <value>Ең жиі мәселе:</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoPublished">
+    <value>Бұл тақырыпта жарияланған есептер әлі жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Map_Breakdown">
+    <value>Талпыныстар құрамы</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorPatterns">
+    <value>Қате түрлері</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorHelp">
+    <value>Жария есептердегі ресми нәтижелер. Инфрақұрылым қателері есептелмейді.</value>
+  </data>
+  <data xml:space="preserve" name="Map_ErrorLabel">
+    <value>{0}: қателер</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoErrors">
+    <value>Бұл есептерде оқушы қателері тіркелмеген.</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiPatterns">
+    <value>ЖИ талдаған қате түрлері</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiHelp">
+    <value>Мұнда жүйелік қателерді қоспағанда, ЖИ талдауы сақталған жіберілімдер ғана берілген. Бұл санаттар меңгеру деңгейіне немесе рейтингке әсер етпейді.</value>
+  </data>
+  <data xml:space="preserve" name="Map_AiLabel">
+    <value>{0}: ЖИ талдаған жіберілімдер</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoAi">
+    <value>Бұл есептер үшін сақталған ЖИ талдауы әлі жоқ. Оқу картасы онсыз да жұмыс істейді.</value>
+  </data>
+  <data xml:space="preserve" name="Map_PracticeNext">
+    <value>Келесі жаттығу</value>
+  </data>
+  <data xml:space="preserve" name="Map_Recommendation">
+    <value>Ұсынылған келесі жаттығу</value>
+  </data>
+  <data xml:space="preserve" name="Map_Topic">
+    <value>Тақырып:</value>
+  </data>
+  <data xml:space="preserve" name="Map_Reason">
+    <value>{0}: {1}; {3} есептің {2}-і шешілген. Алдымен жаттығу басымдығы, кейін меңгеру деңгейі ескеріледі; осы тақырыптағы ең оңай шешілмеген есеп ұсынылады.</value>
+  </data>
+  <data xml:space="preserve" name="Map_PracticeButton">
+    <value>Осы есеппен жаттығу →</value>
+  </data>
+  <data xml:space="preserve" name="Map_AllSolved">
+    <value>Барлық жария есептерді шештіңіз. Тәсіліңізді талдау үшін шешімді қайта қараңыз немесе жаңа есептер шыққанда оралыңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Map_NoPractice">
+    <value>Есептер жарияланғанда жаңа жаттығу пайда болады.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Eyebrow">
+    <value>Жаттығу нәтиже береді</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Intro">
+    <value>Үйренуді жалғастырыңыз. Әр жаңа шешілген есеп сізді алға жетелейді.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Points">
+    <value>{0} · {1} ұпай</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_ScoreHelp">
+    <value>Әр шешілген есепке ұпай бір рет беріледі. Қайталанған қабылданған жіберілімдер қосымша ұпай қоспайды.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_EmptyHeading">
+    <value>Рейтингте пайдаланушылар әлі жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_EmptyText">
+    <value>Ұпай жинау үшін есеп шешуді бастаңыз.</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Region">
+    <value>Оқушылар рейтингі</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Rank">
+    <value>Орын</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Accepted">
+    <value>Қабылданған</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Completed">
+    <value>Аяқталған</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Success">
+    <value>Сәттілік үлесі</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Score">
+    <value>Ұпай</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_You">
+    <value>Сіз</value>
+  </data>
+  <data xml:space="preserve" name="Leaderboard_Pages">
+    <value>Рейтинг беттері</value>
+  </data>
+  <data xml:space="preserve" name="Account_AccessDenied">
+    <value>Қатынауға тыйым салынған</value>
+  </data>
+  <data xml:space="preserve" name="Account_AccessDeniedText">
+    <value>Бұл бетке кіруге рұқсатыңыз жоқ.</value>
+  </data>
+  <data xml:space="preserve" name="Account_Welcome">
+    <value>Қайта келгеніңізге қуаныштымыз</value>
+  </data>
+  <data xml:space="preserve" name="Account_LoginIntro">
+    <value>Тоқтаған жерден жалғастырыңыз. Жаттығу үшін тіркелгіге кіріңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Account_Create">
+    <value>Тіркелгі құру</value>
+  </data>
+  <data xml:space="preserve" name="Account_Profile">
+    <value>Профиль</value>
+  </data>
+  <data xml:space="preserve" name="Account_YourAccount">
+    <value>Сіздің тіркелгіңіз</value>
+  </data>
+  <data xml:space="preserve" name="Account_ProfileIntro">
+    <value>Көрсетілетін есіміңіз рейтингте көрінеді. Электрондық поштаңыз құпия қалады.</value>
+  </data>
+  <data xml:space="preserve" name="Account_JoinedUtc">
+    <value>Тіркелген уақыты (UTC)</value>
+  </data>
+  <data xml:space="preserve" name="Account_Roles">
+    <value>Рөлдер</value>
+  </data>
+  <data xml:space="preserve" name="Account_StartJourney">
+    <value>Оқу жолыңызды бастаңыз</value>
+  </data>
+  <data xml:space="preserve" name="Account_RegisterIntro">
+    <value>Оқушы тіркелгісін құрып, алғашқы есебіңізді шешіңіз.</value>
+  </data>
+  <data xml:space="preserve" name="Account_PasswordHelp">
+    <value>8–100 таңба қолданыңыз: бас әріп, кіші әріп, сан және арнайы таңба болуы керек.</value>
+  </data>
+  <data xml:space="preserve" name="Account_AlreadyRegistered">
+    <value>Тіркелгіңіз бар ма?</value>
+  </data>
+  <data xml:space="preserve" name="Ai_LanguageHelp">
+    <value>Жаңа талдау интерфейстің қазіргі тілінде беріледі. Сақталған кеңес бастапқы тілінде қалады.</value>
+  </data>
+</root>

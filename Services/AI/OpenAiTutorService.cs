@@ -1,4 +1,5 @@
 using System.ClientModel;
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using IntelligentProgrammingPlatform.Data;
@@ -119,7 +120,15 @@ public sealed class OpenAiTutorService
             item.PassedTests, item.TotalTests,
             visible.Select(result => new AiVisibleTest(result.Order, result.Status.ToString(), Clean(result.Input, 1000),
                 Clean(result.ExpectedOutput, 1000), Clean(result.ActualOutput, 1000), Clean(result.ErrorMessage, 1000))).ToList(),
-            hidden.Select(result => new AiHiddenTest(result.Order, result.Status.ToString(), result.ExecutionTimeMs)).ToList());
+            hidden.Select(result => new AiHiddenTest(result.Order, result.Status.ToString(), result.ExecutionTimeMs)).ToList())
+        {
+            ResponseLanguage = CultureInfo.CurrentUICulture.Name switch
+            {
+                "ru-RU" => AiResponseLanguage.Russian,
+                "en-US" => AiResponseLanguage.English,
+                _ => AiResponseLanguage.Kazakh
+            }
+        };
     }
 
     // Бұрын сақталған кеңесті тек оның иесіне арналған encoded ViewModel-ге түрлендіреді.

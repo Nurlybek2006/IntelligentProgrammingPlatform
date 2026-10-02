@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 
@@ -13,8 +14,13 @@ namespace IntelligentProgrammingPlatform.Areas.Admin.Controllers;
 public class TestCasesController : Controller
 {
     private readonly ApplicationDbContext _db;
+    private readonly IStringLocalizer<AdminResource> _text;
     // Контроллерге дерекқор және қажетті қызметтерді береді.
-    public TestCasesController(ApplicationDbContext db) => _db = db;
+    public TestCasesController(ApplicationDbContext db, IStringLocalizer<AdminResource> text)
+    {
+        _db = db;
+        _text = text;
+    }
 
     [HttpGet]
     // Әкімшіге тест жазбаларының тізімін көрсетеді.
@@ -53,10 +59,10 @@ public class TestCasesController : Controller
         try { await _db.SaveChangesAsync(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "This order is already used or the parent task no longer exists.");
+            ModelState.AddModelError(string.Empty, _text["TestCase_Constraint"]);
             return View(model);
         }
-        TempData["Success"] = "Test case created.";
+        TempData["Success"] = _text["TestCase_Created"].Value;
         return RedirectToAction(nameof(Index), new { taskId = model.ProgrammingTaskId });
     }
 
@@ -89,10 +95,10 @@ public class TestCasesController : Controller
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "This order is already used or the parent task no longer exists.");
+            ModelState.AddModelError(string.Empty, _text["TestCase_Constraint"]);
             return View(model);
         }
-        TempData["Success"] = "Test case updated.";
+        TempData["Success"] = _text["TestCase_Updated"].Value;
         return RedirectToAction(nameof(Index), new { taskId = test.ProgrammingTaskId });
     }
 
@@ -113,7 +119,7 @@ public class TestCasesController : Controller
         if (test == null) return NotFound();
         if (await _db.ExecutionResults.AnyAsync(result => result.TestCaseId == id))
         {
-            ModelState.AddModelError(string.Empty, "This test case has execution results and cannot be deleted.");
+            ModelState.AddModelError(string.Empty, _text["TestCase_HasResults"]);
             return View("Delete", test);
         }
         _db.TestCases.Remove(test);
@@ -121,10 +127,10 @@ public class TestCasesController : Controller
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "This test case now has execution results and cannot be deleted.");
+            ModelState.AddModelError(string.Empty, _text["TestCase_InUse"]);
             return View("Delete", test);
         }
-        TempData["Success"] = "Test case deleted.";
+        TempData["Success"] = _text["TestCase_Deleted"].Value;
         return RedirectToAction(nameof(Index), new { taskId = test.ProgrammingTaskId });
     }
 
@@ -141,7 +147,7 @@ public class TestCasesController : Controller
     {
         if (await _db.TestCases.AnyAsync(test => test.ProgrammingTaskId == model.ProgrammingTaskId
                 && test.Order == model.Order && test.Id != id))
-            ModelState.AddModelError(nameof(model.Order), "This task already has a test case with this order.");
+            ModelState.AddModelError(nameof(model.Order), _text["TestCase_DuplicateOrder"]);
     }
 
     // ViewModel-дегі рұқсат етілген өрістерді тест entity-іне көшіреді.

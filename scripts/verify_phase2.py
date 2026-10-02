@@ -44,9 +44,16 @@ class Inputs(HTMLParser):
 
 
 class Client:
-    def __init__(self, timeout=30):
+    def __init__(self, timeout=30, culture="en-US"):
         self.timeout = timeout
         self.cookies = http.cookiejar.CookieJar()
+        # Older suites assert English copy explicitly; None exercises the Kazakh default.
+        if culture is not None:
+            self.cookies.set_cookie(http.cookiejar.Cookie(
+                version=0, name=".AspNetCore.Culture", value="c=" + culture + "|uic=" + culture,
+                port=None, port_specified=False, domain="localhost.local", domain_specified=False,
+                domain_initial_dot=False, path="/", path_specified=True, secure=True,
+                expires=None, discard=True, comment=None, comment_url=None, rest={}))
         # Only the loopback development certificate is accepted without CA validation.
         context = ssl._create_unverified_context()
         self.opener = urllib.request.build_opener(

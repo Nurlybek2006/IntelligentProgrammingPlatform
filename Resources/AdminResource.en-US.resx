@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Admin" xml:space="preserve"><value>Admin</value></data>
+  <data name="Dashboard_Eyebrow" xml:space="preserve"><value>Catalog management</value></data>
+  <data name="Dashboard_Title" xml:space="preserve"><value>Admin workspace</value></data>
+  <data name="Dashboard_Intro" xml:space="preserve"><value>Prepare clear tasks, reliable examples and meaningful tests for students.</value></data>
+  <data name="Dashboard_Organize" xml:space="preserve"><value>01 / ORGANIZE</value></data>
+  <data name="Dashboard_Publish" xml:space="preserve"><value>02 / PUBLISH</value></data>
+  <data name="Dashboard_Verify" xml:space="preserve"><value>03 / VERIFY</value></data>
+  <data name="Dashboard_Topics" xml:space="preserve"><value>Group practice tasks into useful learning areas.</value></data>
+  <data name="Dashboard_Tasks" xml:space="preserve"><value>Edit descriptions, difficulty, limits and publication state.</value></data>
+  <data name="Dashboard_TestCases" xml:space="preserve"><value>Manage visible examples and protected hidden tests.</value></data>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Leaderboard maintenance</value></data>
+  <data name="Leaderboard_Description" xml:space="preserve"><value>Recalculate scores and counts from submission history after catalog changes. Existing submissions are preserved.</value></data>
+  <data name="Leaderboard_Busy" xml:space="preserve"><value>Rebuilding leaderboard…</value></data>
+  <data name="Leaderboard_Rebuild" xml:space="preserve"><value>Rebuild leaderboard</value></data>
+  <data name="Leaderboard_Rebuilt" xml:space="preserve"><value>Leaderboard recalculated from submission history.</value></data>
+  <data name="Leaderboard_Unavailable" xml:space="preserve"><value>Leaderboard recalculation is temporarily unavailable.</value></data>
+  <data name="Button_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Button_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Button_Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Button_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Button_Filter" xml:space="preserve"><value>Filter</value></data>
+  <data name="Field_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Field_Title" xml:space="preserve"><value>Title</value></data>
+  <data name="Field_Description" xml:space="preserve"><value>Description</value></data>
+  <data name="Field_Slug" xml:space="preserve"><value>Slug</value></data>
+  <data name="Field_Difficulty" xml:space="preserve"><value>Difficulty</value></data>
+  <data name="Field_Topic" xml:space="preserve"><value>Topic</value></data>
+  <data name="Field_Task" xml:space="preserve"><value>Programming task</value></data>
+  <data name="Field_TimeLimit" xml:space="preserve"><value>Time limit (ms)</value></data>
+  <data name="Field_MemoryLimit" xml:space="preserve"><value>Memory limit (MB)</value></data>
+  <data name="Field_Published" xml:space="preserve"><value>Published</value></data>
+  <data name="Field_Unpublished" xml:space="preserve"><value>Unpublished</value></data>
+  <data name="Field_Order" xml:space="preserve"><value>Order</value></data>
+  <data name="Field_Input" xml:space="preserve"><value>Input</value></data>
+  <data name="Field_ExpectedOutput" xml:space="preserve"><value>Expected output</value></data>
+  <data name="Field_Hidden" xml:space="preserve"><value>Hidden</value></data>
+  <data name="Field_Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Field_Limits" xml:space="preserve"><value>Time / memory limit</value></data>
+  <data name="Field_CreatedUtc" xml:space="preserve"><value>Created (UTC)</value></data>
+  <data name="Limits_Value" xml:space="preserve"><value>{0} ms / {1} MB</value></data>
+  <data name="Yes" xml:space="preserve"><value>Yes</value></data>
+  <data name="No" xml:space="preserve"><value>No</value></data>
+  <data name="Records_Label" xml:space="preserve"><value>Management records</value></data>
+  <data name="Records_Empty" xml:space="preserve"><value>No records to show yet.</value></data>
+  <data name="Records_EmptyHelp" xml:space="preserve"><value>Use the controls above to add a record or choose another task.</value></data>
+  <data name="Topics" xml:space="preserve"><value>Topics</value></data>
+  <data name="Topic_Create" xml:space="preserve"><value>Create topic</value></data>
+  <data name="Topic_Edit" xml:space="preserve"><value>Edit topic</value></data>
+  <data name="Topic_Delete" xml:space="preserve"><value>Delete topic</value></data>
+  <data name="Topic_DeletePrompt" xml:space="preserve"><value>Delete “{0}”? Topics containing tasks cannot be deleted.</value></data>
+  <data name="Topic_Duplicate" xml:space="preserve"><value>A topic with this name already exists.</value></data>
+  <data name="Topic_Created" xml:space="preserve"><value>Topic created.</value></data>
+  <data name="Topic_Updated" xml:space="preserve"><value>Topic updated.</value></data>
+  <data name="Topic_Deleted" xml:space="preserve"><value>Topic deleted.</value></data>
+  <data name="Topic_HasTasks" xml:space="preserve"><value>This topic contains programming tasks. Move or delete them before deleting the topic.</value></data>
+  <data name="Topic_InUse" xml:space="preserve"><value>This topic is now used by a task and cannot be deleted.</value></data>
+  <data name="Tasks" xml:space="preserve"><value>Programming tasks</value></data>
+  <data name="Task_Manage" xml:space="preserve"><value>Manage tasks</value></data>
+  <data name="Task_Back" xml:space="preserve"><value>Back to task management</value></data>
+  <data name="Task_Create" xml:space="preserve"><value>Create task</value></data>
+  <data name="Task_Edit" xml:space="preserve"><value>Edit task</value></data>
+  <data name="Task_Delete" xml:space="preserve"><value>Delete task</value></data>
+  <data name="Task_Details" xml:space="preserve"><value>Task details</value></data>
+  <data name="Task_PublicPage" xml:space="preserve"><value>Public page</value></data>
+  <data name="Task_DeletePrompt" xml:space="preserve"><value>Delete “{0}”? Tasks with submissions are protected. Remove unused test cases first.</value></data>
+  <data name="Task_SlugHelp" xml:space="preserve"><value>Example: sum-of-two-numbers. Saved in lowercase.</value></data>
+  <data name="Task_SelectTopic" xml:space="preserve"><value>Select a topic</value></data>
+  <data name="Task_All" xml:space="preserve"><value>All tasks</value></data>
+  <data name="Task_ChooseForTest" xml:space="preserve"><value>Select a task to add a test case.</value></data>
+  <data name="Task_DuplicateSlug" xml:space="preserve"><value>A task with this slug already exists.</value></data>
+  <data name="Task_Constraint" xml:space="preserve"><value>The slug is already in use or the selected topic no longer exists.</value></data>
+  <data name="Task_Created" xml:space="preserve"><value>Programming task created.</value></data>
+  <data name="Task_Updated" xml:space="preserve"><value>Programming task updated.</value></data>
+  <data name="Task_Deleted" xml:space="preserve"><value>Programming task deleted.</value></data>
+  <data name="Task_HasSubmissions" xml:space="preserve"><value>This task has submissions and cannot be deleted. Unpublish it to remove it from the catalog.</value></data>
+  <data name="Task_HasTestCases" xml:space="preserve"><value>Delete this task's test cases first. Test cases with saved results cannot be deleted.</value></data>
+  <data name="Task_InUse" xml:space="preserve"><value>This task now has dependent records and cannot be deleted.</value></data>
+  <data name="TestCases" xml:space="preserve"><value>Test cases</value></data>
+  <data name="TestCase_Create" xml:space="preserve"><value>Create test case</value></data>
+  <data name="TestCase_Add" xml:space="preserve"><value>Add test case</value></data>
+  <data name="TestCase_Edit" xml:space="preserve"><value>Edit test case</value></data>
+  <data name="TestCase_Delete" xml:space="preserve"><value>Delete test case</value></data>
+  <data name="TestCase_Manage" xml:space="preserve"><value>Manage test cases</value></data>
+  <data name="TestCase_DeletePrompt" xml:space="preserve"><value>Delete test case {0} for “{1}”? Cases with execution results are protected.</value></data>
+  <data name="TestCase_TaskLabel" xml:space="preserve"><value>Task:</value></data>
+  <data name="TestCase_HiddenHelp" xml:space="preserve"><value>Hidden cases appear only in Admin pages.</value></data>
+  <data name="TestCase_Constraint" xml:space="preserve"><value>This order is already used or the parent task no longer exists.</value></data>
+  <data name="TestCase_DuplicateOrder" xml:space="preserve"><value>This task already has a test case with this order.</value></data>
+  <data name="TestCase_Created" xml:space="preserve"><value>Test case created.</value></data>
+  <data name="TestCase_Updated" xml:space="preserve"><value>Test case updated.</value></data>
+  <data name="TestCase_Deleted" xml:space="preserve"><value>Test case deleted.</value></data>
+  <data name="TestCase_HasResults" xml:space="preserve"><value>This test case has execution results and cannot be deleted.</value></data>
+  <data name="TestCase_InUse" xml:space="preserve"><value>This test case now has execution results and cannot be deleted.</value></data>
+  <data name="Validation_Required" xml:space="preserve"><value>The {0} field is required.</value></data>
+  <data name="Validation_StringLength" xml:space="preserve"><value>The field {0} must be a string with a maximum length of {1}.</value></data>
+  <data name="Validation_Range" xml:space="preserve"><value>The field {0} must be between {1} and {2}.</value></data>
+  <data name="Validation_Slug" xml:space="preserve"><value>Use letters, numbers, and single hyphens between words.</value></data>
+  <data name="Validation_Difficulty" xml:space="preserve"><value>Select a valid difficulty.</value></data>
+  <data name="Validation_Topic" xml:space="preserve"><value>Select an existing topic.</value></data>
+  <data name="Validation_Task" xml:space="preserve"><value>Select an existing task.</value></data>
+</root>

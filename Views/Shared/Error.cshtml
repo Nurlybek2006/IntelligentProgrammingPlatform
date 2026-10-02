@@ -1,13 +1,13 @@
 @model ErrorViewModel
 @{
     Layout = "_ErrorLayout";
-    var title = Model.StatusCode switch { 403 => "Access denied", 404 => "Page not found", 500 => "Something went wrong", _ => "We couldn't complete that request" };
+    var title = T[Model.StatusCode switch { 403 => "Error_AccessDenied", 404 => "Error_NotFound", 500 => "Error_Server", _ => "Error_Request" }];
     ViewData["Title"] = title;
 }
 <section class="panel error-page">
     <p class="error-number" aria-hidden="true">@Model.StatusCode</p>
     <h1>@title</h1>
-    <p class="text-muted">@(Model.StatusCode == 404 ? "This page may have moved or is no longer available." : Model.StatusCode == 403 ? "You do not have permission to access this page." : "Please return to the task catalog and try again. If the problem continues, contact the administrator.")</p>
-    @if (Model.ShowRequestId) { <p class="small text-muted">Request ID: <code>@Model.RequestId</code></p> }
-    <a asp-area="" asp-controller="Tasks" asp-action="Index" class="btn btn-primary">Back to tasks</a>
+    <p class="text-muted">@T[Model.StatusCode == 404 ? "Error_NotFoundText" : Model.StatusCode == 403 ? "Error_AccessDeniedText" : "Error_Retry"]</p>
+    @if (Model.ShowRequestId) { <p class="small text-muted">@T["Error_RequestId"]: <code>@Model.RequestId</code></p> }
+    <a asp-area="" asp-controller="Tasks" asp-action="Index" class="btn btn-primary">@T["Button_BackToTasks"]</a>
 </section>

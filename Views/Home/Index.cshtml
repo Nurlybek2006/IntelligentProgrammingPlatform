@@ -1,34 +1,34 @@
 @model IntelligentProgrammingPlatform.ViewModels.Home.HomeViewModel
-@{ ViewData["Title"] = "Learn by solving"; }
+@{ ViewData["Title"] = L["Home_Title"]; }
 <section class="hero">
     <div>
-        <p class="eyebrow">A little practice. A clearer understanding.</p>
-        <h1>Build your skills.<br /><span>One solution at a time.</span></h1>
-        <p class="hero-copy">A focused place to practice C++. Solve a task, understand your results, and use thoughtful hints to find your next step.</p>
+        <p class="eyebrow">@L["Home_Eyebrow"]</p>
+        <h1>@L["Home_Heading"]<br /><span>@L["Home_HeadingAccent"]</span></h1>
+        <p class="hero-copy">@L["Home_Intro"]</p>
         <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">@(User.Identity?.IsAuthenticated == true ? "Continue solving" : "Start solving") <span aria-hidden="true">→</span></a>
-            <a class="btn btn-outline-secondary" asp-controller="Leaderboard" asp-action="Index">Explore leaderboard</a>
+            <a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">@L[User.Identity?.IsAuthenticated == true ? "Home_Continue" : "Home_Start"] <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline-secondary" asp-controller="Leaderboard" asp-action="Index">@L["Home_ExploreLeaderboard"]</a>
         </div>
-        <p class="hero-note">C++ 20 · From basics to algorithms · Learn at your own pace</p>
+        <p class="hero-note">@L["Home_Note"]</p>
     </div>
-    <div class="learning-loop" aria-label="Your learning journey">
-        <div class="loop-title"><span>YOUR NEXT BREAKTHROUGH</span><span aria-hidden="true">&lt;/&gt;</span></div>
-        <div class="loop-step"><span class="loop-number" aria-hidden="true">01</span><div><strong>Take on a task</strong><p>Read the examples. Write your approach.</p></div></div>
-        <div class="loop-step"><span class="loop-number" aria-hidden="true">02</span><div><strong>Make sense of the result</strong><p>See what passed and where to look next.</p></div></div>
-        <div class="loop-step"><span class="loop-number" aria-hidden="true">03</span><div><strong>Learn, adjust, try again</strong><p>Get a hint. Make the fix yourself. Keep growing.</p></div></div>
+    <div class="learning-loop" aria-label="@L["Home_JourneyLabel"]">
+        <div class="loop-title"><span>@L["Home_LoopTitle"]</span><span aria-hidden="true">&lt;/&gt;</span></div>
+        <div class="loop-step"><span class="loop-number" aria-hidden="true">01</span><div><strong>@L["Home_StepTask"]</strong><p>@L["Home_StepTaskText"]</p></div></div>
+        <div class="loop-step"><span class="loop-number" aria-hidden="true">02</span><div><strong>@L["Home_StepResult"]</strong><p>@L["Home_StepResultText"]</p></div></div>
+        <div class="loop-step"><span class="loop-number" aria-hidden="true">03</span><div><strong>@L["Home_StepLearn"]</strong><p>@L["Home_StepLearnText"]</p></div></div>
     </div>
 </section>
 @if (User.Identity?.IsAuthenticated == true)
 {
     <section aria-labelledby="snapshot-heading">
-        <div class="section-heading"><h2 id="snapshot-heading">Pick up where you left off</h2><a asp-controller="Progress" asp-action="Index">View your progress →</a></div>
+        <div class="section-heading"><h2 id="snapshot-heading">@L["Home_Snapshot"]</h2><a asp-controller="Progress" asp-action="Index">@L["Home_ViewProgress"]</a></div>
         <div class="row g-3 mb-4">
-            <div class="col-sm-6"><div class="panel metric-card"><h2>Solved tasks</h2><strong id="home-solved">@Model.SolvedTasks</strong></div></div>
-            <div class="col-sm-6"><div class="panel metric-card accent"><h2>Your score</h2><strong id="home-score">@Model.Score</strong></div></div>
+            <div class="col-sm-6"><div class="panel metric-card"><h2>@L["Common_SolvedTasks"]</h2><strong id="home-solved">@Model.SolvedTasks</strong></div></div>
+            <div class="col-sm-6"><div class="panel metric-card accent"><h2>@L["Home_YourScore"]</h2><strong id="home-score">@Model.Score</strong></div></div>
         </div>
         @if (Model.Recent.Count == 0)
         {
-            <div class="empty-state"><h3>Your first solution starts here</h3><p>Choose a task and make your first attempt. Every attempt is part of learning.</p></div>
+            <div class="empty-state"><h3>@L["Home_EmptyHeading"]</h3><p>@L["Home_EmptyText"]</p></div>
         }
         else
         {
@@ -37,11 +37,11 @@
     </section>
 }
 <section aria-labelledby="features-heading">
-    <div class="section-heading"><h2 id="features-heading">Everything you need to keep learning</h2></div>
+    <div class="section-heading"><h2 id="features-heading">@L["Home_Features"]</h2></div>
     <div class="feature-grid">
-        <div class="panel"><span class="feature-number" aria-hidden="true">01 / PRACTICE</span><h3>Programming tasks</h3><p>Explore topics and difficulties, with clear examples to get started.</p></div>
-        <div class="panel"><span class="feature-number" aria-hidden="true">02 / CHECK</span><h3>Isolated execution</h3><p>Run C++ against test cases and get a clear result for each attempt.</p></div>
-        <div class="panel"><span class="feature-number" aria-hidden="true">03 / UNDERSTAND</span><h3>Your AI tutor</h3><p>Ask for explanations and hints while keeping the problem solving yours.</p></div>
-        <div class="panel"><span class="feature-number" aria-hidden="true">04 / GROW</span><h3>Visible progress</h3><p>Follow your solved tasks, success rate and score as your skills develop.</p></div>
+        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_PracticeTag"]</span><h3>@L["Home_TasksFeature"]</h3><p>@L["Home_TasksFeatureText"]</p></div>
+        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_CheckTag"]</span><h3>@L["Home_ExecutionFeature"]</h3><p>@L["Home_ExecutionFeatureText"]</p></div>
+        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_UnderstandTag"]</span><h3>@L["Home_AiFeature"]</h3><p>@L["Home_AiFeatureText"]</p></div>
+        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_GrowTag"]</span><h3>@L["Home_ProgressFeature"]</h3><p>@L["Home_ProgressFeatureText"]</p></div>
     </div>
 </section>

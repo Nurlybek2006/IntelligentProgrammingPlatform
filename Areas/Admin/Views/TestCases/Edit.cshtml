@@ -1,9 +1,9 @@
 @model TestCaseFormViewModel
-@{ ViewData["Title"] = "Edit test case"; }
-<h1>Edit test case</h1>
+@{ ViewData["Title"] = A["TestCase_Edit"]; }
+<h1>@A["TestCase_Edit"]</h1>
 <form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post" class="col-lg-8">
     <partial name="_Form" model="Model" />
-    <button class="btn btn-primary" type="submit">Save</button>
-    <a asp-action="Index" asp-route-taskId="@Model.ProgrammingTaskId" class="btn btn-secondary">Cancel</a>
+    <button class="btn btn-primary" type="submit">@A["Button_Save"]</button>
+    <a asp-action="Index" asp-route-taskId="@Model.ProgrammingTaskId" class="btn btn-secondary">@A["Button_Cancel"]</a>
 </form>
 @section Scripts { <partial name="/Views/Shared/_ValidationScriptsPartial.cshtml" /> }

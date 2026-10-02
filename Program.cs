@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.HostFiltering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using IntelligentProgrammingPlatform;
+using IntelligentProgrammingPlatform.Services.Localization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +26,37 @@ builder.Services.AddOptions<HostFilteringOptions>()
         "AllowedHosts must contain explicit host names; empty lists and wildcards are not allowed.")
     .ValidateOnStart();
 
+// Ресурстар мен culture cookie арқылы үш тілді, әдепкі қазақша интерфейсті тіркейді.
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.SetDefaultCulture(SupportedCultures.Default)
+        .AddSupportedCultures(SupportedCultures.Names.ToArray())
+        .AddSupportedUICultures(SupportedCultures.Names.ToArray());
+    options.RequestCultureProviders = new[] { new CookieRequestCultureProvider() };
+    options.ApplyCurrentCultureToResponseHeaders = true;
+});
+
 // MVC беттерін және барлық өзгертетін сұраулардың CSRF қорғанысын тіркейді.
 builder.Services.AddControllersWithViews(options =>
-    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()))
+    .AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (type, factory) =>
+        factory.Create(type.Namespace?.Contains(".Admin", StringComparison.Ordinal) == true
+            ? typeof(AdminResource) : typeof(SharedResource)));
+// Түрге түрлендіру қателерін де ағымдағы сұрау тілімен көрсетеді.
+builder.Services.AddOptions<MvcOptions>().Configure<IStringLocalizer<SharedResource>>((options, text) =>
+{
+    var messages = options.ModelBindingMessageProvider;
+    messages.SetAttemptedValueIsInvalidAccessor((value, field) => text["Validation_InvalidValue", field]);
+    messages.SetValueMustNotBeNullAccessor(value => text["Validation_RequiredValue"]);
+    messages.SetValueIsInvalidAccessor(value => text["Validation_InvalidValue", value]);
+    messages.SetMissingBindRequiredValueAccessor(field => text["Validation_Required", field]);
+    messages.SetUnknownValueIsInvalidAccessor(field => text["Validation_InvalidValue", field]);
+    messages.SetValueMustBeANumberAccessor(field => text["Validation_Number", field]);
+    messages.SetNonPropertyAttemptedValueIsInvalidAccessor(value => text["Validation_InvalidValue", value]);
+    messages.SetNonPropertyUnknownValueIsInvalidAccessor(() => text["Validation_RequiredValue"]);
+    messages.SetNonPropertyValueMustBeANumberAccessor(() => text["Validation_Number", ""]);
+});
 // Қауіпсіздік және уақытша хабар cookie-лерін тек HTTPS арқылы жібереді.
 builder.Services.AddAntiforgery(options => options.Cookie.SecurePolicy = CookieSecurePolicy.Always);
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.CookieTempDataProviderOptions>(options =>
@@ -85,6 +117,9 @@ builder.Services.AddScoped<OpenAiTutorService>();
 builder.Services.AddScoped<HintRevealService>();
 
 var app = builder.Build();
+
+// Қате беттері де culture cookie таңдаған тілде көрсетіледі.
+app.UseRequestLocalization();
 
 // HTTP сұрауларын HTTPS және қауіпсіз қате өңдеу middleware-лері арқылы өткізеді.
 app.UseMiddleware<SecurityHeadersMiddleware>();

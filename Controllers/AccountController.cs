@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace IntelligentProgrammingPlatform.Controllers;
 
@@ -15,14 +16,16 @@ public class AccountController : Controller
     private readonly UserManager<ApplicationUser> _users;
     private readonly SignInManager<ApplicationUser> _signIn;
     private readonly ApplicationDbContext _db;
+    private readonly IStringLocalizer<SharedResource> _text;
 
     // Контроллерге дерекқор және қажетті қызметтерді береді.
     public AccountController(UserManager<ApplicationUser> users,
-        SignInManager<ApplicationUser> signIn, ApplicationDbContext db)
+        SignInManager<ApplicationUser> signIn, ApplicationDbContext db, IStringLocalizer<SharedResource> text)
     {
         _users = users;
         _signIn = signIn;
         _db = db;
+        _text = text;
     }
 
     [AllowAnonymous, HttpGet]
@@ -39,7 +42,7 @@ public class AccountController : Controller
         var email = model.Email.Trim();
         if (await _users.FindByEmailAsync(email) != null)
         {
-            ModelState.AddModelError(nameof(model.Email), "This email is already registered.");
+            ModelState.AddModelError(nameof(model.Email), _text["Account_DuplicateEmail"]);
             return View(model);
         }
 
@@ -58,22 +61,28 @@ public class AccountController : Controller
             {
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty,
-                        error.Code is "DuplicateEmail" or "DuplicateUserName"
-                            ? "This email is already registered." : error.Description);
+                        _text[error.Code switch
+                        {
+                            "DuplicateEmail" or "DuplicateUserName" => "Account_DuplicateEmail",
+                            "PasswordTooShort" or "PasswordRequiresNonAlphanumeric" or "PasswordRequiresDigit"
+                                or "PasswordRequiresLower" or "PasswordRequiresUpper" or "PasswordRequiresUniqueChars" => "Identity_" + error.Code,
+                            "InvalidEmail" or "InvalidUserName" => "Validation_Email",
+                            _ => "Account_RegistrationFailed"
+                        }]);
                 return View(model);
             }
 
             var roleResult = await _users.AddToRoleAsync(user, RoleNames.Student);
             if (!roleResult.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Registration could not be completed. Please try again.");
+                ModelState.AddModelError(string.Empty, _text["Account_RegistrationFailed"]);
                 return View(model);
             }
             await transaction.CommitAsync();
         }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, "Registration could not be completed. This email may already be registered.");
+            ModelState.AddModelError(string.Empty, _text["Account_RegistrationConflict"]);
             return View(model);
         }
 
@@ -103,7 +112,7 @@ public class AccountController : Controller
 
         if (!result.Succeeded)
         {
-            ModelState.AddModelError(string.Empty, "Invalid email or password.");
+            ModelState.AddModelError(string.Empty, _text["Account_InvalidLogin"]);
             return View(model);
         }
 

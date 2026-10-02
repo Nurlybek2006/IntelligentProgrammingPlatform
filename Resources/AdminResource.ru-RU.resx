@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Admin" xml:space="preserve"><value>Администратор</value></data>
+  <data name="Dashboard_Eyebrow" xml:space="preserve"><value>Управление каталогом</value></data>
+  <data name="Dashboard_Title" xml:space="preserve"><value>Панель администратора</value></data>
+  <data name="Dashboard_Intro" xml:space="preserve"><value>Готовьте понятные задачи, корректные примеры и содержательные тесты для студентов.</value></data>
+  <data name="Dashboard_Organize" xml:space="preserve"><value>01 / СТРУКТУРА</value></data>
+  <data name="Dashboard_Publish" xml:space="preserve"><value>02 / ПУБЛИКАЦИЯ</value></data>
+  <data name="Dashboard_Verify" xml:space="preserve"><value>03 / ПРОВЕРКА</value></data>
+  <data name="Dashboard_Topics" xml:space="preserve"><value>Группируйте практические задачи по учебным темам.</value></data>
+  <data name="Dashboard_Tasks" xml:space="preserve"><value>Изменяйте описания, сложность, ограничения и состояние публикации.</value></data>
+  <data name="Dashboard_TestCases" xml:space="preserve"><value>Управляйте открытыми примерами и защищёнными скрытыми тестами.</value></data>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Обслуживание рейтинга</value></data>
+  <data name="Leaderboard_Description" xml:space="preserve"><value>Пересчитайте баллы и показатели по истории отправок после изменений каталога. Существующие отправки сохраняются.</value></data>
+  <data name="Leaderboard_Busy" xml:space="preserve"><value>Рейтинг пересчитывается…</value></data>
+  <data name="Leaderboard_Rebuild" xml:space="preserve"><value>Пересчитать рейтинг</value></data>
+  <data name="Leaderboard_Rebuilt" xml:space="preserve"><value>Рейтинг пересчитан по истории отправок.</value></data>
+  <data name="Leaderboard_Unavailable" xml:space="preserve"><value>Пересчёт рейтинга временно недоступен.</value></data>
+  <data name="Button_Save" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="Button_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Button_Edit" xml:space="preserve"><value>Изменить</value></data>
+  <data name="Button_Delete" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Button_Filter" xml:space="preserve"><value>Применить</value></data>
+  <data name="Field_Name" xml:space="preserve"><value>Название</value></data>
+  <data name="Field_Title" xml:space="preserve"><value>Название</value></data>
+  <data name="Field_Description" xml:space="preserve"><value>Описание</value></data>
+  <data name="Field_Slug" xml:space="preserve"><value>Идентификатор URL</value></data>
+  <data name="Field_Difficulty" xml:space="preserve"><value>Сложность</value></data>
+  <data name="Field_Topic" xml:space="preserve"><value>Тема</value></data>
+  <data name="Field_Task" xml:space="preserve"><value>Задача</value></data>
+  <data name="Field_TimeLimit" xml:space="preserve"><value>Ограничение времени (мс)</value></data>
+  <data name="Field_MemoryLimit" xml:space="preserve"><value>Ограничение памяти (МБ)</value></data>
+  <data name="Field_Published" xml:space="preserve"><value>Опубликовано</value></data>
+  <data name="Field_Unpublished" xml:space="preserve"><value>Не опубликовано</value></data>
+  <data name="Field_Order" xml:space="preserve"><value>Порядок</value></data>
+  <data name="Field_Input" xml:space="preserve"><value>Входные данные</value></data>
+  <data name="Field_ExpectedOutput" xml:space="preserve"><value>Ожидаемый результат</value></data>
+  <data name="Field_Hidden" xml:space="preserve"><value>Скрытый</value></data>
+  <data name="Field_Actions" xml:space="preserve"><value>Действия</value></data>
+  <data name="Field_Limits" xml:space="preserve"><value>Ограничение времени / памяти</value></data>
+  <data name="Field_CreatedUtc" xml:space="preserve"><value>Создано (UTC)</value></data>
+  <data name="Limits_Value" xml:space="preserve"><value>{0} мс / {1} МБ</value></data>
+  <data name="Yes" xml:space="preserve"><value>Да</value></data>
+  <data name="No" xml:space="preserve"><value>Нет</value></data>
+  <data name="Records_Label" xml:space="preserve"><value>Записи для управления</value></data>
+  <data name="Records_Empty" xml:space="preserve"><value>Пока нет записей.</value></data>
+  <data name="Records_EmptyHelp" xml:space="preserve"><value>Добавьте запись или выберите другую задачу с помощью элементов управления выше.</value></data>
+  <data name="Topics" xml:space="preserve"><value>Темы</value></data>
+  <data name="Topic_Create" xml:space="preserve"><value>Создать тему</value></data>
+  <data name="Topic_Edit" xml:space="preserve"><value>Изменить тему</value></data>
+  <data name="Topic_Delete" xml:space="preserve"><value>Удалить тему</value></data>
+  <data name="Topic_DeletePrompt" xml:space="preserve"><value>Удалить тему «{0}»? Темы с задачами нельзя удалить.</value></data>
+  <data name="Topic_Duplicate" xml:space="preserve"><value>Тема с таким названием уже существует.</value></data>
+  <data name="Topic_Created" xml:space="preserve"><value>Тема создана.</value></data>
+  <data name="Topic_Updated" xml:space="preserve"><value>Тема обновлена.</value></data>
+  <data name="Topic_Deleted" xml:space="preserve"><value>Тема удалена.</value></data>
+  <data name="Topic_HasTasks" xml:space="preserve"><value>В этой теме есть задачи. Переместите или удалите их перед удалением темы.</value></data>
+  <data name="Topic_InUse" xml:space="preserve"><value>Эта тема уже используется задачей и не может быть удалена.</value></data>
+  <data name="Tasks" xml:space="preserve"><value>Задачи</value></data>
+  <data name="Task_Manage" xml:space="preserve"><value>Управление задачами</value></data>
+  <data name="Task_Back" xml:space="preserve"><value>К управлению задачами</value></data>
+  <data name="Task_Create" xml:space="preserve"><value>Создать задачу</value></data>
+  <data name="Task_Edit" xml:space="preserve"><value>Изменить задачу</value></data>
+  <data name="Task_Delete" xml:space="preserve"><value>Удалить задачу</value></data>
+  <data name="Task_Details" xml:space="preserve"><value>Сведения о задаче</value></data>
+  <data name="Task_PublicPage" xml:space="preserve"><value>Общедоступная страница</value></data>
+  <data name="Task_DeletePrompt" xml:space="preserve"><value>Удалить задачу «{0}»? Задачи с отправками защищены. Сначала удалите неиспользованные тесты.</value></data>
+  <data name="Task_SlugHelp" xml:space="preserve"><value>Пример: sum-of-two-numbers. Сохраняется в нижнем регистре.</value></data>
+  <data name="Task_SelectTopic" xml:space="preserve"><value>Выберите тему</value></data>
+  <data name="Task_All" xml:space="preserve"><value>Все задачи</value></data>
+  <data name="Task_ChooseForTest" xml:space="preserve"><value>Выберите задачу, чтобы добавить тест.</value></data>
+  <data name="Task_DuplicateSlug" xml:space="preserve"><value>Задача с таким идентификатором URL уже существует.</value></data>
+  <data name="Task_Constraint" xml:space="preserve"><value>Идентификатор URL уже используется или выбранная тема больше не существует.</value></data>
+  <data name="Task_Created" xml:space="preserve"><value>Задача создана.</value></data>
+  <data name="Task_Updated" xml:space="preserve"><value>Задача обновлена.</value></data>
+  <data name="Task_Deleted" xml:space="preserve"><value>Задача удалена.</value></data>
+  <data name="Task_HasSubmissions" xml:space="preserve"><value>У этой задачи есть отправки, поэтому удалить её нельзя. Снимите её с публикации, чтобы убрать из каталога.</value></data>
+  <data name="Task_HasTestCases" xml:space="preserve"><value>Сначала удалите тесты этой задачи. Тесты с сохранёнными результатами удалить нельзя.</value></data>
+  <data name="Task_InUse" xml:space="preserve"><value>У этой задачи появились связанные записи, поэтому удалить её нельзя.</value></data>
+  <data name="TestCases" xml:space="preserve"><value>Тесты</value></data>
+  <data name="TestCase_Create" xml:space="preserve"><value>Создать тест</value></data>
+  <data name="TestCase_Add" xml:space="preserve"><value>Добавить тест</value></data>
+  <data name="TestCase_Edit" xml:space="preserve"><value>Изменить тест</value></data>
+  <data name="TestCase_Delete" xml:space="preserve"><value>Удалить тест</value></data>
+  <data name="TestCase_Manage" xml:space="preserve"><value>Управление тестами</value></data>
+  <data name="TestCase_DeletePrompt" xml:space="preserve"><value>Удалить тест {0} задачи «{1}»? Тесты с результатами выполнения защищены.</value></data>
+  <data name="TestCase_TaskLabel" xml:space="preserve"><value>Задача:</value></data>
+  <data name="TestCase_HiddenHelp" xml:space="preserve"><value>Скрытые тесты отображаются только на страницах администратора.</value></data>
+  <data name="TestCase_Constraint" xml:space="preserve"><value>Этот номер уже используется или связанная задача больше не существует.</value></data>
+  <data name="TestCase_DuplicateOrder" xml:space="preserve"><value>У этой задачи уже есть тест с таким порядковым номером.</value></data>
+  <data name="TestCase_Created" xml:space="preserve"><value>Тест создан.</value></data>
+  <data name="TestCase_Updated" xml:space="preserve"><value>Тест обновлён.</value></data>
+  <data name="TestCase_Deleted" xml:space="preserve"><value>Тест удалён.</value></data>
+  <data name="TestCase_HasResults" xml:space="preserve"><value>У этого теста есть результаты выполнения, поэтому удалить его нельзя.</value></data>
+  <data name="TestCase_InUse" xml:space="preserve"><value>У этого теста появились результаты выполнения, поэтому удалить его нельзя.</value></data>
+  <data name="Validation_Required" xml:space="preserve"><value>Поле «{0}» обязательно.</value></data>
+  <data name="Validation_StringLength" xml:space="preserve"><value>Длина поля «{0}» не должна превышать {1} символов.</value></data>
+  <data name="Validation_Range" xml:space="preserve"><value>Значение поля «{0}» должно быть от {1} до {2}.</value></data>
+  <data name="Validation_Slug" xml:space="preserve"><value>Используйте латинские буквы, цифры и один дефис между словами.</value></data>
+  <data name="Validation_Difficulty" xml:space="preserve"><value>Выберите допустимый уровень сложности.</value></data>
+  <data name="Validation_Topic" xml:space="preserve"><value>Выберите существующую тему.</value></data>
+  <data name="Validation_Task" xml:space="preserve"><value>Выберите существующую задачу.</value></data>
+</root>

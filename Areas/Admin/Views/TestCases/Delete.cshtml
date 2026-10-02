@@ -1,9 +1,9 @@
 @model TestCase
-@{ ViewData["Title"] = "Delete test case"; }
-<h1>Delete test case</h1>
-<p class="alert alert-warning" role="note">Delete test case @Model.Order for <strong>@Model.ProgrammingTask.Title</strong>? Cases with execution results are protected.</p>
+@{ ViewData["Title"] = A["TestCase_Delete"]; }
+<h1>@A["TestCase_Delete"]</h1>
+<p class="alert alert-warning" role="note">@A["TestCase_DeletePrompt", Model.Order, Model.ProgrammingTask.Title]</p>
 <div asp-validation-summary="All" class="text-danger" role="alert"></div>
 <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
-    <button class="btn btn-danger" type="submit">Delete test case</button>
-    <a asp-action="Index" asp-route-taskId="@Model.ProgrammingTaskId" class="btn btn-secondary">Cancel</a>
+    <button class="btn btn-danger" type="submit">@A["TestCase_Delete"]</button>
+    <a asp-action="Index" asp-route-taskId="@Model.ProgrammingTaskId" class="btn btn-secondary">@A["Button_Cancel"]</a>
 </form>

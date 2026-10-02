@@ -36,27 +36,27 @@ public sealed class SubmissionService
     {
         if (string.IsNullOrWhiteSpace(model.SourceCode)
             || Encoding.UTF8.GetByteCount(model.SourceCode) > CodeRunnerOptions.MaxSourceBytes)
-            return new SubmissionOutcome(null, "Enter source code of at most 64 KB (UTF-8).");
+            return new SubmissionOutcome(null, "Validation_SourceLimit");
 
         var task = await _db.ProgrammingTasks.AsNoTracking()
             .SingleOrDefaultAsync(task => task.Id == model.ProgrammingTaskId && task.IsPublished, cancellationToken);
         var runtime = await _db.Runtimes.AsNoTracking()
             .SingleOrDefaultAsync(runtime => runtime.Id == model.RuntimeId && runtime.IsEnabled, cancellationToken);
         if (task == null)
-            return new SubmissionOutcome(null, "Select a published programming task.");
+            return new SubmissionOutcome(null, "Validation_PublishedTask");
         if (runtime == null || runtime.LanguageKey != CodeRunnerOptions.LanguageKey)
-            return new SubmissionOutcome(null, "Select an enabled C++ runtime.");
+            return new SubmissionOutcome(null, "Validation_Runtime");
 
         var testQuery = _db.TestCases.AsNoTracking().Where(test => test.ProgrammingTaskId == task.Id);
         var count = await testQuery.CountAsync(cancellationToken);
         if (count == 0 || count > CodeRunnerOptions.MaxTests
             || await testQuery.AnyAsync(test => test.Input.Length > CodeRunnerOptions.MaxTestInputBytes
                 || test.ExpectedOutput.Length > CodeRunnerOptions.MaxTestInputBytes, cancellationToken))
-            return new SubmissionOutcome(null, "This task is not configured for execution. Please contact an administrator.");
+            return new SubmissionOutcome(null, "Runner_TaskConfiguration");
         var tests = await testQuery.OrderBy(test => test.Order).ToListAsync(cancellationToken);
         if (tests.Any(test => Encoding.UTF8.GetByteCount(test.Input) > CodeRunnerOptions.MaxTestInputBytes
             || Encoding.UTF8.GetByteCount(test.ExpectedOutput) > CodeRunnerOptions.MaxTestInputBytes))
-            return new SubmissionOutcome(null, "This task's test data exceeds the supported size.");
+            return new SubmissionOutcome(null, "Runner_TestSize");
 
         var submission = new Submission
         {

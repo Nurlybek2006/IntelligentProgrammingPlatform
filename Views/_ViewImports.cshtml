@@ -1,5 +1,8 @@
 ﻿@using IntelligentProgrammingPlatform
 @using IntelligentProgrammingPlatform.Models
+@using System.Globalization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> T
+@inject Microsoft.Extensions.Localization.IStringLocalizer<StudentResource> L
 @inject IntelligentProgrammingPlatform.Services.Security.ContentSecurityPolicy Csp
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, IntelligentProgrammingPlatform

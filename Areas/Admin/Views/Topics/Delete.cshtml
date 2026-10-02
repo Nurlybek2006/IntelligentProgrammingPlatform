@@ -1,9 +1,9 @@
 @model Topic
-@{ ViewData["Title"] = "Delete topic"; }
-<h1>Delete topic</h1>
-<p class="alert alert-warning" role="note">Delete <strong>@Model.Name</strong>? Topics containing tasks cannot be deleted.</p>
+@{ ViewData["Title"] = A["Topic_Delete"]; }
+<h1>@A["Topic_Delete"]</h1>
+<p class="alert alert-warning" role="note">@A["Topic_DeletePrompt", Model.Name]</p>
 <div asp-validation-summary="All" class="text-danger" role="alert"></div>
 <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
-    <button class="btn btn-danger" type="submit">Delete topic</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button class="btn btn-danger" type="submit">@A["Topic_Delete"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@A["Button_Cancel"]</a>
 </form>

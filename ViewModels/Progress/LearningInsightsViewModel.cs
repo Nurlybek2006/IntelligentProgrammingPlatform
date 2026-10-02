@@ -28,13 +28,15 @@ public sealed class TopicStrengthViewModel
     public decimal CompletionRate => PublishedTasks == 0 ? 0 : (decimal)SolvedTasks / PublishedTasks;
     public decimal SubmissionSuccessRate => CompletedSubmissions == 0 ? 0 : (decimal)AcceptedSubmissions / CompletedSubmissions;
     public decimal StrengthScore => Math.Clamp((CompletionRate * 0.70m + SubmissionSuccessRate * 0.30m) * 100, 0, 100);
-    public string Label => CompletedSubmissions == 0 ? "Not started" : CompletedSubmissions < 3 ? "Exploring"
-        : StrengthScore >= 75 ? "Strong" : StrengthScore >= 45 ? "Developing" : "Needs practice";
+    public TopicStrengthLevel Level => CompletedSubmissions == 0 ? TopicStrengthLevel.NotStarted
+        : CompletedSubmissions < 3 ? TopicStrengthLevel.Exploring
+        : StrengthScore >= 75 ? TopicStrengthLevel.Strong
+        : StrengthScore >= 45 ? TopicStrengthLevel.Developing : TopicStrengthLevel.NeedsPractice;
     public string MostFrequentIssue => new[]
     {
-        new LearningPatternViewModel("Compilation", CompilationErrors), new("Wrong Answer / Logic", WrongAnswers),
-        new("Runtime", RuntimeErrors), new("Time Limit", TimeLimitErrors), new("Memory Limit", MemoryLimitErrors)
-    }.Where(item => item.Count > 0).OrderByDescending(item => item.Count).FirstOrDefault()?.Name ?? "No recorded errors";
+        new LearningPatternViewModel("Compilation", CompilationErrors), new("WrongAnswer", WrongAnswers),
+        new("Runtime", RuntimeErrors), new("TimeLimit", TimeLimitErrors), new("MemoryLimit", MemoryLimitErrors)
+    }.Where(item => item.Count > 0).OrderByDescending(item => item.Count).FirstOrDefault()?.Name ?? "None";
 }
 
 public sealed record LearningPatternViewModel(string Name, int Count);
@@ -47,5 +49,7 @@ public sealed class PracticeNextViewModel
     public string Slug { get; set; } = string.Empty;
     public string TopicName { get; set; } = string.Empty;
     public Difficulty Difficulty { get; set; }
-    public string Reason { get; set; } = string.Empty;
+    public TopicStrengthLevel Level { get; set; }
+    public int SolvedTasks { get; set; }
+    public int PublishedTasks { get; set; }
 }

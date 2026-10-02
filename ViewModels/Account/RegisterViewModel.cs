@@ -4,17 +4,19 @@ namespace IntelligentProgrammingPlatform.ViewModels.Account;
 
 public class RegisterViewModel
 {
-    [Required, StringLength(100)]
-    [Display(Name = "Display name")]
+    [Required(ErrorMessage = "Validation_Required"), StringLength(100, ErrorMessage = "Validation_StringLength")]
+    [Display(Name = "Field_DisplayName")]
     public string DisplayName { get; set; } = string.Empty;
 
-    [Required, EmailAddress, StringLength(256)]
+    [Required(ErrorMessage = "Validation_Required"), EmailAddress(ErrorMessage = "Validation_Email"), StringLength(256, ErrorMessage = "Validation_StringLength")]
+    [Display(Name = "Field_Email")]
     public string Email { get; set; } = string.Empty;
 
-    [Required, StringLength(100, MinimumLength = 8), DataType(DataType.Password)]
+    [Required(ErrorMessage = "Validation_Required"), StringLength(100, MinimumLength = 8, ErrorMessage = "Validation_PasswordLength"), DataType(DataType.Password)]
+    [Display(Name = "Field_Password")]
     public string Password { get; set; } = string.Empty;
 
-    [Required, DataType(DataType.Password), Compare(nameof(Password))]
-    [Display(Name = "Confirm password")]
+    [Required(ErrorMessage = "Validation_Required"), DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Validation_Compare")]
+    [Display(Name = "Field_ConfirmPassword")]
     public string ConfirmPassword { get; set; } = string.Empty;
 }

@@ -1,9 +1,9 @@
 @model ProgrammingTaskFormViewModel
-@{ ViewData["Title"] = "Create task"; }
-<h1>Create task</h1>
+@{ ViewData["Title"] = A["Task_Create"]; }
+<h1>@A["Task_Create"]</h1>
 <form asp-action="Create" method="post" class="col-lg-8">
     <partial name="_Form" model="Model" />
-    <button class="btn btn-primary" type="submit">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button class="btn btn-primary" type="submit">@A["Button_Save"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@A["Button_Cancel"]</a>
 </form>
 @section Scripts { <partial name="/Views/Shared/_ValidationScriptsPartial.cshtml" /> }

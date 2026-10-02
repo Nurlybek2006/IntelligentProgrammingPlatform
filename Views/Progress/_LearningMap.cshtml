@@ -1,43 +1,43 @@
 @using System.Globalization
 @model IntelligentProgrammingPlatform.ViewModels.Progress.LearningInsightsViewModel
 <section id="learning-map" aria-labelledby="learning-map-heading" class="mt-5">
-    <div class="section-heading"><div><p class="eyebrow">Find your next practice</p><h2 id="learning-map-heading">Learning Map</h2></div></div>
-    <p class="text-muted">A snapshot of your official attempts on currently published tasks. Temporary Runs and system errors do not affect these learning measures.</p>
+    <div class="section-heading"><div><p class="eyebrow">@L["Map_Eyebrow"]</p><h2 id="learning-map-heading">@L["Map_Title"]</h2></div></div>
+    <p class="text-muted">@L["Map_Intro"]</p>
     <details class="learning-guide mb-4">
-        <summary>How to read your learning strength</summary>
-        <p class="small mt-3">Strength = (task completion × 70% + submission success × 30%). Completion counts each solved task once; success counts Accepted attempts out of completed attempts, excluding system errors.</p>
-        <p class="small mb-0">No completed attempts: Not started. One or two: Exploring. With at least three: Strong at 75% or above, Developing at 45% or above, otherwise Needs practice. These labels describe recorded practice, not personal ability. Learning strength is separate from your rating score.</p>
+        <summary>@L["Map_GuideTitle"]</summary>
+        <p class="small mt-3">@L["Map_Formula"]</p>
+        <p class="small mb-0">@L["Map_LevelsHelp", T["Strength_NotStarted"].Value, T["Strength_Exploring"].Value, T["Strength_Strong"].Value, T["Strength_Developing"].Value, T["Strength_NeedsPractice"].Value]</p>
     </details>
-    <h3 class="h5 mb-3">Topic strength</h3>
+    <h3 class="h5 mb-3">@L["Map_TopicStrength"]</h3>
     @if (Model.Topics.Count == 0)
     {
-        <div class="empty-state">Your learning map will appear when topics are added.</div>
+        <div class="empty-state">@L["Map_Empty"]</div>
     }
     <div class="learning-topic-grid">
         @foreach (var topic in Model.Topics)
         {
             var score = topic.StrengthScore.ToString("0.0", CultureInfo.InvariantCulture);
-            <article class="panel learning-topic" data-topic-id="@topic.TopicId" data-strength="@score" data-label="@topic.Label">
-                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2"><h4 class="h5 mb-0">@topic.Name</h4><span class="learning-label">@topic.Label</span></div>
-                <p class="learning-strength"><strong>@score%</strong> <span class="small text-muted">learning strength</span></p>
-                <progress class="learning-meter" value="@score" max="100" aria-label="@topic.Name learning strength">@score%</progress>
+            <article class="panel learning-topic" data-topic-id="@topic.TopicId" data-strength="@score" data-label="@topic.Level">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2"><h4 class="h5 mb-0">@topic.Name</h4><span class="learning-label">@T[$"Strength_{topic.Level}"]</span></div>
+                <p class="learning-strength"><strong>@topic.StrengthScore.ToString("0.0")%</strong> <span class="small text-muted">@L["Map_Strength"]</span></p>
+                <progress class="learning-meter" value="@score" max="100" aria-label="@L["Map_StrengthLabel", topic.Name]">@topic.StrengthScore.ToString("0.0")%</progress>
                 <dl class="learning-facts">
-                    <div><dt>Solved / published</dt><dd>@topic.SolvedTasks / @topic.PublishedTasks</dd></div>
-                    <div><dt>Completed attempts</dt><dd>@topic.CompletedSubmissions</dd></div>
-                    <div><dt>Task completion</dt><dd>@((topic.CompletionRate * 100).ToString("0.0"))%</dd></div>
-                    <div><dt>Submission success</dt><dd>@((topic.SubmissionSuccessRate * 100).ToString("0.0"))%</dd></div>
+                    <div><dt>@L["Map_SolvedPublished"]</dt><dd>@topic.SolvedTasks / @topic.PublishedTasks</dd></div>
+                    <div><dt>@L["Map_CompletedAttempts"]</dt><dd>@topic.CompletedSubmissions</dd></div>
+                    <div><dt>@L["Map_Completion"]</dt><dd>@((topic.CompletionRate * 100).ToString("0.0"))%</dd></div>
+                    <div><dt>@L["Map_Success"]</dt><dd>@((topic.SubmissionSuccessRate * 100).ToString("0.0"))%</dd></div>
                 </dl>
-                <p class="small mb-0">Most frequent issue: <strong>@topic.MostFrequentIssue</strong></p>
-                @if (topic.PublishedTasks == 0) { <p class="small text-muted mt-2 mb-0">No published tasks in this topic yet.</p> }
+                <p class="small mb-0">@L["Map_FrequentIssue"] <strong>@T[$"ErrorPattern_{topic.MostFrequentIssue}"]</strong></p>
+                @if (topic.PublishedTasks == 0) { <p class="small text-muted mt-2 mb-0">@L["Map_NoPublished"]</p> }
                 <details class="small mt-3">
-                    <summary>Attempt breakdown</summary>
+                    <summary>@L["Map_Breakdown"]</summary>
                     <dl class="learning-facts">
-                        <div><dt>Accepted</dt><dd>@topic.AcceptedSubmissions</dd></div>
-                        <div><dt>Compilation</dt><dd>@topic.CompilationErrors</dd></div>
-                        <div><dt>Wrong Answer</dt><dd>@topic.WrongAnswers</dd></div>
-                        <div><dt>Runtime</dt><dd>@topic.RuntimeErrors</dd></div>
-                        <div><dt>Time Limit</dt><dd>@topic.TimeLimitErrors</dd></div>
-                        <div><dt>Memory Limit</dt><dd>@topic.MemoryLimitErrors</dd></div>
+                        <div><dt>@T["Status_Accepted"]</dt><dd>@topic.AcceptedSubmissions</dd></div>
+                        <div><dt>@T["ErrorPattern_Compilation"]</dt><dd>@topic.CompilationErrors</dd></div>
+                        <div><dt>@T["ErrorPattern_WrongAnswer"]</dt><dd>@topic.WrongAnswers</dd></div>
+                        <div><dt>@T["ErrorPattern_Runtime"]</dt><dd>@topic.RuntimeErrors</dd></div>
+                        <div><dt>@T["ErrorPattern_TimeLimit"]</dt><dd>@topic.TimeLimitErrors</dd></div>
+                        <div><dt>@T["ErrorPattern_MemoryLimit"]</dt><dd>@topic.MemoryLimitErrors</dd></div>
                     </dl>
                 </details>
             </article>
@@ -45,46 +45,46 @@
     </div>
     <div class="row g-4 mt-1">
         <section class="col-lg-6" aria-labelledby="error-patterns-heading"><div class="panel h-100">
-            <h3 id="error-patterns-heading" class="h5">Error patterns</h3>
-            <p class="small text-muted">Official results on published tasks. Infrastructure errors are excluded.</p>
+            <h3 id="error-patterns-heading" class="h5">@L["Map_ErrorPatterns"]</h3>
+            <p class="small text-muted">@L["Map_ErrorHelp"]</p>
             @foreach (var pattern in Model.ErrorPatterns)
             {
                 <div class="learning-pattern">
-                    <div class="d-flex justify-content-between gap-3"><span>@pattern.Name</span><strong>@pattern.Count</strong></div>
-                    <progress class="learning-meter" value="@pattern.Count" max="@Math.Max(1, Model.ErrorPatterns.Max(item => item.Count))" aria-label="@pattern.Name errors">@pattern.Count</progress>
+                    <div class="d-flex justify-content-between gap-3"><span>@T[$"ErrorPattern_{pattern.Name}"]</span><strong>@pattern.Count</strong></div>
+                    <progress class="learning-meter" value="@pattern.Count" max="@Math.Max(1, Model.ErrorPatterns.Max(item => item.Count))" aria-label="@L["Map_ErrorLabel", T[$"ErrorPattern_{pattern.Name}"].Value]">@pattern.Count</progress>
                 </div>
             }
-            @if (Model.ErrorPatterns.All(item => item.Count == 0)) { <p class="small text-muted mb-0">No student errors recorded in these tasks.</p> }
+            @if (Model.ErrorPatterns.All(item => item.Count == 0)) { <p class="small text-muted mb-0">@L["Map_NoErrors"]</p> }
         </div></section>
         <section class="col-lg-6" aria-labelledby="ai-patterns-heading"><div class="panel h-100">
-            <h3 id="ai-patterns-heading" class="h5">AI-analyzed patterns</h3>
-            <p class="small text-muted">Only submissions with saved AI analysis are represented here, excluding system errors. These categories do not affect learning strength or rating.</p>
+            <h3 id="ai-patterns-heading" class="h5">@L["Map_AiPatterns"]</h3>
+            <p class="small text-muted">@L["Map_AiHelp"]</p>
             @foreach (var pattern in Model.AiPatterns)
             {
                 <div class="learning-pattern">
-                    <div class="d-flex justify-content-between gap-3"><span>@pattern.Name</span><strong>@pattern.Count</strong></div>
-                    <progress class="learning-meter" value="@pattern.Count" max="@Math.Max(1, Model.AiPatterns.Max(item => item.Count))" aria-label="@pattern.Name AI-analyzed submissions">@pattern.Count</progress>
+                    <div class="d-flex justify-content-between gap-3"><span>@T[$"AiCategory_{pattern.Name}"]</span><strong>@pattern.Count</strong></div>
+                    <progress class="learning-meter" value="@pattern.Count" max="@Math.Max(1, Model.AiPatterns.Max(item => item.Count))" aria-label="@L["Map_AiLabel", T[$"AiCategory_{pattern.Name}"].Value]">@pattern.Count</progress>
                 </div>
             }
-            @if (Model.AiPatterns.Count == 0) { <p class="text-muted mb-0">No saved AI analysis for these tasks yet. Your learning map works without it.</p> }
+            @if (Model.AiPatterns.Count == 0) { <p class="text-muted mb-0">@L["Map_NoAi"]</p> }
         </div></section>
     </div>
     <section id="practice-next" class="panel practice-next mt-4" aria-labelledby="practice-next-heading">
-        <p class="eyebrow">Practice Next</p><h3 id="practice-next-heading" class="h4">Recommended next practice</h3>
+        <p class="eyebrow">@L["Map_PracticeNext"]</p><h3 id="practice-next-heading" class="h4">@L["Map_Recommendation"]</h3>
         @if (Model.PracticeNext is { } next)
         {
             <h4 class="h5">@next.Title</h4>
-            <p>Topic: @next.TopicName · <span class="difficulty @next.Difficulty">@next.Difficulty</span></p>
-            <p class="text-muted">@next.Reason</p>
-            <a id="practice-next-link" class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@next.Slug">Practice this task →</a>
+            <p>@L["Map_Topic"] @next.TopicName · <span class="difficulty @next.Difficulty">@T[$"Difficulty_{next.Difficulty}"]</span></p>
+            <p class="text-muted">@L["Map_Reason", next.TopicName, T[$"Strength_{next.Level}"].Value, next.SolvedTasks, next.PublishedTasks]</p>
+            <a id="practice-next-link" class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@next.Slug">@L["Map_PracticeButton"]</a>
         }
         else if (Model.AllPublishedSolved)
         {
-            <p class="mb-0">You have solved every published task. Revisit a solution to reflect on your approach, or return when new tasks are available.</p>
+            <p class="mb-0">@L["Map_AllSolved"]</p>
         }
         else
         {
-            <p class="mb-0">New practice will appear when tasks are published.</p>
+            <p class="mb-0">@L["Map_NoPractice"]</p>
         }
     </section>
 </section>
