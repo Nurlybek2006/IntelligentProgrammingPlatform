@@ -25,7 +25,7 @@ static class Checks
     internal const string FeedbackJson = """
         {"summary":"Check the expression used for the answer.","errorCategory":"Logic",
         "explanation":"The program completes but its output differs from the visible example. Trace the input values through the expression.",
-        "hints":["Compare the required operation with the one in your code.","Check the visible example by hand."]}
+        "hints":["Compare the required operation with the one in your code.","Check the visible example by hand.","Trace how each input value contributes to the result, then revise the expression yourself."]}
         """;
     private static readonly DbContextOptions<ApplicationDbContext> DbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
         .UseSqlServer("Server=localhost;Database=IntelligentProgrammingPlatformDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=False;")
@@ -209,7 +209,7 @@ static class Checks
         });
         var adapter = new OpenAiFeedbackClient(options, sdk);
         var result = await adapter.GenerateAsync(input, default);
-        Assert(AiFeedbackContent.Parse(result.Json).Hints.Length == 2 && result.InputTokens == 80, "Official SDK reads structured feedback and token usage through offline transport");
+        Assert(AiFeedbackContent.Parse(result.Json).Hints.Length == 3 && result.InputTokens == 80, "Official SDK reads three structured hints and token usage through offline transport");
         using var request = JsonDocument.Parse(handler.LastBody!);
         var root = request.RootElement;
         Assert(root.GetProperty("model").GetString() == "gpt-6-luna" && !root.GetProperty("store").GetBoolean()

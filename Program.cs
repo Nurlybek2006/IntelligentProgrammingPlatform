@@ -72,6 +72,7 @@ builder.Services.AddScoped<TaskPageService>();
 
 // Прогресті тарихтан есептеп, рейтинг summary жаңартуларын реттейді.
 builder.Services.AddScoped<ProgressService>();
+builder.Services.AddScoped<LearningInsightsService>();
 builder.Services.AddSingleton<LeaderboardUpdateGate>();
 builder.Services.AddScoped<LeaderboardService>();
 
@@ -81,6 +82,7 @@ builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<AiRequestGate>();
 builder.Services.AddSingleton<IAiFeedbackClient, OpenAiFeedbackClient>();
 builder.Services.AddScoped<OpenAiTutorService>();
+builder.Services.AddScoped<HintRevealService>();
 
 var app = builder.Build();
 

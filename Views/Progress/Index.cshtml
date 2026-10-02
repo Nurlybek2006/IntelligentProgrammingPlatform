@@ -45,6 +45,7 @@
     </div></section>
 </div>
 <p class="small text-muted mt-3">Solving time runs from your first submission to your first Accepted submission for each solved task. It is not program execution time.</p>
+<partial name="_LearningMap" model="Model.LearningMap" />
 <section aria-labelledby="recent-heading">
     <div class="section-heading"><h2 id="recent-heading">Recent activity</h2><a asp-controller="Submissions" asp-action="My">All my submissions →</a></div>
     @if (Model.Recent.Count == 0) { <div class="empty-state"><h3>Your progress starts with a first attempt</h3><p><a asp-controller="Tasks" asp-action="Index">Choose a task</a> to get started.</p></div> }

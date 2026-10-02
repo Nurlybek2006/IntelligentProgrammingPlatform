@@ -128,6 +128,9 @@ namespace IntelligentProgrammingPlatform.Data
                 entity.Property(feedback => feedback.Summary).HasMaxLength(600).IsRequired();
                 entity.Property(feedback => feedback.Explanation).HasMaxLength(3000).IsRequired();
                 entity.Property(feedback => feedback.HintsJson).HasMaxLength(6000).IsRequired();
+                entity.Property(feedback => feedback.RevealedHintCount).HasDefaultValue(1).HasSentinel(-1);
+                entity.ToTable(table => table.HasCheckConstraint("CK_AiFeedbacks_RevealedHintCount",
+                    "[RevealedHintCount] BETWEEN 0 AND 3"));
                 entity.Property(feedback => feedback.ErrorCategory).HasMaxLength(30).IsRequired();
                 entity.HasIndex(feedback => feedback.SubmissionId).IsUnique();
                 entity.HasOne(feedback => feedback.Submission)

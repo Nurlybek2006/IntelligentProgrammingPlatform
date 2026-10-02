@@ -26,6 +26,7 @@
                     @if (attempt.HasAiFeedback)
                     {
                         <span class="ai-hint-marker" title="AI feedback is saved for this attempt. This does not imply it caused a later improvement.">AI Hint Used</span>
+                        <span class="small journey-hint-count">AI hints: @attempt.RevealedHintCount/@attempt.AvailableHintCount</span>
                     }
                     @if (attempt.PreviousSubmissionId.HasValue)
                     {

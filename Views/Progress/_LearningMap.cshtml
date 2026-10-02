@@ -1,0 +1,90 @@
+@using System.Globalization
+@model IntelligentProgrammingPlatform.ViewModels.Progress.LearningInsightsViewModel
+<section id="learning-map" aria-labelledby="learning-map-heading" class="mt-5">
+    <div class="section-heading"><div><p class="eyebrow">Find your next practice</p><h2 id="learning-map-heading">Learning Map</h2></div></div>
+    <p class="text-muted">A snapshot of your official attempts on currently published tasks. Temporary Runs and system errors do not affect these learning measures.</p>
+    <details class="learning-guide mb-4">
+        <summary>How to read your learning strength</summary>
+        <p class="small mt-3">Strength = (task completion × 70% + submission success × 30%). Completion counts each solved task once; success counts Accepted attempts out of completed attempts, excluding system errors.</p>
+        <p class="small mb-0">No completed attempts: Not started. One or two: Exploring. With at least three: Strong at 75% or above, Developing at 45% or above, otherwise Needs practice. These labels describe recorded practice, not personal ability. Learning strength is separate from your rating score.</p>
+    </details>
+    <h3 class="h5 mb-3">Topic strength</h3>
+    @if (Model.Topics.Count == 0)
+    {
+        <div class="empty-state">Your learning map will appear when topics are added.</div>
+    }
+    <div class="learning-topic-grid">
+        @foreach (var topic in Model.Topics)
+        {
+            var score = topic.StrengthScore.ToString("0.0", CultureInfo.InvariantCulture);
+            <article class="panel learning-topic" data-topic-id="@topic.TopicId" data-strength="@score" data-label="@topic.Label">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2"><h4 class="h5 mb-0">@topic.Name</h4><span class="learning-label">@topic.Label</span></div>
+                <p class="learning-strength"><strong>@score%</strong> <span class="small text-muted">learning strength</span></p>
+                <progress class="learning-meter" value="@score" max="100" aria-label="@topic.Name learning strength">@score%</progress>
+                <dl class="learning-facts">
+                    <div><dt>Solved / published</dt><dd>@topic.SolvedTasks / @topic.PublishedTasks</dd></div>
+                    <div><dt>Completed attempts</dt><dd>@topic.CompletedSubmissions</dd></div>
+                    <div><dt>Task completion</dt><dd>@((topic.CompletionRate * 100).ToString("0.0"))%</dd></div>
+                    <div><dt>Submission success</dt><dd>@((topic.SubmissionSuccessRate * 100).ToString("0.0"))%</dd></div>
+                </dl>
+                <p class="small mb-0">Most frequent issue: <strong>@topic.MostFrequentIssue</strong></p>
+                @if (topic.PublishedTasks == 0) { <p class="small text-muted mt-2 mb-0">No published tasks in this topic yet.</p> }
+                <details class="small mt-3">
+                    <summary>Attempt breakdown</summary>
+                    <dl class="learning-facts">
+                        <div><dt>Accepted</dt><dd>@topic.AcceptedSubmissions</dd></div>
+                        <div><dt>Compilation</dt><dd>@topic.CompilationErrors</dd></div>
+                        <div><dt>Wrong Answer</dt><dd>@topic.WrongAnswers</dd></div>
+                        <div><dt>Runtime</dt><dd>@topic.RuntimeErrors</dd></div>
+                        <div><dt>Time Limit</dt><dd>@topic.TimeLimitErrors</dd></div>
+                        <div><dt>Memory Limit</dt><dd>@topic.MemoryLimitErrors</dd></div>
+                    </dl>
+                </details>
+            </article>
+        }
+    </div>
+    <div class="row g-4 mt-1">
+        <section class="col-lg-6" aria-labelledby="error-patterns-heading"><div class="panel h-100">
+            <h3 id="error-patterns-heading" class="h5">Error patterns</h3>
+            <p class="small text-muted">Official results on published tasks. Infrastructure errors are excluded.</p>
+            @foreach (var pattern in Model.ErrorPatterns)
+            {
+                <div class="learning-pattern">
+                    <div class="d-flex justify-content-between gap-3"><span>@pattern.Name</span><strong>@pattern.Count</strong></div>
+                    <progress class="learning-meter" value="@pattern.Count" max="@Math.Max(1, Model.ErrorPatterns.Max(item => item.Count))" aria-label="@pattern.Name errors">@pattern.Count</progress>
+                </div>
+            }
+            @if (Model.ErrorPatterns.All(item => item.Count == 0)) { <p class="small text-muted mb-0">No student errors recorded in these tasks.</p> }
+        </div></section>
+        <section class="col-lg-6" aria-labelledby="ai-patterns-heading"><div class="panel h-100">
+            <h3 id="ai-patterns-heading" class="h5">AI-analyzed patterns</h3>
+            <p class="small text-muted">Only submissions with saved AI analysis are represented here, excluding system errors. These categories do not affect learning strength or rating.</p>
+            @foreach (var pattern in Model.AiPatterns)
+            {
+                <div class="learning-pattern">
+                    <div class="d-flex justify-content-between gap-3"><span>@pattern.Name</span><strong>@pattern.Count</strong></div>
+                    <progress class="learning-meter" value="@pattern.Count" max="@Math.Max(1, Model.AiPatterns.Max(item => item.Count))" aria-label="@pattern.Name AI-analyzed submissions">@pattern.Count</progress>
+                </div>
+            }
+            @if (Model.AiPatterns.Count == 0) { <p class="text-muted mb-0">No saved AI analysis for these tasks yet. Your learning map works without it.</p> }
+        </div></section>
+    </div>
+    <section id="practice-next" class="panel practice-next mt-4" aria-labelledby="practice-next-heading">
+        <p class="eyebrow">Practice Next</p><h3 id="practice-next-heading" class="h4">Recommended next practice</h3>
+        @if (Model.PracticeNext is { } next)
+        {
+            <h4 class="h5">@next.Title</h4>
+            <p>Topic: @next.TopicName · <span class="difficulty @next.Difficulty">@next.Difficulty</span></p>
+            <p class="text-muted">@next.Reason</p>
+            <a id="practice-next-link" class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@next.Slug">Practice this task →</a>
+        }
+        else if (Model.AllPublishedSolved)
+        {
+            <p class="mb-0">You have solved every published task. Revisit a solution to reflect on your approach, or return when new tasks are available.</p>
+        }
+        else
+        {
+            <p class="mb-0">New practice will appear when tasks are published.</p>
+        }
+    </section>
+</section>

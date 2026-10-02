@@ -130,6 +130,14 @@ python scripts/verify_phase5_live.py --finish
 
 Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement2_ui.mjs` for the new regressions. See [study-enhancement2.md](study-enhancement2.md) and [manual-enhancement2-checklist.md](manual-enhancement2-checklist.md). Real browser verification remains pending.
 
+## Intelligent Learning features
+
+- **Progressive AI hints:** one analysis generates three increasingly specific hints. Hint 1 appears immediately; later hints stay on the server until revealed. Revealing saves your progress and makes no additional AI request. Older feedback with fewer hints remains usable.
+- **Learning Weakness Map:** `/Progress` shows topic strength and official error patterns from your submissions on published tasks. System errors and temporary Runs are excluded; AI-analyzed categories are shown separately and do not affect scores.
+- **Practice Next:** a deterministic recommendation selects an unsolved published task by topic practice priority, strength, then difficulty and stable IDs. Leaderboard scoring remains unchanged.
+
+Apply `AddProgressiveHintReveal` with `dotnet ef database update`. Verify with `dotnet run --project tests/Enhancement3Checks` and `python scripts/verify_enhancement3.py`. See [study-enhancement3.md](study-enhancement3.md) and [manual-enhancement3-checklist.md](manual-enhancement3-checklist.md); visual browser checks remain pending.
+
 ## Demo workflow
 
 1. Register/login, open **Tasks**, select **Sum of Two Numbers**.

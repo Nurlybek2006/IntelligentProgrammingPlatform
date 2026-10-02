@@ -27,7 +27,7 @@ public sealed class AiFeedbackContent
             ?? throw new InvalidDataException("AI response is empty.");
         ValidateText(content.Summary, 600);
         ValidateText(content.Explanation, 3000);
-        if (content.Hints == null || content.Hints.Length is < 1 or > 3)
+        if (content.Hints == null || content.Hints.Length != 3)
             throw new InvalidDataException("AI hint count is invalid.");
         foreach (var hint in content.Hints) ValidateText(hint, 300);
         if (content.ErrorCategory is not ("Compilation" or "Logic" or "Runtime" or "TimeLimit"

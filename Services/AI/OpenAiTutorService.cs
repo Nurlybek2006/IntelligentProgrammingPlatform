@@ -61,6 +61,7 @@ public sealed class OpenAiTutorService
                 Summary = Clean(content.Summary, 600), Explanation = Clean(content.Explanation, 3000),
                 ErrorCategory = content.ErrorCategory,
                 HintsJson = JsonSerializer.Serialize(content.Hints.Select(hint => Clean(hint, 300))),
+                RevealedHintCount = 1,
                 CreatedAt = DateTime.UtcNow,
                 InputTokens = response.InputTokens >= 0 ? response.InputTokens : null,
                 OutputTokens = response.OutputTokens >= 0 ? response.OutputTokens : null
@@ -126,13 +127,14 @@ public sealed class OpenAiTutorService
     {
         var feedback = await _db.AiFeedbacks.AsNoTracking().Where(item => item.SubmissionId == submissionId
                 && item.Submission.UserId == userId && item.UserId == userId)
-            .Select(item => new { item.Summary, item.Explanation, item.ErrorCategory, item.HintsJson, item.CreatedAt })
+            .Select(item => new { item.Id, item.Summary, item.Explanation, item.ErrorCategory,
+                item.HintsJson, item.RevealedHintCount, item.CreatedAt })
             .SingleOrDefaultAsync(cancellationToken);
         if (feedback == null) return null;
-        string[] hints;
-        try { hints = JsonSerializer.Deserialize<string[]>(feedback.HintsJson) ?? Array.Empty<string>(); }
-        catch (JsonException) { hints = Array.Empty<string>(); }
-        return new AiFeedbackViewModel(feedback.Summary, feedback.Explanation, feedback.ErrorCategory, hints.Take(3).ToArray(), feedback.CreatedAt);
+        var hints = StoredHintReader.Read(feedback.HintsJson, _logger, feedback.Id);
+        var revealed = Math.Clamp(feedback.RevealedHintCount, 0, hints.Length);
+        return new AiFeedbackViewModel(feedback.Summary, feedback.Explanation, feedback.ErrorCategory,
+            hints.Take(revealed).ToArray(), feedback.CreatedAt, hints.Length);
     }
 
     // Бірдей redaction мен көлем шегін барлық AI мәтініне қолданады.

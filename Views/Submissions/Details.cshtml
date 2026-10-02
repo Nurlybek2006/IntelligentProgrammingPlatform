@@ -67,7 +67,35 @@
             <h3>Summary</h3><p class="text-content">@feedback.Summary</p>
             <p class="small">Error category: <span class="badge bg-secondary">@feedback.ErrorCategory</span></p>
             <h3>Explanation</h3><div class="text-content mb-3">@feedback.Explanation</div>
-            <h3>Hints</h3><ol class="hints">@foreach (var hint in feedback.Hints) { <li class="text-content">@hint</li> }</ol>
+            <h3>Progressive hints</h3>
+            <div class="hint-progress" role="status">
+                <p id="hint-count">Hints revealed: @feedback.RevealedHintCount / @feedback.AvailableHintCount</p>
+                <div class="hint-steps" aria-hidden="true">
+                    @for (var i = 0; i < feedback.AvailableHintCount; i++)
+                    {
+                        <span class="hint-step @(i < feedback.RevealedHintCount ? "is-revealed" : "")">@(i < feedback.RevealedHintCount ? "●" : "○")</span>
+                    }
+                </div>
+            </div>
+            <ol class="hints">
+                @for (var i = 0; i < feedback.Hints.Count; i++)
+                {
+                    <li class="text-content"><strong>Hint @(i + 1)</strong><p>@feedback.Hints[i]</p></li>
+                }
+            </ol>
+            @if (feedback.CanRevealNext)
+            {
+                <p class="small text-muted">Try updating your solution before revealing another hint. Need a little more direction?</p>
+                <form asp-controller="HintReveals" asp-action="RevealNextHint" asp-route-id="@Model.Id" method="post" data-busy-form="Revealing your next hint…">
+                    <button class="btn btn-outline-primary" type="submit">@(feedback.AvailableHintCount - feedback.RevealedHintCount == 1 ? "Reveal final hint" : "Reveal next hint")</button>
+                    <span class="d-block small mt-2" role="status"></span>
+                </form>
+                <p class="small text-muted mt-2">Revealing a saved hint does not request another AI analysis.</p>
+            }
+            else
+            {
+                <p class="small text-muted">@(feedback.AvailableHintCount == 0 ? "No saved hints are available for this feedback." : "All available hints revealed.")</p>
+            }
         }
         else if (Model.FinishedAt == null || Model.Status is SubmissionStatus.Pending or SubmissionStatus.Compiling or SubmissionStatus.Running)
         {

@@ -146,6 +146,26 @@ pre, code { font-family: Consolas, "Cascadia Code", monospace; }
 .hints { padding-left: 1.5rem; }
 .hints li { padding-left: .3rem; margin-bottom: .8rem; }
 .hints li::marker { color: var(--primary); font-weight: 700; }
+.hint-progress { padding: .8rem 1rem; background: var(--bg); border: 1px solid #655986; border-radius: .6rem; }
+.hint-progress p { margin-bottom: .3rem; }
+.hint-steps { display: flex; gap: .65rem; color: var(--text-muted); font-size: 1.5rem; line-height: 1; }
+.hint-step.is-revealed { color: var(--primary); }
+.learning-guide { border-left: 3px solid var(--primary); padding: .75rem 1rem; background: var(--surface); }
+.learning-topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 1rem; }
+.learning-topic, .learning-pattern, .practice-next { min-width: 0; overflow-wrap: anywhere; }
+.learning-label { font-size: .8rem; padding: .2rem .55rem; border: 1px solid #655986; border-radius: .4rem; color: #d6cfff; }
+.learning-strength { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; margin: 1rem 0 .5rem; }
+.learning-strength strong { font-size: 1.7rem; }
+.learning-meter { display: block; width: 100%; height: .65rem; border: 0; border-radius: .5rem; overflow: hidden; appearance: none; background: #111924; color: var(--primary); }
+.learning-meter::-webkit-progress-bar { background: #111924; }
+.learning-meter::-webkit-progress-value { background: var(--primary); border-radius: .5rem; }
+.learning-meter::-moz-progress-bar { background: var(--primary); border-radius: .5rem; }
+.learning-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin: 1rem 0; }
+.learning-facts dt { color: var(--text-muted); font-weight: 400; font-size: .8rem; }
+.learning-facts dd { margin: .2rem 0 0; }
+.learning-pattern { margin-bottom: 1rem; }
+.learning-pattern .learning-meter { margin-top: .45rem; }
+.practice-next { border-left: 3px solid var(--primary); }
 .test-result .card-body { padding: 1.2rem; }
 .test-result h3 { font-size: 1rem; }
 .progress { height: 1.25rem; background: #111924; }

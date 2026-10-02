@@ -25,5 +25,7 @@ public sealed class JourneyAttemptViewModel
     public DateTime CreatedAt { get; set; }
     public int? ExecutionTimeMs { get; set; }
     public bool HasAiFeedback { get; set; }
+    public int AvailableHintCount { get; set; }
+    public int RevealedHintCount { get; set; }
     public bool IsAccepted => Status == SubmissionStatus.Accepted;
 }

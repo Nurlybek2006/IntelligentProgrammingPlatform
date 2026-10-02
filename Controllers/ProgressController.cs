@@ -9,15 +9,23 @@ namespace IntelligentProgrammingPlatform.Controllers;
 public class ProgressController : Controller
 {
     private readonly ProgressService _progress;
+    private readonly LearningInsightsService _insights;
 
     // Жеке статистиканы есептейтін қызметті қабылдайды.
-    public ProgressController(ProgressService progress) => _progress = progress;
+    public ProgressController(ProgressService progress, LearningInsightsService insights)
+    {
+        _progress = progress;
+        _insights = insights;
+    }
 
     [HttpGet]
     // Тек ағымдағы пайдаланушының прогресін көрсетеді.
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        return userId == null ? Challenge() : View(await _progress.GetAsync(userId, cancellationToken));
+        if (userId == null) return Challenge();
+        var model = await _progress.GetAsync(userId, cancellationToken);
+        model.LearningMap = await _insights.GetAsync(userId, cancellationToken);
+        return View(model);
     }
 }
