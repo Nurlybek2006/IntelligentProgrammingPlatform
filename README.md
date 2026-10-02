@@ -101,7 +101,7 @@ Task/topic titles and descriptions, source code, compiler diagnostics, custom in
    dotnet run --launch-profile https
    ```
 
-   Open **https://localhost:7115**. The HTTPS profile is the default for `dotnet run`. Sign up for a Student account, or sign in with the configured development Admin. Development startup adds missing demo records: seven tasks across Basics, Arrays and Algorithms, including Easy, Medium and Hard, with visible and hidden tests. The three new tasks are **Count Even Numbers**, **Palindrome Check** and **Binary Search**; each can be solved in either language. Existing tasks/tests are preserved. Production does not seed demo tasks or an Admin account.
+   Open **https://localhost:7115**. The HTTPS profile is the default for `dotnet run`. Sign up for a Student account, or sign in with the configured development Admin. Development startup adds missing demo records: nine tasks across Basics, Arrays and Algorithms, including Easy, Medium and Hard, with visible and hidden tests. These include **Count Even Numbers**, **Palindrome Check**, **Binary Search**, and two Kazakh tasks: **Массив элементтерінің қосындысы** (`array-sum`, Arrays, Easy) and **Жолдағы дауысты әріптер саны** (`count-vowels`, Basics, Easy). Each task can be solved in either C++ or Python. Existing tasks/tests are preserved. Production does not seed demo tasks or an Admin account.
 
 Monaco assets are intentionally committed under `wwwroot/js/editor`. Node.js is only needed to rebuild them after editor-source changes:
 

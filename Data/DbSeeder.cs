@@ -127,7 +127,7 @@ public static class DbSeeder
         logger.LogInformation("Development admin account created from configured User Secrets.");
     }
 
-    // Жеті оқу есебін және тілге тәуелсіз тесттерін тек жоқ болғанда қосады.
+    // Оқу есептерін және тілге тәуелсіз тесттерін тек жоқ болғанда қосады.
     private static async Task SeedTasksAsync(ApplicationDbContext db)
     {
         await using var transaction = await db.Database.BeginTransactionAsync();
