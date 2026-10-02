@@ -54,6 +54,12 @@ def main():
     }
     for prefix, names in required.items():
         assert all(prefix + "_" + name in groups["SharedResource"] for name in names.split()), prefix
+    # Lessons must remain fully translated even when navigation and optional blocks are hidden.
+    assert "Nav_Lessons" in groups["SharedResource"]
+    assert {"Lessons_Title", "Lessons_Empty", "Lessons_Previous", "Lessons_Next", "Lessons_DisplayOnly",
+            "Lessons_NoTasks", "Lessons_RelatedTasks"} <= groups["StudentResource"]
+    assert {"Lessons", "Lesson_Create", "Lesson_Edit", "Lesson_Delete", "Lesson_Constraint",
+            "Validation_LessonSlug", "Validation_CodeLanguage", "Topic_HasLessons"} <= groups["AdminResource"]
     print(f"RESOURCE CHECKS PASSED: {len(GROUPS)*len(CULTURES)} files, {sum(map(len, groups.values()))} keys per language; no missing-key fallback used")
 
 

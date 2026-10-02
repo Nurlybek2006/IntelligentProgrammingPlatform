@@ -1,6 +1,7 @@
 @{ ViewData["Title"] = A["Dashboard_Title"]; }
 <div class="page-heading"><div><p class="eyebrow">@A["Dashboard_Eyebrow"]</p><h1>@A["Dashboard_Title"]</h1><p>@A["Dashboard_Intro"]</p></div></div>
 <div class="admin-actions">
+    <a class="panel" asp-controller="Lessons" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Lesson_Teach"]</span><h2 class="h4">@A["Lessons"] →</h2><p>@A["Lesson_Manage"]</p></a>
     <a class="panel" asp-controller="Topics" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Dashboard_Organize"]</span><h2 class="h4">@A["Topics"] →</h2><p>@A["Dashboard_Topics"]</p></a>
     <a class="panel" asp-controller="ProgrammingTasks" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Dashboard_Publish"]</span><h2 class="h4">@A["Tasks"] →</h2><p>@A["Dashboard_Tasks"]</p></a>
     <a class="panel" asp-controller="TestCases" asp-action="Index"><span class="feature-number" aria-hidden="true">@A["Dashboard_Verify"]</span><h2 class="h4">@A["TestCases"] →</h2><p>@A["Dashboard_TestCases"]</p></a>

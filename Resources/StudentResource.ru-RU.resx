@@ -894,4 +894,25 @@
   <data xml:space="preserve" name="Ai_LanguageHelp">
     <value>Новый анализ использует текущий язык интерфейса. Сохранённые советы остаются на исходном языке.</value>
   </data>
+  <data name="Lessons_Title" xml:space="preserve"><value>Уроки</value></data>
+  <data name="Lessons_Eyebrow" xml:space="preserve"><value>Сначала разберитесь</value></data>
+  <data name="Lessons_Intro" xml:space="preserve"><value>Изучите теорию, разберите пример, затем переходите к связанным задачам.</value></data>
+  <data name="Lessons_Topic" xml:space="preserve"><value>Тема</value></data>
+  <data name="Lessons_AllTopics" xml:space="preserve"><value>Все темы</value></data>
+  <data name="Lessons_Filter" xml:space="preserve"><value>Применить</value></data>
+  <data name="Lessons_Empty" xml:space="preserve"><value>Уроки не найдены</value></data>
+  <data name="Lessons_EmptyHelp" xml:space="preserve"><value>Выберите другую тему или вернитесь позже.</value></data>
+  <data name="Lessons_Order" xml:space="preserve"><value>Урок {0}</value></data>
+  <data name="Lessons_Back" xml:space="preserve"><value>Все уроки</value></data>
+  <data name="Lessons_Theory" xml:space="preserve"><value>Теория</value></data>
+  <data name="Lessons_Code" xml:space="preserve"><value>Пример кода</value></data>
+  <data name="Lessons_PlainText" xml:space="preserve"><value>Обычный текст</value></data>
+  <data name="Lessons_DisplayOnly" xml:space="preserve"><value>Учебный пример. Код на этой странице не выполняется.</value></data>
+  <data name="Lessons_Practice" xml:space="preserve"><value>Примените знания</value></data>
+  <data name="Lessons_RelatedTasks" xml:space="preserve"><value>Связанные задачи</value></data>
+  <data name="Lessons_RelatedHelp" xml:space="preserve"><value>Откройте задачу по этой теме и разработайте своё решение.</value></data>
+  <data name="Lessons_NoTasks" xml:space="preserve"><value>В этой теме пока нет опубликованных задач.</value></data>
+  <data name="Lessons_Navigation" xml:space="preserve"><value>Переход между уроками темы</value></data>
+  <data name="Lessons_Previous" xml:space="preserve"><value>Предыдущий урок</value></data>
+  <data name="Lessons_Next" xml:space="preserve"><value>Следующий урок</value></data>
 </root>

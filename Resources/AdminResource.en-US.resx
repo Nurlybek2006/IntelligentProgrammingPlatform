@@ -53,13 +53,13 @@
   <data name="Topic_Create" xml:space="preserve"><value>Create topic</value></data>
   <data name="Topic_Edit" xml:space="preserve"><value>Edit topic</value></data>
   <data name="Topic_Delete" xml:space="preserve"><value>Delete topic</value></data>
-  <data name="Topic_DeletePrompt" xml:space="preserve"><value>Delete “{0}”? Topics containing tasks cannot be deleted.</value></data>
+  <data name="Topic_DeletePrompt" xml:space="preserve"><value>Delete topic “{0}”? Topics containing tasks or lessons cannot be deleted.</value></data>
   <data name="Topic_Duplicate" xml:space="preserve"><value>A topic with this name already exists.</value></data>
   <data name="Topic_Created" xml:space="preserve"><value>Topic created.</value></data>
   <data name="Topic_Updated" xml:space="preserve"><value>Topic updated.</value></data>
   <data name="Topic_Deleted" xml:space="preserve"><value>Topic deleted.</value></data>
   <data name="Topic_HasTasks" xml:space="preserve"><value>This topic contains programming tasks. Move or delete them before deleting the topic.</value></data>
-  <data name="Topic_InUse" xml:space="preserve"><value>This topic is now used by a task and cannot be deleted.</value></data>
+  <data name="Topic_InUse" xml:space="preserve"><value>The topic is used by tasks or lessons. Reload the page and check again.</value></data>
   <data name="Tasks" xml:space="preserve"><value>Programming tasks</value></data>
   <data name="Task_Manage" xml:space="preserve"><value>Manage tasks</value></data>
   <data name="Task_Back" xml:space="preserve"><value>Back to task management</value></data>
@@ -104,4 +104,35 @@
   <data name="Validation_Difficulty" xml:space="preserve"><value>Select a valid difficulty.</value></data>
   <data name="Validation_Topic" xml:space="preserve"><value>Select an existing topic.</value></data>
   <data name="Validation_Task" xml:space="preserve"><value>Select an existing task.</value></data>
+  <data name="Lessons" xml:space="preserve"><value>Lessons</value></data>
+  <data name="Lesson_Create" xml:space="preserve"><value>Create lesson</value></data>
+  <data name="Lesson_Edit" xml:space="preserve"><value>Edit lesson</value></data>
+  <data name="Lesson_Delete" xml:space="preserve"><value>Delete lesson</value></data>
+  <data name="Lesson_Details" xml:space="preserve"><value>Lesson details</value></data>
+  <data name="Lesson_Manage" xml:space="preserve"><value>Prepare theory and code examples, then publish lessons.</value></data>
+  <data name="Lesson_Teach" xml:space="preserve"><value>Teach</value></data>
+  <data name="Lesson_AllTopics" xml:space="preserve"><value>All topics</value></data>
+  <data name="Lesson_Back" xml:space="preserve"><value>Back to lessons</value></data>
+  <data name="Lesson_OpenPublic" xml:space="preserve"><value>Open public page</value></data>
+  <data name="Lesson_EditNamed" xml:space="preserve"><value>Edit lesson: {0}</value></data>
+  <data name="Lesson_DeleteNamed" xml:space="preserve"><value>Delete lesson: {0}</value></data>
+  <data name="Lesson_DeletePrompt" xml:space="preserve"><value>Delete the lesson “{0}”? This action cannot be undone.</value></data>
+  <data name="Lesson_Created" xml:space="preserve"><value>Lesson created.</value></data>
+  <data name="Lesson_Updated" xml:space="preserve"><value>Lesson updated.</value></data>
+  <data name="Lesson_Deleted" xml:space="preserve"><value>Lesson deleted.</value></data>
+  <data name="Lesson_DuplicateSlug" xml:space="preserve"><value>Another lesson already uses this slug.</value></data>
+  <data name="Lesson_DuplicateOrder" xml:space="preserve"><value>This order is already used in the selected topic.</value></data>
+  <data name="Lesson_Constraint" xml:space="preserve"><value>Data changed or a lesson constraint was violated. Check the slug, topic and order, then reload the page.</value></data>
+  <data name="Lesson_SlugHelp" xml:space="preserve"><value>Use lowercase a–z, digits and hyphens between words: cpp-basics.</value></data>
+  <data name="Lesson_ContentHelp" xml:space="preserve"><value>Plain text. Line breaks are preserved; HTML and Markdown are not rendered.</value></data>
+  <data name="Lesson_CodeHelp" xml:space="preserve"><value>Display-only code. It does not run in the lesson or change runner settings.</value></data>
+  <data name="Lesson_OrderHelp" xml:space="preserve"><value>A unique positive integer within the topic.</value></data>
+  <data name="Lesson_PlainText" xml:space="preserve"><value>Plain text</value></data>
+  <data name="Field_LessonSummary" xml:space="preserve"><value>Summary</value></data>
+  <data name="Field_LessonContent" xml:space="preserve"><value>Lesson content</value></data>
+  <data name="Field_CodeExample" xml:space="preserve"><value>Code example</value></data>
+  <data name="Field_CodeLanguage" xml:space="preserve"><value>Example language</value></data>
+  <data name="Validation_LessonSlug" xml:space="preserve"><value>Use lowercase letters and digits with single hyphens between words for the slug.</value></data>
+  <data name="Validation_CodeLanguage" xml:space="preserve"><value>Select an example language from the list.</value></data>
+  <data name="Topic_HasLessons" xml:space="preserve"><value>This topic contains lessons. Move or delete them first.</value></data>
 </root>

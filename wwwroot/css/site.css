@@ -188,7 +188,7 @@ pre, code { font-family: Consolas, "Cascadia Code", monospace; }
 .admin-shell main > form[method="post"] { max-width: 900px; background: var(--surface); border: 1px solid var(--border); border-radius: .8rem; padding: 1.5rem; }
 .admin-shell .table pre { max-width: 22rem; min-width: 8rem; max-height: 8rem; margin: 0; }
 .admin-shell .table td:last-child { white-space: nowrap; }
-.admin-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.admin-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1rem; }
 .admin-actions a { display: block; text-decoration: none; }
 .admin-actions a:hover { border-color: var(--primary); }
 .admin-actions p { color: var(--text-muted); margin-bottom: 0; }
@@ -218,6 +218,17 @@ pre, code { font-family: Consolas, "Cascadia Code", monospace; }
   .table > :not(caption) > * > * { padding: .8rem; }
   .table-responsive .table { min-width: 560px; }
   .auth-card { margin: 0; }
+}
+.lesson-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1rem; }
+.lesson-card, .lesson-heading, .lesson-body, .lesson-related { min-width: 0; overflow-wrap: anywhere; }
+.lesson-reading { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.lesson-prose { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 72ch; line-height: 1.8; }
+.lesson-body .source-code { max-width: 100%; }
+.lesson-task { padding-block: .8rem; border-top: 1px solid var(--border); }
+.lesson-navigation { display: flex; flex-wrap: wrap; gap: 1rem; }
+.lesson-navigation > a { flex: 1 1 260px; min-width: 0; overflow-wrap: anywhere; text-decoration: none; }
+@media (max-width: 991.98px) {
+  .lesson-reading { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }

@@ -53,13 +53,13 @@
   <data name="Topic_Create" xml:space="preserve"><value>Создать тему</value></data>
   <data name="Topic_Edit" xml:space="preserve"><value>Изменить тему</value></data>
   <data name="Topic_Delete" xml:space="preserve"><value>Удалить тему</value></data>
-  <data name="Topic_DeletePrompt" xml:space="preserve"><value>Удалить тему «{0}»? Темы с задачами нельзя удалить.</value></data>
+  <data name="Topic_DeletePrompt" xml:space="preserve"><value>Удалить тему «{0}»? Тему с задачами или уроками удалить нельзя.</value></data>
   <data name="Topic_Duplicate" xml:space="preserve"><value>Тема с таким названием уже существует.</value></data>
   <data name="Topic_Created" xml:space="preserve"><value>Тема создана.</value></data>
   <data name="Topic_Updated" xml:space="preserve"><value>Тема обновлена.</value></data>
   <data name="Topic_Deleted" xml:space="preserve"><value>Тема удалена.</value></data>
   <data name="Topic_HasTasks" xml:space="preserve"><value>В этой теме есть задачи. Переместите или удалите их перед удалением темы.</value></data>
-  <data name="Topic_InUse" xml:space="preserve"><value>Эта тема уже используется задачей и не может быть удалена.</value></data>
+  <data name="Topic_InUse" xml:space="preserve"><value>Тема используется задачами или уроками. Обновите страницу и проверьте ещё раз.</value></data>
   <data name="Tasks" xml:space="preserve"><value>Задачи</value></data>
   <data name="Task_Manage" xml:space="preserve"><value>Управление задачами</value></data>
   <data name="Task_Back" xml:space="preserve"><value>К управлению задачами</value></data>
@@ -104,4 +104,35 @@
   <data name="Validation_Difficulty" xml:space="preserve"><value>Выберите допустимый уровень сложности.</value></data>
   <data name="Validation_Topic" xml:space="preserve"><value>Выберите существующую тему.</value></data>
   <data name="Validation_Task" xml:space="preserve"><value>Выберите существующую задачу.</value></data>
+  <data name="Lessons" xml:space="preserve"><value>Уроки</value></data>
+  <data name="Lesson_Create" xml:space="preserve"><value>Создать урок</value></data>
+  <data name="Lesson_Edit" xml:space="preserve"><value>Редактировать урок</value></data>
+  <data name="Lesson_Delete" xml:space="preserve"><value>Удалить урок</value></data>
+  <data name="Lesson_Details" xml:space="preserve"><value>Сведения об уроке</value></data>
+  <data name="Lesson_Manage" xml:space="preserve"><value>Подготовьте теорию и примеры кода, затем опубликуйте уроки.</value></data>
+  <data name="Lesson_Teach" xml:space="preserve"><value>Обучение</value></data>
+  <data name="Lesson_AllTopics" xml:space="preserve"><value>Все темы</value></data>
+  <data name="Lesson_Back" xml:space="preserve"><value>К списку уроков</value></data>
+  <data name="Lesson_OpenPublic" xml:space="preserve"><value>Открыть опубликованную страницу</value></data>
+  <data name="Lesson_EditNamed" xml:space="preserve"><value>Редактировать урок «{0}»</value></data>
+  <data name="Lesson_DeleteNamed" xml:space="preserve"><value>Удалить урок «{0}»</value></data>
+  <data name="Lesson_DeletePrompt" xml:space="preserve"><value>Урок «{0}» будет удалён. Это действие нельзя отменить.</value></data>
+  <data name="Lesson_Created" xml:space="preserve"><value>Урок создан.</value></data>
+  <data name="Lesson_Updated" xml:space="preserve"><value>Урок обновлён.</value></data>
+  <data name="Lesson_Deleted" xml:space="preserve"><value>Урок удалён.</value></data>
+  <data name="Lesson_DuplicateSlug" xml:space="preserve"><value>Этот slug уже используется другим уроком.</value></data>
+  <data name="Lesson_DuplicateOrder" xml:space="preserve"><value>Этот номер уже занят в выбранной теме.</value></data>
+  <data name="Lesson_Constraint" xml:space="preserve"><value>Данные изменились или нарушено ограничение урока. Проверьте slug, тему и порядок, затем обновите страницу.</value></data>
+  <data name="Lesson_SlugHelp" xml:space="preserve"><value>Только строчные латинские буквы, цифры и дефисы между словами: cpp-basics.</value></data>
+  <data name="Lesson_ContentHelp" xml:space="preserve"><value>Обычный текст. Переносы строк сохраняются; HTML и Markdown не обрабатываются.</value></data>
+  <data name="Lesson_CodeHelp" xml:space="preserve"><value>Код только для чтения. Он не выполняется в уроке и не меняет настройки исполнителя.</value></data>
+  <data name="Lesson_OrderHelp" xml:space="preserve"><value>Уникальное положительное целое число внутри темы.</value></data>
+  <data name="Lesson_PlainText" xml:space="preserve"><value>Обычный текст</value></data>
+  <data name="Field_LessonSummary" xml:space="preserve"><value>Краткое описание</value></data>
+  <data name="Field_LessonContent" xml:space="preserve"><value>Содержание урока</value></data>
+  <data name="Field_CodeExample" xml:space="preserve"><value>Пример кода</value></data>
+  <data name="Field_CodeLanguage" xml:space="preserve"><value>Язык примера</value></data>
+  <data name="Validation_LessonSlug" xml:space="preserve"><value>Slug должен состоять из строчных латинских букв и цифр с одиночными дефисами между словами.</value></data>
+  <data name="Validation_CodeLanguage" xml:space="preserve"><value>Выберите язык примера из списка.</value></data>
+  <data name="Topic_HasLessons" xml:space="preserve"><value>В этой теме есть уроки. Сначала перенесите их в другую тему или удалите.</value></data>
 </root>

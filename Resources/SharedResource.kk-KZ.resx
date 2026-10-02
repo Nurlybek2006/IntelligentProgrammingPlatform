@@ -136,5 +136,6 @@
   <data name="Run_TimeFormat" xml:space="preserve"><value>Орындау уақыты: {0} мс (нақты өткен уақыт)</value></data>
   <data name="Run_TimeUnmeasured" xml:space="preserve"><value>Орындау уақыты: өлшенбеген</value></data>
   <data name="Run_SuccessSummary" xml:space="preserve"><value>Бағдарлама аяқталды. Шығыс күтілетін жауаппен салыстырылмады. Әрекет сақталмады.</value></data>
+  <data name="Nav_Lessons" xml:space="preserve"><value>Сабақтар</value></data>
 </root>
 

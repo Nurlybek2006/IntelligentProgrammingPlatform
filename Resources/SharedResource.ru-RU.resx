@@ -136,5 +136,6 @@
   <data name="Run_TimeFormat" xml:space="preserve"><value>Время выполнения: {0} мс (реальное время)</value></data>
   <data name="Run_TimeUnmeasured" xml:space="preserve"><value>Время выполнения: не измерено</value></data>
   <data name="Run_SuccessSummary" xml:space="preserve"><value>Программа завершена. Вывод не сравнивался с ожидаемым ответом. Попытка не сохранена.</value></data>
+  <data name="Nav_Lessons" xml:space="preserve"><value>Уроки</value></data>
 </root>
 

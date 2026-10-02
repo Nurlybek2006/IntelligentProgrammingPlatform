@@ -24,6 +24,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="@T["Nav_Toggle"]"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Lessons" && !inAdmin ? "page" : null)" asp-area="" asp-controller="Lessons" asp-action="Index">@T["Nav_Lessons"]</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Tasks" && !inAdmin ? "page" : null)" asp-area="" asp-controller="Tasks" asp-action="Index">@T["Nav_Tasks"]</a></li>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
@@ -45,6 +46,7 @@
                 <span class="eyebrow">@T["Nav_Administration"]</span>
                 <a asp-area="Admin" asp-controller="Home" asp-action="Index" aria-current="@(controller == "Home" ? "page" : null)">@T["Nav_Overview"]</a>
                 <a asp-area="Admin" asp-controller="Topics" asp-action="Index" aria-current="@(controller == "Topics" ? "page" : null)">@T["Nav_Topics"]</a>
+                <a asp-area="Admin" asp-controller="Lessons" asp-action="Index" aria-current="@(controller == "Lessons" ? "page" : null)">@T["Nav_Lessons"]</a>
                 <a asp-area="Admin" asp-controller="ProgrammingTasks" asp-action="Index" aria-current="@(controller == "ProgrammingTasks" ? "page" : null)">@T["Nav_Tasks"]</a>
                 <a asp-area="Admin" asp-controller="TestCases" asp-action="Index" aria-current="@(controller == "TestCases" ? "page" : null)">@T["Nav_TestCases"]</a>
             </nav>

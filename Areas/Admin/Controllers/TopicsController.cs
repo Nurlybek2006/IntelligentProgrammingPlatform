@@ -101,6 +101,11 @@ public class TopicsController : Controller
             ModelState.AddModelError(string.Empty, _text["Topic_HasTasks"]);
             return View("Delete", topic);
         }
+        if (await _db.Lessons.AnyAsync(lesson => lesson.TopicId == id))
+        {
+            ModelState.AddModelError(string.Empty, _text["Topic_HasLessons"]);
+            return View("Delete", topic);
+        }
         _db.Topics.Remove(topic);
         try { await _db.SaveChangesAsync(); }
         catch (DbUpdateConcurrencyException) { return NotFound(); }

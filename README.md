@@ -149,7 +149,19 @@ python scripts/verify_phase5_live.py --finish
 
 Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement2_ui.mjs` for the new regressions. See [study-enhancement2.md](study-enhancement2.md) and [manual-enhancement2-checklist.md](manual-enhancement2-checklist.md). Real browser verification remains pending.
 
-## Intelligent Learning features
+## Lessons / Learning Content (Enhancement 5A)
+
+- `/Lessons` is an anonymous, published-only catalog with a topic filter. `/Lessons/{slug}` shows theory, display-only code examples, up to three published tasks in the same topic, and ordered previous/next lessons.
+- `/Admin/Lessons` supports create, preview, edit, publish/unpublish and confirmed deletion. Slugs are unique lowercase URL identifiers; lesson order is positive and unique within its topic. Topics containing tasks or lessons cannot be deleted.
+- Apply `AddLessons` with `dotnet ef database update`. Development startup seeds five Kazakh lessons: Programming Basics, C++ Basics, Python Basics, Arrays Basics and Algorithm Basics. Existing slugs and edited content are preserved. A deleted demo slug is recreated on the next Development startup; unpublish it to hide it persistently.
+- UI supports Kazakh, Russian and English; database lesson text remains as authored. Text and `<pre><code>` examples use normal Razor encoding. No Markdown library or CSP relaxation was added.
+- **Python execution and lesson completion tracking are not implemented.** Python examples are reading material; the existing C++ runner remains unchanged.
+
+Run `python scripts/verify_enhancement5a.py` against the running HTTPS Development app. See [study-enhancement5a.md](study-enhancement5a.md) for the Kazakh guide, schema, security, verification and manual browser checklist. Real visual/keyboard/console checks at 1440, 1024 and 390 pixels remain pending because no browser was available.
+
+Enhancement 5A verification (2026-10-02): the new Lessons suite, all eight existing Phase 2–5 / Enhancement 1–4 HTTP suites, three C# suites, two Node suites and resource checks passed. Build: **0 errors, 0 warnings**. Database current; no pending model changes. Resources now contain **579 keys per language**. All 15 pre-existing database-table hashes survived migration/seeding; restarting preserved the five lesson rows exactly. No paid AI calls were made.
+
+## Intelligent Learning features (Enhancement 3)
 
 - **Progressive AI hints:** one analysis generates three increasingly specific hints. Hint 1 appears immediately; later hints stay on the server until revealed. Revealing saves your progress and makes no additional AI request. Older feedback with fewer hints remains usable.
 - **Learning Weakness Map:** `/Progress` shows topic strength and official error patterns from your submissions on published tasks. System errors and temporary Runs are excluded; AI-analyzed categories are shown separately and do not affect scores.

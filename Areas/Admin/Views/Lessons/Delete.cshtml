@@ -1,0 +1,9 @@
+@model Lesson
+@{ ViewData["Title"] = A["Lesson_Delete"]; }
+<h1>@A["Lesson_Delete"]</h1>
+<p class="alert alert-warning" role="note">@A["Lesson_DeletePrompt", Model.Title]</p>
+<div asp-validation-summary="All" class="text-danger" role="alert"></div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button class="btn btn-danger" type="submit">@A["Lesson_Delete"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@A["Button_Cancel"]</a>
+</form>

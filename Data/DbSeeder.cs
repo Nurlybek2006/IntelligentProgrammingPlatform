@@ -34,6 +34,7 @@ public static class DbSeeder
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         await SeedRuntimeAsync(db);
         await SeedTasksAsync(db);
+        await LessonSeeder.SeedAsync(db);
     }
 
     // C++ тілінің бір ғана даму runtime жазбасын қайталамай қосады.

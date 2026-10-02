@@ -1,0 +1,29 @@
+@model IntelligentProgrammingPlatform.ViewModels.Lessons.LessonCatalogViewModel
+@{ ViewData["Title"] = L["Lessons_Title"]; }
+<div class="page-heading"><div><p class="eyebrow">@L["Lessons_Eyebrow"]</p><h1>@L["Lessons_Title"]</h1><p>@L["Lessons_Intro"]</p></div></div>
+<form method="get" asp-action="Index" class="panel mb-4">
+    <div class="row align-items-end g-3">
+        <div class="col-md-8"><label for="topicId" class="form-label">@L["Lessons_Topic"]</label><select asp-for="TopicId" id="topicId" name="topicId" asp-items="Model.Topics" class="form-select"><option value="">@L["Lessons_AllTopics"]</option></select></div>
+        <div class="col-md-4"><button type="submit" class="btn btn-primary">@L["Lessons_Filter"]</button></div>
+    </div>
+</form>
+@if (Model.Lessons.Count == 0)
+{
+    <div class="empty-state panel"><h2 class="h4">@L["Lessons_Empty"]</h2><p>@L["Lessons_EmptyHelp"]</p></div>
+}
+@foreach (var group in Model.Lessons.GroupBy(lesson => new { lesson.TopicId, lesson.TopicName }))
+{
+    <section class="mb-4" aria-labelledby="topic-@group.Key.TopicId">
+        <h2 id="topic-@group.Key.TopicId" class="h4 mb-3">@group.Key.TopicName</h2>
+        <div class="lesson-grid">
+        @foreach (var lesson in group)
+        {
+            <article class="panel lesson-card">
+                <p class="eyebrow">@L["Lessons_Order", lesson.Order]</p>
+                <h3 class="h5"><a asp-action="Details" asp-route-slug="@lesson.Slug">@lesson.Title</a></h3>
+                <p class="text-muted mb-0">@lesson.Summary</p>
+            </article>
+        }
+        </div>
+    </section>
+}

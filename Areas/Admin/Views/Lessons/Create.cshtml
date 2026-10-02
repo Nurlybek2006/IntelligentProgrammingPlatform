@@ -1,0 +1,9 @@
+@model LessonFormViewModel
+@{ ViewData["Title"] = A["Lesson_Create"]; }
+<h1>@A["Lesson_Create"]</h1>
+<form asp-action="Create" method="post">
+    <partial name="_Form" model="Model" />
+    <button class="btn btn-primary" type="submit">@A["Button_Save"]</button>
+    <a asp-action="Index" class="btn btn-secondary">@A["Button_Cancel"]</a>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,23 @@
+@model IntelligentProgrammingPlatform.ViewModels.Lessons.LessonCatalogViewModel
+@{ ViewData["Title"] = A["Lessons"]; }
+<div class="page-heading"><div><h1>@A["Lessons"]</h1><p>@A["Lesson_Manage"]</p></div><a class="btn btn-primary" asp-action="Create">@A["Lesson_Create"]</a></div>
+<form asp-action="Index" method="get" class="panel mb-4">
+    <div class="row align-items-end g-3">
+        <div class="col-md-8"><label for="topicId" class="form-label">@A["Field_Topic"]</label><select asp-for="TopicId" id="topicId" name="topicId" asp-items="Model.Topics" class="form-select"><option value="">@A["Lesson_AllTopics"]</option></select></div>
+        <div class="col-md-4"><button type="submit" class="btn btn-primary">@A["Button_Filter"]</button></div>
+    </div>
+</form>
+@if (Model.Lessons.Count == 0) { <div class="panel"><h2 class="h4">@A["Records_Empty"]</h2><p>@A["Records_EmptyHelp"]</p></div> }
+else
+{
+    <div class="table-responsive"><table class="table align-middle">
+        <caption>@A["Lessons"]</caption>
+        <thead><tr><th scope="col">@A["Field_Title"]</th><th scope="col">@A["Field_Topic"]</th><th scope="col">@A["Field_Order"]</th><th scope="col">@A["Field_Published"]</th><th scope="col">@A["Field_Actions"]</th></tr></thead>
+        <tbody>
+        @foreach (var lesson in Model.Lessons)
+        {
+            <tr><th scope="row"><a asp-action="Details" asp-route-id="@lesson.Id">@lesson.Title</a></th><td>@lesson.TopicName</td><td>@lesson.Order</td><td>@A[lesson.IsPublished ? "Field_Published" : "Field_Unpublished"]</td><td><a asp-action="Edit" asp-route-id="@lesson.Id" aria-label="@A["Lesson_EditNamed", lesson.Title]">@A["Button_Edit"]</a> · <a asp-action="Delete" asp-route-id="@lesson.Id" aria-label="@A["Lesson_DeleteNamed", lesson.Title]">@A["Button_Delete"]</a></td></tr>
+        }
+        </tbody>
+    </table></div>
+}

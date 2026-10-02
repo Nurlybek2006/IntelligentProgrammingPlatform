@@ -7,5 +7,6 @@ namespace IntelligentProgrammingPlatform.Models
         public string? Description { get; set; }
 
         public ICollection<ProgrammingTask> ProgrammingTasks { get; set; } = new List<ProgrammingTask>();
+        public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }

@@ -14,6 +14,7 @@ namespace IntelligentProgrammingPlatform.Data
         }
 
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
         public DbSet<ProgrammingTask> ProgrammingTasks { get; set; }
         public DbSet<TestCase> TestCases { get; set; }
         public DbSet<Runtime> Runtimes { get; set; }
@@ -37,6 +38,21 @@ namespace IntelligentProgrammingPlatform.Data
                 entity.Property(topic => topic.Name).HasMaxLength(100).IsRequired();
                 entity.Property(topic => topic.Description).HasMaxLength(2000);
                 entity.HasIndex(topic => topic.Name).IsUnique();
+            });
+
+            modelBuilder.Entity<Lesson>(entity =>
+            {
+                entity.Property(lesson => lesson.Title).HasMaxLength(200).IsRequired();
+                entity.Property(lesson => lesson.Slug).HasMaxLength(200).IsRequired();
+                entity.Property(lesson => lesson.Summary).HasMaxLength(1000).IsRequired();
+                entity.Property(lesson => lesson.Content).HasMaxLength(50000).IsRequired();
+                entity.Property(lesson => lesson.CodeExample).HasMaxLength(16000);
+                entity.Property(lesson => lesson.CodeLanguage).HasMaxLength(20);
+                entity.HasIndex(lesson => lesson.Slug).IsUnique();
+                entity.HasIndex(lesson => new { lesson.TopicId, lesson.Order }).IsUnique();
+                entity.ToTable(table => table.HasCheckConstraint("CK_Lessons_Order", "[Order] > 0"));
+                entity.HasOne(lesson => lesson.Topic).WithMany(topic => topic.Lessons)
+                    .HasForeignKey(lesson => lesson.TopicId).OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<ProgrammingTask>(entity =>

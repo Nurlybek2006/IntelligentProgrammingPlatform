@@ -1,0 +1,43 @@
+@model IntelligentProgrammingPlatform.ViewModels.Lessons.LessonDetailsViewModel
+@{ ViewData["Title"] = Model.Title; }
+<a asp-action="Index" class="back-link">← @L["Lessons_Back"]</a>
+<div class="page-heading lesson-heading"><div>
+    <p class="eyebrow"><a asp-action="Index" asp-route-topicId="@Model.TopicId">@Model.TopicName</a> · @L["Lessons_Order", Model.Order]</p>
+    <h1>@Model.Title</h1><p>@Model.Summary</p>
+</div></div>
+<div class="lesson-reading">
+    <article class="panel lesson-body">
+        <h2 class="h4">@L["Lessons_Theory"]</h2>
+        <div class="lesson-prose">@Model.Content</div>
+        @if (!string.IsNullOrWhiteSpace(Model.CodeExample))
+        {
+            <h2 id="lesson-code-heading" class="h4 mt-4">@L["Lessons_Code"]</h2>
+            <p class="small text-muted">@(Model.CodeLanguage == "cpp" ? "C++" : Model.CodeLanguage == "python" ? "Python" : L["Lessons_PlainText"].Value) · @L["Lessons_DisplayOnly"]</p>
+            <pre class="source-code" tabindex="0" aria-labelledby="lesson-code-heading"><code>@Model.CodeExample</code></pre>
+        }
+    </article>
+    <aside class="panel lesson-related" aria-labelledby="related-heading">
+        <p class="eyebrow">@L["Lessons_Practice"]</p><h2 id="related-heading" class="h4">@L["Lessons_RelatedTasks"]</h2>
+        <p class="text-muted">@L["Lessons_RelatedHelp"]</p>
+        @if (Model.RelatedTasks.Count == 0) { <p>@L["Lessons_NoTasks"]</p> }
+        <ul class="list-unstyled mb-0">
+        @foreach (var task in Model.RelatedTasks)
+        {
+            <li class="lesson-task"><a asp-controller="Tasks" asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a><span class="d-block small text-muted">@T[$"Difficulty_{task.Difficulty}"]</span></li>
+        }
+        </ul>
+    </aside>
+</div>
+@if (Model.Previous != null || Model.Next != null)
+{
+    <nav class="lesson-navigation mt-4" aria-label="@L["Lessons_Navigation"]">
+        @if (Model.Previous != null)
+        {
+            <a class="panel" asp-action="Details" asp-route-slug="@Model.Previous.Slug"><span class="d-block small text-muted">← @L["Lessons_Previous"]</span>@Model.Previous.Title</a>
+        }
+        @if (Model.Next != null)
+        {
+            <a class="panel" asp-action="Details" asp-route-slug="@Model.Next.Slug"><span class="d-block small text-muted">@L["Lessons_Next"] →</span>@Model.Next.Title</a>
+        }
+    </nav>
+}

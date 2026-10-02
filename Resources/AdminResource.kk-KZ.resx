@@ -53,13 +53,13 @@
   <data name="Topic_Create" xml:space="preserve"><value>Тақырып қосу</value></data>
   <data name="Topic_Edit" xml:space="preserve"><value>Тақырыпты өзгерту</value></data>
   <data name="Topic_Delete" xml:space="preserve"><value>Тақырыпты өшіру</value></data>
-  <data name="Topic_DeletePrompt" xml:space="preserve"><value>«{0}» тақырыбын өшіресіз бе? Есептері бар тақырыптарды өшіру мүмкін емес.</value></data>
+  <data name="Topic_DeletePrompt" xml:space="preserve"><value>«{0}» тақырыбын өшіру керек пе? Есептері немесе сабақтары бар тақырып өшірілмейді.</value></data>
   <data name="Topic_Duplicate" xml:space="preserve"><value>Мұндай атауы бар тақырып бұрыннан бар.</value></data>
   <data name="Topic_Created" xml:space="preserve"><value>Тақырып қосылды.</value></data>
   <data name="Topic_Updated" xml:space="preserve"><value>Тақырып жаңартылды.</value></data>
   <data name="Topic_Deleted" xml:space="preserve"><value>Тақырып өшірілді.</value></data>
   <data name="Topic_HasTasks" xml:space="preserve"><value>Бұл тақырыпта есептер бар. Тақырыпты өшірмес бұрын оларды басқа тақырыпқа ауыстырыңыз немесе өшіріңіз.</value></data>
-  <data name="Topic_InUse" xml:space="preserve"><value>Бұл тақырыпқа есеп байланыстырылғандықтан, оны өшіру мүмкін емес.</value></data>
+  <data name="Topic_InUse" xml:space="preserve"><value>Тақырыпта есептер немесе сабақтар бар. Бетті жаңартып, қайта тексеріңіз.</value></data>
   <data name="Tasks" xml:space="preserve"><value>Есептер</value></data>
   <data name="Task_Manage" xml:space="preserve"><value>Есептерді басқару</value></data>
   <data name="Task_Back" xml:space="preserve"><value>Есептерді басқаруға оралу</value></data>
@@ -104,4 +104,35 @@
   <data name="Validation_Difficulty" xml:space="preserve"><value>Қиындық деңгейін дұрыс таңдаңыз.</value></data>
   <data name="Validation_Topic" xml:space="preserve"><value>Бар тақырыпты таңдаңыз.</value></data>
   <data name="Validation_Task" xml:space="preserve"><value>Бар есепті таңдаңыз.</value></data>
+  <data name="Lessons" xml:space="preserve"><value>Сабақтар</value></data>
+  <data name="Lesson_Create" xml:space="preserve"><value>Сабақ қосу</value></data>
+  <data name="Lesson_Edit" xml:space="preserve"><value>Сабақты өңдеу</value></data>
+  <data name="Lesson_Delete" xml:space="preserve"><value>Сабақты өшіру</value></data>
+  <data name="Lesson_Details" xml:space="preserve"><value>Сабақ мәліметтері</value></data>
+  <data name="Lesson_Manage" xml:space="preserve"><value>Теория мен код мысалдарын дайындап, сабақтарды жариялаңыз.</value></data>
+  <data name="Lesson_Teach" xml:space="preserve"><value>Үйрету</value></data>
+  <data name="Lesson_AllTopics" xml:space="preserve"><value>Барлық тақырыптар</value></data>
+  <data name="Lesson_Back" xml:space="preserve"><value>Сабақтар тізімі</value></data>
+  <data name="Lesson_OpenPublic" xml:space="preserve"><value>Жарияланған бетті ашу</value></data>
+  <data name="Lesson_EditNamed" xml:space="preserve"><value>«{0}» сабағын өңдеу</value></data>
+  <data name="Lesson_DeleteNamed" xml:space="preserve"><value>«{0}» сабағын өшіру</value></data>
+  <data name="Lesson_DeletePrompt" xml:space="preserve"><value>«{0}» сабағы өшіріледі. Бұл әрекетті қайтару мүмкін емес.</value></data>
+  <data name="Lesson_Created" xml:space="preserve"><value>Сабақ қосылды.</value></data>
+  <data name="Lesson_Updated" xml:space="preserve"><value>Сабақ жаңартылды.</value></data>
+  <data name="Lesson_Deleted" xml:space="preserve"><value>Сабақ өшірілді.</value></data>
+  <data name="Lesson_DuplicateSlug" xml:space="preserve"><value>Бұл slug басқа сабақта қолданылған.</value></data>
+  <data name="Lesson_DuplicateOrder" xml:space="preserve"><value>Бұл тақырыпта осы реттік нөмір қолданылған.</value></data>
+  <data name="Lesson_Constraint" xml:space="preserve"><value>Деректер өзгерді немесе сабақ шектеуі бұзылды. Slug, тақырып пен ретті тексеріп, бетті жаңартыңыз.</value></data>
+  <data name="Lesson_SlugHelp" xml:space="preserve"><value>Тек кіші латын әріптері, цифрлар және сөздер арасындағы дефис: cpp-basics.</value></data>
+  <data name="Lesson_ContentHelp" xml:space="preserve"><value>Жай мәтін. Жолдар сақталады; HTML мен Markdown өңделмейді.</value></data>
+  <data name="Lesson_CodeHelp" xml:space="preserve"><value>Тек оқуға арналған код. Сабақта орындалмайды және орындаушы баптауларын өзгертпейді.</value></data>
+  <data name="Lesson_OrderHelp" xml:space="preserve"><value>Тақырып ішіндегі қайталанбайтын оң бүтін сан.</value></data>
+  <data name="Lesson_PlainText" xml:space="preserve"><value>Жай мәтін</value></data>
+  <data name="Field_LessonSummary" xml:space="preserve"><value>Қысқаша сипаттама</value></data>
+  <data name="Field_LessonContent" xml:space="preserve"><value>Сабақ мазмұны</value></data>
+  <data name="Field_CodeExample" xml:space="preserve"><value>Код мысалы</value></data>
+  <data name="Field_CodeLanguage" xml:space="preserve"><value>Мысал тілі</value></data>
+  <data name="Validation_LessonSlug" xml:space="preserve"><value>Slug кіші латын әріптері мен цифрлардан тұрып, сөздері бір дефиспен бөлінуі тиіс.</value></data>
+  <data name="Validation_CodeLanguage" xml:space="preserve"><value>Мысал тілін тізімнен таңдаңыз.</value></data>
+  <data name="Topic_HasLessons" xml:space="preserve"><value>Бұл тақырыпта сабақтар бар. Алдымен оларды басқа тақырыпқа көшіріңіз немесе өшіріңіз.</value></data>
 </root>
