@@ -7,12 +7,14 @@
         <p class="text-muted">@Model.Email</p><p class="small text-muted mb-0">@L["Account_JoinedUtc"]: @Model.CreatedAt.ToString("g")</p>
     </div>
 </section>
+<partial name="_Experience" model="Model.Experience" />
 <div class="profile-metrics my-4">
     <section class="panel metric-card"><h2>@L["Common_SolvedTasks"]</h2><strong id="profile-solved">@Model.Progress.SolvedTasks</strong></section>
     <section class="panel metric-card"><h2>@L["Progress_Completed"]</h2><strong id="profile-submissions">@Model.Progress.TotalSubmissions</strong></section>
     <section class="panel metric-card"><h2>@L["Progress_SuccessPercentage"]</h2><strong id="profile-success">@Model.Progress.SuccessRate.ToString("0.0")%</strong></section>
     <section class="panel metric-card accent"><h2>@L["Progress_Rating"]</h2><strong id="profile-score">@Model.Progress.Score</strong></section>
 </div>
+<partial name="_SubmissionActivity" model="Model.Activity" />
 <section class="panel" aria-labelledby="profile-recent"><h2 id="profile-recent" class="h4 mb-3">@T["Profile_Recent"]</h2>
     @if (Model.Progress.Recent.Count == 0) { <p class="text-muted mb-0">@L["Progress_EmptyHeading"]</p> }
     else

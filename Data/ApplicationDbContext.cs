@@ -22,6 +22,9 @@ namespace IntelligentProgrammingPlatform.Data
         public DbSet<ExecutionResult> ExecutionResults { get; set; }
         public DbSet<Leaderboard> Leaderboards { get; set; }
         public DbSet<AiFeedback> AiFeedbacks { get; set; }
+        public DbSet<AcceptedCodeReview> AcceptedCodeReviews { get; set; }
+        public DbSet<LessonProgress> LessonProgresses { get; set; }
+        public DbSet<TaskFavorite> TaskFavorites { get; set; }
 
         // Identity мен домен кестелерінің байланыстарын және шектеулерін баптайды.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -103,6 +106,7 @@ namespace IntelligentProgrammingPlatform.Data
                 entity.HasIndex(submission => submission.ProgrammingTaskId);
                 entity.HasIndex(submission => submission.CreatedAt);
                 entity.HasIndex(submission => submission.Status);
+                entity.HasIndex(submission => new { submission.UserId, submission.CreatedAt });
 
                 // Preserve submission history when a parent is deleted.
                 entity.HasOne(submission => submission.User)
@@ -156,6 +160,43 @@ namespace IntelligentProgrammingPlatform.Data
                     .OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(feedback => feedback.User).WithMany()
                     .HasForeignKey(feedback => feedback.UserId).OnDelete(DeleteBehavior.NoAction);
+            });
+
+            modelBuilder.Entity<AcceptedCodeReview>(entity =>
+            {
+                entity.HasIndex(review => review.SubmissionId).IsUnique();
+                entity.Property(review => review.Model).HasMaxLength(100).IsRequired();
+                entity.Property(review => review.Summary).HasMaxLength(600).IsRequired();
+                entity.Property(review => review.ReadabilityFeedback).HasMaxLength(800).IsRequired();
+                entity.Property(review => review.NamingFeedback).HasMaxLength(800).IsRequired();
+                entity.Property(review => review.EfficiencyFeedback).HasMaxLength(800).IsRequired();
+                entity.Property(review => review.StyleFeedback).HasMaxLength(800).IsRequired();
+                entity.Property(review => review.TimeComplexity).HasMaxLength(120).IsRequired();
+                entity.Property(review => review.SpaceComplexity).HasMaxLength(120).IsRequired();
+                entity.Property(review => review.ComplexityExplanation).HasMaxLength(1200).IsRequired();
+                entity.Property(review => review.SuggestionsJson).HasMaxLength(6000).IsRequired();
+                entity.HasOne(review => review.Submission).WithOne(submission => submission.AcceptedCodeReview)
+                    .HasForeignKey<AcceptedCodeReview>(review => review.SubmissionId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<LessonProgress>(entity =>
+            {
+                entity.Property(progress => progress.UserId).HasMaxLength(450).IsRequired();
+                entity.HasIndex(progress => new { progress.UserId, progress.LessonId }).IsUnique();
+                entity.HasOne(progress => progress.User).WithMany().HasForeignKey(progress => progress.UserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(progress => progress.Lesson).WithMany().HasForeignKey(progress => progress.LessonId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            modelBuilder.Entity<TaskFavorite>(entity =>
+            {
+                entity.Property(favorite => favorite.UserId).HasMaxLength(450).IsRequired();
+                entity.HasIndex(favorite => new { favorite.UserId, favorite.ProgrammingTaskId }).IsUnique();
+                entity.HasOne(favorite => favorite.User).WithMany().HasForeignKey(favorite => favorite.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(favorite => favorite.ProgrammingTask).WithMany().HasForeignKey(favorite => favorite.ProgrammingTaskId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Leaderboard>(entity =>

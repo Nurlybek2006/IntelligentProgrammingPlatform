@@ -25,6 +25,7 @@ public sealed class LessonCatalogViewModel
 
 public sealed class LessonDetailsViewModel : LessonListItemViewModel
 {
+    public bool IsCompleted { get; set; }
     public string Content { get; set; } = string.Empty;
     public string? CodeExample { get; set; }
     public string? CodeLanguage { get; set; }

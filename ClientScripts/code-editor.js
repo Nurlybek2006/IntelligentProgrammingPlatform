@@ -19,6 +19,11 @@ if (form) {
     const status = document.getElementById("submission-progress");
     const submit = document.getElementById("submit-code");
     const runtime = document.getElementById("RuntimeId");
+    const draftStatus = document.getElementById("draft-status");
+    const reset = document.getElementById("reset-code");
+    const run = document.getElementById("run-code");
+    let submitting = false;
+    const submitLabel = submit.textContent;
     const selected = () => runtime.selectedOptions[0];
     let language = editorLanguage(selected()?.dataset.language);
     const key = () => form.dataset.draftKey + ":" + language;
@@ -62,10 +67,31 @@ if (form) {
         source.value = editor.getValue();
         drafts.set(language, source.value);
         try {
-            if (source.value.length <= 128 * 1024) sessionStorage.setItem(key(), source.value);
-        } catch { /* The form field still preserves the source without browser storage. */ }
+            if (source.value.length > 128 * 1024) throw new Error("Draft exceeds storage limit");
+            sessionStorage.setItem(key(), source.value);
+            if (draftStatus) draftStatus.textContent = form.dataset.draftSaved;
+        } catch {
+            if (draftStatus) draftStatus.textContent = form.dataset.draftUnavailable;
+        }
     };
     editor.onDidChangeModelContent(sync);
+    sync();
+    reset?.addEventListener("click", () => {
+        if (form.dataset.busy || reset.disabled || !window.confirm(form.dataset.resetConfirm)) return;
+        editor.setValue(selected()?.dataset.starter ?? "");
+        sync();
+        editor.focus();
+    });
+    // Binding on the editor host keeps shortcuts away from custom input and other forms.
+    editorElement.addEventListener("keydown", event => {
+        if (!(event.ctrlKey || event.metaKey) || event.altKey || event.key !== "Enter") return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (event.repeat || form.dataset.busy) return;
+        if (event.shiftKey) {
+            if (!submit.disabled) form.requestSubmit(submit);
+        } else if (run && !run.disabled) run.click();
+    }, true);
     runtime.addEventListener("change", () => {
         sync();
         language = editorLanguage(selected()?.dataset.language);
@@ -79,6 +105,7 @@ if (form) {
     });
     form.addEventListener("source-sync", sync);
     form.addEventListener("submit", event => {
+        if (submitting || form.dataset.busy) { event.preventDefault(); return; }
         sync();
         if (!source.value.trim() || new TextEncoder().encode(source.value).length > 64 * 1024) {
             event.preventDefault();
@@ -86,12 +113,23 @@ if (form) {
             editor.focus();
             return;
         }
-        if (globalThis.jQuery && !globalThis.jQuery(form).valid()) return;
+        if (globalThis.jQuery && !globalThis.jQuery(form).valid()) { event.preventDefault(); return; }
+        if (event.defaultPrevented) return;
+        submitting = true;
+        form.dataset.busy = "submit";
         submit.disabled = true;
+        if (run) run.disabled = true;
+        if (reset) reset.disabled = true;
+        submit.textContent = form.dataset.submitProgress;
         status.textContent = form.dataset.submitProgress;
     });
     window.addEventListener("pageshow", () => {
+        submitting = false;
+        if (form.dataset.busy === "submit") delete form.dataset.busy;
+        submit.textContent = submitLabel;
         submit.disabled = runtime.options.length === 0;
+        if (run) run.disabled = runtime.options.length === 0;
+        if (reset) reset.disabled = runtime.options.length === 0;
         status.textContent = "";
     });
     window.addEventListener("pagehide", sync);

@@ -66,6 +66,16 @@ def main():
             "Profile_Edit", "Profile_SaveFailed", "Profile_Recent"} <= groups["SharedResource"]
     assert {"Lessons_PythonPath", "Lessons_Path"} <= groups["StudentResource"]
     assert {"Users", "User_Details", "User_RemoveAvatar", "User_SaveFailed"} <= groups["AdminResource"]
+    assert {"Lesson_HasProgress"} <= groups["AdminResource"]
+    assert {"Xp_Title", "Xp_Level", "Xp_Total", "Xp_Progress", "Xp_CompletedLessons", "Lesson_Complete",
+            "Lesson_Completed", "Favorites_Title", "Favorite_Add", "Favorite_Remove", "Activity_Title",
+            "Activity_Day", "Activity_Less", "Activity_More", "Review_Caution", "Review_Time", "Review_Space",
+            "Review_Estimate", "Review_Readability", "Review_Naming", "Review_Efficiency", "Review_Style",
+            "Workspace_DraftSaved", "Workspace_DraftUnavailable", "Workspace_Reset", "Workspace_ResetConfirm",
+            "Workspace_Shortcuts", "Workspace_Description", "Workspace_Input", "Workspace_Output",
+            "Workspace_Constraints"} <= groups["SharedResource"]
+    assert all("Review_" + name in groups["SharedResource"] for name in
+               "Saved Existing NotFound NotAccepted NotConfigured Busy Unavailable".split())
     print(f"RESOURCE CHECKS PASSED: {len(GROUPS)*len(CULTURES)} files, {sum(map(len, groups.values()))} keys per language; no missing-key fallback used")
 
 

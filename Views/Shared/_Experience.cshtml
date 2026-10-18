@@ -1,0 +1,8 @@
+@model IntelligentProgrammingPlatform.ViewModels.Progress.ExperienceViewModel
+<section class="panel experience-panel my-4" aria-labelledby="experience-heading">
+    <div class="experience-heading"><div><p class="eyebrow">@T["Xp_Title"]</p><h2 id="experience-heading">@T["Xp_Level", Model.CurrentLevel]</h2></div><div><span class="text-muted">@T["Xp_Total"]</span> <strong id="profile-xp">@Model.TotalXp.ToString("N0")</strong></div></div>
+    <label id="xp-progress-label" for="xp-progress">@T["Xp_Progress", Model.CurrentLevelXp.ToString("N0"), Model.XpNeededForNextLevel.ToString("N0")]</label>
+    <progress id="xp-progress" class="xp-progress" aria-labelledby="xp-progress-label" max="@Model.XpNeededForNextLevel" value="@Model.CurrentLevelXp">@Model.Percentage.ToString("0")%</progress>
+    <div class="experience-breakdown"><span>@T["Xp_Tasks", Model.TaskXp.ToString("N0")]</span><span>@T["Xp_Lessons", Model.CompletedLessons]</span><span>@T["Favorites_Count", Model.FavoritesCount]</span></div>
+    <p class="small text-muted mb-0">@T["Xp_Help"]</p>
+</section>

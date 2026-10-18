@@ -158,5 +158,64 @@
   <data name="Profile_AvatarRemoved" xml:space="preserve"><value>Аватар удалён.</value></data>
   <data name="Profile_SaveFailed" xml:space="preserve"><value>Не удалось сохранить профиль. Обновите страницу и повторите попытку.</value></data>
   <data name="Profile_InvalidName" xml:space="preserve"><value>Имя должно содержать от 1 до 100 символов.</value></data>
+  <data name="Xp_Title" xml:space="preserve"><value>Личный учебный прогресс</value></data>
+  <data name="Xp_Level" xml:space="preserve"><value>Уровень {0}</value></data>
+  <data name="Xp_Total" xml:space="preserve"><value>Всего XP</value></data>
+  <data name="Xp_Progress" xml:space="preserve"><value>До следующего уровня: {0} / {1} XP</value></data>
+  <data name="Xp_Tasks" xml:space="preserve"><value>За задачи: {0} XP</value></data>
+  <data name="Xp_Lessons" xml:space="preserve"><value>Завершено уроков: {0}</value></data>
+  <data name="Xp_Help" xml:space="preserve"><value>XP начисляется за первую принятую попытку каждой задачи и завершённые уроки. Рейтинговые баллы считаются отдельно.</value></data>
+  <data name="Xp_Earned" xml:space="preserve"><value>XP уже получен</value></data>
+  <data name="Xp_Reward" xml:space="preserve"><value>+{0} XP</value></data>
+  <data name="Xp_CompletedLessons" xml:space="preserve"><value>Завершённые уроки</value></data>
+  <data name="Favorites_Title" xml:space="preserve"><value>Мои избранные задачи</value></data>
+  <data name="Favorite_Add" xml:space="preserve"><value>Добавить в избранное</value></data>
+  <data name="Favorite_Remove" xml:space="preserve"><value>Удалить из избранного</value></data>
+  <data name="Favorites_Empty" xml:space="preserve"><value>Избранных задач пока нет. Сохраните задачу звёздочкой в каталоге.</value></data>
+  <data name="Favorites_Count" xml:space="preserve"><value>Избранное: {0}</value></data>
+  <data name="Favorites_Label" xml:space="preserve"><value>Избранное</value></data>
+  <data name="Lesson_Complete" xml:space="preserve"><value>Отметить урок завершённым</value></data>
+  <data name="Lesson_Completed" xml:space="preserve"><value>Урок завершён</value></data>
+  <data name="Lesson_Reward" xml:space="preserve"><value>Награда за завершение</value></data>
+  <data name="Activity_Title" xml:space="preserve"><value>Активность программирования</value></data>
+  <data name="Activity_Total" xml:space="preserve"><value>Официальных отправок: {0}</value></data>
+  <data name="Activity_Period" xml:space="preserve"><value>{0} — {1}</value></data>
+  <data name="Activity_Utc" xml:space="preserve"><value>Дни считаются по UTC</value></data>
+  <data name="Activity_Day" xml:space="preserve"><value>{0}. Отправок: {1}. Принято: {2}.</value></data>
+  <data name="Activity_Less" xml:space="preserve"><value>Меньше</value></data>
+  <data name="Activity_More" xml:space="preserve"><value>Больше</value></data>
+  <data name="Review_Title" xml:space="preserve"><value>AI-ревью кода</value></data>
+  <data name="Review_Quality" xml:space="preserve"><value>Качество и сложность кода</value></data>
+  <data name="Review_Caution" xml:space="preserve"><value>Сложность оценена AI и может быть неточной. Это не измеренное время выполнения и не математическое доказательство.</value></data>
+  <data name="Review_Estimate" xml:space="preserve"><value>Оценка AI</value></data>
+  <data name="Review_Time" xml:space="preserve"><value>Временная сложность</value></data>
+  <data name="Review_Space" xml:space="preserve"><value>Пространственная сложность</value></data>
+  <data name="Review_Summary" xml:space="preserve"><value>Краткий обзор</value></data>
+  <data name="Review_Readability" xml:space="preserve"><value>Читаемость</value></data>
+  <data name="Review_Naming" xml:space="preserve"><value>Именование</value></data>
+  <data name="Review_Efficiency" xml:space="preserve"><value>Эффективность</value></data>
+  <data name="Review_Style" xml:space="preserve"><value>Стиль кода</value></data>
+  <data name="Review_Suggestions" xml:space="preserve"><value>Рекомендации</value></data>
+  <data name="Review_Intro" xml:space="preserve"><value>Получите обзор читаемости, стиля и эффективности принятого решения. Ревью не изменяет код и не предоставляет готовое полное решение.</value></data>
+  <data name="Review_Disclosure" xml:space="preserve"><value>По нажатию текст задачи и ваш код отправляются в OpenAI. Данные тестов и аккаунта не передаются. Результат сохраняется один раз и используется повторно.</value></data>
+  <data name="Review_Request" xml:space="preserve"><value>Проанализировать принятое решение с AI</value></data>
+  <data name="Review_StoredLanguage" xml:space="preserve"><value>Смена языка не создаёт ревью заново</value></data>
+  <data name="Review_Saved" xml:space="preserve"><value>Ревью кода сохранено.</value></data>
+  <data name="Review_Existing" xml:space="preserve"><value>Показано сохранённое ревью. Новый запрос к AI не отправлялся.</value></data>
+  <data name="Review_NotAccepted" xml:space="preserve"><value>Ревью доступно только для завершённой принятой отправки.</value></data>
+  <data name="Review_NotConfigured" xml:space="preserve"><value>AI-ревью сейчас не настроено. Принятый результат сохранён.</value></data>
+  <data name="Review_Busy" xml:space="preserve"><value>Запрос AI выполняется или действует короткая пауза. Повторите позже.</value></data>
+  <data name="Review_Unavailable" xml:space="preserve"><value>Не удалось получить AI-ревью. Принятый результат не изменён.</value></data>
+  <data name="Review_NotFound" xml:space="preserve"><value>Отправка не найдена.</value></data>
+  <data name="Workspace_DraftSaved" xml:space="preserve"><value>Черновик сохранён в этой вкладке</value></data>
+  <data name="Workspace_DraftUnavailable" xml:space="preserve"><value>Сохранение черновика недоступно; код остаётся в редакторе</value></data>
+  <data name="Workspace_Reset" xml:space="preserve"><value>Вернуть начальный код</value></data>
+  <data name="Workspace_ResetConfirm" xml:space="preserve"><value>Заменить черновик текущего языка начальным кодом? Черновик другого языка сохранится.</value></data>
+  <data name="Workspace_Shortcuts" xml:space="preserve"><value>В редакторе: Ctrl/Cmd + Enter — Run; Ctrl/Cmd + Shift + Enter — Submit</value></data>
+  <data name="Workspace_Description" xml:space="preserve"><value>Описание задачи</value></data>
+  <data name="Workspace_Input" xml:space="preserve"><value>Входные данные</value></data>
+  <data name="Workspace_Output" xml:space="preserve"><value>Выходные данные</value></data>
+  <data name="Workspace_Constraints" xml:space="preserve"><value>Ограничения</value></data>
+  <data name="Workspace_Journey" xml:space="preserve"><value>История попыток · {0} отправок</value></data>
 </root>
 

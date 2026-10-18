@@ -4,10 +4,10 @@
 <div class="page-heading"><div><p class="eyebrow">@T["Nav_Administration"]</p><h1>@A["Users"]</h1><p>@A["Users_Intro"]</p></div></div>
 <section class="panel">
 <div class="table-responsive" role="region" aria-label="@A["Users"]" tabindex="0">
-<table class="table users-table"><thead><tr><th scope="col">@T["Field_DisplayName"]</th><th scope="col">@T["Field_Email"]</th><th scope="col">@A["User_Roles"]</th><th scope="col">@A["User_Joined"]</th><th scope="col">@A["User_Solved"]</th><th scope="col">@A["User_Score"]</th></tr></thead><tbody>
+<table class="table users-table"><thead><tr><th scope="col">@T["Field_DisplayName"]</th><th scope="col">@T["Field_Email"]</th><th scope="col">@A["User_Roles"]</th><th scope="col">@A["User_Joined"]</th><th scope="col">@A["User_Solved"]</th><th scope="col">@A["User_Score"]</th><th scope="col">@T["Xp_Total"]</th><th scope="col">@T["Xp_CompletedLessons"]</th><th scope="col">@T["Favorites_Label"]</th></tr></thead><tbody>
 @foreach (var user in Model.Users)
 {
-    <tr><td><a class="avatar-name" asp-action="Details" asp-route-id="@user.Id"><partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = user.DisplayName, AvatarPath = user.AvatarPath })" /><span>@user.DisplayName</span></a></td><td>@user.Email</td><td>@string.Join(", ", user.Roles.Select(role => role == RoleNames.Admin ? T["Role_Admin"].Value : role == RoleNames.Student ? T["Role_Student"].Value : role))</td><td>@user.CreatedAt.ToString("g")</td><td>@user.SolvedTasks</td><td>@user.Score</td></tr>
+    <tr><td><a class="avatar-name" asp-action="Details" asp-route-id="@user.Id"><partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = user.DisplayName, AvatarPath = user.AvatarPath })" /><span>@user.DisplayName</span></a></td><td>@user.Email</td><td>@string.Join(", ", user.Roles.Select(role => role == RoleNames.Admin ? T["Role_Admin"].Value : role == RoleNames.Student ? T["Role_Student"].Value : role))</td><td>@user.CreatedAt.ToString("g")</td><td>@user.SolvedTasks</td><td>@user.Score</td><td>@user.Experience.TotalXp.ToString("N0") / @T["Xp_Level", user.Experience.CurrentLevel]</td><td>@user.Experience.CompletedLessons</td><td>@user.Experience.FavoritesCount</td></tr>
 }
 </tbody></table></div>
 @if (Model.Users.Count == 0) { <p class="text-muted">@A["Users_Empty"]</p> }

@@ -45,7 +45,8 @@ public class TasksController : Controller
                 .Select(topic => new SelectListItem(topic.Name, topic.Id.ToString())).ToListAsync(),
             Tasks = await query.OrderBy(task => task.Title).Select(task => new TaskListItemViewModel
             {
-                Title = task.Title, Slug = task.Slug, TopicName = task.Topic.Name, Difficulty = task.Difficulty,
+                Id = task.Id, Title = task.Title, Slug = task.Slug, TopicName = task.Topic.Name, Difficulty = task.Difficulty,
+                IsFavorite = userId != null && _db.TaskFavorites.Any(item => item.UserId == userId && item.ProgrammingTaskId == task.Id),
                 IsSolved = userId != null && task.Submissions.Any(submission => submission.UserId == userId
                     && submission.Status == SubmissionStatus.Accepted)
             }).ToListAsync()

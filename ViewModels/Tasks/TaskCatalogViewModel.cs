@@ -14,6 +14,8 @@ public class TaskCatalogViewModel
 
 public class TaskListItemViewModel
 {
+    public int Id { get; set; }
+    public bool IsFavorite { get; set; }
     public bool IsSolved { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Slug { get; set; } = string.Empty;

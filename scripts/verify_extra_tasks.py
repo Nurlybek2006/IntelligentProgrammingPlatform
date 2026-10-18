@@ -85,6 +85,7 @@ class TestMarkup(HTMLParser):
     def __init__(self, body):
         super().__init__()
         self.values, self.buffer, self.cards = [], None, 0
+        self.descriptions, self.description = [], None
         self.feed(body)
 
     def handle_starttag(self, tag, attrs):
@@ -93,15 +94,22 @@ class TestMarkup(HTMLParser):
             self.buffer = []
         if tag == 'section' and 'test-result' in classes:
             self.cards += 1
+        if tag == 'div' and 'task-description' in classes:
+            self.description = []
 
     def handle_data(self, value):
         if self.buffer is not None:
             self.buffer.append(value)
+        if self.description is not None:
+            self.description.append(value)
 
     def handle_endtag(self, tag):
         if tag == 'pre' and self.buffer is not None:
             self.values.append(''.join(self.buffer).replace('\r\n', '\n'))
             self.buffer = None
+        if tag == 'div' and self.description is not None:
+            self.descriptions.append(''.join(self.description).replace('\r\n', '\n').rstrip())
+            self.description = None
 
 
 def main():
@@ -135,7 +143,10 @@ def main():
                 expected = sum(value.count(c) for c in 'aeiouAEIOU')
             assert row['ExpectedOutput'] == str(expected), (slug, row['Order'])
         response = guest.request('/Tasks/' + slug)
-        assert response[0] == 200 and task['Description'] in html.unescape(response[2])
+        assert response[0] == 200
+        # The workspace separates known headings; every authored content line stays intact and ordered.
+        sections = re.split(r'(?im)^\s*(?:Кіріс пішімі|Шығыс пішімі|Шектеулер):?\s*\r?\n', task['Description'])
+        assert TestMarkup(response[2]).descriptions == [part.replace('\r\n', '\n').rstrip() for part in sections if part]
         assert all(label in task['Description'] for label in ('Кіріс пішімі', 'Шығыс пішімі', 'Шектеулер', 'Мысал'))
         assert TestMarkup(response[2]).values == [value for r in rows[:2] for value in (r['Input'], r['ExpectedOutput'])]
         lesson_slug = 'arrays-basics' if slug == 'array-sum' else 'programming-basics'

@@ -27,6 +27,8 @@ public sealed class TaskPageService
             .Select(task => new TaskDetailsViewModel
             {
                 Id = task.Id, Title = task.Title, TopicName = task.Topic.Name, Difficulty = task.Difficulty,
+                IsFavorite = userId != null && _db.TaskFavorites.Any(item => item.UserId == userId && item.ProgrammingTaskId == task.Id),
+                IsSolved = userId != null && task.Submissions.Any(item => item.UserId == userId && item.Status == Models.Enums.SubmissionStatus.Accepted),
                 Description = task.Description, TimeLimitMs = task.TimeLimitMs, MemoryLimitMb = task.MemoryLimitMb,
                 Examples = task.TestCases.Where(test => !test.IsHidden).OrderBy(test => test.Order)
                     .Select(test => new TaskExampleViewModel

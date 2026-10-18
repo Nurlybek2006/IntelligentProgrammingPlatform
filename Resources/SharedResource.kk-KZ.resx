@@ -158,5 +158,64 @@
   <data name="Profile_AvatarRemoved" xml:space="preserve"><value>Аватар алынып тасталды.</value></data>
   <data name="Profile_SaveFailed" xml:space="preserve"><value>Профиль сақталмады. Бетті жаңартып, қайталап көріңіз.</value></data>
   <data name="Profile_InvalidName" xml:space="preserve"><value>Ат 1–100 таңбадан тұруы керек.</value></data>
+  <data name="Xp_Title" xml:space="preserve"><value>Жеке оқу прогресі</value></data>
+  <data name="Xp_Level" xml:space="preserve"><value>{0}-деңгей</value></data>
+  <data name="Xp_Total" xml:space="preserve"><value>Жалпы XP</value></data>
+  <data name="Xp_Progress" xml:space="preserve"><value>Келесі деңгейге: {0} / {1} XP</value></data>
+  <data name="Xp_Tasks" xml:space="preserve"><value>Есептерден: {0} XP</value></data>
+  <data name="Xp_Lessons" xml:space="preserve"><value>Аяқталған сабақтар: {0}</value></data>
+  <data name="Xp_Help" xml:space="preserve"><value>XP әр есептің алғашқы Accepted нәтижесі мен аяқталған сабақтардан есептеледі. Рейтинг ұпайы бөлек есептеледі.</value></data>
+  <data name="Xp_Earned" xml:space="preserve"><value>XP алынды</value></data>
+  <data name="Xp_Reward" xml:space="preserve"><value>+{0} XP</value></data>
+  <data name="Xp_CompletedLessons" xml:space="preserve"><value>Аяқталған сабақтар</value></data>
+  <data name="Favorites_Title" xml:space="preserve"><value>Менің таңдаулыларым</value></data>
+  <data name="Favorite_Add" xml:space="preserve"><value>Таңдаулыларға қосу</value></data>
+  <data name="Favorite_Remove" xml:space="preserve"><value>Таңдаулылардан алып тастау</value></data>
+  <data name="Favorites_Empty" xml:space="preserve"><value>Әзірге таңдаулы есептер жоқ. Каталогтағы жұлдызшамен есепті сақтаңыз.</value></data>
+  <data name="Favorites_Count" xml:space="preserve"><value>Таңдаулылар: {0}</value></data>
+  <data name="Favorites_Label" xml:space="preserve"><value>Таңдаулылар</value></data>
+  <data name="Lesson_Complete" xml:space="preserve"><value>Сабақты аяқтадым</value></data>
+  <data name="Lesson_Completed" xml:space="preserve"><value>Сабақ аяқталды</value></data>
+  <data name="Lesson_Reward" xml:space="preserve"><value>Аяқтау сыйақысы</value></data>
+  <data name="Activity_Title" xml:space="preserve"><value>Код жазу белсенділігі</value></data>
+  <data name="Activity_Total" xml:space="preserve"><value>{0} ресми жіберілім</value></data>
+  <data name="Activity_Period" xml:space="preserve"><value>{0} — {1}</value></data>
+  <data name="Activity_Utc" xml:space="preserve"><value>Күндер UTC бойынша есептеледі</value></data>
+  <data name="Activity_Day" xml:space="preserve"><value>{0}. Жіберілімдер: {1}. Қабылданғаны: {2}.</value></data>
+  <data name="Activity_Less" xml:space="preserve"><value>Аз</value></data>
+  <data name="Activity_More" xml:space="preserve"><value>Көп</value></data>
+  <data name="Review_Title" xml:space="preserve"><value>AI код шолуы</value></data>
+  <data name="Review_Quality" xml:space="preserve"><value>Код сапасы және күрделілігі</value></data>
+  <data name="Review_Caution" xml:space="preserve"><value>Күрделілік — AI бағалауы, ол қате болуы мүмкін. Бұл өлшенген орындау уақыты немесе математикалық дәлел емес.</value></data>
+  <data name="Review_Estimate" xml:space="preserve"><value>AI бағалауы</value></data>
+  <data name="Review_Time" xml:space="preserve"><value>Уақыт күрделілігі</value></data>
+  <data name="Review_Space" xml:space="preserve"><value>Жад күрделілігі</value></data>
+  <data name="Review_Summary" xml:space="preserve"><value>Қысқаша қорытынды</value></data>
+  <data name="Review_Readability" xml:space="preserve"><value>Оқуға қолайлылық</value></data>
+  <data name="Review_Naming" xml:space="preserve"><value>Атау беру</value></data>
+  <data name="Review_Efficiency" xml:space="preserve"><value>Тиімділік</value></data>
+  <data name="Review_Style" xml:space="preserve"><value>Код стилі</value></data>
+  <data name="Review_Suggestions" xml:space="preserve"><value>Ұсыныстар</value></data>
+  <data name="Review_Intro" xml:space="preserve"><value>Accepted шешімнің оқуға қолайлылығын, стилін және тиімділігін талдатыңыз. Шолу кодыңызды өзгертпейді және толық дайын шешім бермейді.</value></data>
+  <data name="Review_Disclosure" xml:space="preserve"><value>Батырманы басқанда есеп мәтіні мен кодыңыз OpenAI сервисіне жіберіледі. Тест деректері мен аккаунт мәліметтері жіберілмейді. Нәтиже бір рет сақталып, қайта пайдаланылады.</value></data>
+  <data name="Review_Request" xml:space="preserve"><value>Accepted шешімді AI арқылы талдау</value></data>
+  <data name="Review_StoredLanguage" xml:space="preserve"><value>Сақталған шолу тіл ауысқанда қайта жасалмайды</value></data>
+  <data name="Review_Saved" xml:space="preserve"><value>Код шолуы сақталды.</value></data>
+  <data name="Review_Existing" xml:space="preserve"><value>Бұрын сақталған шолу көрсетілді. Жаңа AI сұрауы жіберілген жоқ.</value></data>
+  <data name="Review_NotAccepted" xml:space="preserve"><value>Код шолуы тек аяқталған Accepted жіберіліміне қолжетімді.</value></data>
+  <data name="Review_NotConfigured" xml:space="preserve"><value>AI код шолуы қазір бапталмаған. Accepted нәтижесі сақталады.</value></data>
+  <data name="Review_Busy" xml:space="preserve"><value>AI сұрауы орындалуда немесе қысқа күту шегі белсенді. Біраздан кейін қайталаңыз.</value></data>
+  <data name="Review_Unavailable" xml:space="preserve"><value>AI шолуын қазір алу мүмкін болмады. Accepted нәтижесі өзгерген жоқ.</value></data>
+  <data name="Review_NotFound" xml:space="preserve"><value>Жіберілім табылмады.</value></data>
+  <data name="Workspace_DraftSaved" xml:space="preserve"><value>Нобай осы қойындыда сақталды</value></data>
+  <data name="Workspace_DraftUnavailable" xml:space="preserve"><value>Нобайды сақтау қолжетімсіз; код редакторда бар</value></data>
+  <data name="Workspace_Reset" xml:space="preserve"><value>Бастапқы кодты қалпына келтіру</value></data>
+  <data name="Workspace_ResetConfirm" xml:space="preserve"><value>Осы тілдегі нобайды бастапқы кодпен ауыстыру керек пе? Өзге тілдегі нобай сақталады.</value></data>
+  <data name="Workspace_Shortcuts" xml:space="preserve"><value>Редакторда: Ctrl/Cmd + Enter — Run; Ctrl/Cmd + Shift + Enter — Submit</value></data>
+  <data name="Workspace_Description" xml:space="preserve"><value>Есеп сипаттамасы</value></data>
+  <data name="Workspace_Input" xml:space="preserve"><value>Кіріс пішімі</value></data>
+  <data name="Workspace_Output" xml:space="preserve"><value>Шығыс пішімі</value></data>
+  <data name="Workspace_Constraints" xml:space="preserve"><value>Шектеулер</value></data>
+  <data name="Workspace_Journey" xml:space="preserve"><value>Әрекет тарихы · {0} жіберілім</value></data>
 </root>
 

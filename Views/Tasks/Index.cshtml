@@ -1,5 +1,6 @@
 @using IntelligentProgrammingPlatform.Models.Enums
 @using Microsoft.AspNetCore.Mvc.Rendering
+@using IntelligentProgrammingPlatform.ViewModels.Tasks
 @model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskCatalogViewModel
 @{
     ViewData["Title"] = L["Common_Tasks"];
@@ -7,6 +8,7 @@
         new SelectListItem(T[$"Difficulty_{value}"].Value, ((int)value).ToString(CultureInfo.InvariantCulture)));
 }
 <div class="page-heading"><div><p class="eyebrow">@L["Tasks_Eyebrow"]</p><h1>@L["Tasks_Heading"]</h1><p>@L["Tasks_Intro"]</p></div><span class="text-muted">@L["Tasks_Matching", Model.Tasks.Count]</span></div>
+@if (User.Identity?.IsAuthenticated == true) { <p><a asp-controller="Favorites" asp-action="Index">★ @T["Favorites_Title"]</a></p> }
 <form asp-action="Index" method="get" class="panel filter-panel row g-3 mx-0">
     <div class="col-lg-4"><label asp-for="Search" class="form-label">@L["Tasks_Search"]</label><input asp-for="Search" class="form-control" placeholder="@L["Tasks_SearchPlaceholder"]" /></div>
     <div class="col-sm-6 col-lg-3"><label asp-for="TopicId" class="form-label">@L["Common_Topic"]</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">@L["Tasks_AllTopics"]</option></select></div>
@@ -25,7 +27,7 @@ else
         @foreach (var task in Model.Tasks)
         {
             <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td><span class="difficulty @task.Difficulty">@T[$"Difficulty_{task.Difficulty}"]</span></td>
-                @if (User.Identity?.IsAuthenticated == true) { <td>@if (task.IsSolved) { <span class="solved-badge">@L["Tasks_Solved"]</span> } else { <span class="text-muted">@L["Tasks_ToExplore"]</span> }</td> }
+                @if (User.Identity?.IsAuthenticated == true) { <td><div class="catalog-personal">@if (task.IsSolved) { <span class="solved-badge">@L["Tasks_Solved"]</span> } else { <span class="text-muted">@L["Tasks_ToExplore"]</span> }<partial name="_FavoriteButton" model="@(new FavoriteButtonViewModel(task.Id, task.IsFavorite, true))" /></div></td> }
                 <td><a asp-action="Details" asp-route-slug="@task.Slug" class="btn btn-sm btn-outline-secondary" aria-label="@L["Tasks_SolveLabel", task.Title]">@L["Tasks_Solve"] <span aria-hidden="true">→</span></a></td></tr>
         }
         </tbody>

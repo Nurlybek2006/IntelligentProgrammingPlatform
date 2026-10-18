@@ -1,0 +1,19 @@
+@model IntelligentProgrammingPlatform.ViewModels.Progress.SubmissionActivityViewModel
+<section class="panel activity-panel my-4" aria-labelledby="activity-heading">
+    <div class="experience-heading"><h2 id="activity-heading" class="h4">@T["Activity_Title"]</h2><span>@T["Activity_Total", Model.TotalSubmissions.ToString("N0")]</span></div>
+    <p class="small text-muted">@T["Activity_Period", Model.Start.ToString("d"), Model.End.ToString("d")] · @T["Activity_Utc"]</p>
+    <div class="activity-scroll" role="region" aria-label="@T["Activity_Title"]" tabindex="0">
+        <div class="activity-calendar">
+            <div class="activity-weekdays" aria-hidden="true">@for (var i = 0; i < 7; i++) { <span>@CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName((DayOfWeek)((i + 1) % 7))</span> }</div>
+            <div class="activity-grid">
+                @for (var i = 0; i < Model.LeadingDays; i++) { <span class="activity-padding" aria-hidden="true"></span> }
+                @foreach (var day in Model.Days)
+                {
+                    var label = T["Activity_Day", day.Date.ToString("D"), day.Submissions, day.Accepted].Value;
+                    <span class="activity-cell activity-@day.Intensity" tabindex="0" role="img" title="@label" aria-label="@label" data-date="@day.Date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)" data-submissions="@day.Submissions" data-accepted="@day.Accepted"></span>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="activity-legend"><span>@T["Activity_Less"]</span>@for (var i = 0; i < 5; i++) { <span class="activity-cell activity-@i" aria-hidden="true"></span> }<span>@T["Activity_More"]</span></div>
+</section>

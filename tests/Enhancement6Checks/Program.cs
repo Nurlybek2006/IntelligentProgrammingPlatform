@@ -147,6 +147,9 @@ static class Checks
         services.AddIdentityCore<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
         services.AddSingleton(avatars);
         services.AddScoped<ProgressService>();
+        services.AddScoped<ExperienceService>();
+        services.AddScoped<SubmissionActivityService>();
+        services.AddSingleton(TimeProvider.System);
         services.AddScoped<ProfileService>();
         await using var provider = services.BuildServiceProvider();
         using var first = provider.CreateScope();

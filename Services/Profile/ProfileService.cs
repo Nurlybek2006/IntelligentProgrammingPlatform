@@ -14,12 +14,15 @@ public sealed class ProfileService
     private readonly AvatarService _avatars;
     private readonly ProgressService _progress;
     private readonly ILogger<ProfileService> _logger;
+    private readonly ExperienceService _experience;
+    private readonly SubmissionActivityService _activity;
 
     // Профильге Identity, аватар және дайын статистика қызметтерін береді.
     public ProfileService(UserManager<ApplicationUser> users, ApplicationDbContext db, AvatarService avatars,
-        ProgressService progress, ILogger<ProfileService> logger)
+        ProgressService progress, ILogger<ProfileService> logger, ExperienceService experience, SubmissionActivityService activity)
     {
         _users = users; _db = db; _avatars = avatars; _progress = progress; _logger = logger;
+        _experience = experience; _activity = activity;
     }
 
     // Қауіпсіз профиль өрістерін және соңғы бес әрекетті бірге қайтарады.
@@ -34,6 +37,8 @@ public sealed class ProfileService
             join role in _db.Roles.AsNoTracking() on membership.RoleId equals role.Id
             where membership.UserId == userId orderby role.Name select role.Name ?? "").ToListAsync(cancellationToken);
         model.Progress = await _progress.GetAsync(userId, cancellationToken);
+        model.Experience = await _experience.GetAsync(userId, cancellationToken);
+        model.Activity = await _activity.GetAsync(userId, cancellationToken);
         return model;
     }
 

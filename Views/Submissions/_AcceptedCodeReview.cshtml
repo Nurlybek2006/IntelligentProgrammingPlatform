@@ -1,0 +1,29 @@
+@model IntelligentProgrammingPlatform.ViewModels.Submissions.SubmissionDetailsViewModel
+<section class="panel accepted-review mt-4" aria-labelledby="review-heading">
+    <div class="experience-heading"><div><p class="eyebrow">@T["Review_Title"]</p><h2 id="review-heading">@T["Review_Quality"]</h2></div><span class="status-badge Accepted">@T["Status_Accepted"]</span></div>
+    @if (TempData["ReviewMessage"] is string message) { <p class="alert alert-info" role="status">@message</p> }
+    <p class="review-disclaimer" role="note">@T["Review_Caution"]</p>
+    @if (Model.AcceptedReview is { } review)
+    {
+        <h3>@T["Review_Summary"]</h3><p class="text-content">@review.Summary</p>
+        <div class="complexity-grid">
+            <section><p class="small text-muted">@T["Review_Estimate"]</p><h3>@T["Review_Time"]</h3><strong class="complexity-value">@review.TimeComplexity</strong></section>
+            <section><p class="small text-muted">@T["Review_Estimate"]</p><h3>@T["Review_Space"]</h3><strong class="complexity-value">@review.SpaceComplexity</strong></section>
+        </div>
+        <p class="text-content mt-3">@review.ComplexityExplanation</p>
+        <div class="review-grid">
+            <section><h3>@T["Review_Readability"]</h3><p class="text-content">@review.Readability</p></section>
+            <section><h3>@T["Review_Naming"]</h3><p class="text-content">@review.Naming</p></section>
+            <section><h3>@T["Review_Efficiency"]</h3><p class="text-content">@review.Efficiency</p></section>
+            <section><h3>@T["Review_Style"]</h3><p class="text-content">@review.Style</p></section>
+        </div>
+        <h3>@T["Review_Suggestions"]</h3><ul>@foreach (var suggestion in review.Suggestions) { <li class="text-content">@suggestion</li> }</ul>
+        <p class="small text-muted mb-0">@T["Review_StoredLanguage"] · @review.CreatedAt.ToString("g") UTC</p>
+    }
+    else if (!Model.ReviewConfigured) { <p>@T["Review_NotConfigured"]</p> }
+    else
+    {
+        <p>@T["Review_Intro"]</p><p class="small text-muted">@T["Review_Disclosure"]</p>
+        <form asp-controller="AcceptedCodeReviews" asp-action="Analyze" asp-route-id="@Model.Id" method="post" data-busy-form="@L["Ai_Asking"]"><button type="submit" class="btn btn-primary">@T["Review_Request"]</button><span class="d-block small mt-2" role="status"></span></form>
+    }
+</section>

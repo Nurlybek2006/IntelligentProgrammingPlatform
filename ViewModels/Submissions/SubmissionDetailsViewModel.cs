@@ -21,6 +21,9 @@ public class SubmissionDetailsViewModel
     public List<TestResultViewModel> Results { get; set; } = new();
     public AiFeedbackViewModel? AiFeedback { get; set; }
     public bool AiConfigured { get; set; }
+    public AcceptedCodeReviewViewModel? AcceptedReview { get; set; }
+    public bool ReviewConfigured { get; set; }
+    public long? PreviousSubmissionId { get; set; }
 }
 
 public class TestResultViewModel

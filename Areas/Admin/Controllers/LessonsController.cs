@@ -137,6 +137,8 @@ public class LessonsController : Controller
     public async Task<IActionResult> Delete(int id)
     {
         var lesson = await _db.Lessons.AsNoTracking().SingleOrDefaultAsync(lesson => lesson.Id == id);
+        if (await _db.LessonProgresses.AnyAsync(item => item.LessonId == id))
+            ModelState.AddModelError(string.Empty, _text["Lesson_HasProgress"]);
         return lesson == null ? NotFound() : View(lesson);
     }
 
@@ -146,12 +148,17 @@ public class LessonsController : Controller
     {
         var lesson = await _db.Lessons.FindAsync(id);
         if (lesson == null) return NotFound();
+        if (await _db.LessonProgresses.AnyAsync(item => item.LessonId == id))
+        {
+            ModelState.AddModelError(string.Empty, _text["Lesson_HasProgress"]);
+            return View("Delete", lesson);
+        }
         _db.Lessons.Remove(lesson);
         try { await _db.SaveChangesAsync(); }
         catch (DbUpdateConcurrencyException) { return NotFound(); }
         catch (DbUpdateException exception) when (DbUpdateErrors.IsConstraintViolation(exception))
         {
-            ModelState.AddModelError(string.Empty, _text["Lesson_Constraint"]);
+            ModelState.AddModelError(string.Empty, _text["Lesson_HasProgress"]);
             return View("Delete", lesson);
         }
         TempData["Success"] = _text["Lesson_Deleted"].Value;

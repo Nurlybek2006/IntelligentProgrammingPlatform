@@ -158,5 +158,64 @@
   <data name="Profile_AvatarRemoved" xml:space="preserve"><value>Avatar removed.</value></data>
   <data name="Profile_SaveFailed" xml:space="preserve"><value>The profile could not be saved. Refresh the page and try again.</value></data>
   <data name="Profile_InvalidName" xml:space="preserve"><value>The display name must contain 1–100 characters.</value></data>
+  <data name="Xp_Title" xml:space="preserve"><value>Personal learning progress</value></data>
+  <data name="Xp_Level" xml:space="preserve"><value>Level {0}</value></data>
+  <data name="Xp_Total" xml:space="preserve"><value>Total XP</value></data>
+  <data name="Xp_Progress" xml:space="preserve"><value>Progress to next level: {0} / {1} XP</value></data>
+  <data name="Xp_Tasks" xml:space="preserve"><value>From tasks: {0} XP</value></data>
+  <data name="Xp_Lessons" xml:space="preserve"><value>Completed lessons: {0}</value></data>
+  <data name="Xp_Help" xml:space="preserve"><value>XP comes from the first Accepted result for each task and completed lessons. Leaderboard score is calculated separately.</value></data>
+  <data name="Xp_Earned" xml:space="preserve"><value>XP earned</value></data>
+  <data name="Xp_Reward" xml:space="preserve"><value>+{0} XP</value></data>
+  <data name="Xp_CompletedLessons" xml:space="preserve"><value>Completed lessons</value></data>
+  <data name="Favorites_Title" xml:space="preserve"><value>My Favorites</value></data>
+  <data name="Favorite_Add" xml:space="preserve"><value>Add to favorites</value></data>
+  <data name="Favorite_Remove" xml:space="preserve"><value>Remove from favorites</value></data>
+  <data name="Favorites_Empty" xml:space="preserve"><value>No favorite tasks yet. Save a task using the star in the catalog.</value></data>
+  <data name="Favorites_Count" xml:space="preserve"><value>Favorites: {0}</value></data>
+  <data name="Favorites_Label" xml:space="preserve"><value>Favorites</value></data>
+  <data name="Lesson_Complete" xml:space="preserve"><value>Mark lesson completed</value></data>
+  <data name="Lesson_Completed" xml:space="preserve"><value>Lesson completed</value></data>
+  <data name="Lesson_Reward" xml:space="preserve"><value>Completion reward</value></data>
+  <data name="Activity_Title" xml:space="preserve"><value>Coding activity</value></data>
+  <data name="Activity_Total" xml:space="preserve"><value>{0} official submissions</value></data>
+  <data name="Activity_Period" xml:space="preserve"><value>{0} — {1}</value></data>
+  <data name="Activity_Utc" xml:space="preserve"><value>Days are counted in UTC</value></data>
+  <data name="Activity_Day" xml:space="preserve"><value>{0}. Submissions: {1}. Accepted: {2}.</value></data>
+  <data name="Activity_Less" xml:space="preserve"><value>Less</value></data>
+  <data name="Activity_More" xml:space="preserve"><value>More</value></data>
+  <data name="Review_Title" xml:space="preserve"><value>AI Code Review</value></data>
+  <data name="Review_Quality" xml:space="preserve"><value>Code quality &amp; complexity</value></data>
+  <data name="Review_Caution" xml:space="preserve"><value>Complexity is estimated by AI and may be inaccurate. It is not measured runtime or a mathematical proof.</value></data>
+  <data name="Review_Estimate" xml:space="preserve"><value>AI estimate</value></data>
+  <data name="Review_Time" xml:space="preserve"><value>Time complexity</value></data>
+  <data name="Review_Space" xml:space="preserve"><value>Space complexity</value></data>
+  <data name="Review_Summary" xml:space="preserve"><value>Summary</value></data>
+  <data name="Review_Readability" xml:space="preserve"><value>Readability</value></data>
+  <data name="Review_Naming" xml:space="preserve"><value>Naming</value></data>
+  <data name="Review_Efficiency" xml:space="preserve"><value>Efficiency</value></data>
+  <data name="Review_Style" xml:space="preserve"><value>Style</value></data>
+  <data name="Review_Suggestions" xml:space="preserve"><value>Suggestions</value></data>
+  <data name="Review_Intro" xml:space="preserve"><value>Review the readability, style and efficiency of your Accepted solution. The review does not modify your code or provide a complete replacement solution.</value></data>
+  <data name="Review_Disclosure" xml:space="preserve"><value>Clicking sends the task text and your code to OpenAI. Test data and account details are excluded. The result is stored once and reused.</value></data>
+  <data name="Review_Request" xml:space="preserve"><value>Review accepted solution with AI</value></data>
+  <data name="Review_StoredLanguage" xml:space="preserve"><value>Changing language does not regenerate this saved review</value></data>
+  <data name="Review_Saved" xml:space="preserve"><value>Code review saved.</value></data>
+  <data name="Review_Existing" xml:space="preserve"><value>Showing the saved review. No new AI request was made.</value></data>
+  <data name="Review_NotAccepted" xml:space="preserve"><value>Code review is available only for a completed Accepted submission.</value></data>
+  <data name="Review_NotConfigured" xml:space="preserve"><value>AI Code Review is not configured. Your Accepted result is preserved.</value></data>
+  <data name="Review_Busy" xml:space="preserve"><value>An AI request is active or the short cooldown applies. Please try again shortly.</value></data>
+  <data name="Review_Unavailable" xml:space="preserve"><value>AI review could not be completed. Your Accepted result is unchanged.</value></data>
+  <data name="Review_NotFound" xml:space="preserve"><value>Submission not found.</value></data>
+  <data name="Workspace_DraftSaved" xml:space="preserve"><value>Draft saved in this tab</value></data>
+  <data name="Workspace_DraftUnavailable" xml:space="preserve"><value>Draft storage unavailable; code remains in the editor</value></data>
+  <data name="Workspace_Reset" xml:space="preserve"><value>Reset starter code</value></data>
+  <data name="Workspace_ResetConfirm" xml:space="preserve"><value>Replace this language’s draft with starter code? The other language’s draft will be preserved.</value></data>
+  <data name="Workspace_Shortcuts" xml:space="preserve"><value>In the editor: Ctrl/Cmd + Enter — Run; Ctrl/Cmd + Shift + Enter — Submit</value></data>
+  <data name="Workspace_Description" xml:space="preserve"><value>Description</value></data>
+  <data name="Workspace_Input" xml:space="preserve"><value>Input</value></data>
+  <data name="Workspace_Output" xml:space="preserve"><value>Output</value></data>
+  <data name="Workspace_Constraints" xml:space="preserve"><value>Constraints</value></data>
+  <data name="Workspace_Journey" xml:space="preserve"><value>Attempt Journey · {0} submissions</value></data>
 </root>
 

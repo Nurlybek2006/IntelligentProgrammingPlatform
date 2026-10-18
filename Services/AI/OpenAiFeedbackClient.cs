@@ -9,7 +9,7 @@ using OpenAI.Responses;
 
 namespace IntelligentProgrammingPlatform.Services.AI;
 
-public sealed class OpenAiFeedbackClient : IAiFeedbackClient
+public sealed class OpenAiFeedbackClient : IAiFeedbackClient, IAcceptedCodeReviewClient
 {
     private readonly AiTutorOptions _options;
     private readonly ResponsesClient? _client;
@@ -62,7 +62,20 @@ public sealed class OpenAiFeedbackClient : IAiFeedbackClient
     }
 
     // Ресми Responses API-ға құралсыз, сақтаусыз және автоматты retry-сыз бір сұрау жібереді.
-    public async Task<AiModelResponse> GenerateAsync(AiTutorInput input, CancellationToken cancellationToken)
+    public Task<AiModelResponse> GenerateAsync(AiTutorInput input, CancellationToken cancellationToken) =>
+        GenerateStructuredAsync(input, BuildInstructions(input.ResponseLanguage), "tutor_feedback", FeedbackSchema, cancellationToken);
+
+    // Жаңа шолуға сол ресми клиентті, timeout және retry қорғанысын қайта қолданады.
+    public Task<AiModelResponse> ReviewAsync(AcceptedCodeReviewInput input, CancellationToken cancellationToken) =>
+        GenerateStructuredAsync(input, BuildReviewInstructions(input.ResponseLanguage), "accepted_code_review", AcceptedCodeReviewContent.Schema, cancellationToken);
+
+    // Сенімді тіл атауын review нұсқауына ғана енгізіп, студент JSON-ынан бөледі.
+    public static string BuildReviewInstructions(AiResponseLanguage language) => AcceptedCodeReviewContent.Instructions
+        + "\nTrusted response language: " + (language == AiResponseLanguage.Russian ? "Russian" : language == AiResponseLanguage.English ? "English" : "Kazakh")
+        + ". Write every feedback field and suggestion in this language.";
+
+    // Екі AI мүмкіндігін бір құралсыз және автоматты retry-сыз Responses тасымалымен орындайды.
+    private async Task<AiModelResponse> GenerateStructuredAsync<T>(T input, string instructions, string schemaName, string schema, CancellationToken cancellationToken)
     {
         if (!_options.IsConfigured) throw new InvalidOperationException("AI is not configured.");
         var client = _client ?? new ResponsesClient(new ApiKeyCredential(_options.ApiKey!), new ResponsesClientOptions
@@ -74,12 +87,12 @@ public sealed class OpenAiFeedbackClient : IAiFeedbackClient
         var request = new CreateResponseOptions
         {
             Model = _options.Model,
-            Instructions = BuildInstructions(input.ResponseLanguage),
+            Instructions = instructions,
             StoredOutputEnabled = false,
             MaxOutputTokenCount = Math.Clamp(_options.MaxOutputTokens, 256, 3000),
             TextOptions = new ResponseTextOptions
             {
-                TextFormat = ResponseTextFormat.CreateJsonSchemaFormat("tutor_feedback", BinaryData.FromString(FeedbackSchema), null, true)
+                TextFormat = ResponseTextFormat.CreateJsonSchemaFormat(schemaName, BinaryData.FromString(schema), null, true)
             }
         };
         request.InputItems.Add(ResponseItem.CreateUserMessageItem(JsonSerializer.Serialize(input)));

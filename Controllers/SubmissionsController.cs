@@ -21,10 +21,11 @@ public class SubmissionsController : Controller
     private readonly ILogger<SubmissionsController> _logger;
     private readonly OpenAiTutorService _ai;
     private readonly IStringLocalizer<SharedResource> _text;
+    private readonly AcceptedCodeReviewService _reviews;
 
     // Контроллерге тексеру, қауіпсіз бет құру және сақтау қызметтерін береді.
     public SubmissionsController(ApplicationDbContext db, SubmissionService submissions, TaskPageService pages,
-        ILogger<SubmissionsController> logger, OpenAiTutorService ai, IStringLocalizer<SharedResource> text)
+        ILogger<SubmissionsController> logger, OpenAiTutorService ai, IStringLocalizer<SharedResource> text, AcceptedCodeReviewService reviews)
     {
         _db = db;
         _submissions = submissions;
@@ -32,6 +33,7 @@ public class SubmissionsController : Controller
         _logger = logger;
         _ai = ai;
         _text = text;
+        _reviews = reviews;
     }
 
     [HttpPost, RequestSizeLimit(512 * 1024)]
@@ -100,6 +102,11 @@ public class SubmissionsController : Controller
                 PassedTests = submission.PassedTests, TotalTests = submission.TotalTests,
                 ExecutionTimeMs = submission.ExecutionTimeMs, CreatedAt = submission.CreatedAt,
                 StartedAt = submission.StartedAt, FinishedAt = submission.FinishedAt,
+                PreviousSubmissionId = _db.Submissions.Where(previous => previous.UserId == userId
+                        && previous.ProgrammingTaskId == submission.ProgrammingTaskId && previous.RuntimeId == submission.RuntimeId
+                        && (previous.CreatedAt < submission.CreatedAt || (previous.CreatedAt == submission.CreatedAt && previous.Id < submission.Id)))
+                    .OrderByDescending(previous => previous.CreatedAt).ThenByDescending(previous => previous.Id)
+                    .Select(previous => (long?)previous.Id).FirstOrDefault(),
                 Results = submission.ExecutionResults.OrderBy(result => result.TestCase.Order).Select(result => new TestResultViewModel
                 {
                     Number = result.TestCase.Order, IsHidden = result.TestCase.IsHidden,
@@ -114,6 +121,8 @@ public class SubmissionsController : Controller
         if (model == null) return NotFound();
         model.AiConfigured = _ai.IsConfigured;
         model.AiFeedback = await _ai.GetExistingAsync(id, userId!, cancellationToken);
+        model.ReviewConfigured = _reviews.IsConfigured;
+        model.AcceptedReview = await _reviews.GetExistingAsync(id, userId!, cancellationToken);
         return View(model);
     }
 

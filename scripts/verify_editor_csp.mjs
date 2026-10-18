@@ -40,16 +40,20 @@ function exercise(validationFailed, draft, throwsStorage = false, labels = ["C++
     const handlers = {}, windowHandlers = {}, storage = new Map([["user-task", draft]]);
     const elements = {
         "submission-form": { dataset: { draftKey: "user-task", validationFailed, editorLabel: labels[0], sourceLimit: labels[1], submitProgress: labels[2] }, addEventListener: (name, handler) => handlers[name] = handler },
-        SourceCode: { value: "server validation source" }, "code-editor": { hidden: true },
+        SourceCode: { value: "server validation source" }, "code-editor": { hidden: true, addEventListener: (name, handler) => handlers["editor-" + name] = handler },
+        "draft-status": {}, "reset-code": { addEventListener: (name, handler) => handlers["reset-" + name] = handler },
+        "run-code": { click: () => runClicks++ },
         "submission-progress": {}, "submit-code": {}, RuntimeId: {
             options: [1], selectedOptions: [{ dataset: { language: "cpp", starter: "cpp starter" } }],
             addEventListener: (name, handler) => handlers["runtime-" + name] = handler
         }
     };
-    let value, changed, focused = false, worker;
+    let value, changed, focused = false, worker, runClicks = 0, submitCalls = 0, confirmReset = false;
+    Object.assign(elements["submission-form"].dataset, { draftSaved: "Saved locally", draftUnavailable: "Storage unavailable", resetConfirm: "Replace current draft?" });
+    elements["submission-form"].requestSubmit = () => { submitCalls++; handlers.submit({ preventDefault() {} }); };
     const context = {
         document: { getElementById: id => elements[id] }, TextEncoder, URL,
-        window: { addEventListener: (name, handler) => windowHandlers[name] = handler },
+        window: { addEventListener: (name, handler) => windowHandlers[name] = handler, confirm: prompt => { assert.equal(prompt, "Replace current draft?"); return confirmReset; } },
         Worker: class { constructor(url, options) { worker = { url, options }; } },
         sessionStorage: {
             getItem: key => { if (throwsStorage) throw Error("disabled"); return storage.get(key) ?? null; },
@@ -90,6 +94,23 @@ function exercise(validationFailed, draft, throwsStorage = false, labels = ["C++
         assert.equal(storage.get("user-task:cpp"), cppDraft);
         assert.equal(storage.get("user-task:python"), "python-code");
     }
+    assert.equal(elements["draft-status"].textContent, throwsStorage ? "Storage unavailable" : "Saved locally");
+    handlers["reset-click"](); assert.equal(value, "python-code", "Cancel reset preserves source");
+    confirmReset = true; handlers["reset-click"](); assert.equal(value, "# Python starter\n");
+    if (!throwsStorage) assert.equal(storage.get("user-task:cpp"), cppDraft, "Reset touches only the current language draft");
+    const key = (overrides = {}) => ({ key: "Enter", ctrlKey: true, metaKey: false, shiftKey: false, altKey: false, repeat: false,
+        preventDefault() {}, stopPropagation() {}, ...overrides });
+    handlers["editor-keydown"](key()); assert.equal(runClicks, 1);
+    handlers["editor-keydown"](key({ repeat: true })); assert.equal(runClicks, 1);
+    elements["submission-form"].dataset.busy = "run";
+    handlers["editor-keydown"](key({ shiftKey: true })); assert.equal(submitCalls, 0);
+    handlers["reset-click"](); assert.equal(value, "# Python starter\n");
+    delete elements["submission-form"].dataset.busy;
+    handlers["editor-keydown"](key({ ctrlKey: false, metaKey: true, shiftKey: true })); assert.equal(submitCalls, 1);
+    handlers["editor-keydown"](key({ shiftKey: true })); assert.equal(submitCalls, 1);
+    let duplicatePrevented = false;
+    handlers.submit({ preventDefault: () => duplicatePrevented = true }); assert.equal(duplicatePrevented, true);
+    windowHandlers.pageshow();
     let prevented = false;
     handlers.submit({ preventDefault: () => prevented = true });
     assert.equal(prevented, false); assert.equal(elements["submit-code"].disabled, true);
@@ -108,4 +129,5 @@ exercise("false", "saved draft", false, ["C++ код редакторы", "Ко�
 exercise("false", "saved draft", false, ["Редактор кода C++", "Размер кода не должен превышать 64 КиБ.", "Компиляция и проверка решения…"]);
 console.log("PASS: Editor integration doubles verify textarea sync, submit, draft/validation precedence, size bounds and same-origin module worker");
 console.log("PASS: C++ legacy draft migration, independent C++/Python drafts and model switching work even when storage is blocked");
+console.log("PASS: Draft status, confirmed current-language reset, editor-scoped Ctrl/Cmd shortcuts and shared busy/duplicate guards");
 console.log("BROWSER CHECKS STILL REQUIRED: rendering, highlighting, real input, worker startup and CSP console");

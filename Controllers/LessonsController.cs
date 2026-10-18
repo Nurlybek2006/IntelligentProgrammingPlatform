@@ -1,4 +1,5 @@
 using IntelligentProgrammingPlatform.Data;
+using System.Security.Claims;
 using IntelligentProgrammingPlatform.ViewModels.Lessons;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,11 +45,13 @@ public sealed class LessonsController : Controller
     // Сабақты, жарияланған көршілерін және тек ашық есеп метадеректерін қайтарады.
     public async Task<IActionResult> Details(string slug, CancellationToken cancellationToken)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var model = await _db.Lessons.AsNoTracking().Where(lesson => lesson.IsPublished && lesson.Slug == slug)
             .Select(lesson => new LessonDetailsViewModel
             {
                 Id = lesson.Id, Title = lesson.Title, Slug = lesson.Slug, Summary = lesson.Summary,
                 Content = lesson.Content, CodeExample = lesson.CodeExample, CodeLanguage = lesson.CodeLanguage,
+                IsCompleted = userId != null && _db.LessonProgresses.Any(item => item.UserId == userId && item.LessonId == lesson.Id),
                 TopicId = lesson.TopicId, TopicName = lesson.Topic.Name, Order = lesson.Order
             }).SingleOrDefaultAsync(cancellationToken);
         if (model == null) return NotFound();

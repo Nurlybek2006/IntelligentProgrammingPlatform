@@ -7,10 +7,11 @@
       data-validation-failed="@(!ViewData.ModelState.IsValid ? "true" : "false")"
       data-run-url="@Url.Action("Run", "CustomRuns")"
       data-editor-label="@T["Editor_AriaLabel"]" data-source-limit="@T["Validation_SourceLimit"]"
-      data-submit-progress="@T["Editor_Submitting"]">
+      data-submit-progress="@T["Editor_Submitting"]" data-draft-saved="@T["Workspace_DraftSaved"]"
+      data-draft-unavailable="@T["Workspace_DraftUnavailable"]" data-reset-confirm="@T["Workspace_ResetConfirm"]">
     <div asp-validation-summary="All" class="text-danger" role="alert"></div>
     <input asp-for="ProgrammingTaskId" type="hidden" />
-    <div class="mb-3">
+    <div class="workspace-toolbar mb-3"><div class="runtime-select">
         <label asp-for="RuntimeId" class="form-label"></label>
         <select asp-for="RuntimeId" class="form-select" aria-describedby="language-help">
             @foreach (var runtime in Model.Runtimes)
@@ -19,8 +20,8 @@
             }
         </select>
         <span asp-validation-for="RuntimeId" class="text-danger"></span>
-        <p id="language-help" class="form-text">@L["Editor_LanguageHelp"]</p>
-    </div>
+    </div><div class="draft-tools"><span id="draft-status" class="small text-muted" role="status" aria-live="polite"></span><button type="button" id="reset-code" class="btn btn-sm btn-outline-secondary" disabled="@(Model.Runtimes.Count == 0)">@T["Workspace_Reset"]</button></div></div>
+    <p id="language-help" class="form-text">@L["Editor_LanguageHelp"]</p>
     <label asp-for="SourceCode" class="form-label"></label>
     <textarea asp-for="SourceCode" class="form-control source-fallback" spellcheck="false" aria-describedby="source-help"></textarea>
     <div id="code-editor" class="code-editor" hidden></div>
@@ -31,17 +32,6 @@
         <textarea id="CustomInput" name="CustomInput" class="form-control custom-input" rows="4" maxlength="32768" spellcheck="false" aria-describedby="custom-input-help"></textarea>
         <p id="custom-input-help" class="form-text mb-0">@L["Run_InputHelp"]</p>
     </div>
-    <div class="d-flex flex-wrap gap-2">
-        <button type="button" class="btn btn-outline-primary" id="run-code" disabled="@(Model.Runtimes.Count == 0)">@L["Run_Button"]</button>
-        <button type="submit" class="btn btn-primary" id="submit-code" disabled="@(Model.Runtimes.Count == 0)">@L["Submit_Button"]</button>
-    </div>
-    <p class="form-text">@L["Submit_Help"]</p>
-    <span id="submission-progress" class="ms-2" role="status"></span>
-    @if (Model.Runtimes.Count == 0)
-    {
-        <p class="text-warning mt-2">@L["Editor_NoRuntime"]</p>
-    }
-</form>
 <section id="custom-run-result" class="custom-run-result mt-4" aria-labelledby="run-result-heading" hidden
          data-temporary="@T["Run_Temporary"]" data-check-input="@T["Run_CheckInput"]" data-limits="@T["Run_Limits"]"
          data-running="@T["Run_Running"]" data-sign-in="@T["Run_SignIn"]" data-reload="@T["Run_Reload"]"
@@ -58,3 +48,16 @@
     <div id="run-error-panel" hidden><h4 class="h6">@L["Run_Diagnostic"]</h4><pre id="run-error" class="test-data" tabindex="0"></pre></div>
     <div id="run-compiler-panel" hidden><h4 class="h6">@L["Common_CompilerOutput"]</h4><pre id="run-compiler" class="test-data" tabindex="0"></pre></div>
 </section>
+    <div class="workspace-actions"><div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-outline-primary" id="run-code" disabled="@(Model.Runtimes.Count == 0)">@L["Run_Button"]</button>
+        <button type="submit" class="btn btn-primary" id="submit-code" disabled="@(Model.Runtimes.Count == 0)">@L["Submit_Button"]</button>
+    </div>
+    <p class="form-text mt-2 mb-1">@T["Workspace_Shortcuts"]</p>
+    <span id="submission-progress" class="ms-2" role="status"></span>
+    </div>
+    <p class="form-text">@L["Submit_Help"]</p>
+    @if (Model.Runtimes.Count == 0)
+    {
+        <p class="text-warning mt-2">@L["Editor_NoRuntime"]</p>
+    }
+</form>

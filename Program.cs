@@ -107,6 +107,10 @@ builder.Services.AddScoped<TaskPageService>();
 
 // Прогресті тарихтан есептеп, рейтинг summary жаңартуларын реттейді.
 builder.Services.AddScoped<ProgressService>();
+builder.Services.AddScoped<ExperienceService>();
+builder.Services.AddScoped<SubmissionActivityService>();
+builder.Services.AddScoped<LessonProgressService>();
+builder.Services.AddScoped<TaskFavoriteService>();
 builder.Services.AddScoped<LearningInsightsService>();
 builder.Services.AddSingleton<LeaderboardUpdateGate>();
 builder.Services.AddScoped<LeaderboardService>();
@@ -118,7 +122,10 @@ builder.Services.AddScoped<AdminUsersService>();
 builder.Services.Configure<AiTutorOptions>(builder.Configuration.GetSection("OpenAI"));
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<AiRequestGate>();
-builder.Services.AddSingleton<IAiFeedbackClient, OpenAiFeedbackClient>();
+builder.Services.AddSingleton<OpenAiFeedbackClient>();
+builder.Services.AddSingleton<IAiFeedbackClient>(services => services.GetRequiredService<OpenAiFeedbackClient>());
+builder.Services.AddSingleton<IAcceptedCodeReviewClient>(services => services.GetRequiredService<OpenAiFeedbackClient>());
+builder.Services.AddScoped<AcceptedCodeReviewService>();
 builder.Services.AddScoped<OpenAiTutorService>();
 builder.Services.AddScoped<HintRevealService>();
 

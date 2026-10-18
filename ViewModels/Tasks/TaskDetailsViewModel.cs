@@ -6,6 +6,9 @@ namespace IntelligentProgrammingPlatform.ViewModels.Tasks;
 public class TaskDetailsViewModel
 {
     public int Id { get; set; }
+    public bool IsFavorite { get; set; }
+    public bool IsSolved { get; set; }
+    public int XpReward => Services.Progress.ExperienceService.TaskReward(Difficulty);
     public AttemptJourneyViewModel? Journey { get; set; }
     public SubmitViewModel Submission { get; set; } = new();
     public string Title { get; set; } = string.Empty;

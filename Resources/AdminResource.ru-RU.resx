@@ -152,4 +152,5 @@
   <data name="User_RemoveAvatar" xml:space="preserve"><value>Удалить аватар пользователя</value></data>
   <data name="User_AvatarRemoved" xml:space="preserve"><value>Аватар пользователя удалён.</value></data>
   <data name="User_SaveFailed" xml:space="preserve"><value>Не удалось сохранить изменение. Обновите страницу и повторите попытку.</value></data>
+  <data name="Lesson_HasProgress" xml:space="preserve"><value>У этого урока есть история завершения, поэтому удалить его нельзя. При необходимости снимите его с публикации.</value></data>
 </root>

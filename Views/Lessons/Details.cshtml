@@ -13,6 +13,18 @@
     <p class="eyebrow"><a asp-action="Index" asp-route-topicId="@Model.TopicId">@Model.TopicName</a> · @L["Lessons_Order", Model.Order]</p>
     <h1>@Model.Title</h1><p>@Model.Summary</p>
 </div></div>
+<section class="panel lesson-completion mb-4" aria-label="@T["Lesson_Reward"]">
+    @if (Model.IsCompleted) { <strong class="solved-badge" id="lesson-completed">✓ @T["Lesson_Completed"]</strong><span>@T["Xp_Earned"] · 20 XP</span> }
+    else
+    {
+        <span>@T["Lesson_Reward"] · @T["Xp_Reward", 20]</span>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-controller="LessonCompletions" asp-action="Complete" method="post"><input type="hidden" name="lessonId" value="@Model.Id" /><button type="submit" class="btn btn-primary">@T["Lesson_Complete"]</button></form>
+        }
+        else { <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">@L["Common_Login"]</a> }
+    }
+</section>
 <div class="lesson-reading">
     <article class="panel lesson-body">
         <h2 class="h4">@L["Lessons_Theory"]</h2>

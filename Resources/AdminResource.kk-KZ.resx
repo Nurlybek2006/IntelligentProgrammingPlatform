@@ -152,4 +152,5 @@
   <data name="User_RemoveAvatar" xml:space="preserve"><value>Пайдаланушы аватарын алып тастау</value></data>
   <data name="User_AvatarRemoved" xml:space="preserve"><value>Пайдаланушы аватары алынып тасталды.</value></data>
   <data name="User_SaveFailed" xml:space="preserve"><value>Өзгеріс сақталмады. Бетті жаңартып, қайталап көріңіз.</value></data>
+  <data name="Lesson_HasProgress" xml:space="preserve"><value>Бұл сабақ бойынша аяқтау тарихы бар, сондықтан оны өшіру мүмкін емес. Қажет болса, жариялауды тоқтатыңыз.</value></data>
 </root>

@@ -159,7 +159,17 @@ python scripts/verify_phase5_live.py --finish
 - **Attempt Journey:** the task page shows your latest five attempts with their runtime; `/Tasks/{slug}/Journey` provides the full chronological history, twenty per page. Saved AI feedback is marked factually; attempts link to existing result pages.
 - **Code Diff:** **Compare with previous** selects the previous attempt in the same language. Both attempts must belong to you and the same task. Same-language comparisons use C++/Python highlighting; an explicit mixed comparison uses plaintext. The diff reuses the existing nonce/scoped Monaco CSP and switches to an inline view on narrow screens.
 
-Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement2_ui.mjs` for the new regressions. See [study-enhancement2.md](study-enhancement2.md) and [manual-enhancement2-checklist.md](manual-enhancement2-checklist.md). Real browser verification remains pending.
+Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement2_ui.mjs` for these regressions. See [study-enhancement2.md](study-enhancement2.md), [manual-enhancement2-checklist.md](manual-enhancement2-checklist.md), and the current browser verification scope in [study-enhancement7.md](study-enhancement7.md).
+
+## Advanced Learning Experience
+
+- **Accepted AI Code Review:** the owner explicitly requests a concise quality review through the existing OpenAI SDK. One stored review per submission is reused, including after a language change. Hidden tests and account details are excluded. AI-estimated time/space complexity is clearly marked as an estimate that may be wrong; measured runtime remains separate and this is not a proof of algorithmic complexity.
+- **XP / Levels:** distinct Accepted tasks award Easy **50**, Medium **100**, Hard **200** XP once across languages. Completing a published lesson awards **20** XP once. XP is derived from history; advancing from level `L` requires `250 × L`, and entering level `L` requires `250 × (L − 1) × L / 2` cumulative XP. Leaderboard and Learning Map formulas stay separate.
+- **Task Favorites:** authenticated students bookmark published tasks from the catalog/workspace and visit `/Tasks/Favorites` through Tasks or Profile. Lesson completion and favorites use protected POST actions; completion is one-way and protects lesson history from deletion.
+- **Submission Activity Heatmap:** Profile includes 365 UTC days of official attempts and Accepted counts, with SQL aggregation and accessible labels. Temporary Custom Runs do not contribute.
+- **Solving workspace:** desktop panes use a 42/58 split with independent scrolling; smaller screens stack them. Monaco has language-specific draft status, confirmed starter reset, Run/Submit busy guards and editor-scoped Ctrl/Cmd+Enter / Ctrl/Cmd+Shift+Enter shortcuts. Existing avatar, journey, diff, hints and sandbox protections remain integrated.
+
+Apply the single `AddLearningEngagementFeatures` migration with `dotnet ef database update`. Verify without paid AI calls using `dotnet run --project tests/Enhancement7Checks`, `python scripts/verify_enhancement7.py`, and the existing regression suites. The explicit `--live-review` mode permits one paid review and writes a local ledger to prevent accidental reruns. See [study-enhancement7.md](study-enhancement7.md) for the Kazakh guide, file inventory, verification evidence and remaining manual checks.
 
 ## Lessons / Learning Content (Enhancement 5A)
 
@@ -167,7 +177,7 @@ Run `python scripts/verify_enhancement2.py` and `node scripts/verify_enhancement
 - `/Admin/Lessons` supports create, preview, edit, publish/unpublish and confirmed deletion. Slugs are unique lowercase URL identifiers; lesson order is positive and unique within its topic. Topics containing tasks or lessons cannot be deleted.
 - Apply `AddLessons` with `dotnet ef database update`. Development startup seeds five Kazakh lessons: Programming Basics, C++ Basics, Python Basics, Arrays Basics and Algorithm Basics. Existing slugs and edited content are preserved. A deleted demo slug is recreated on the next Development startup; unpublish it to hide it persistently.
 - UI supports Kazakh, Russian and English; database lesson text remains as authored. Text and `<pre><code>` examples use normal Razor encoding. No Markdown library or CSP relaxation was added.
-- Lesson code blocks remain reading material; students now select **Python 3** on a task page to Run or Submit. The untouched original Python lesson is upgraded to cover `input`, `print`, variables, `if`, `for` and lists. Admin-edited lesson bodies are preserved. Lesson completion tracking is not implemented.
+- Lesson code blocks remain reading material; students select **Python 3** on a task page to Run or Submit. The untouched original Python lesson is upgraded to cover `input`, `print`, variables, `if`, `for` and lists. Admin-edited lesson bodies are preserved. Enhancement 7 adds one-way lesson completion and derived XP.
 
 Run `python scripts/verify_enhancement5a.py` against the running HTTPS Development app. See [study-enhancement5a.md](study-enhancement5a.md) for the Kazakh guide, schema, security, verification and manual browser checklist. Real visual/keyboard/console checks at 1440, 1024 and 390 pixels remain pending because no browser was available.
 

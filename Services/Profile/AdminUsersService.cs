@@ -1,5 +1,6 @@
 ﻿using IntelligentProgrammingPlatform.Data;
 using IntelligentProgrammingPlatform.Services.Leaderboards;
+using IntelligentProgrammingPlatform.Services.Progress;
 using IntelligentProgrammingPlatform.ViewModels.Admin;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,11 +10,13 @@ public sealed class AdminUsersService
 {
     private readonly ApplicationDbContext _db;
     private readonly LeaderboardService _leaderboard;
+    private readonly ExperienceService _experience;
 
     // Әкімші тізіміне дерекқор мен бар рейтинг қызметін береді.
-    public AdminUsersService(ApplicationDbContext db, LeaderboardService leaderboard)
+    public AdminUsersService(ApplicationDbContext db, LeaderboardService leaderboard, ExperienceService experience)
     {
         _db = db; _leaderboard = leaderboard;
+        _experience = experience;
     }
 
     // Бір бетке тек қауіпсіз бағандарды және рөлдерді топтап оқиды.
@@ -35,7 +38,12 @@ public sealed class AdminUsersService
             where ids.Contains(membership.UserId) orderby role.Name
             select new { membership.UserId, Name = role.Name ?? "" }).ToListAsync(cancellationToken);
         var byUser = roles.ToLookup(role => role.UserId, role => role.Name);
-        foreach (var user in model.Users) user.Roles = byUser[user.Id].ToList();
+        var experience = await _experience.GetForUsersAsync(ids, cancellationToken);
+        foreach (var user in model.Users)
+        {
+            user.Roles = byUser[user.Id].ToList();
+            user.Experience = experience[user.Id];
+        }
         return model;
     }
 }

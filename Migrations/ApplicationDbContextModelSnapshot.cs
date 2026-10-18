@@ -22,6 +22,84 @@ namespace IntelligentProgrammingPlatform.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.AcceptedCodeReview", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("ComplexityExplanation")
+                        .IsRequired()
+                        .HasMaxLength(1200)
+                        .HasColumnType("nvarchar(1200)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EfficiencyFeedback")
+                        .IsRequired()
+                        .HasMaxLength(800)
+                        .HasColumnType("nvarchar(800)");
+
+                    b.Property<int?>("InputTokens")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NamingFeedback")
+                        .IsRequired()
+                        .HasMaxLength(800)
+                        .HasColumnType("nvarchar(800)");
+
+                    b.Property<int?>("OutputTokens")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReadabilityFeedback")
+                        .IsRequired()
+                        .HasMaxLength(800)
+                        .HasColumnType("nvarchar(800)");
+
+                    b.Property<string>("SpaceComplexity")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("StyleFeedback")
+                        .IsRequired()
+                        .HasMaxLength(800)
+                        .HasColumnType("nvarchar(800)");
+
+                    b.Property<long>("SubmissionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SuggestionsJson")
+                        .IsRequired()
+                        .HasMaxLength(6000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<string>("TimeComplexity")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubmissionId")
+                        .IsUnique();
+
+                    b.ToTable("AcceptedCodeReviews");
+                });
+
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.AiFeedback", b =>
                 {
                     b.Property<long>("Id")
@@ -307,6 +385,35 @@ namespace IntelligentProgrammingPlatform.Migrations
                         });
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.LessonProgress", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CompletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("UserId", "LessonId")
+                        .IsUnique();
+
+                    b.ToTable("LessonProgresses");
+                });
+
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.ProgrammingTask", b =>
                 {
                     b.Property<int>("Id")
@@ -471,7 +578,38 @@ namespace IntelligentProgrammingPlatform.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId", "CreatedAt");
+
                     b.ToTable("Submissions");
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.TaskFavorite", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProgrammingTaskId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgrammingTaskId");
+
+                    b.HasIndex("UserId", "ProgrammingTaskId")
+                        .IsUnique();
+
+                    b.ToTable("TaskFavorites");
                 });
 
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.TestCase", b =>
@@ -665,6 +803,17 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.AcceptedCodeReview", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.Submission", "Submission")
+                        .WithOne("AcceptedCodeReview")
+                        .HasForeignKey("IntelligentProgrammingPlatform.Models.AcceptedCodeReview", "SubmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Submission");
+                });
+
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.AiFeedback", b =>
                 {
                     b.HasOne("IntelligentProgrammingPlatform.Models.Submission", "Submission")
@@ -725,6 +874,25 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.Navigation("Topic");
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.LessonProgress", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.Lesson", "Lesson")
+                        .WithMany()
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Lesson");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.ProgrammingTask", b =>
                 {
                     b.HasOne("IntelligentProgrammingPlatform.Models.Topic", "Topic")
@@ -759,6 +927,25 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.Navigation("ProgrammingTask");
 
                     b.Navigation("Runtime");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.TaskFavorite", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ProgrammingTask", "ProgrammingTask")
+                        .WithMany()
+                        .HasForeignKey("ProgrammingTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProgrammingTask");
 
                     b.Navigation("User");
                 });
@@ -846,6 +1033,8 @@ namespace IntelligentProgrammingPlatform.Migrations
 
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.Submission", b =>
                 {
+                    b.Navigation("AcceptedCodeReview");
+
                     b.Navigation("AiFeedback");
 
                     b.Navigation("ExecutionResults");

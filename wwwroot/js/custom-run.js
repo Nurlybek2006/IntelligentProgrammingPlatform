@@ -3,6 +3,7 @@ const run = document.getElementById("run-code");
 if (form && run) {
     const submit = document.getElementById("submit-code");
     const runtime = document.getElementById("RuntimeId");
+    const reset = document.getElementById("reset-code");
     const source = document.getElementById("SourceCode");
     const input = document.getElementById("CustomInput");
     const result = document.getElementById("custom-run-result");
@@ -24,9 +25,10 @@ if (form && run) {
         document.getElementById("run-compiler-panel").hidden = !compilation;
     };
     run.addEventListener("click", async () => {
-        if (active) return;
+        if (active || form.dataset.busy || run.disabled) return;
         form.dispatchEvent(new Event("source-sync"));
         result.hidden = false;
+        result.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
         output.textContent = "";
         time.textContent = "";
         summary.textContent = text.temporary;
@@ -43,7 +45,12 @@ if (form && run) {
         const timeout = setTimeout(() => controller.abort(), 110000);
         const submitWasDisabled = submit.disabled;
         const runtimeWasDisabled = runtime.disabled;
+        const resetWasDisabled = reset?.disabled;
+        const runLabel = run.textContent;
         const body = new URLSearchParams(new FormData(form));
+        form.dataset.busy = "run";
+        if (reset) reset.disabled = true;
+        run.textContent = text.running;
         run.disabled = true;
         submit.disabled = true;
         runtime.disabled = true;
@@ -75,6 +82,9 @@ if (form && run) {
         } finally {
             clearTimeout(timeout);
             active = null;
+            if (form.dataset.busy === "run") delete form.dataset.busy;
+            run.textContent = runLabel;
+            if (reset) reset.disabled = resetWasDisabled;
             run.disabled = document.getElementById("RuntimeId").options.length === 0;
             submit.disabled = submitWasDisabled;
             runtime.disabled = runtimeWasDisabled;

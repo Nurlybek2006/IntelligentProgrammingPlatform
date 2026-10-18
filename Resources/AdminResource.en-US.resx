@@ -152,4 +152,5 @@
   <data name="User_RemoveAvatar" xml:space="preserve"><value>Remove user avatar</value></data>
   <data name="User_AvatarRemoved" xml:space="preserve"><value>User avatar removed.</value></data>
   <data name="User_SaveFailed" xml:space="preserve"><value>The change could not be saved. Refresh the page and try again.</value></data>
+  <data name="Lesson_HasProgress" xml:space="preserve"><value>This lesson has completion history and cannot be deleted. Unpublish it if it should no longer be available.</value></data>
 </root>

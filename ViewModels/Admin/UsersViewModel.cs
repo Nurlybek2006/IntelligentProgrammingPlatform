@@ -11,6 +11,7 @@ public sealed class UsersViewModel
 
 public sealed class UserListItemViewModel
 {
+    public IntelligentProgrammingPlatform.ViewModels.Progress.ExperienceViewModel Experience { get; set; } = new();
     public string Id { get; set; } = "";
     public string DisplayName { get; set; } = "";
     public string Email { get; set; } = "";

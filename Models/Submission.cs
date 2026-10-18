@@ -24,5 +24,6 @@ namespace IntelligentProgrammingPlatform.Models
         public Runtime Runtime { get; set; } = null!;
         public ICollection<ExecutionResult> ExecutionResults { get; set; } = new List<ExecutionResult>();
         public AiFeedback? AiFeedback { get; set; }
+        public AcceptedCodeReview? AcceptedCodeReview { get; set; }
     }
 }
