@@ -1,4 +1,5 @@
 @model IntelligentProgrammingPlatform.ViewModels.Leaderboard.LeaderboardViewModel
+@using IntelligentProgrammingPlatform.ViewModels.Account
 @{ ViewData["Title"] = L["Common_Leaderboard"]; }
 <div class="page-heading"><div><p class="eyebrow">@L["Leaderboard_Eyebrow"]</p><h1>@L["Common_Leaderboard"]</h1><p>@L["Leaderboard_Intro"]</p></div></div>
 <div class="d-flex flex-wrap gap-2 mb-4"><span class="difficulty Easy">@L["Leaderboard_Points", T["Difficulty_Easy"].Value, 100]</span><span class="difficulty Medium">@L["Leaderboard_Points", T["Difficulty_Medium"].Value, 200]</span><span class="difficulty Hard">@L["Leaderboard_Points", T["Difficulty_Hard"].Value, 300]</span></div>
@@ -13,7 +14,7 @@ else
     <table class="table table-striped"><thead><tr><th scope="col">@L["Leaderboard_Rank"]</th><th scope="col">@L["Common_DisplayName"]</th><th scope="col">@L["Common_SolvedTasks"]</th><th scope="col">@L["Leaderboard_Accepted"]</th><th scope="col">@L["Leaderboard_Completed"]</th><th scope="col">@L["Leaderboard_Success"]</th><th scope="col">@L["Leaderboard_Score"]</th></tr></thead><tbody>
     @foreach (var row in Model.Rows)
     {
-        <tr class="@(row.IsCurrentUser ? "table-primary" : "")"><td><span class="rank-marker @(row.Rank <= 3 ? "rank-" + row.Rank : "")">@row.Rank</span></td><td>@row.DisplayName @if (row.IsCurrentUser) { <span class="badge bg-primary">@L["Leaderboard_You"]</span> }</td><td>@row.SolvedTasks</td><td>@row.SuccessfulSubmissions</td><td>@row.TotalSubmissions</td><td>@row.SuccessRate.ToString("0.0")%</td><td><strong>@row.Score</strong></td></tr>
+        <tr class="@(row.IsCurrentUser ? "table-primary" : "")"><td><span class="rank-marker @(row.Rank <= 3 ? "rank-" + row.Rank : "")">@row.Rank</span></td><td><span class="avatar-name"><partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = row.DisplayName, AvatarPath = row.AvatarPath })" /><span>@row.DisplayName</span></span> @if (row.IsCurrentUser) { <span class="badge bg-primary">@L["Leaderboard_You"]</span> }</td><td>@row.SolvedTasks</td><td>@row.SuccessfulSubmissions</td><td>@row.TotalSubmissions</td><td>@row.SuccessRate.ToString("0.0")%</td><td><strong>@row.Score</strong></td></tr>
     }
     </tbody></table>
     </div>

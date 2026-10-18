@@ -137,5 +137,26 @@
   <data name="Run_TimeUnmeasured" xml:space="preserve"><value>Орындау уақыты: өлшенбеген</value></data>
   <data name="Run_SuccessSummary" xml:space="preserve"><value>Бағдарлама аяқталды. Шығыс күтілетін жауаппен салыстырылмады. Әрекет сақталмады.</value></data>
   <data name="Nav_Lessons" xml:space="preserve"><value>Сабақтар</value></data>
+  <data name="Nav_Users" xml:space="preserve"><value>Пайдаланушылар</value></data>
+  <data name="Role_Admin" xml:space="preserve"><value>Әкімші</value></data>
+  <data name="Role_Student" xml:space="preserve"><value>Студент</value></data>
+  <data name="Avatar_Alt" xml:space="preserve"><value>{0} профиль суреті</value></data>
+  <data name="Avatar_Invalid" xml:space="preserve"><value>Дұрыс JPEG, PNG немесе бір кадрлы WebP суретін таңдаңыз.</value></data>
+  <data name="Avatar_TooLarge" xml:space="preserve"><value>Сурет көлемі 4 MiB-тан аспауы керек.</value></data>
+  <data name="Avatar_Dimensions" xml:space="preserve"><value>Сурет өлшемі тым үлкен: ең көбі 8192 пиксель және 16 мегапиксель.</value></data>
+  <data name="Avatar_Help" xml:space="preserve"><value>JPEG, PNG немесе WebP, ең көбі 4 MiB. Суреттің ортасы шаршы қиылып, 512×512 өлшеміне дейін кішірейтіледі. Аватар жалпы рейтингте көрінеді.</value></data>
+  <data name="Profile_Edit" xml:space="preserve"><value>Профильді өңдеу</value></data>
+  <data name="Profile_EditHelp" xml:space="preserve"><value>Көрсетілетін атты жаңартыңыз немесе жаңа аватар таңдаңыз. Email өзгермейді.</value></data>
+  <data name="Profile_ChangeAvatar" xml:space="preserve"><value>Аватарды ауыстыру</value></data>
+  <data name="Profile_UploadAvatar" xml:space="preserve"><value>Жаңа аватар жүктеу</value></data>
+  <data name="Profile_RemoveAvatar" xml:space="preserve"><value>Аватарды алып тастау</value></data>
+  <data name="Profile_Recent" xml:space="preserve"><value>Соңғы әрекеттер</value></data>
+  <data name="Profile_Save" xml:space="preserve"><value>Өзгерістерді сақтау</value></data>
+  <data name="Profile_Cancel" xml:space="preserve"><value>Бас тарту</value></data>
+  <data name="Profile_Saving" xml:space="preserve"><value>Сақталуда…</value></data>
+  <data name="Profile_Saved" xml:space="preserve"><value>Профиль жаңартылды.</value></data>
+  <data name="Profile_AvatarRemoved" xml:space="preserve"><value>Аватар алынып тасталды.</value></data>
+  <data name="Profile_SaveFailed" xml:space="preserve"><value>Профиль сақталмады. Бетті жаңартып, қайталап көріңіз.</value></data>
+  <data name="Profile_InvalidName" xml:space="preserve"><value>Ат 1–100 таңбадан тұруы керек.</value></data>
 </root>
 

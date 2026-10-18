@@ -17,17 +17,20 @@ public sealed class LessonsController : Controller
 
     [HttpGet("/Lessons")]
     // Тек жарияланған сабақтарды тақырып бойынша сүзіп, ретімен көрсетеді.
-    public async Task<IActionResult> Index(int? topicId, CancellationToken cancellationToken)
+    public async Task<IActionResult> Index(int? topicId, string? language, CancellationToken cancellationToken)
     {
         var query = _db.Lessons.AsNoTracking().Where(lesson => lesson.IsPublished);
         if (topicId.HasValue) query = query.Where(lesson => lesson.TopicId == topicId);
+        var pythonPath = language == "python";
+        if (pythonPath) query = query.Where(lesson => lesson.CodeLanguage == "python");
         return View(new LessonCatalogViewModel
         {
             TopicId = topicId,
+            PythonPath = pythonPath,
             Topics = await _db.Topics.AsNoTracking().Where(topic => topic.Lessons.Any(lesson => lesson.IsPublished))
                 .OrderBy(topic => topic.Name).ThenBy(topic => topic.Id)
                 .Select(topic => new SelectListItem(topic.Name, topic.Id.ToString())).ToListAsync(cancellationToken),
-            Lessons = await query.OrderBy(lesson => lesson.Topic.Name).ThenBy(lesson => lesson.TopicId)
+            Lessons = await query.OrderBy(lesson => pythonPath ? "" : lesson.Topic.Name).ThenBy(lesson => pythonPath ? 0 : lesson.TopicId)
                 .ThenBy(lesson => lesson.Order).ThenBy(lesson => lesson.Id)
                 .Select(lesson => new LessonListItemViewModel
                 {
@@ -49,6 +52,16 @@ public sealed class LessonsController : Controller
                 TopicId = lesson.TopicId, TopicName = lesson.Topic.Name, Order = lesson.Order
             }).SingleOrDefaultAsync(cancellationToken);
         if (model == null) return NotFound();
+        if (model.CodeLanguage == "python")
+        {
+            var path = _db.Lessons.AsNoTracking().Where(lesson => lesson.IsPublished && lesson.CodeLanguage == "python");
+            model.PythonPrevious = await path.Where(lesson => lesson.Order < model.Order || (lesson.Order == model.Order && lesson.Id < model.Id))
+                .OrderByDescending(lesson => lesson.Order).ThenByDescending(lesson => lesson.Id)
+                .Select(lesson => new LessonLinkViewModel { Title = lesson.Title, Slug = lesson.Slug }).FirstOrDefaultAsync(cancellationToken);
+            model.PythonNext = await path.Where(lesson => lesson.Order > model.Order || (lesson.Order == model.Order && lesson.Id > model.Id))
+                .OrderBy(lesson => lesson.Order).ThenBy(lesson => lesson.Id)
+                .Select(lesson => new LessonLinkViewModel { Title = lesson.Title, Slug = lesson.Slug }).FirstOrDefaultAsync(cancellationToken);
+        }
         var neighbors = _db.Lessons.AsNoTracking().Where(lesson => lesson.IsPublished && lesson.TopicId == model.TopicId);
         model.Previous = await neighbors.Where(lesson => lesson.Order < model.Order || (lesson.Order == model.Order && lesson.Id < model.Id))
             .OrderByDescending(lesson => lesson.Order).ThenByDescending(lesson => lesson.Id)

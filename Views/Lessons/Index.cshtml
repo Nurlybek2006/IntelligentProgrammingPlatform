@@ -1,7 +1,9 @@
 @model IntelligentProgrammingPlatform.ViewModels.Lessons.LessonCatalogViewModel
 @{ ViewData["Title"] = L["Lessons_Title"]; }
 <div class="page-heading"><div><p class="eyebrow">@L["Lessons_Eyebrow"]</p><h1>@L["Lessons_Title"]</h1><p>@L["Lessons_Intro"]</p></div></div>
+<nav class="profile-actions mb-4" aria-label="@L["Lessons_Path"]"><a class="btn @(Model.PythonPath ? "btn-outline-secondary" : "btn-primary")" asp-action="Index">@L["Lessons_Title"]</a><a class="btn @(Model.PythonPath ? "btn-primary" : "btn-outline-secondary")" asp-action="Index" asp-route-language="python">@L["Lessons_PythonPath"]</a></nav>
 <form method="get" asp-action="Index" class="panel mb-4">
+    @if (Model.PythonPath) { <input type="hidden" name="language" value="python" /> }
     <div class="row align-items-end g-3">
         <div class="col-md-8"><label for="topicId" class="form-label">@L["Lessons_Topic"]</label><select asp-for="TopicId" id="topicId" name="topicId" asp-items="Model.Topics" class="form-select"><option value="">@L["Lessons_AllTopics"]</option></select></div>
         <div class="col-md-4"><button type="submit" class="btn btn-primary">@L["Lessons_Filter"]</button></div>
@@ -11,7 +13,7 @@
 {
     <div class="empty-state panel"><h2 class="h4">@L["Lessons_Empty"]</h2><p>@L["Lessons_EmptyHelp"]</p></div>
 }
-@foreach (var group in Model.Lessons.GroupBy(lesson => new { lesson.TopicId, lesson.TopicName }))
+@foreach (var group in Model.Lessons.GroupBy(lesson => new { TopicId = Model.PythonPath ? 0 : lesson.TopicId, TopicName = Model.PythonPath ? L["Lessons_PythonPath"].Value : lesson.TopicName }))
 {
     <section class="mb-4" aria-labelledby="topic-@group.Key.TopicId">
         <h2 id="topic-@group.Key.TopicId" class="h4 mb-3">@group.Key.TopicName</h2>

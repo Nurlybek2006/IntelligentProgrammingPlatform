@@ -45,6 +45,7 @@
             <nav class="admin-nav" aria-label="@T["Nav_AdminLabel"]">
                 <span class="eyebrow">@T["Nav_Administration"]</span>
                 <a asp-area="Admin" asp-controller="Home" asp-action="Index" aria-current="@(controller == "Home" ? "page" : null)">@T["Nav_Overview"]</a>
+                <a asp-area="Admin" asp-controller="Users" asp-action="Index" aria-current="@(controller == "Users" ? "page" : null)">@T["Nav_Users"]</a>
                 <a asp-area="Admin" asp-controller="Topics" asp-action="Index" aria-current="@(controller == "Topics" ? "page" : null)">@T["Nav_Topics"]</a>
                 <a asp-area="Admin" asp-controller="Lessons" asp-action="Index" aria-current="@(controller == "Lessons" ? "page" : null)">@T["Nav_Lessons"]</a>
                 <a asp-area="Admin" asp-controller="ProgrammingTasks" asp-action="Index" aria-current="@(controller == "ProgrammingTasks" ? "page" : null)">@T["Nav_Tasks"]</a>

@@ -11,3 +11,9 @@ document.querySelectorAll("form[data-busy-form]").forEach(form => {
         if (status) status.textContent = "";
     });
 });
+// Keep initials visible when a managed image is missing or cannot be decoded.
+document.querySelectorAll('.user-avatar img').forEach(image => {
+    const fallback = () => { image.hidden = true; };
+    image.addEventListener('error', fallback);
+    if (image.complete && image.naturalWidth === 0) fallback();
+});

@@ -34,3 +34,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Runtime user images (keep only the empty directory marker)
+wwwroot/uploads/avatars/*
+!wwwroot/uploads/avatars/.gitkeep

@@ -895,4 +895,6 @@
   <data name="Lessons_Next" xml:space="preserve"><value>Келесі сабақ</value></data>
   <data name="Editor_LanguageHelp" xml:space="preserve"><value>Тілді ауыстырғанда сол тілдің нобайы ашылады. Python: тек стандартты кітапхана, интернеттен пакет орнатылмайды.</value></data>
   <data name="Diff_MixedLanguages" xml:space="preserve"><value>Бұл әрекеттердің тілдері әртүрлі немесе қолдау көрсетілмейді. Код жай мәтін ретінде салыстырылады.</value></data>
+  <data name="Lessons_Path" xml:space="preserve"><value>Оқу жолын таңдау</value></data>
+  <data name="Lessons_PythonPath" xml:space="preserve"><value>Python оқу жолы</value></data>
 </root>

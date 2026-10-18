@@ -31,6 +31,7 @@ namespace IntelligentProgrammingPlatform.Data
             modelBuilder.Entity<ApplicationUser>(entity =>
             {
                 entity.Property(user => user.DisplayName).HasMaxLength(100).IsRequired();
+                entity.Property(user => user.AvatarPath).HasMaxLength(200);
             });
 
             modelBuilder.Entity<Topic>(entity =>

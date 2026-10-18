@@ -11,6 +11,7 @@ public class LeaderboardRowViewModel
 {
     public int Rank { get; set; }
     public string DisplayName { get; set; } = string.Empty;
+    public string? AvatarPath { get; set; }
     public int SolvedTasks { get; set; }
     public int SuccessfulSubmissions { get; set; }
     public int TotalSubmissions { get; set; }

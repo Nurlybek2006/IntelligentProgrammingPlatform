@@ -14,6 +14,9 @@ using IntelligentProgrammingPlatform;
 using IntelligentProgrammingPlatform.Services.Localization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
+using IntelligentProgrammingPlatform.Services.Profile;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +110,9 @@ builder.Services.AddScoped<ProgressService>();
 builder.Services.AddScoped<LearningInsightsService>();
 builder.Services.AddSingleton<LeaderboardUpdateGate>();
 builder.Services.AddScoped<LeaderboardService>();
+builder.Services.AddSingleton<AvatarService>();
+builder.Services.AddScoped<ProfileService>();
+builder.Services.AddScoped<AdminUsersService>();
 
 // API кілтін конфигурациядан алып, AI шақыруын студенттің жеке әрекетіне ғана қосады.
 builder.Services.Configure<AiTutorOptions>(builder.Configuration.GetSection("OpenAI"));
@@ -130,6 +136,25 @@ if (!app.Environment.IsDevelopment()) app.UseHsts();
 app.UseStatusCodePagesWithReExecute("/Home/HttpError", "?code={0}");
 
 app.UseHttpsRedirection();
+
+// Жұмыс кезінде жасалған суреттерді тек бақыланатын WebP жолымен береді.
+var avatars = app.Services.GetRequiredService<AvatarService>();
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/uploads/avatars")
+        && !AvatarService.IsManagedPath(context.Request.Path.Value))
+    {
+        context.Response.StatusCode = StatusCodes.Status404NotFound;
+        return;
+    }
+    await next(context);
+});
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(avatars.StorageRoot), RequestPath = "/uploads/avatars",
+    ContentTypeProvider = new FileExtensionContentTypeProvider(new Dictionary<string, string> { [".webp"] = "image/webp" }),
+    OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = "public,max-age=31536000,immutable"
+});
 app.UseRouting();
 
 // Алдымен пайдаланушыны таниды, кейін оның рұқсаттарын тексереді.

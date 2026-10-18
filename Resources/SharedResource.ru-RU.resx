@@ -137,5 +137,26 @@
   <data name="Run_TimeUnmeasured" xml:space="preserve"><value>Время выполнения: не измерено</value></data>
   <data name="Run_SuccessSummary" xml:space="preserve"><value>Программа завершена. Вывод не сравнивался с ожидаемым ответом. Попытка не сохранена.</value></data>
   <data name="Nav_Lessons" xml:space="preserve"><value>Уроки</value></data>
+  <data name="Nav_Users" xml:space="preserve"><value>Пользователи</value></data>
+  <data name="Role_Admin" xml:space="preserve"><value>Администратор</value></data>
+  <data name="Role_Student" xml:space="preserve"><value>Студент</value></data>
+  <data name="Avatar_Alt" xml:space="preserve"><value>Фото профиля: {0}</value></data>
+  <data name="Avatar_Invalid" xml:space="preserve"><value>Выберите корректное изображение JPEG, PNG или однокадровое WebP.</value></data>
+  <data name="Avatar_TooLarge" xml:space="preserve"><value>Размер изображения не должен превышать 4 MiB.</value></data>
+  <data name="Avatar_Dimensions" xml:space="preserve"><value>Слишком большое разрешение: максимум 8192 пикселя по стороне и 16 мегапикселей.</value></data>
+  <data name="Avatar_Help" xml:space="preserve"><value>JPEG, PNG или WebP до 4 MiB. Изображение обрезается по центру до квадрата размером не более 512×512. Аватар виден в общем рейтинге.</value></data>
+  <data name="Profile_Edit" xml:space="preserve"><value>Редактировать профиль</value></data>
+  <data name="Profile_EditHelp" xml:space="preserve"><value>Обновите отображаемое имя или выберите новый аватар. Email не изменяется.</value></data>
+  <data name="Profile_ChangeAvatar" xml:space="preserve"><value>Изменить аватар</value></data>
+  <data name="Profile_UploadAvatar" xml:space="preserve"><value>Загрузить новый аватар</value></data>
+  <data name="Profile_RemoveAvatar" xml:space="preserve"><value>Удалить аватар</value></data>
+  <data name="Profile_Recent" xml:space="preserve"><value>Последняя активность</value></data>
+  <data name="Profile_Save" xml:space="preserve"><value>Сохранить изменения</value></data>
+  <data name="Profile_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Profile_Saving" xml:space="preserve"><value>Сохранение…</value></data>
+  <data name="Profile_Saved" xml:space="preserve"><value>Профиль обновлён.</value></data>
+  <data name="Profile_AvatarRemoved" xml:space="preserve"><value>Аватар удалён.</value></data>
+  <data name="Profile_SaveFailed" xml:space="preserve"><value>Не удалось сохранить профиль. Обновите страницу и повторите попытку.</value></data>
+  <data name="Profile_InvalidName" xml:space="preserve"><value>Имя должно содержать от 1 до 100 символов.</value></data>
 </root>
 

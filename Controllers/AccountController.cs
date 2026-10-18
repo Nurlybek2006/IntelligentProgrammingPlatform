@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using IntelligentProgrammingPlatform.Services.Profile;
 
 namespace IntelligentProgrammingPlatform.Controllers;
 
@@ -17,15 +18,17 @@ public class AccountController : Controller
     private readonly SignInManager<ApplicationUser> _signIn;
     private readonly ApplicationDbContext _db;
     private readonly IStringLocalizer<SharedResource> _text;
+    private readonly ProfileService _profiles;
 
     // Контроллерге дерекқор және қажетті қызметтерді береді.
     public AccountController(UserManager<ApplicationUser> users,
-        SignInManager<ApplicationUser> signIn, ApplicationDbContext db, IStringLocalizer<SharedResource> text)
+        SignInManager<ApplicationUser> signIn, ApplicationDbContext db, IStringLocalizer<SharedResource> text, ProfileService profiles)
     {
         _users = users;
         _signIn = signIn;
         _db = db;
         _text = text;
+        _profiles = profiles;
     }
 
     [AllowAnonymous, HttpGet]
@@ -131,7 +134,7 @@ public class AccountController : Controller
 
     [HttpGet]
     // Ағымдағы пайдаланушының қауіпсіз профиль деректерін көрсетеді.
-    public async Task<IActionResult> Profile()
+    public async Task<IActionResult> Profile(CancellationToken cancellationToken)
     {
         var user = await _users.GetUserAsync(User);
         if (user == null)
@@ -140,11 +143,44 @@ public class AccountController : Controller
             return RedirectToAction(nameof(Login));
         }
 
-        return View(new ProfileViewModel
+        return View(await _profiles.GetAsync(user.Id, cancellationToken));
+    }
+
+    [HttpGet]
+    // Ағымдағы пайдаланушының атын өңдеу формасына береді.
+    public async Task<IActionResult> EditProfile()
+    {
+        var user = await _users.GetUserAsync(User);
+        return user == null ? Challenge() : View(new ProfileEditViewModel { DisplayName = user.DisplayName });
+    }
+
+    [HttpPost, RequestSizeLimit(AvatarService.MaxBytes + 65536)]
+    [RequestFormLimits(MultipartBodyLengthLimit = AvatarService.MaxBytes + 65536)]
+    // Иесін cookie-ден анықтап, тек рұқсат етілген профиль өрістерін жаңартады.
+    public async Task<IActionResult> EditProfile(ProfileEditViewModel model, CancellationToken cancellationToken)
+    {
+        if (!ModelState.IsValid) return View(model);
+        var id = _users.GetUserId(User);
+        if (id == null) return Challenge();
+        var error = await _profiles.UpdateAsync(id, model, cancellationToken);
+        if (error != null)
         {
-            DisplayName = user.DisplayName, Email = user.Email ?? string.Empty,
-            CreatedAt = user.CreatedAt, Roles = await _users.GetRolesAsync(user)
-        });
+            ModelState.AddModelError(string.Empty, _text[error]);
+            return View(model);
+        }
+        TempData["Success"] = _text["Profile_Saved"].Value;
+        return RedirectToAction(nameof(Profile));
+    }
+
+    [HttpPost]
+    // Тек кірген пайдаланушының сақталған суретін POST арқылы алып тастайды.
+    public async Task<IActionResult> RemoveAvatar()
+    {
+        var id = _users.GetUserId(User);
+        if (id == null) return Challenge();
+        var success = await _profiles.RemoveAvatarAsync(id);
+        TempData[success ? "Success" : "ProfileError"] = _text[success ? "Profile_AvatarRemoved" : "Profile_SaveFailed"].Value;
+        return RedirectToAction(nameof(Profile));
     }
 
     [AllowAnonymous, HttpGet]

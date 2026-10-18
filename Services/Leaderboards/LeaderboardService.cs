@@ -85,7 +85,7 @@ public sealed class LeaderboardService
             .ThenByDescending(row => row.SolvedTasks).ThenBy(row => row.UserId)
             .Skip((page - 1) * 50).Take(51).Select(row => new LeaderboardRowViewModel
             {
-                DisplayName = row.User.DisplayName, SolvedTasks = row.SolvedTasks,
+                DisplayName = row.User.DisplayName, AvatarPath = row.User.AvatarPath, SolvedTasks = row.SolvedTasks,
                 SuccessfulSubmissions = row.SuccessfulSubmissions, TotalSubmissions = row.TotalSubmissions,
                 Score = row.Score, IsCurrentUser = row.UserId == currentUserId
             }).ToListAsync(cancellationToken);

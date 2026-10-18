@@ -5,7 +5,7 @@ namespace IntelligentProgrammingPlatform.Data;
 
 public static class LessonSeeder
 {
-    // Даму ортасының бес сабағын бар мазмұн мен ретті өзгертпей қосады.
+    // Даму сабақтарын тұрақты slug арқылы қосып, әкімші өңдеген мазмұнды сақтайды.
     public static async Task SeedAsync(ApplicationDbContext db)
     {
         await using var transaction = await db.Database.BeginTransactionAsync();
@@ -56,12 +56,6 @@ public static class LessonSeeder
                         std::cout << "Level: " << level << '\n';
                     }
                     """
-            },
-            new Lesson
-            {
-                Title = "Python негіздері", Slug = "python-basics", TopicId = topics["Basics"], Order = 3,
-                Summary = PythonLessonContent.Summary, Content = PythonLessonContent.Content,
-                CodeLanguage = "python", CodeExample = PythonLessonContent.CodeExample
             },
             new Lesson
             {
@@ -119,21 +113,26 @@ public static class LessonSeeder
             }
         };
 
+        var curriculum = PythonCurriculumSeeds.Create(topics);
         var previousPython = await db.Lessons.SingleOrDefaultAsync(lesson => lesson.Slug == "python-basics");
-        if (previousPython != null && previousPython.CodeLanguage == "python"
-            && previousPython.Summary == PythonLessonContent.LegacySummary
-            && previousPython.Content.Replace("\r\n", "\n") == PythonLessonContent.LegacyContent.Replace("\r\n", "\n")
-            && previousPython.CodeExample?.Replace("\r\n", "\n") == PythonLessonContent.LegacyCodeExample.Replace("\r\n", "\n"))
+        if (previousPython != null && previousPython.Title == "Python негіздері" && previousPython.CodeLanguage == "python"
+            && ((previousPython.Summary == PythonLessonContent.LegacySummary
+                && SameText(previousPython.Content, PythonLessonContent.LegacyContent)
+                && SameText(previousPython.CodeExample, PythonLessonContent.LegacyCodeExample))
+                || (previousPython.Summary == PythonLessonContent.Summary
+                    && SameText(previousPython.Content, PythonLessonContent.Content)
+                    && SameText(previousPython.CodeExample, PythonLessonContent.CodeExample))))
         {
-            previousPython.Summary = PythonLessonContent.Summary;
-            previousPython.Content = PythonLessonContent.Content;
-            previousPython.CodeExample = PythonLessonContent.CodeExample;
+            previousPython.Title = curriculum[0].Title;
+            previousPython.Summary = curriculum[0].Summary;
+            previousPython.Content = curriculum[0].Content;
+            previousPython.CodeExample = curriculum[0].CodeExample;
         }
 
         var existing = await db.Lessons.AsNoTracking().Select(lesson => new { lesson.Slug, lesson.TopicId, lesson.Order }).ToListAsync();
         var slugs = existing.Select(lesson => lesson.Slug).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var positions = existing.Select(lesson => (lesson.TopicId, lesson.Order)).ToHashSet();
-        foreach (var lesson in lessons)
+        foreach (var lesson in lessons.Concat(curriculum))
         {
             if (!slugs.Add(lesson.Slug)) continue;
             while (!positions.Add((lesson.TopicId, lesson.Order))) lesson.Order++;
@@ -144,4 +143,7 @@ public static class LessonSeeder
         await db.SaveChangesAsync();
         await transaction.CommitAsync();
     }
+
+    // Белгілі seed мәтінін жол соңы айырмасын ғана елемей салыстырады.
+    private static bool SameText(string? left, string right) => left?.Replace("\r\n", "\n") == right.Replace("\r\n", "\n");
 }

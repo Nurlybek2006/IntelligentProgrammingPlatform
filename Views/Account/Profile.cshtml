@@ -1,12 +1,14 @@
 @model IntelligentProgrammingPlatform.ViewModels.Account.ProfileViewModel
 @{ ViewData["Title"] = L["Account_Profile"]; }
-<section class="auth-card">
-<p class="eyebrow">@L["Account_YourAccount"]</p><h1>@L["Account_Profile"]</h1><p class="text-muted mb-4">@L["Account_ProfileIntro"]</p>
-<dl>
-    <dt class="text-muted small">@L["Common_DisplayName"]</dt><dd class="mb-3">@Model.DisplayName</dd>
-    <dt class="text-muted small">@L["Common_Email"]</dt><dd class="mb-3">@Model.Email</dd>
-    <dt class="text-muted small">@L["Account_JoinedUtc"]</dt><dd class="mb-3">@Model.CreatedAt.ToString("g")</dd>
-    <dt class="text-muted small">@L["Account_Roles"]</dt><dd class="mb-4">@string.Join(", ", Model.Roles)</dd>
-</dl>
-<div class="d-flex gap-2 flex-wrap"><a asp-controller="Tasks" asp-action="Index" class="btn btn-primary">@L["Common_BrowseTasks"]</a><a asp-controller="Progress" asp-action="Index" class="btn btn-outline-secondary">@L["Common_MyProgress"]</a></div>
-</section>
+<div class="page-heading"><div><p class="eyebrow">@L["Account_YourAccount"]</p><h1>@L["Account_Profile"]</h1><p>@L["Account_ProfileIntro"]</p></div><a asp-action="EditProfile" class="btn btn-primary">@T["Profile_Edit"]</a></div>
+@if (TempData["ProfileError"] != null) { <div class="alert alert-warning" role="alert">@TempData["ProfileError"]</div> }
+<partial name="_ProfileOverview" model="Model" />
+<div class="profile-actions mt-4">
+    <a asp-action="EditProfile" class="btn btn-outline-primary">@T["Profile_ChangeAvatar"]</a>
+    @if (Model.AvatarPath != null)
+    {
+        <form asp-action="RemoveAvatar" method="post"><button type="submit" class="btn btn-outline-danger">@T["Profile_RemoveAvatar"]</button></form>
+    }
+    <a asp-controller="Progress" asp-action="Index" class="btn btn-outline-secondary">@L["Common_MyProgress"]</a>
+    <a asp-controller="Submissions" asp-action="My" class="btn btn-outline-secondary">@L["Progress_AllSubmissions"]</a>
+</div>

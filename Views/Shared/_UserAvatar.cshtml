@@ -1,0 +1,7 @@
+@model IntelligentProgrammingPlatform.ViewModels.Account.UserAvatarViewModel
+<span class="user-avatar @(Model.Large ? "avatar-large" : Model.Small ? "avatar-small" : "")" data-initials="@Model.Initials" role="img" aria-label="@T["Avatar_Alt", Model.DisplayName ?? ""]">
+    @if (Model.SafePath != null)
+    {
+        <img src="@Model.SafePath" alt="@T["Avatar_Alt", Model.DisplayName ?? ""]" width="@(Model.Large ? 112 : Model.Small ? 28 : 40)" height="@(Model.Large ? 112 : Model.Small ? 28 : 40)" decoding="async" />
+    }
+</span>

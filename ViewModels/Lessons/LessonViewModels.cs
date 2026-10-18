@@ -17,6 +17,7 @@ public class LessonListItemViewModel
 
 public sealed class LessonCatalogViewModel
 {
+    public bool PythonPath { get; set; }
     public int? TopicId { get; set; }
     public List<SelectListItem> Topics { get; set; } = new();
     public List<LessonListItemViewModel> Lessons { get; set; } = new();
@@ -29,6 +30,8 @@ public sealed class LessonDetailsViewModel : LessonListItemViewModel
     public string? CodeLanguage { get; set; }
     public LessonLinkViewModel? Previous { get; set; }
     public LessonLinkViewModel? Next { get; set; }
+    public LessonLinkViewModel? PythonPrevious { get; set; }
+    public LessonLinkViewModel? PythonNext { get; set; }
     public List<LessonTaskViewModel> RelatedTasks { get; set; } = new();
 }
 

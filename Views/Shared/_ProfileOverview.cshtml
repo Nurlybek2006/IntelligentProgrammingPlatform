@@ -1,0 +1,28 @@
+@model IntelligentProgrammingPlatform.ViewModels.Account.ProfileViewModel
+@using IntelligentProgrammingPlatform.ViewModels.Account
+<section class="panel profile-hero" aria-label="@L["Account_Profile"]">
+    <partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = Model.DisplayName, AvatarPath = Model.AvatarPath, Large = true })" />
+    <div class="profile-identity"><p class="eyebrow">@L["Account_Profile"]</p><h2>@Model.DisplayName</h2>
+        <p class="profile-roles">@string.Join(" · ", Model.Roles.Select(role => role == RoleNames.Admin ? T["Role_Admin"].Value : role == RoleNames.Student ? T["Role_Student"].Value : role))</p>
+        <p class="text-muted">@Model.Email</p><p class="small text-muted mb-0">@L["Account_JoinedUtc"]: @Model.CreatedAt.ToString("g")</p>
+    </div>
+</section>
+<div class="profile-metrics my-4">
+    <section class="panel metric-card"><h2>@L["Common_SolvedTasks"]</h2><strong id="profile-solved">@Model.Progress.SolvedTasks</strong></section>
+    <section class="panel metric-card"><h2>@L["Progress_Completed"]</h2><strong id="profile-submissions">@Model.Progress.TotalSubmissions</strong></section>
+    <section class="panel metric-card"><h2>@L["Progress_SuccessPercentage"]</h2><strong id="profile-success">@Model.Progress.SuccessRate.ToString("0.0")%</strong></section>
+    <section class="panel metric-card accent"><h2>@L["Progress_Rating"]</h2><strong id="profile-score">@Model.Progress.Score</strong></section>
+</div>
+<section class="panel" aria-labelledby="profile-recent"><h2 id="profile-recent" class="h4 mb-3">@T["Profile_Recent"]</h2>
+    @if (Model.Progress.Recent.Count == 0) { <p class="text-muted mb-0">@L["Progress_EmptyHeading"]</p> }
+    else
+    {
+        <div class="table-responsive" role="region" aria-label="@T["Profile_Recent"]" tabindex="0">
+        <table class="table mb-0"><thead><tr><th scope="col">@L["Common_Task"]</th><th scope="col">@T["Field_Runtime"]</th><th scope="col">@L["Common_Status"]</th><th scope="col">@L["Common_CreatedUtc"]</th></tr></thead><tbody>
+        @foreach (var item in Model.Progress.Recent)
+        {
+            <tr><td>@item.TaskTitle</td><td>@item.RuntimeName</td><td><span class="status-badge @item.Status">@T[$"Status_{item.Status}"]</span></td><td>@item.CreatedAt.ToString("g")</td></tr>
+        }
+        </tbody></table></div>
+    }
+</section>

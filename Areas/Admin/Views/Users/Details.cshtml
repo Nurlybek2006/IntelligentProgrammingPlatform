@@ -1,0 +1,12 @@
+@model IntelligentProgrammingPlatform.ViewModels.Admin.UserDetailsViewModel
+@{ ViewData["Title"] = A["User_Details"]; }
+<a asp-action="Index" class="back-link">← @A["Users"]</a>
+<div class="page-heading"><div><p class="eyebrow">@T["Nav_Administration"]</p><h1>@A["User_Details"]</h1></div></div>
+@if (TempData["ProfileError"] != null) { <div class="alert alert-warning" role="alert">@TempData["ProfileError"]</div> }
+<partial name="_ProfileOverview" model="Model.Profile" />
+@if (Model.Profile.AvatarPath != null)
+{
+    <section class="panel mt-4"><h2 class="h5">@A["User_Moderation"]</h2><p class="text-muted">@A["User_ModerationHelp"]</p>
+        <form asp-action="RemoveAvatar" asp-route-id="@Model.Id" method="post"><button class="btn btn-outline-danger" type="submit">@A["User_RemoveAvatar"]</button></form>
+    </section>
+}

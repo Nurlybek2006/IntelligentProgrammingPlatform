@@ -895,4 +895,6 @@
   <data name="Lessons_Next" xml:space="preserve"><value>Next lesson</value></data>
   <data name="Editor_LanguageHelp" xml:space="preserve"><value>Switching languages restores that language’s draft. Python supports the standard library; internet package installation is unavailable.</value></data>
   <data name="Diff_MixedLanguages" xml:space="preserve"><value>These attempts use different or unsupported languages. The comparison uses plain text.</value></data>
+  <data name="Lessons_Path" xml:space="preserve"><value>Choose a learning path</value></data>
+  <data name="Lessons_PythonPath" xml:space="preserve"><value>Python learning path</value></data>
 </root>

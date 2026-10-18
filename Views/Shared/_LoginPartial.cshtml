@@ -1,4 +1,5 @@
 @using Microsoft.AspNetCore.Identity
+@using IntelligentProgrammingPlatform.ViewModels.Account
 @inject UserManager<ApplicationUser> UserManager
 @{
     var action = ViewContext.RouteData.Values["action"]?.ToString();
@@ -8,7 +9,7 @@
 @if (User.Identity?.IsAuthenticated == true)
 {
     var currentUser = await UserManager.GetUserAsync(User);
-    <li class="nav-item"><span class="navbar-text display-name">@currentUser?.DisplayName</span></li>
+    <li class="nav-item"><span class="navbar-text display-name avatar-name"><partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = currentUser?.DisplayName, AvatarPath = currentUser?.AvatarPath, Small = true })" /><span>@currentUser?.DisplayName</span></span></li>
     <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Profile" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Profile">@T["Nav_Profile"]</a></li>
     @if (User.IsInRole(RoleNames.Admin))
     {

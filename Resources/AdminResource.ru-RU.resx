@@ -135,4 +135,21 @@
   <data name="Validation_LessonSlug" xml:space="preserve"><value>Slug должен состоять из строчных латинских букв и цифр с одиночными дефисами между словами.</value></data>
   <data name="Validation_CodeLanguage" xml:space="preserve"><value>Выберите язык примера из списка.</value></data>
   <data name="Topic_HasLessons" xml:space="preserve"><value>В этой теме есть уроки. Сначала перенесите их в другую тему или удалите.</value></data>
+  <data name="Users" xml:space="preserve"><value>Пользователи</value></data>
+  <data name="Users_Intro" xml:space="preserve"><value>Просматривайте профили, результаты обучения и управляйте аватарами.</value></data>
+  <data name="Users_Empty" xml:space="preserve"><value>На этой странице нет пользователей.</value></data>
+  <data name="Users_Pages" xml:space="preserve"><value>Страницы пользователей</value></data>
+  <data name="User_Roles" xml:space="preserve"><value>Роли</value></data>
+  <data name="User_Joined" xml:space="preserve"><value>Дата регистрации (UTC)</value></data>
+  <data name="User_Solved" xml:space="preserve"><value>Решённые задачи</value></data>
+  <data name="User_Score" xml:space="preserve"><value>Баллы</value></data>
+  <data name="User_Previous" xml:space="preserve"><value>Назад</value></data>
+  <data name="User_Next" xml:space="preserve"><value>Далее</value></data>
+  <data name="User_Page" xml:space="preserve"><value>Страница {0}</value></data>
+  <data name="User_Details" xml:space="preserve"><value>Профиль пользователя</value></data>
+  <data name="User_Moderation" xml:space="preserve"><value>Модерация</value></data>
+  <data name="User_ModerationHelp" xml:space="preserve"><value>После удаления неподходящего или повреждённого изображения будут показаны инициалы.</value></data>
+  <data name="User_RemoveAvatar" xml:space="preserve"><value>Удалить аватар пользователя</value></data>
+  <data name="User_AvatarRemoved" xml:space="preserve"><value>Аватар пользователя удалён.</value></data>
+  <data name="User_SaveFailed" xml:space="preserve"><value>Не удалось сохранить изменение. Обновите страницу и повторите попытку.</value></data>
 </root>

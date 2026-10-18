@@ -1,6 +1,14 @@
 @model IntelligentProgrammingPlatform.ViewModels.Lessons.LessonDetailsViewModel
 @{ ViewData["Title"] = Model.Title; }
 <a asp-action="Index" class="back-link">← @L["Lessons_Back"]</a>
+@if (Model.CodeLanguage == "python")
+{
+    <nav class="panel python-path-nav" aria-label="@L["Lessons_PythonPath"]">
+        <a asp-action="Index" asp-route-language="python">@L["Lessons_PythonPath"]</a>
+        @if (Model.PythonPrevious != null) { <a asp-action="Details" asp-route-slug="@Model.PythonPrevious.Slug">← @Model.PythonPrevious.Title</a> }
+        @if (Model.PythonNext != null) { <a asp-action="Details" asp-route-slug="@Model.PythonNext.Slug">@Model.PythonNext.Title →</a> }
+    </nav>
+}
 <div class="page-heading lesson-heading"><div>
     <p class="eyebrow"><a asp-action="Index" asp-route-topicId="@Model.TopicId">@Model.TopicName</a> · @L["Lessons_Order", Model.Order]</p>
     <h1>@Model.Title</h1><p>@Model.Summary</p>

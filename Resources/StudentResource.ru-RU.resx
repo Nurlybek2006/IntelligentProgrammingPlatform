@@ -895,4 +895,6 @@
   <data name="Lessons_Next" xml:space="preserve"><value>Следующий урок</value></data>
   <data name="Editor_LanguageHelp" xml:space="preserve"><value>При смене языка открывается его черновик. Python: только стандартная библиотека, без установки пакетов из интернета.</value></data>
   <data name="Diff_MixedLanguages" xml:space="preserve"><value>Языки этих попыток отличаются или не поддерживаются. Код сравнивается как обычный текст.</value></data>
+  <data name="Lessons_Path" xml:space="preserve"><value>Выбор учебного пути</value></data>
+  <data name="Lessons_PythonPath" xml:space="preserve"><value>Учебный путь Python</value></data>
 </root>

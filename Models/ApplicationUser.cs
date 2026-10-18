@@ -5,6 +5,7 @@ namespace IntelligentProgrammingPlatform.Models
     public class ApplicationUser : IdentityUser
     {
         public string DisplayName { get; set; } = string.Empty;
+        public string? AvatarPath { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Submission> Submissions { get; set; } = new List<Submission>();

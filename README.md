@@ -5,12 +5,14 @@ An ASP.NET Core MVC learning platform where students practice C++ and Python, in
 ## Features
 
 - Published tasks with search, topic/difficulty filters and personal solved badges.
+- Nine Kazakh Python lessons form an ordered learning path at `/Lessons?language=python`, with examples and existing topic-based practice links.
 - Locally bundled Monaco editor with dynamic C++/Python highlighting and separate drafts per account, task and language in tab session storage.
 - C++ 20 and Python 3 execution in isolated Docker images pinned by immutable digest. Python supports the standard library only; no package installation.
 - Visible examples, protected hidden tests, saved submissions and execution results.
 - Optional AI Tutor using the OpenAI Responses API; structured advice is saved and reused.
 - Progress reports: solved tasks, compilation errors, successful attempt percentage, average solving time and rating score.
 - Public leaderboard with deterministic ranking and private account identifiers excluded.
+- Editable display names and normalized profile avatars, shared with the leaderboard and navbar; Admin Users provides paginated profiles, statistics and avatar removal.
 - Identity registration/login, personal history/profile, and an authorized Admin area for topics, tasks, test cases and leaderboard rebuilds.
 - Shared dark theme, responsive workspace, accessible form labels and safe error pages.
 - Three UI languages: **Қазақша**, **Русский**, **English**, including Admin and validation.
@@ -37,6 +39,10 @@ ASP.NET Core MVC
 ```
 
 Docker results determine the submission status. AI is requested separately and never executes or changes code automatically. A completed submission updates the leaderboard after its result is saved.
+
+Avatars use **SkiaSharp 4.153.1** to decode JPEG/PNG/WebP uploads (maximum 4 MiB), reject unsupported/invalid images, and create a metadata-free square WebP up to 512×512. Only a generated relative path is stored in `ApplicationUser.AvatarPath` (`AddUserAvatar` migration). Runtime files in `wwwroot/uploads/avatars/` are ignored by Git and excluded from publish assets: preserve this directory separately when deploying/backing up. Local storage suits this university deployment; multiple production instances need shared object storage such as S3 or Azure Blob. Linux hosting also needs the matching SkiaSharp Linux native-assets package. `System.Security.Cryptography.Pkcs` is pinned to patched 9.0.21 to override the older SQL client transitive dependency reported by NuGet audit.
+
+Enhancement 6 details and verification: [study-enhancement6.md](study-enhancement6.md). Run `dotnet run --project tests/Enhancement6Checks/Enhancement6Checks.csproj`, then `python scripts/verify_enhancement6.py` against the running HTTPS development app. The service checks create/delete an isolated SQL database and generate benign image fixtures under ignored `obj/`; HTTP checks remove their UUID users, submissions and uploaded avatars. Real browser viewport checks remain manual; automated HTTP checks do not establish visual correctness.
 
 ## Languages
 
