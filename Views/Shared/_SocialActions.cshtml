@@ -1,0 +1,40 @@
+@model IntelligentProgrammingPlatform.ViewModels.Social.SocialActionsViewModel
+@using IntelligentProgrammingPlatform.Services.Social
+@{
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    var actions = new List<(string Controller, string Action, string Label, string Style)>();
+    switch (Model.Relationship)
+    {
+        case SocialRelationship.None: actions.Add(("Friends", "Request", "Social_AddFriend", "primary")); break;
+        case SocialRelationship.Outgoing: actions.Add(("Friends", "Cancel", "Social_Cancel", "outline-secondary")); break;
+        case SocialRelationship.Incoming:
+            actions.Add(("Friends", "Accept", "Social_Accept", "primary"));
+            actions.Add(("Friends", "Decline", "Social_Decline", "outline-secondary")); break;
+        case SocialRelationship.Friends:
+            actions.Add(("Messages", "Open", "Social_Message", "primary"));
+            actions.Add(("Friends", "Remove", "Social_Remove", "outline-secondary")); break;
+        case SocialRelationship.Blocked: actions.Add(("Friends", "Unblock", "Social_Unblock", "outline-secondary")); break;
+    }
+    if (Model.Relationship is SocialRelationship.None or SocialRelationship.Outgoing or SocialRelationship.Incoming or SocialRelationship.Friends)
+        actions.Add(("Friends", "Block", "Social_Block", "outline-danger"));
+}
+<div class="social-actions" data-social-state="@Model.Relationship">
+    @if (Model.Relationship == SocialRelationship.Self)
+    { <a class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="EditProfile">@T["Profile_Edit"]</a> }
+    @if (Model.Relationship == SocialRelationship.Guest)
+    { <a class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl">@T["Social_Login"]</a> }
+    @if (Model.Relationship == SocialRelationship.Outgoing)
+    { <span class="social-state">@T["Social_RequestSent"]</span> }
+    @if (Model.Relationship == SocialRelationship.Friends)
+    { <span class="social-state">@T["Social_Friends"]</span> }
+    @if (Model.Relationship == SocialRelationship.Unavailable)
+    { <span class="text-muted">@T["Social_Unavailable"]</span> }
+    @foreach (var action in actions)
+    {
+        <form asp-area="" asp-controller="@action.Controller" asp-action="@action.Action" method="post">
+            <input type="hidden" name="targetUserId" value="@Model.TargetUserId" />
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+            <button type="submit" class="btn btn-sm btn-@action.Style">@T[action.Label]</button>
+        </form>
+    }
+</div>

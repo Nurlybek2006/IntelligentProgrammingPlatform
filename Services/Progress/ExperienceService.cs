@@ -18,7 +18,7 @@ public sealed class ExperienceService
         (await GetForUsersAsync([userId], cancellationToken))[userId];
 
     // Әкімші бетінің аккаунттарын үш SQL агрегатымен, код мәтінінсіз есептейді.
-    public async Task<Dictionary<string, ExperienceViewModel>> GetForUsersAsync(string[] userIds, CancellationToken cancellationToken)
+    public async Task<Dictionary<string, ExperienceViewModel>> GetForUsersAsync(string[] userIds, CancellationToken cancellationToken, bool includeFavorites = true)
     {
         if (userIds.Length == 0) return new();
         var tasks = await _db.Submissions.AsNoTracking()
@@ -33,9 +33,9 @@ public sealed class ExperienceService
         var lessons = await _db.LessonProgresses.AsNoTracking().Where(item => userIds.Contains(item.UserId))
             .GroupBy(item => item.UserId).Select(group => new { UserId = group.Key, Count = group.LongCount() })
             .ToDictionaryAsync(item => item.UserId, item => item.Count, cancellationToken);
-        var favorites = await _db.TaskFavorites.AsNoTracking().Where(item => userIds.Contains(item.UserId))
+        var favorites = includeFavorites ? await _db.TaskFavorites.AsNoTracking().Where(item => userIds.Contains(item.UserId))
             .GroupBy(item => item.UserId).Select(group => new { UserId = group.Key, Count = group.LongCount() })
-            .ToDictionaryAsync(item => item.UserId, item => item.Count, cancellationToken);
+            .ToDictionaryAsync(item => item.UserId, item => item.Count, cancellationToken) : new Dictionary<string, long>();
         return userIds.Distinct().ToDictionary(id => id,
             id => Calculate(tasks.GetValueOrDefault(id), lessons.GetValueOrDefault(id), favorites.GetValueOrDefault(id)));
     }

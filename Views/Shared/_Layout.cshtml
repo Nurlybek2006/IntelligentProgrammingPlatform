@@ -14,6 +14,7 @@
     <script type="importmap" nonce="@Csp.Nonce"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/social.css" asp-append-version="true" />
 </head>
 <body>
     <a class="skip-link" href="#main-content">@T["Nav_Skip"]</a>
@@ -30,6 +31,7 @@
                         {
                             <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Submissions" ? "page" : null)" asp-area="" asp-controller="Submissions" asp-action="My">@T["Nav_Submissions"]</a></li>
                             <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Progress" ? "page" : null)" asp-area="" asp-controller="Progress" asp-action="Index">@T["Nav_Progress"]</a></li>
+                            @await Component.InvokeAsync("SocialNavigation")
                         }
                         <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Leaderboard" && !inAdmin ? "page" : null)" asp-area="" asp-controller="Leaderboard" asp-action="Index">@T["Nav_Leaderboard"]</a></li>
                     </ul>
@@ -69,6 +71,15 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div hidden data-social-config data-hub-url="@Url.Content("~/hubs/chat")" data-counts-url="@Url.Action("Counts", "Social", new { area = "" })"
+             data-list-url="@Url.Action("ListData", "Messages", new { area = "" })" data-thread-url="@Url.Action("ThreadData", "Messages", new { area = "" })"
+             data-conversation-url="@Url.Action("Conversation", "Messages", new { area = "", id = (long?)null })"
+             data-offline="@T["Social_Offline"]" data-connecting="@T["Social_Connecting"]" data-online="@T["Social_Online"]"
+             data-error="@T["Social_NetworkError"]" data-empty="@T["Social_NoMessages"]" data-no-conversations="@T["Social_NoConversations"]"></div>
+        <script type="module" src="~/js/social/social.js" asp-append-version="true"></script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

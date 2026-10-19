@@ -217,5 +217,78 @@
   <data name="Workspace_Output" xml:space="preserve"><value>Output</value></data>
   <data name="Workspace_Constraints" xml:space="preserve"><value>Constraints</value></data>
   <data name="Workspace_Journey" xml:space="preserve"><value>Attempt Journey · {0} submissions</value></data>
+  <data name="Social_Community" xml:space="preserve"><value>Community</value></data>
+  <data name="Social_PublicProfile" xml:space="preserve"><value>Public profile</value></data>
+  <data name="Social_PublicIntro" xml:space="preserve"><value>Learning achievements shared with the community.</value></data>
+  <data name="Social_Joined" xml:space="preserve"><value>Joined {0}</value></data>
+  <data name="Social_Level" xml:space="preserve"><value>Level</value></data>
+  <data name="Social_Xp" xml:space="preserve"><value>Total XP</value></data>
+  <data name="Social_Login" xml:space="preserve"><value>Sign in to connect</value></data>
+  <data name="Social_AddFriend" xml:space="preserve"><value>Add friend</value></data>
+  <data name="Social_RequestSent" xml:space="preserve"><value>Request sent</value></data>
+  <data name="Social_Cancel" xml:space="preserve"><value>Cancel request</value></data>
+  <data name="Social_Accept" xml:space="preserve"><value>Accept</value></data>
+  <data name="Social_Decline" xml:space="preserve"><value>Decline</value></data>
+  <data name="Social_Friends" xml:space="preserve"><value>Friends</value></data>
+  <data name="Social_Message" xml:space="preserve"><value>Message</value></data>
+  <data name="Social_Remove" xml:space="preserve"><value>Remove friend</value></data>
+  <data name="Social_Block" xml:space="preserve"><value>Block</value></data>
+  <data name="Social_Unblock" xml:space="preserve"><value>Unblock</value></data>
+  <data name="Social_Unavailable" xml:space="preserve"><value>Connection unavailable.</value></data>
+  <data name="Social_FriendsIntro" xml:space="preserve"><value>Find fellow learners and stay in touch.</value></data>
+  <data name="Social_Tab_friends" xml:space="preserve"><value>My friends</value></data>
+  <data name="Social_Tab_incoming" xml:space="preserve"><value>Incoming requests</value></data>
+  <data name="Social_Tab_outgoing" xml:space="preserve"><value>Sent requests</value></data>
+  <data name="Social_Tab_search" xml:space="preserve"><value>Find developers</value></data>
+  <data name="Social_Tab_blocked" xml:space="preserve"><value>Blocked users</value></data>
+  <data name="Social_SearchLabel" xml:space="preserve"><value>Display name</value></data>
+  <data name="Social_Search" xml:space="preserve"><value>Search</value></data>
+  <data name="Social_SearchHelp" xml:space="preserve"><value>Enter at least two characters of a display name. Email addresses are not searched.</value></data>
+  <data name="Social_Empty_friends" xml:space="preserve"><value>Your community starts here</value></data>
+  <data name="Social_EmptyHelp_friends" xml:space="preserve"><value>Find a developer or open a profile from the leaderboard to send a request.</value></data>
+  <data name="Social_Empty_incoming" xml:space="preserve"><value>No incoming requests</value></data>
+  <data name="Social_EmptyHelp_incoming" xml:space="preserve"><value>New friend requests will appear here.</value></data>
+  <data name="Social_Empty_outgoing" xml:space="preserve"><value>No pending requests</value></data>
+  <data name="Social_EmptyHelp_outgoing" xml:space="preserve"><value>Requests stay here until accepted, declined or cancelled.</value></data>
+  <data name="Social_Empty_search" xml:space="preserve"><value>Find your learning community</value></data>
+  <data name="Social_EmptyHelp_search" xml:space="preserve"><value>Enter a display name above, or try a different name if no results appear.</value></data>
+  <data name="Social_Empty_blocked" xml:space="preserve"><value>No blocked users</value></data>
+  <data name="Social_EmptyHelp_blocked" xml:space="preserve"><value>Users you block appear here. Unblocking does not restore a friendship.</value></data>
+  <data name="Social_CardStats" xml:space="preserve"><value>Level {0} · {1} solved tasks</value></data>
+  <data name="Social_Pages" xml:space="preserve"><value>Community pages</value></data>
+  <data name="Social_Updated" xml:space="preserve"><value>Connection updated.</value></data>
+  <data name="Social_Messages" xml:space="preserve"><value>Messages</value></data>
+  <data name="Social_MessagesIntro" xml:space="preserve"><value>Private text conversations with accepted friends.</value></data>
+  <data name="Social_Conversations" xml:space="preserve"><value>Conversations</value></data>
+  <data name="Social_NoConversations" xml:space="preserve"><value>No conversations yet.</value></data>
+  <data name="Social_NoMessages" xml:space="preserve"><value>No messages yet. Say hello!</value></data>
+  <data name="Social_Thread" xml:space="preserve"><value>Message history</value></data>
+  <data name="Social_SelectConversation" xml:space="preserve"><value>A place to learn together</value></data>
+  <data name="Social_StartConversation" xml:space="preserve"><value>Select a conversation or use Message on a friend's profile.</value></data>
+  <data name="Social_Back" xml:space="preserve"><value>All conversations</value></data>
+  <data name="Social_History" xml:space="preserve"><value>History navigation</value></data>
+  <data name="Social_OlderMessages" xml:space="preserve"><value>Older messages</value></data>
+  <data name="Social_LatestMessages" xml:space="preserve"><value>Latest messages</value></data>
+  <data name="Social_MarkRead" xml:space="preserve"><value>Mark displayed messages as read</value></data>
+  <data name="Social_SendUnavailable" xml:space="preserve"><value>Sending is unavailable. Your conversation history is still here.</value></data>
+  <data name="Social_WriteMessage" xml:space="preserve"><value>Your message</value></data>
+  <data name="Social_MessageHelp" xml:space="preserve"><value>Plain text · Enter to send · Shift+Enter for a new line.</value></data>
+  <data name="Social_Send" xml:space="preserve"><value>Send</value></data>
+  <data name="Social_MessageRequired" xml:space="preserve"><value>Write a message before sending.</value></data>
+  <data name="Social_MessageTooLong" xml:space="preserve"><value>A message can contain at most 2000 characters.</value></data>
+  <data name="Social_TooManyMessages" xml:space="preserve"><value>You're sending messages too quickly. Please try again shortly.</value></data>
+  <data name="Social_TooManyRequests" xml:space="preserve"><value>Too many actions. Please try again shortly.</value></data>
+  <data name="Social_Result_NotFound" xml:space="preserve"><value>This conversation is unavailable.</value></data>
+  <data name="Social_Result_NotAllowed" xml:space="preserve"><value>This action is unavailable.</value></data>
+  <data name="Social_Result_Unavailable" xml:space="preserve"><value>This connection is unavailable.</value></data>
+  <data name="Social_Result_InvalidMessage" xml:space="preserve"><value>Enter a message of 1–2000 characters and try again.</value></data>
+  <data name="Social_Result_Busy" xml:space="preserve"><value>This action is busy. Please try again shortly.</value></data>
+  <data name="Social_Result_Failed" xml:space="preserve"><value>We couldn't save this change. Please try again.</value></data>
+  <data name="Social_Offline" xml:space="preserve"><value>Live updates paused · you can still send and refresh</value></data>
+  <data name="Social_Connecting" xml:space="preserve"><value>Connecting…</value></data>
+  <data name="Social_Online" xml:space="preserve"><value>Live updates connected</value></data>
+  <data name="Social_NetworkError" xml:space="preserve"><value>Could not confirm delivery. Your text remains here; retry this message when your connection returns.</value></data>
+  <data name="Social_PrivacyHeading" xml:space="preserve"><value>Community privacy</value></data>
+  <data name="Social_PrivacyText" xml:space="preserve"><value>Public profiles show display names, avatars and learning totals. Email, code, favorites and detailed activity stay private. Direct messages are plain text stored in SQL Server, not end-to-end encrypted. Only conversation participants can read them in the application; the Admin area has no message-reading interface. Removing a friend or blocking stops new messages but keeps existing history.</value></data>
 </root>
 

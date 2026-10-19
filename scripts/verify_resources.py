@@ -36,7 +36,7 @@ def main():
             if path.suffix not in (".cs", ".cshtml"):
                 continue
             source = path.read_text(encoding="utf-8-sig")
-            for symbol, key in re.findall(r'\b(T|L|A|_text)\["([A-Za-z][A-Za-z0-9_]+)"', source):
+            for symbol, key in re.findall(r'\b(T|L|A|_text)\["([A-Za-z][A-Za-z0-9_]+)"(?=\s*[,\]])', source):
                 group = {"T": "SharedResource", "L": "StudentResource", "A": "AdminResource"}.get(symbol,
                     "AdminResource" if "Admin" in path.parts else "SharedResource")
                 assert key in groups[group], f"Missing {group}/{key} referenced by {path.relative_to(ROOT)}"
@@ -50,7 +50,11 @@ def main():
         "Strength": "NotStarted Exploring NeedsPractice Developing Strong",
         "ErrorPattern": "Compilation WrongAnswer Runtime TimeLimit MemoryLimit None",
         "AiCategory": "Compilation Logic Runtime TimeLimit Memory OutputFormat Unknown",
-        "Identity": "PasswordTooShort PasswordRequiresNonAlphanumeric PasswordRequiresDigit PasswordRequiresLower PasswordRequiresUpper PasswordRequiresUniqueChars"
+        "Identity": "PasswordTooShort PasswordRequiresNonAlphanumeric PasswordRequiresDigit PasswordRequiresLower PasswordRequiresUpper PasswordRequiresUniqueChars",
+        "Social_Tab": "friends incoming outgoing search blocked",
+        "Social_Empty": "friends incoming outgoing search blocked",
+        "Social_EmptyHelp": "friends incoming outgoing search blocked",
+        "Social_Result": "NotFound NotAllowed Unavailable InvalidMessage Busy Failed"
     }
     for prefix, names in required.items():
         assert all(prefix + "_" + name in groups["SharedResource"] for name in names.split()), prefix

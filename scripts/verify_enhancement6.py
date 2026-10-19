@@ -123,7 +123,9 @@ def main():
 
         leaderboard = guest.request('/Leaderboard')[2]
         assert previous in leaderboard and 'data-initials="OS"' in leaderboard
-        assert all(value not in leaderboard for value in [*emails, *ids, 'PasswordHash', 'SecurityStamp'])
+        assert all(value not in leaderboard for value in [*emails, 'PasswordHash', 'SecurityStamp'])
+        without_profile_links = re.sub(r'href="/Users/[a-zA-Z0-9-]+"', '', leaderboard)
+        assert all(value not in without_profile_links for value in ids)
         assert '<img_onerror' not in leaderboard
         assert admin.request('/Admin/Users/RemoveAvatar/' + owner)[0] in (404,405)
         assert admin.request('/Admin/Users/RemoveAvatar/' + owner, {})[0] == 400

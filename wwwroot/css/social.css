@@ -1,0 +1,55 @@
+/* Community pages share the existing colors, panels and avatar component. */
+.social-name, .social-profile-link { min-width: 0; overflow-wrap: anywhere; }
+.social-profile-link { text-decoration: none; }
+.social-profile-link:hover strong, .social-profile-link:hover > span:last-child { text-decoration: underline; }
+.public-profile-identity { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.public-profile-identity > div { flex: 1 1 240px; min-width: 0; }
+.social-actions { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.social-actions form { margin: 0; }
+.social-state { color: var(--success); font-size: .85rem; padding-right: .5rem; }
+.social-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.5rem; margin: 1.5rem 0 0; }
+.social-stats dt { color: var(--text-muted); font-size: .85rem; font-weight: 400; }
+.social-stats dd { font-size: 1.8rem; font-weight: 700; margin: .25rem 0 0; }
+.social-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.social-tabs a { padding: .5rem .85rem; border-radius: .5rem; text-decoration: none; }
+.social-tabs a[aria-current="page"] { background: var(--surface-alt); color: var(--text); }
+.social-search { margin-bottom: 1.5rem; max-width: 720px; }
+.social-search label { display: block; margin-bottom: .5rem; }
+.social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
+.social-card { min-width: 0; }
+.social-card > p { margin: .75rem 0; }
+.chat-layout { display: grid; grid-template-columns: minmax(240px, .32fr) minmax(0, .68fr); gap: 1rem; align-items: start; }
+.chat-layout .panel { margin: 0; min-width: 0; padding: 1.25rem; }
+.chat-sidebar h2 { font-size: 1rem; margin-bottom: 1rem; }
+.conversation-link { display: flex; align-items: center; gap: .75rem; padding: .85rem .5rem; border-bottom: 1px solid var(--border); text-decoration: none; border-radius: .5rem; min-width: 0; }
+.conversation-link:hover, .conversation-link[aria-current="page"] { background: var(--surface-alt); }
+.conversation-summary { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+.conversation-summary > strong, .conversation-summary > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.conversation-summary > span, .conversation-summary time { color: var(--text-muted); font-size: .8rem; }
+.chat-header { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+.chat-header > [data-connection-status] { flex-basis: 100%; font-size: .75rem; }
+.chat-back { display: none; }
+.chat-history-nav { display: flex; gap: 1rem; flex-wrap: wrap; padding-top: .75rem; font-size: .85rem; }
+.chat-messages { display: flex; flex-direction: column; align-items: start; gap: .75rem; height: clamp(250px, 45dvh, 540px); overflow-y: auto; overflow-x: hidden; padding: 1rem .4rem; scrollbar-gutter: stable; }
+.message-bubble { max-width: 88%; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 1rem 1rem 1rem .25rem; padding: .75rem 1rem; min-width: 0; }
+.message-mine { align-self: end; background: #302b4f; border-color: #5a4d81; border-radius: 1rem 1rem .25rem 1rem; }
+.message-meta { display: flex; flex-wrap: wrap; gap: .25rem 1rem; color: var(--text-muted); font-size: .7rem; overflow-wrap: anywhere; }
+.message-body { white-space: pre-wrap; overflow-wrap: anywhere; margin: .4rem 0 0; }
+.chat-read { text-align: right; }
+.chat-read .btn { font-size: .75rem; }
+.chat-composer { border-top: 1px solid var(--border); padding-top: 1rem; }
+.chat-composer textarea { resize: vertical; max-height: 250px; }
+.chat-composer-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .75rem; }
+.chat-composer-footer .form-text { font-size: .7rem; margin: 0; }
+[data-message-length] { white-space: nowrap; }
+@media (max-width: 991px) {
+  .chat-layout { grid-template-columns: minmax(0, 1fr); }
+  .chat-selected .chat-sidebar { display: none; }
+  .chat-back { display: block; flex-basis: 100%; font-size: .85rem; }
+}
+@media (max-width: 575px) {
+  .chat-layout .panel { padding: .85rem; }
+  .message-bubble { max-width: 95%; padding: .65rem .8rem; }
+  .chat-composer-footer { align-items: end; }
+  .public-profile-identity { gap: 1rem; }
+}

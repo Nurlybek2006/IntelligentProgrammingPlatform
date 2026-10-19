@@ -9,6 +9,7 @@ public class LeaderboardViewModel
 
 public class LeaderboardRowViewModel
 {
+    public string PublicProfileId { get; set; } = string.Empty;
     public int Rank { get; set; }
     public string DisplayName { get; set; } = string.Empty;
     public string? AvatarPath { get; set; }

@@ -17,6 +17,8 @@ using Microsoft.Extensions.Localization;
 using IntelligentProgrammingPlatform.Services.Profile;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.StaticFiles;
+using IntelligentProgrammingPlatform.Hubs;
+using IntelligentProgrammingPlatform.Services.Social;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -118,6 +120,21 @@ builder.Services.AddSingleton<AvatarService>();
 builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<AdminUsersService>();
 
+// Әлеуметтік дерек SQL-де сақталады; SignalR тек жеке топтарға жаңарту оқиғасын жеткізеді.
+builder.Services.AddScoped<SocialPairLock>();
+builder.Services.AddScoped<SocialNotifier>();
+builder.Services.AddScoped<FriendshipService>();
+builder.Services.AddScoped<SocialProfileService>();
+builder.Services.AddScoped<MessagingService>();
+builder.Services.AddScoped<SocialNotificationService>();
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = false;
+    options.MaximumReceiveMessageSize = 4096;
+    options.MaximumParallelInvocationsPerClient = 1;
+});
+builder.Services.AddRateLimiter(SocialRateLimits.Configure);
+
 // API кілтін конфигурациядан алып, AI шақыруын студенттің жеке әрекетіне ғана қосады.
 builder.Services.Configure<AiTutorOptions>(builder.Configuration.GetSection("OpenAI"));
 builder.Services.AddSingleton(TimeProvider.System);
@@ -163,10 +180,14 @@ app.UseStaticFiles(new StaticFileOptions
     OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = "public,max-age=31536000,immutable"
 });
 app.UseRouting();
+app.UseMiddleware<SocialHubOriginMiddleware>();
 
 // Алдымен пайдаланушыны таниды, кейін оның рұқсаттарын тексереді.
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
+
+app.MapHub<ChatHub>("/hubs/chat", options => options.CloseOnAuthenticationExpiration = true);
 
 app.MapStaticAssets();
 

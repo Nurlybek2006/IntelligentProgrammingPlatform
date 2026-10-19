@@ -25,11 +25,70 @@ namespace IntelligentProgrammingPlatform.Data
         public DbSet<AcceptedCodeReview> AcceptedCodeReviews { get; set; }
         public DbSet<LessonProgress> LessonProgresses { get; set; }
         public DbSet<TaskFavorite> TaskFavorites { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<UserBlock> UserBlocks { get; set; }
+        public DbSet<DirectConversation> DirectConversations { get; set; }
+        public DbSet<DirectMessage> DirectMessages { get; set; }
+
+        // Әлеуметтік жұптардың бірегейлігін және жеке хат тарихының қауіпсіз байланыстарын орнатады.
+        private static void ConfigureSocial(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Friendship>(entity =>
+            {
+                entity.Property(item => item.UserAId).HasMaxLength(450).IsRequired();
+                entity.Property(item => item.UserBId).HasMaxLength(450).IsRequired();
+                entity.Property(item => item.RequestedByUserId).HasMaxLength(450).IsRequired();
+                entity.HasIndex(item => new { item.UserAId, item.UserBId }).IsUnique();
+                entity.HasIndex(item => new { item.UserBId, item.Status });
+                entity.ToTable(table =>
+                {
+                    table.HasCheckConstraint("CK_Friendships_Pair", "[UserAId] COLLATE Latin1_General_100_BIN2 < [UserBId] COLLATE Latin1_General_100_BIN2");
+                    table.HasCheckConstraint("CK_Friendships_Requester", "[RequestedByUserId] IN ([UserAId], [UserBId])");
+                    table.HasCheckConstraint("CK_Friendships_Status", "([Status] = 0 AND [AcceptedAt] IS NULL) OR ([Status] = 1 AND [AcceptedAt] IS NOT NULL)");
+                });
+                entity.HasOne(item => item.UserA).WithMany().HasForeignKey(item => item.UserAId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(item => item.UserB).WithMany().HasForeignKey(item => item.UserBId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(item => item.RequestedByUser).WithMany().HasForeignKey(item => item.RequestedByUserId).OnDelete(DeleteBehavior.NoAction);
+            });
+            modelBuilder.Entity<UserBlock>(entity =>
+            {
+                entity.Property(item => item.BlockerUserId).HasMaxLength(450).IsRequired();
+                entity.Property(item => item.BlockedUserId).HasMaxLength(450).IsRequired();
+                entity.HasIndex(item => new { item.BlockerUserId, item.BlockedUserId }).IsUnique();
+                entity.ToTable(table => table.HasCheckConstraint("CK_UserBlocks_DifferentUsers", "[BlockerUserId] <> [BlockedUserId]"));
+                entity.HasOne(item => item.BlockerUser).WithMany().HasForeignKey(item => item.BlockerUserId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(item => item.BlockedUser).WithMany().HasForeignKey(item => item.BlockedUserId).OnDelete(DeleteBehavior.NoAction);
+            });
+            modelBuilder.Entity<DirectConversation>(entity =>
+            {
+                entity.Property(item => item.UserAId).HasMaxLength(450).IsRequired();
+                entity.Property(item => item.UserBId).HasMaxLength(450).IsRequired();
+                entity.HasIndex(item => new { item.UserAId, item.UserBId }).IsUnique();
+                entity.HasIndex(item => new { item.UserAId, item.LastMessageAt });
+                entity.HasIndex(item => new { item.UserBId, item.LastMessageAt });
+                entity.ToTable(table => table.HasCheckConstraint("CK_DirectConversations_Pair", "[UserAId] COLLATE Latin1_General_100_BIN2 < [UserBId] COLLATE Latin1_General_100_BIN2"));
+                entity.HasOne(item => item.UserA).WithMany().HasForeignKey(item => item.UserAId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(item => item.UserB).WithMany().HasForeignKey(item => item.UserBId).OnDelete(DeleteBehavior.NoAction);
+            });
+            modelBuilder.Entity<DirectMessage>(entity =>
+            {
+                entity.Property(item => item.SenderUserId).HasMaxLength(450).IsRequired();
+                entity.Property(item => item.Body).HasMaxLength(2000).IsRequired();
+                entity.HasIndex(item => new { item.SenderUserId, item.ClientMessageId }).IsUnique();
+                entity.HasIndex(item => new { item.ConversationId, item.CreatedAt });
+                entity.HasIndex(item => new { item.ConversationId, item.Id });
+                entity.HasIndex(item => new { item.ConversationId, item.ReadAt, item.SenderUserId });
+                entity.ToTable(table => table.HasCheckConstraint("CK_DirectMessages_Body", "LEN([Body]) BETWEEN 1 AND 2000"));
+                entity.HasOne(item => item.Conversation).WithMany(item => item.Messages).HasForeignKey(item => item.ConversationId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(item => item.SenderUser).WithMany().HasForeignKey(item => item.SenderUserId).OnDelete(DeleteBehavior.NoAction);
+            });
+        }
 
         // Identity мен домен кестелерінің байланыстарын және шектеулерін баптайды.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            ConfigureSocial(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>(entity =>
             {

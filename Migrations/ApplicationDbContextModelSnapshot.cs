@@ -245,6 +245,92 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.DirectConversation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastMessageAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserAId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserBId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserAId", "LastMessageAt");
+
+                    b.HasIndex("UserAId", "UserBId")
+                        .IsUnique();
+
+                    b.HasIndex("UserBId", "LastMessageAt");
+
+                    b.ToTable("DirectConversations", t =>
+                        {
+                            t.HasCheckConstraint("CK_DirectConversations_Pair", "[UserAId] COLLATE Latin1_General_100_BIN2 < [UserBId] COLLATE Latin1_General_100_BIN2");
+                        });
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.DirectMessage", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<Guid>("ClientMessageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("ConversationId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ReadAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId", "CreatedAt");
+
+                    b.HasIndex("ConversationId", "Id");
+
+                    b.HasIndex("SenderUserId", "ClientMessageId")
+                        .IsUnique();
+
+                    b.HasIndex("ConversationId", "ReadAt", "SenderUserId");
+
+                    b.ToTable("DirectMessages", t =>
+                        {
+                            t.HasCheckConstraint("CK_DirectMessages_Body", "LEN([Body]) BETWEEN 1 AND 2000");
+                        });
+                });
+
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.ExecutionResult", b =>
                 {
                     b.Property<long>("Id")
@@ -285,6 +371,57 @@ namespace IntelligentProgrammingPlatform.Migrations
                         .IsUnique();
 
                     b.ToTable("ExecutionResults");
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.Friendship", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("AcceptedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestedByUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserAId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserBId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestedByUserId");
+
+                    b.HasIndex("UserAId", "UserBId")
+                        .IsUnique();
+
+                    b.HasIndex("UserBId", "Status");
+
+                    b.ToTable("Friendships", t =>
+                        {
+                            t.HasCheckConstraint("CK_Friendships_Pair", "[UserAId] COLLATE Latin1_General_100_BIN2 < [UserBId] COLLATE Latin1_General_100_BIN2");
+
+                            t.HasCheckConstraint("CK_Friendships_Requester", "[RequestedByUserId] IN ([UserAId], [UserBId])");
+
+                            t.HasCheckConstraint("CK_Friendships_Status", "([Status] = 0 AND [AcceptedAt] IS NULL) OR ([Status] = 1 AND [AcceptedAt] IS NOT NULL)");
+                        });
                 });
 
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.Leaderboard", b =>
@@ -670,6 +807,40 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.ToTable("Topics");
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.UserBlock", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("BlockedUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BlockerUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlockedUserId");
+
+                    b.HasIndex("BlockerUserId", "BlockedUserId")
+                        .IsUnique();
+
+                    b.ToTable("UserBlocks", t =>
+                        {
+                            t.HasCheckConstraint("CK_UserBlocks_DifferentUsers", "[BlockerUserId] <> [BlockedUserId]");
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -833,6 +1004,44 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.DirectConversation", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "UserA")
+                        .WithMany()
+                        .HasForeignKey("UserAId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "UserB")
+                        .WithMany()
+                        .HasForeignKey("UserBId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("UserA");
+
+                    b.Navigation("UserB");
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.DirectMessage", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.DirectConversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "SenderUser")
+                        .WithMany()
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("SenderUser");
+                });
+
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.ExecutionResult", b =>
                 {
                     b.HasOne("IntelligentProgrammingPlatform.Models.Submission", "Submission")
@@ -850,6 +1059,33 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.Navigation("Submission");
 
                     b.Navigation("TestCase");
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.Friendship", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "RequestedByUser")
+                        .WithMany()
+                        .HasForeignKey("RequestedByUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "UserA")
+                        .WithMany()
+                        .HasForeignKey("UserAId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "UserB")
+                        .WithMany()
+                        .HasForeignKey("UserBId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("RequestedByUser");
+
+                    b.Navigation("UserA");
+
+                    b.Navigation("UserB");
                 });
 
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.Leaderboard", b =>
@@ -961,6 +1197,25 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.Navigation("ProgrammingTask");
                 });
 
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.UserBlock", b =>
+                {
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "BlockedUser")
+                        .WithMany()
+                        .HasForeignKey("BlockedUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("IntelligentProgrammingPlatform.Models.ApplicationUser", "BlockerUser")
+                        .WithMany()
+                        .HasForeignKey("BlockerUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BlockedUser");
+
+                    b.Navigation("BlockerUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1017,6 +1272,11 @@ namespace IntelligentProgrammingPlatform.Migrations
                     b.Navigation("Leaderboard");
 
                     b.Navigation("Submissions");
+                });
+
+            modelBuilder.Entity("IntelligentProgrammingPlatform.Models.DirectConversation", b =>
+                {
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("IntelligentProgrammingPlatform.Models.ProgrammingTask", b =>

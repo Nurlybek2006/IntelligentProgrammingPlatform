@@ -1,0 +1,63 @@
+@model IntelligentProgrammingPlatform.ViewModels.Social.MessagesViewModel
+@{ ViewData["Title"] = T["Social_Messages"]; var thread = Model.Thread; }
+<div class="page-heading"><div><p class="eyebrow">@T["Social_Community"]</p><h1>@T["Social_Messages"]</h1><p>@T["Social_MessagesIntro"]</p></div><a class="btn btn-outline-primary" asp-controller="Friends" asp-action="Index">@T["Social_Friends"]</a></div>
+<div class="chat-layout @(thread != null ? "chat-selected" : "")" data-chat data-list-page="@Model.Conversations.Page" data-conversation-id="@thread?.Id" data-older-page="@(thread?.IsOlderPage == true ? "true" : "false")">
+    <aside class="panel chat-sidebar" aria-label="@T["Social_Conversations"]">
+        <h2>@T["Social_Conversations"]</h2>
+        <div data-conversation-list>
+        @if (Model.Conversations.Rows.Count == 0) { <p class="text-muted">@T["Social_NoConversations"]</p> }
+        @foreach (var row in Model.Conversations.Rows)
+        {
+            <a class="conversation-link" asp-action="Conversation" asp-route-id="@row.Id" aria-current="@(thread?.Id == row.Id ? "page" : null)">
+                <partial name="_UserAvatar" model="row.Avatar" />
+                <span class="conversation-summary"><strong>@row.DisplayName</strong><span>@(row.Preview.Length == 0 ? T["Social_NoMessages"].Value : row.Preview)</span>@if (row.LastMessageAt.HasValue) { <time datetime="@row.LastMessageAt.Value.ToString("O")">@row.LastMessageAt.Value.ToString("g")</time> }</span>
+                @if (row.UnreadCount > 0) { <span class="badge bg-primary">@row.UnreadCount</span> }
+            </a>
+        }
+        </div>
+        <nav class="d-flex flex-wrap gap-2 mt-3" aria-label="@T["Social_Pages"]">
+            @if (Model.Conversations.Page > 1) { <a asp-action="Index" asp-route-page="@(Model.Conversations.Page - 1)">@L["Common_Previous"]</a> }
+            <a data-conversations-next hidden="@(!Model.Conversations.HasNextPage)" asp-action="Index" asp-route-page="@(Model.Conversations.Page + 1)">@L["Common_Next"]</a>
+        </nav>
+    </aside>
+    <section class="panel chat-thread" aria-label="@T["Social_Thread"]">
+    @if (thread == null)
+    { <div class="empty-state"><h2>@T["Social_SelectConversation"]</h2><p>@T["Social_StartConversation"]</p><a class="btn btn-primary" asp-controller="Friends" asp-action="Index" asp-route-section="search">@T["Social_Tab_search"]</a></div> }
+    else
+    {
+        <header class="chat-header">
+            <a class="chat-back" asp-action="Index">← @T["Social_Back"]</a>
+            <a class="avatar-name social-profile-link" asp-controller="Users" asp-action="Profile" asp-route-id="@thread.OtherUser.Id"><partial name="_UserAvatar" model="thread.OtherUser.Avatar" /><strong class="social-name">@thread.OtherUser.DisplayName</strong></a>
+            <span class="small text-muted" data-connection-status role="status"></span>
+        </header>
+        <nav class="chat-history-nav" aria-label="@T["Social_History"]">
+            <a data-older-messages hidden="@(!thread.HasOlder)" asp-action="Conversation" asp-route-id="@thread.Id" asp-route-beforeId="@thread.Messages.FirstOrDefault()?.Id">@T["Social_OlderMessages"]</a>
+            <a data-latest-messages hidden="@(!thread.IsOlderPage)" asp-action="Conversation" asp-route-id="@thread.Id">@T["Social_LatestMessages"]</a>
+        </nav>
+        <div class="chat-messages" data-message-list role="log" aria-label="@T["Social_Thread"]" aria-live="polite" tabindex="0">
+        @if (thread.Messages.Count == 0) { <p class="text-muted" data-empty-messages>@T["Social_NoMessages"]</p> }
+        @foreach (var message in thread.Messages)
+        {
+            <article class="message-bubble @(message.IsMine ? "message-mine" : "")" data-message-id="@message.Id">
+                <div class="message-meta"><strong>@message.SenderName</strong><time datetime="@message.CreatedAt.ToString("O")">@message.CreatedAt.ToString("g")</time></div>
+                <p class="message-body">@message.Body</p>
+            </article>
+        }
+        </div>
+        <form asp-action="Read" method="post" data-read-form class="chat-read">
+            <input type="hidden" name="conversationId" value="@thread.Id" />
+            <input type="hidden" name="throughId" value="@(thread.Messages.LastOrDefault()?.Id ?? 0)" />
+            <button class="btn btn-sm btn-link">@T["Social_MarkRead"]</button>
+        </form>
+        <p class="alert alert-secondary" data-chat-unavailable hidden="@thread.CanSend">@T["Social_SendUnavailable"]</p>
+        <form asp-action="Send" method="post" data-send-form class="chat-composer" hidden="@(!thread.CanSend)">
+            <input type="hidden" name="ConversationId" value="@thread.Id" />
+            <input type="hidden" name="ClientMessageId" value="@Model.ClientMessageId" />
+            <label for="message-body">@T["Social_WriteMessage"]</label>
+            <textarea id="message-body" name="Body" class="form-control" rows="3" maxlength="2000" required aria-describedby="message-help" disabled="@(!thread.CanSend)"></textarea>
+            <div class="chat-composer-footer"><span id="message-help" class="form-text">@T["Social_MessageHelp"] <span data-message-length>0 / 2000</span></span><button class="btn btn-primary" type="submit" disabled="@(!thread.CanSend)">@T["Social_Send"]</button></div>
+        </form>
+        <p data-chat-error class="text-danger mb-0" role="alert" hidden></p>
+    }
+    </section>
+</div>

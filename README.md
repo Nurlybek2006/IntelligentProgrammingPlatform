@@ -11,7 +11,7 @@ An ASP.NET Core MVC learning platform where students practice C++ and Python, in
 - Visible examples, protected hidden tests, saved submissions and execution results.
 - Optional AI Tutor using the OpenAI Responses API; structured advice is saved and reused.
 - Progress reports: solved tasks, compilation errors, successful attempt percentage, average solving time and rating score.
-- Public leaderboard with deterministic ranking and private account identifiers excluded.
+- Public leaderboard with deterministic ranking and linked developer profiles; account IDs appear only in profile URLs, never as visible identity text.
 - Editable display names and normalized profile avatars, shared with the leaderboard and navbar; Admin Users provides paginated profiles, statistics and avatar removal.
 - Identity registration/login, personal history/profile, and an authorized Admin area for topics, tasks, test cases and leaderboard rebuilds.
 - Shared dark theme, responsive workspace, accessible form labels and safe error pages.
@@ -20,6 +20,20 @@ An ASP.NET Core MVC learning platform where students practice C++ and Python, in
 ## Technology
 
 ASP.NET Core MVC · .NET 10 · C# · Entity Framework Core · SQL Server · ASP.NET Core Identity · Docker · Monaco Editor · OpenAI Responses API (official .NET SDK) · Bootstrap 5.3 · Razor, CSS and JavaScript.
+
+## Community Features
+
+- Public developer profiles at `/Users/{id}` reuse avatars and show safe learning totals, level and XP. Email, source code, favorites, detailed activity and private AI feedback remain private.
+- `/Friends` supports display-name search, incoming/outgoing friend requests, explicit acceptance, cancellation, removal and directional blocking.
+- `/Messages` provides private one-to-one text conversations between accepted friends, paged history, unread counts and friend-request badges.
+- Authenticated, antiforgery-protected MVC POST requests save first; SignalR sends real-time notifications only to the two participants. HTTP sending and saved history remain available during a hub outage.
+- Blocking/unfriending prevents new messages and preserves existing history. Unblocking does not restore friendship.
+
+**Private messages are plain text stored in SQL Server; they are not end-to-end encrypted. Admins do not receive a UI to browse private message bodies.** Conversation access checks also apply to Admin accounts. Database operators with direct SQL access remain a separate trust boundary.
+
+Apply the single `AddSocialFeatures` migration with `dotnet ef database update`. The official SignalR 10.0.11 client is bundled locally: `npm ci` then `npm run build:social` (editor build remains `npm run build:editor`). No CDN, new CORS allowance, paid AI call or CSP relaxation is required.
+
+Verification: `dotnet run --project tests/Enhancement8Checks`, `node scripts/verify_social_ui.mjs`, and, with the HTTPS app running, `python scripts/verify_enhancement8.py`. These use disposable fixtures; the HTTP suite includes three real authenticated WebSocket clients. Architecture, test evidence, browser status and manual checks: [study-enhancement8.md](study-enhancement8.md).
 
 ## Architecture
 
@@ -36,6 +50,8 @@ ASP.NET Core MVC
    +-- ProgressService ------------------- Statistics from submissions
    +-- LearningInsightsService ------------ Learning Map / Practice Next
    +-- LeaderboardService ----------------- Rebuildable ranking summary
+   +-- Social services ------------------- Profiles / friends / blocks / messages
+           +-- SQL commit -> SignalR ----- Private real-time notification groups
 ```
 
 Docker results determine the submission status. AI is requested separately and never executes or changes code automatically. A completed submission updates the leaderboard after its result is saved.

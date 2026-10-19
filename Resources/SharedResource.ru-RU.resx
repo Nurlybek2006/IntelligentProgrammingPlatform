@@ -217,5 +217,78 @@
   <data name="Workspace_Output" xml:space="preserve"><value>Выходные данные</value></data>
   <data name="Workspace_Constraints" xml:space="preserve"><value>Ограничения</value></data>
   <data name="Workspace_Journey" xml:space="preserve"><value>История попыток · {0} отправок</value></data>
+  <data name="Social_Community" xml:space="preserve"><value>Сообщество</value></data>
+  <data name="Social_PublicProfile" xml:space="preserve"><value>Открытый профиль</value></data>
+  <data name="Social_PublicIntro" xml:space="preserve"><value>Учебные достижения, открытые сообществу.</value></data>
+  <data name="Social_Joined" xml:space="preserve"><value>На платформе с {0}</value></data>
+  <data name="Social_Level" xml:space="preserve"><value>Уровень</value></data>
+  <data name="Social_Xp" xml:space="preserve"><value>Всего XP</value></data>
+  <data name="Social_Login" xml:space="preserve"><value>Войти для общения</value></data>
+  <data name="Social_AddFriend" xml:space="preserve"><value>Добавить в друзья</value></data>
+  <data name="Social_RequestSent" xml:space="preserve"><value>Запрос отправлен</value></data>
+  <data name="Social_Cancel" xml:space="preserve"><value>Отменить запрос</value></data>
+  <data name="Social_Accept" xml:space="preserve"><value>Принять</value></data>
+  <data name="Social_Decline" xml:space="preserve"><value>Отклонить</value></data>
+  <data name="Social_Friends" xml:space="preserve"><value>Друзья</value></data>
+  <data name="Social_Message" xml:space="preserve"><value>Написать</value></data>
+  <data name="Social_Remove" xml:space="preserve"><value>Удалить из друзей</value></data>
+  <data name="Social_Block" xml:space="preserve"><value>Заблокировать</value></data>
+  <data name="Social_Unblock" xml:space="preserve"><value>Разблокировать</value></data>
+  <data name="Social_Unavailable" xml:space="preserve"><value>Общение недоступно.</value></data>
+  <data name="Social_FriendsIntro" xml:space="preserve"><value>Находите единомышленников и общайтесь.</value></data>
+  <data name="Social_Tab_friends" xml:space="preserve"><value>Мои друзья</value></data>
+  <data name="Social_Tab_incoming" xml:space="preserve"><value>Входящие запросы</value></data>
+  <data name="Social_Tab_outgoing" xml:space="preserve"><value>Отправленные запросы</value></data>
+  <data name="Social_Tab_search" xml:space="preserve"><value>Найти разработчиков</value></data>
+  <data name="Social_Tab_blocked" xml:space="preserve"><value>Заблокированные</value></data>
+  <data name="Social_SearchLabel" xml:space="preserve"><value>Отображаемое имя</value></data>
+  <data name="Social_Search" xml:space="preserve"><value>Найти</value></data>
+  <data name="Social_SearchHelp" xml:space="preserve"><value>Введите минимум два символа имени. Поиск по электронной почте недоступен.</value></data>
+  <data name="Social_Empty_friends" xml:space="preserve"><value>Здесь начинается ваше сообщество</value></data>
+  <data name="Social_EmptyHelp_friends" xml:space="preserve"><value>Найдите разработчика или откройте профиль из рейтинга, чтобы отправить запрос.</value></data>
+  <data name="Social_Empty_incoming" xml:space="preserve"><value>Нет входящих запросов</value></data>
+  <data name="Social_EmptyHelp_incoming" xml:space="preserve"><value>Здесь появятся новые запросы в друзья.</value></data>
+  <data name="Social_Empty_outgoing" xml:space="preserve"><value>Нет отправленных запросов</value></data>
+  <data name="Social_EmptyHelp_outgoing" xml:space="preserve"><value>Запросы остаются здесь до принятия, отклонения или отмены.</value></data>
+  <data name="Social_Empty_search" xml:space="preserve"><value>Найдите своё сообщество</value></data>
+  <data name="Social_EmptyHelp_search" xml:space="preserve"><value>Введите имя выше или измените запрос, если результатов нет.</value></data>
+  <data name="Social_Empty_blocked" xml:space="preserve"><value>Нет заблокированных пользователей</value></data>
+  <data name="Social_EmptyHelp_blocked" xml:space="preserve"><value>Здесь отображаются заблокированные вами пользователи. Разблокировка не восстанавливает дружбу.</value></data>
+  <data name="Social_CardStats" xml:space="preserve"><value>Уровень {0} · Решено задач: {1}</value></data>
+  <data name="Social_Pages" xml:space="preserve"><value>Страницы сообщества</value></data>
+  <data name="Social_Updated" xml:space="preserve"><value>Связь обновлена.</value></data>
+  <data name="Social_Messages" xml:space="preserve"><value>Сообщения</value></data>
+  <data name="Social_MessagesIntro" xml:space="preserve"><value>Личные текстовые беседы с подтверждёнными друзьями.</value></data>
+  <data name="Social_Conversations" xml:space="preserve"><value>Беседы</value></data>
+  <data name="Social_NoConversations" xml:space="preserve"><value>Пока нет бесед.</value></data>
+  <data name="Social_NoMessages" xml:space="preserve"><value>Пока нет сообщений. Поздоровайтесь!</value></data>
+  <data name="Social_Thread" xml:space="preserve"><value>История сообщений</value></data>
+  <data name="Social_SelectConversation" xml:space="preserve"><value>Место для совместного обучения</value></data>
+  <data name="Social_StartConversation" xml:space="preserve"><value>Выберите беседу или нажмите «Написать» в профиле друга.</value></data>
+  <data name="Social_Back" xml:space="preserve"><value>Все беседы</value></data>
+  <data name="Social_History" xml:space="preserve"><value>Навигация по истории</value></data>
+  <data name="Social_OlderMessages" xml:space="preserve"><value>Предыдущие сообщения</value></data>
+  <data name="Social_LatestMessages" xml:space="preserve"><value>Последние сообщения</value></data>
+  <data name="Social_MarkRead" xml:space="preserve"><value>Отметить показанные сообщения прочитанными</value></data>
+  <data name="Social_SendUnavailable" xml:space="preserve"><value>Отправка недоступна. История беседы сохранена.</value></data>
+  <data name="Social_WriteMessage" xml:space="preserve"><value>Ваше сообщение</value></data>
+  <data name="Social_MessageHelp" xml:space="preserve"><value>Обычный текст · Enter — отправить · Shift+Enter — новая строка.</value></data>
+  <data name="Social_Send" xml:space="preserve"><value>Отправить</value></data>
+  <data name="Social_MessageRequired" xml:space="preserve"><value>Напишите сообщение перед отправкой.</value></data>
+  <data name="Social_MessageTooLong" xml:space="preserve"><value>В сообщении допускается не более 2000 символов.</value></data>
+  <data name="Social_TooManyMessages" xml:space="preserve"><value>Вы отправляете сообщения слишком быстро. Повторите немного позже.</value></data>
+  <data name="Social_TooManyRequests" xml:space="preserve"><value>Слишком много действий. Повторите немного позже.</value></data>
+  <data name="Social_Result_NotFound" xml:space="preserve"><value>Эта беседа недоступна.</value></data>
+  <data name="Social_Result_NotAllowed" xml:space="preserve"><value>Это действие недоступно.</value></data>
+  <data name="Social_Result_Unavailable" xml:space="preserve"><value>Это общение недоступно.</value></data>
+  <data name="Social_Result_InvalidMessage" xml:space="preserve"><value>Введите сообщение от 1 до 2000 символов и повторите попытку.</value></data>
+  <data name="Social_Result_Busy" xml:space="preserve"><value>Действие занято. Повторите немного позже.</value></data>
+  <data name="Social_Result_Failed" xml:space="preserve"><value>Не удалось сохранить изменение. Повторите попытку.</value></data>
+  <data name="Social_Offline" xml:space="preserve"><value>Обновления приостановлены · отправка и обновление страницы доступны</value></data>
+  <data name="Social_Connecting" xml:space="preserve"><value>Подключение…</value></data>
+  <data name="Social_Online" xml:space="preserve"><value>Обновления подключены</value></data>
+  <data name="Social_NetworkError" xml:space="preserve"><value>Не удалось подтвердить доставку. Текст остаётся здесь; повторите отправку после восстановления связи.</value></data>
+  <data name="Social_PrivacyHeading" xml:space="preserve"><value>Приватность общения</value></data>
+  <data name="Social_PrivacyText" xml:space="preserve"><value>Открытые профили показывают имя, аватар и итоговые учебные показатели. Почта, код, избранное и подробная активность остаются личными. Личные сообщения хранятся как обычный текст в SQL Server без сквозного шифрования. В приложении их читают только участники; в Admin нет интерфейса чтения переписки. Удаление друга или блокировка запрещают новые сообщения, сохраняя историю.</value></data>
 </root>
 

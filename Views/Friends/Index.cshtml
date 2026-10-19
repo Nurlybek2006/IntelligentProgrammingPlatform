@@ -1,0 +1,36 @@
+@model IntelligentProgrammingPlatform.ViewModels.Social.FriendsViewModel
+@using IntelligentProgrammingPlatform.ViewModels.Social
+@{ ViewData["Title"] = T["Social_Friends"]; }
+<div class="page-heading"><div><p class="eyebrow">@T["Social_Community"]</p><h1>@T["Social_Friends"]</h1><p>@T["Social_FriendsIntro"]</p></div><a class="btn btn-outline-primary" asp-controller="Messages" asp-action="Index">@T["Social_Messages"]</a></div>
+<nav class="social-tabs" aria-label="@T["Social_Friends"]">
+@foreach (var section in new[] { "friends", "incoming", "outgoing", "search", "blocked" })
+{ <a asp-action="Index" asp-route-section="@(section)" aria-current="@(Model.Section == section ? "page" : null)">@T["Social_Tab_" + section]</a> }
+</nav>
+@if (Model.Section == "search")
+{
+    <form asp-action="Index" method="get" class="social-search panel">
+        <input type="hidden" name="section" value="search" />
+        <label for="social-query">@T["Social_SearchLabel"]</label>
+        <div class="d-flex gap-2"><input id="social-query" name="q" value="@Model.Query" class="form-control" minlength="2" maxlength="100" required aria-describedby="search-help" /><button class="btn btn-primary">@T["Social_Search"]</button></div>
+        <p id="search-help" class="form-text mb-0">@T["Social_SearchHelp"]</p>
+    </form>
+}
+@if (Model.Users.Count == 0)
+{ <div class="empty-state"><h2>@T["Social_Empty_" + Model.Section]</h2><p>@T["Social_EmptyHelp_" + Model.Section]</p></div> }
+else
+{
+    <div class="social-grid">
+    @foreach (var item in Model.Users)
+    {
+        <article class="panel social-card">
+            <a class="avatar-name social-profile-link" asp-controller="Users" asp-action="Profile" asp-route-id="@item.Profile.Id"><partial name="_UserAvatar" model="item.Profile.Avatar" /><strong class="social-name">@item.Profile.DisplayName</strong></a>
+            <p class="text-muted small">@T["Social_CardStats", item.Profile.Level, item.Profile.SolvedTasks]</p>
+            <partial name="_SocialActions" model="@(new SocialActionsViewModel(item.Profile.Id, item.Relationship))" />
+        </article>
+    }
+    </div>
+}
+<nav class="d-flex gap-2 mt-4" aria-label="@T["Social_Pages"]">
+    @if (Model.Page > 1) { <a class="btn btn-outline-secondary" asp-action="Index" asp-route-section="@Model.Section" asp-route-q="@Model.Query" asp-route-page="@(Model.Page - 1)">@L["Common_Previous"]</a> }
+    @if (Model.HasNextPage) { <a class="btn btn-outline-secondary" asp-action="Index" asp-route-section="@Model.Section" asp-route-q="@Model.Query" asp-route-page="@(Model.Page + 1)">@L["Common_Next"]</a> }
+</nav>

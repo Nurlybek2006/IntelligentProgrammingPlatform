@@ -1,0 +1,8 @@
+@model IntelligentProgrammingPlatform.ViewModels.Social.SocialCounts
+<li class="nav-item dropdown">
+    <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">@T["Social_Community"] <span class="badge bg-primary" data-social-count="total" hidden="@(Model.IncomingRequests + Model.UnreadMessages == 0)">@(Model.IncomingRequests + Model.UnreadMessages)</span></button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-area="" asp-controller="Friends" asp-action="Index">@T["Social_Friends"] <span class="badge bg-primary" data-social-count="incomingRequests" hidden="@(Model.IncomingRequests == 0)">@Model.IncomingRequests</span></a></li>
+        <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Index">@T["Social_Messages"] <span class="badge bg-primary" data-social-count="unreadMessages" hidden="@(Model.UnreadMessages == 0)">@Model.UnreadMessages</span></a></li>
+    </ul>
+</li>

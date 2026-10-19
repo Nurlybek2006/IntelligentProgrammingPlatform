@@ -1,0 +1,18 @@
+@model IntelligentProgrammingPlatform.ViewModels.Social.PublicProfileViewModel
+@using IntelligentProgrammingPlatform.ViewModels.Social
+@{ ViewData["Title"] = T["Social_PublicProfile"]; }
+<div class="page-heading"><div><p class="eyebrow">@T["Social_Community"]</p><h1>@T["Social_PublicProfile"]</h1><p>@T["Social_PublicIntro"]</p></div></div>
+<section class="panel public-profile" aria-label="@T["Social_PublicProfile"]">
+    <div class="public-profile-identity">
+        <partial name="_UserAvatar" model="@(new IntelligentProgrammingPlatform.ViewModels.Account.UserAvatarViewModel { DisplayName = Model.Profile.DisplayName, AvatarPath = Model.Profile.AvatarPath, Large = true })" />
+        <div><h2 class="social-name">@Model.Profile.DisplayName</h2><p class="text-muted">@T["Social_Joined", Model.Profile.JoinedAt.ToString("d")]</p>
+        <partial name="_SocialActions" model="@(new SocialActionsViewModel(Model.Profile.Id, Model.Relationship))" /></div>
+    </div>
+    <dl class="social-stats">
+        <div><dt>@T["Social_Level"]</dt><dd>@Model.Profile.Level</dd></div>
+        <div><dt>@T["Social_Xp"]</dt><dd>@Model.Profile.TotalXp</dd></div>
+        <div><dt>@L["Common_SolvedTasks"]</dt><dd>@Model.Profile.SolvedTasks</dd></div>
+        <div><dt>@L["Leaderboard_Score"]</dt><dd>@Model.Profile.Score</dd></div>
+        <div><dt>@L["Leaderboard_Success"]</dt><dd>@Model.Profile.SuccessRate.ToString("0.0")%</dd></div>
+    </dl>
+</section>

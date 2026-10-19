@@ -98,7 +98,9 @@ def main():
         check(other.request('/Submissions/Details/' + str(wrong))[0] == 404, 'Feedback details preserve submission ownership')
 
         board = anon.request('/Leaderboard')[2]
-        check(all(email not in board for email in emails) and all(user_id not in board for user_id in ids), 'Public leaderboard exposes neither email nor UserId')
+        without_profile_links = re.sub(r'href="/Users/[a-zA-Z0-9-]+"', '', board)
+        check(all(email not in board for email in emails) and all(user_id not in without_profile_links for user_id in ids),
+              'Public leaderboard excludes email and permits IDs only in public profile URLs')
         fixture_rows = [row for row in cell_rows(board) if row[1] in names]
         check([row[1] for row in fixture_rows] == names, 'Equal scores use solved-count tie-breaker and lower scores follow')
         check([row[-1] for row in fixture_rows] == ['300', '300', '200'], 'Missing leaderboard rows are automatically calculated')

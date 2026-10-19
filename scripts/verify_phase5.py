@@ -108,7 +108,9 @@ def main():
         check(sql("SELECT COUNT(*) FROM ProgrammingTasks WHERE Slug='longest-increasing-subsequence';") == '1', 'New development seed remains idempotent')
         check(is_redirect(student.request('/Admin')), 'Student remains denied Admin access')
         board = anon.request('/Leaderboard')[2]
-        check(email not in board and user_id not in board and display not in board, 'Public leaderboard excludes email/UserId and encodes names')
+        without_profile_links = re.sub(r'href="/Users/[a-zA-Z0-9-]+"', '', board)
+        check(email not in board and user_id not in without_profile_links and display not in board,
+              'Public leaderboard exposes IDs only in profile URLs, excludes email and encodes names')
         project = ET.parse(ROOT / 'IntelligentProgrammingPlatform.csproj')
         secret_path = Path(os.environ['APPDATA']) / 'Microsoft' / 'UserSecrets' / project.findtext('.//UserSecretsId') / 'secrets.json'
         configuration = json.loads(secret_path.read_text(encoding='utf-8-sig'))
