@@ -27,7 +27,11 @@
     <div id="code-editor" class="code-editor" hidden></div>
     <span asp-validation-for="SourceCode" class="text-danger"></span>
     <p id="source-help" class="form-text">@L["Editor_SourceHelp"]</p>
-    <div class="custom-input-panel mb-3">
+    <div class="workspace-tabs" data-workspace-tabs role="tablist" aria-label="@T["Ui_Console"]" hidden>
+        <button type="button" id="input-tab" role="tab" aria-selected="true" aria-controls="custom-input-panel" data-workspace-pane="input">@L["Run_CustomInput"]</button>
+        <button type="button" id="result-tab" role="tab" aria-selected="false" aria-controls="custom-run-result" data-workspace-pane="result" tabindex="-1" disabled>@L["Run_Result"]</button>
+    </div>
+    <div id="custom-input-panel" class="custom-input-panel mb-3">
         <label for="CustomInput" class="form-label">@L["Run_CustomInput"]</label>
         <textarea id="CustomInput" name="CustomInput" class="form-control custom-input" rows="4" maxlength="32768" spellcheck="false" aria-describedby="custom-input-help"></textarea>
         <p id="custom-input-help" class="form-text mb-0">@L["Run_InputHelp"]</p>
@@ -49,7 +53,7 @@
     <div id="run-compiler-panel" hidden><h4 class="h6">@L["Common_CompilerOutput"]</h4><pre id="run-compiler" class="test-data" tabindex="0"></pre></div>
 </section>
     <div class="workspace-actions"><div class="d-flex flex-wrap gap-2">
-        <button type="button" class="btn btn-outline-primary" id="run-code" disabled="@(Model.Runtimes.Count == 0)">@L["Run_Button"]</button>
+        <button type="button" class="btn btn-outline-secondary" id="run-code" disabled="@(Model.Runtimes.Count == 0)">@L["Run_Button"]</button>
         <button type="submit" class="btn btn-primary" id="submit-code" disabled="@(Model.Runtimes.Count == 0)">@L["Submit_Button"]</button>
     </div>
     <p class="form-text mt-2 mb-1">@T["Workspace_Shortcuts"]</p>

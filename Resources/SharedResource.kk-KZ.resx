@@ -290,5 +290,11 @@
   <data name="Social_NetworkError" xml:space="preserve"><value>Жеткізілгені расталмады. Мәтін осы жерде қалады; байланыс қалпына келгенде қайта жіберіп көріңіз.</value></data>
   <data name="Social_PrivacyHeading" xml:space="preserve"><value>Қауымдастықтағы құпиялық</value></data>
   <data name="Social_PrivacyText" xml:space="preserve"><value>Ашық профильде есім, аватар және жалпы оқу көрсеткіштері көрінеді. Email, код, таңдаулылар және толық белсенділік жеке болып қалады. Жеке хаттар SQL Server-де жай мәтін ретінде сақталады, ұштан-ұшқа шифрланбайды. Қолданбада оларды тек әңгіме қатысушылары оқиды; Admin бөлімінде хаттарды оқу интерфейсі жоқ. Достықты жою немесе блоктау жаңа хаттарды тоқтатады, бұрынғы тарих сақталады.</value></data>
+  <data name="Ui_Welcome" xml:space="preserve"><value>Қайта қош келдіңіз, {0}</value></data>
+  <data name="Ui_DashboardIntro" xml:space="preserve"><value>Бүгінгі шағын қадам — ертеңгі сенімді код.</value></data>
+  <data name="Ui_ContinueLearning" xml:space="preserve"><value>Оқуды жалғастыру</value></data>
+  <data name="Ui_ContinueLearningText" xml:space="preserve"><value>Тақырыпты түсініп, мысалды талдаңыз. Содан кейін біліміңізді есеппен бекітіңіз.</value></data>
+  <data name="Ui_PracticeIntro" xml:space="preserve"><value>Есептер жинағынан келесі жаттығуды таңдаңыз немесе таныс есепті қайта пысықтаңыз.</value></data>
+  <data name="Ui_Console" xml:space="preserve"><value>Орындау консолі</value></data>
 </root>
 

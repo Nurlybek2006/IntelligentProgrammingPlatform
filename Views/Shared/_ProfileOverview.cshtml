@@ -2,7 +2,7 @@
 @using IntelligentProgrammingPlatform.ViewModels.Account
 <section class="panel profile-hero" aria-label="@L["Account_Profile"]">
     <partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = Model.DisplayName, AvatarPath = Model.AvatarPath, Large = true })" />
-    <div class="profile-identity"><p class="eyebrow">@L["Account_Profile"]</p><h2>@Model.DisplayName</h2>
+    <div class="profile-identity"><p class="eyebrow">@L["Account_Profile"] · @T["Xp_Level", Model.Experience.CurrentLevel]</p><h2>@Model.DisplayName</h2>
         <p class="profile-roles">@string.Join(" · ", Model.Roles.Select(role => role == RoleNames.Admin ? T["Role_Admin"].Value : role == RoleNames.Student ? T["Role_Student"].Value : role))</p>
         <p class="text-muted">@Model.Email</p><p class="small text-muted mb-0">@L["Account_JoinedUtc"]: @Model.CreatedAt.ToString("g")</p>
     </div>

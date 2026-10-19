@@ -17,6 +17,7 @@ public class ProgressViewModel
     public List<ProgressGroupViewModel> Topics { get; set; } = new();
     public List<SubmissionListItemViewModel> Recent { get; set; } = new();
     public LearningInsightsViewModel LearningMap { get; set; } = new();
+    public ExperienceViewModel Experience { get; set; } = new();
 }
 
 public class ProgressGroupViewModel

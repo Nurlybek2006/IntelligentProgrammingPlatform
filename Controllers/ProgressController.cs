@@ -10,12 +10,14 @@ public class ProgressController : Controller
 {
     private readonly ProgressService _progress;
     private readonly LearningInsightsService _insights;
+    private readonly ExperienceService _experience;
 
     // Жеке статистиканы есептейтін қызметті қабылдайды.
-    public ProgressController(ProgressService progress, LearningInsightsService insights)
+    public ProgressController(ProgressService progress, LearningInsightsService insights, ExperienceService experience)
     {
         _progress = progress;
         _insights = insights;
+        _experience = experience;
     }
 
     [HttpGet]
@@ -26,6 +28,7 @@ public class ProgressController : Controller
         if (userId == null) return Challenge();
         var model = await _progress.GetAsync(userId, cancellationToken);
         model.LearningMap = await _insights.GetAsync(userId, cancellationToken);
+        model.Experience = await _experience.GetAsync(userId, cancellationToken);
         return View(model);
     }
 }

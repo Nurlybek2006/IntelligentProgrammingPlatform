@@ -290,5 +290,11 @@
   <data name="Social_NetworkError" xml:space="preserve"><value>Could not confirm delivery. Your text remains here; retry this message when your connection returns.</value></data>
   <data name="Social_PrivacyHeading" xml:space="preserve"><value>Community privacy</value></data>
   <data name="Social_PrivacyText" xml:space="preserve"><value>Public profiles show display names, avatars and learning totals. Email, code, favorites and detailed activity stay private. Direct messages are plain text stored in SQL Server, not end-to-end encrypted. Only conversation participants can read them in the application; the Admin area has no message-reading interface. Removing a friend or blocking stops new messages but keeps existing history.</value></data>
+  <data name="Ui_Welcome" xml:space="preserve"><value>Welcome back, {0}</value></data>
+  <data name="Ui_DashboardIntro" xml:space="preserve"><value>A little practice today. More confident code tomorrow.</value></data>
+  <data name="Ui_ContinueLearning" xml:space="preserve"><value>Continue learning</value></data>
+  <data name="Ui_ContinueLearningText" xml:space="preserve"><value>Explore a topic and its examples, then put it into practice.</value></data>
+  <data name="Ui_PracticeIntro" xml:space="preserve"><value>Choose your next challenge or revisit a familiar task.</value></data>
+  <data name="Ui_Console" xml:space="preserve"><value>Execution console</value></data>
 </root>
 

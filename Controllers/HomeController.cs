@@ -4,6 +4,7 @@ using IntelligentProgrammingPlatform.Models;
 using IntelligentProgrammingPlatform.Services.Progress;
 using IntelligentProgrammingPlatform.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace IntelligentProgrammingPlatform.Controllers;
 
@@ -11,15 +12,34 @@ namespace IntelligentProgrammingPlatform.Controllers;
 public class HomeController : Controller
 {
     private readonly ProgressService _progress;
+    private readonly ExperienceService _experience;
+    private readonly LearningInsightsService _insights;
+    private readonly UserManager<ApplicationUser> _users;
 
-    // Басты бетке жеңіл статистика дайындайтын қызметті қабылдайды.
-    public HomeController(ProgressService progress) => _progress = progress;
+    // Басты бетке бар статистика мен оқу ұсынысын беретін қызметтерді қабылдайды.
+    public HomeController(ProgressService progress, ExperienceService experience, LearningInsightsService insights, UserManager<ApplicationUser> users)
+    {
+        _progress = progress;
+        _experience = experience;
+        _insights = insights;
+        _users = users;
+    }
 
     // Қонаққа таныстыру бетін, студентке жеке соңғы нәтижелерін көрсетеді.
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        return View(userId == null ? new HomeViewModel() : await _progress.GetHomeAsync(userId, cancellationToken));
+        if (userId == null) return View(new HomeViewModel());
+        // Бар қызметтердің дайын көрсеткіштерін тек басты беттің көрінісіне жинайды.
+        var progress = await _progress.GetAsync(userId, cancellationToken);
+        var experience = await _experience.GetAsync(userId, cancellationToken);
+        var insights = await _insights.GetAsync(userId, cancellationToken);
+        return View(new HomeViewModel
+        {
+            DisplayName = (await _users.GetUserAsync(User))?.DisplayName ?? string.Empty,
+            SolvedTasks = progress.SolvedTasks, Score = progress.Score, SuccessRate = progress.SuccessRate,
+            Experience = experience, PracticeNext = insights.PracticeNext, Recent = progress.Recent.Take(3).ToList()
+        });
     }
 
     // Пайдаланушы деректерінің қолданылуын қысқаша түсіндіреді.

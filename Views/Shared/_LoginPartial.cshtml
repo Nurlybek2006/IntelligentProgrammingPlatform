@@ -5,21 +5,25 @@
     var action = ViewContext.RouteData.Values["action"]?.ToString();
     var controller = ViewContext.RouteData.Values["controller"]?.ToString();
 }
-<ul class="navbar-nav account-nav">
 @if (User.Identity?.IsAuthenticated == true)
 {
     var currentUser = await UserManager.GetUserAsync(User);
-    <li class="nav-item"><span class="navbar-text display-name avatar-name"><partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = currentUser?.DisplayName, AvatarPath = currentUser?.AvatarPath, Small = true })" /><span>@currentUser?.DisplayName</span></span></li>
-    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Profile" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Profile">@T["Nav_Profile"]</a></li>
+    <details class="nav-dropdown account-nav">
+    <summary class="nav-control user-control" aria-current="@(controller is "Account" or "Favorites" || ViewContext.RouteData.Values["area"]?.ToString() == "Admin" ? "page" : null)"><partial name="_UserAvatar" model="@(new UserAvatarViewModel { DisplayName = currentUser?.DisplayName, AvatarPath = currentUser?.AvatarPath, Small = true })" /><span class="display-name">@currentUser?.DisplayName</span><span class="chevron" aria-hidden="true"></span></summary>
+    <div class="nav-dropdown-menu">
+    <p class="dropdown-label">@L["Account_YourAccount"]</p>
+    <a class="dropdown-item" aria-current="@(controller == "Account" && action == "Profile" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Profile">@T["Nav_Profile"]</a>
+    <a class="dropdown-item" aria-current="@(controller == "Favorites" ? "page" : null)" asp-area="" asp-controller="Favorites" asp-action="Index">@T["Favorites_Title"]</a>
     @if (User.IsInRole(RoleNames.Admin))
     {
-        <li class="nav-item"><a class="nav-link" aria-current="@(ViewContext.RouteData.Values["area"]?.ToString() == "Admin" ? "page" : null)" asp-area="Admin" asp-controller="Home" asp-action="Index">@T["Nav_Admin"]</a></li>
+        <a class="dropdown-item" aria-current="@(ViewContext.RouteData.Values["area"]?.ToString() == "Admin" ? "page" : null)" asp-area="Admin" asp-controller="Home" asp-action="Index">@T["Nav_Admin"]</a>
     }
-    <li class="nav-item"><form asp-area="" asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="nav-link btn btn-link">@T["Nav_Logout"]</button></form></li>
+    <div class="dropdown-divider"></div>
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post"><button type="submit" class="dropdown-item">@T["Nav_Logout"]</button></form>
+    </div></details>
 }
 else
 {
-    <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Account" && action == "Login" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Login">@T["Nav_Login"]</a></li>
-    <li class="nav-item"><a class="btn btn-primary btn-sm" asp-area="" asp-controller="Account" asp-action="Register">@T["Nav_Register"]</a></li>
+    <div class="account-nav guest-actions"><a class="nav-control" aria-current="@(controller == "Account" && action == "Login" ? "page" : null)" asp-area="" asp-controller="Account" asp-action="Login">@T["Nav_Login"]</a>
+    <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Account" asp-action="Register">@T["Nav_Register"]</a></div>
 }
-</ul>

@@ -1,47 +1,61 @@
-@model IntelligentProgrammingPlatform.ViewModels.Home.HomeViewModel
+﻿@model IntelligentProgrammingPlatform.ViewModels.Home.HomeViewModel
 @{ ViewData["Title"] = L["Home_Title"]; }
-<section class="hero">
-    <div>
-        <p class="eyebrow">@L["Home_Eyebrow"]</p>
-        <h1>@L["Home_Heading"]<br /><span>@L["Home_HeadingAccent"]</span></h1>
-        <p class="hero-copy">@L["Home_Intro"]</p>
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">@L[User.Identity?.IsAuthenticated == true ? "Home_Continue" : "Home_Start"] <span aria-hidden="true">→</span></a>
-            <a class="btn btn-outline-secondary" asp-controller="Leaderboard" asp-action="Index">@L["Home_ExploreLeaderboard"]</a>
-        </div>
-        <p class="hero-note">@L["Home_Note"]</p>
-    </div>
-    <div class="learning-loop" aria-label="@L["Home_JourneyLabel"]">
-        <div class="loop-title"><span>@L["Home_LoopTitle"]</span><span aria-hidden="true">&lt;/&gt;</span></div>
-        <div class="loop-step"><span class="loop-number" aria-hidden="true">01</span><div><strong>@L["Home_StepTask"]</strong><p>@L["Home_StepTaskText"]</p></div></div>
-        <div class="loop-step"><span class="loop-number" aria-hidden="true">02</span><div><strong>@L["Home_StepResult"]</strong><p>@L["Home_StepResultText"]</p></div></div>
-        <div class="loop-step"><span class="loop-number" aria-hidden="true">03</span><div><strong>@L["Home_StepLearn"]</strong><p>@L["Home_StepLearnText"]</p></div></div>
-    </div>
-</section>
 @if (User.Identity?.IsAuthenticated == true)
 {
-    <section aria-labelledby="snapshot-heading">
-        <div class="section-heading"><h2 id="snapshot-heading">@L["Home_Snapshot"]</h2><a asp-controller="Progress" asp-action="Index">@L["Home_ViewProgress"]</a></div>
-        <div class="row g-3 mb-4">
-            <div class="col-sm-6"><div class="panel metric-card"><h2>@L["Common_SolvedTasks"]</h2><strong id="home-solved">@Model.SolvedTasks</strong></div></div>
-            <div class="col-sm-6"><div class="panel metric-card accent"><h2>@L["Home_YourScore"]</h2><strong id="home-score">@Model.Score</strong></div></div>
-        </div>
+    <div class="page-heading dashboard-heading">
+        <div><p class="eyebrow">@T["App_Brand"] / @L["Home_Snapshot"]</p><h1>@T["Ui_Welcome", Model.DisplayName]</h1><p>@T["Ui_DashboardIntro"]</p></div>
+        <a class="btn btn-primary" asp-controller="Tasks" asp-action="Index">@L["Home_Continue"] <span aria-hidden="true">→</span></a>
+    </div>
+    <section class="dashboard-metrics" aria-label="@L["Home_Snapshot"]">
+        <div class="panel metric-card accent"><h2>@T["Xp_Title"]</h2><strong>@T["Xp_Level", Model.Experience.CurrentLevel]</strong><p class="small text-muted mb-0 mt-2">@Model.Experience.TotalXp.ToString("N0") XP</p></div>
+        <div class="panel metric-card"><h2>@L["Common_SolvedTasks"]</h2><strong id="home-solved">@Model.SolvedTasks</strong></div>
+        <div class="panel metric-card"><h2>@L["Home_YourScore"]</h2><strong id="home-score">@Model.Score</strong></div>
+        <div class="panel metric-card"><h2>@L["Progress_SuccessPercentage"]</h2><strong>@Model.SuccessRate.ToString("0.0")%</strong></div>
+    </section>
+    <div class="dashboard-next">
+        <section class="panel continue-learning"><span class="feature-number" aria-hidden="true">01 / &lt;/&gt;</span><h2>@T["Ui_ContinueLearning"]</h2><p>@T["Ui_ContinueLearningText"]</p><div class="profile-actions"><a class="btn btn-outline-primary" asp-controller="Lessons" asp-action="Index">@T["Nav_Lessons"] →</a><a asp-controller="Lessons" asp-action="Index" asp-route-language="python">@L["Lessons_PythonPath"]</a></div></section>
+        <section class="panel practice-next"><p class="eyebrow">@L["Map_PracticeNext"]</p>
+            @if (Model.PracticeNext is { } next)
+            {
+                <h2>@next.Title</h2><p>@next.TopicName · <span class="difficulty @next.Difficulty">@T[$"Difficulty_{next.Difficulty}"]</span></p>
+                <a class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@next.Slug">@L["Map_PracticeButton"] →</a>
+            }
+            else
+            {
+                <h2>@L["Home_TasksFeature"]</h2><p>@T["Ui_PracticeIntro"]</p><a class="btn btn-outline-primary" asp-controller="Tasks" asp-action="Index">@L["Common_BrowseTasks"] →</a>
+            }
+        </section>
+    </div>
+    <section aria-labelledby="recent-heading">
+        <div class="section-heading"><h2 id="recent-heading">@L["Progress_Recent"]</h2><a asp-controller="Progress" asp-action="Index">@L["Home_ViewProgress"] →</a></div>
         @if (Model.Recent.Count == 0)
         {
-            <div class="empty-state"><h3>@L["Home_EmptyHeading"]</h3><p>@L["Home_EmptyText"]</p></div>
+            <div class="empty-state"><h3>@L["Home_EmptyHeading"]</h3><p>@L["Home_EmptyText"]</p><a class="btn btn-outline-primary" asp-controller="Tasks" asp-action="Index">@L["Common_BrowseTasks"]</a></div>
         }
-        else
-        {
-            <partial name="_RecentSubmissions" model="Model.Recent" />
-        }
+        else { <partial name="_RecentSubmissions" model="Model.Recent" /> }
     </section>
 }
-<section aria-labelledby="features-heading">
-    <div class="section-heading"><h2 id="features-heading">@L["Home_Features"]</h2></div>
-    <div class="feature-grid">
-        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_PracticeTag"]</span><h3>@L["Home_TasksFeature"]</h3><p>@L["Home_TasksFeatureText"]</p></div>
-        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_CheckTag"]</span><h3>@L["Home_ExecutionFeature"]</h3><p>@L["Home_ExecutionFeatureText"]</p></div>
-        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_UnderstandTag"]</span><h3>@L["Home_AiFeature"]</h3><p>@L["Home_AiFeatureText"]</p></div>
-        <div class="panel"><span class="feature-number" aria-hidden="true">@L["Home_GrowTag"]</span><h3>@L["Home_ProgressFeature"]</h3><p>@L["Home_ProgressFeatureText"]</p></div>
-    </div>
-</section>
+else
+{
+    <section class="hero">
+        <div><p class="eyebrow">@L["Home_Eyebrow"]</p><h1>@L["Home_Heading"]<br /><span>@L["Home_HeadingAccent"]</span></h1><p class="hero-copy">@L["Home_Intro"]</p>
+            <div class="profile-actions"><a class="btn btn-primary" asp-controller="Lessons" asp-action="Index">@L["Home_Start"] →</a><a class="btn btn-outline-secondary" asp-controller="Tasks" asp-action="Index">@L["Common_BrowseTasks"]</a></div><p class="hero-note">@L["Home_Note"]</p>
+        </div>
+        <div class="learning-loop" aria-label="@L["Home_JourneyLabel"]">
+            <div class="loop-title"><span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>@T["App_Brand"] / C++ · Python</span><span aria-hidden="true">&lt;/&gt;</span></div>
+            <div class="loop-step"><span class="loop-number" aria-hidden="true">01</span><div><strong>@L["Home_StepTask"]</strong><p>@L["Home_StepTaskText"]</p></div></div>
+            <div class="loop-step"><span class="loop-number" aria-hidden="true">02</span><div><strong>@L["Home_StepResult"]</strong><p>@L["Home_StepResultText"]</p></div></div>
+            <div class="loop-step"><span class="loop-number" aria-hidden="true">03</span><div><strong>@L["Home_StepLearn"]</strong><p>@L["Home_StepLearnText"]</p></div></div>
+            <div class="loop-footer"><span class="status-badge Accepted">@T["Status_Accepted"]</span><span>@T["App_Subtitle"]</span></div>
+        </div>
+    </section>
+    <section aria-labelledby="features-heading">
+        <div class="section-heading"><h2 id="features-heading">@L["Home_Features"]</h2><a asp-controller="Leaderboard" asp-action="Index">@L["Home_ExploreLeaderboard"] →</a></div>
+        <div class="feature-grid">
+            <div><span class="feature-number">01 / @L["Home_PracticeTag"]</span><h3>@L["Home_TasksFeature"]</h3><p>@L["Home_TasksFeatureText"]</p></div>
+            <div><span class="feature-number">02 / @L["Home_CheckTag"]</span><h3>@L["Home_ExecutionFeature"]</h3><p>@L["Home_ExecutionFeatureText"]</p></div>
+            <div><span class="feature-number">03 / @L["Home_UnderstandTag"]</span><h3>@L["Home_AiFeature"]</h3><p>@L["Home_AiFeatureText"]</p></div>
+            <div><span class="feature-number">04 / @L["Home_GrowTag"]</span><h3>@L["Home_ProgressFeature"]</h3><p>@L["Home_ProgressFeatureText"]</p></div>
+        </div>
+    </section>
+}

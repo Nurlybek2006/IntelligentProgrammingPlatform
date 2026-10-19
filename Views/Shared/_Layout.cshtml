@@ -2,6 +2,7 @@
     var controller = ViewContext.RouteData.Values["controller"]?.ToString();
     var area = ViewContext.RouteData.Values["area"]?.ToString();
     var inAdmin = area == "Admin";
+    var workspace = ViewData["Workspace"] is true;
 }
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName" data-bs-theme="dark">
@@ -14,34 +15,37 @@
     <script type="importmap" nonce="@Csp.Nonce"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/learning.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/social.css" asp-append-version="true" />
 </head>
-<body>
+<body class="@(workspace ? "workspace-page" : "")">
     <a class="skip-link" href="#main-content">@T["Nav_Skip"]</a>
     <header class="site-header">
         <nav class="navbar navbar-expand-xxl" aria-label="@T["Nav_Main"]">
             <div class="container-fluid app-width">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="@T["Nav_HomeLabel"]"><span class="brand-mark" aria-hidden="true">&lt;/&gt;</span><span>@T["App_Brand"]<span class="brand-subtitle">@T["App_Subtitle"]</span></span></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="@T["Nav_Toggle"]"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="main-navigation">
-                    <ul class="navbar-nav me-auto">
+                <button class="navbar-toggler" type="button" data-nav-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="@T["Nav_Toggle"]"><span class="navbar-toggler-icon"></span></button>
+                <div class="navbar-collapse" id="main-navigation">
+                    <ul class="navbar-nav main-nav">
                         <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Lessons" && !inAdmin ? "page" : null)" asp-area="" asp-controller="Lessons" asp-action="Index">@T["Nav_Lessons"]</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Tasks" && !inAdmin ? "page" : null)" asp-area="" asp-controller="Tasks" asp-action="Index">@T["Nav_Tasks"]</a></li>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Submissions" ? "page" : null)" asp-area="" asp-controller="Submissions" asp-action="My">@T["Nav_Submissions"]</a></li>
+                            <li class="nav-item"><a class="nav-link" aria-current="@(controller is "Submissions" or "Journeys" ? "page" : null)" asp-area="" asp-controller="Submissions" asp-action="My">@T["Nav_Submissions"]</a></li>
                             <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Progress" ? "page" : null)" asp-area="" asp-controller="Progress" asp-action="Index">@T["Nav_Progress"]</a></li>
                             @await Component.InvokeAsync("SocialNavigation")
                         }
                         <li class="nav-item"><a class="nav-link" aria-current="@(controller == "Leaderboard" && !inAdmin ? "page" : null)" asp-area="" asp-controller="Leaderboard" asp-action="Index">@T["Nav_Leaderboard"]</a></li>
                     </ul>
-                    <partial name="_LoginPartial" />
-                    <partial name="_CultureSelector" />
+                    <div class="nav-utilities"><partial name="_LoginPartial" /><partial name="_CultureSelector" /></div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="app-width page-shell @(inAdmin ? "admin-shell" : "")">
+    <div class="app-width page-shell @(inAdmin ? "admin-shell" : "") @(workspace ? "workspace-shell" : "")">
         @if (inAdmin)
         {
             <nav class="admin-nav" aria-label="@T["Nav_AdminLabel"]">

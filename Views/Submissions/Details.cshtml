@@ -7,7 +7,7 @@
 <a class="small" asp-action="My">@L["Submission_Back"]</a>
 <a class="small ms-3" asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.TaskSlug">@L["Submission_Journey"]</a>
 @if (Model.PreviousSubmissionId.HasValue) { <a class="small ms-3" asp-action="Compare" asp-route-olderId="@Model.PreviousSubmissionId" asp-route-newerId="@Model.Id">@L["Journey_Compare"]</a> }
-<div class="page-heading mt-3"><div><p class="eyebrow">@L["Submission_Title", Model.Id]</p><h1>@statusTitle</h1><p><a asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">@Model.TaskTitle</a></p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">@L["Submission_Editor"]</a></div>
+<div class="page-heading mt-3"><div><p class="eyebrow">@L["Submission_Title", Model.Id]</p><h1 class="submission-verdict @Model.Status"><span aria-hidden="true">@(Model.Status == SubmissionStatus.Accepted ? "✓" : "•")</span> @statusTitle</h1><p><a asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">@Model.TaskTitle</a></p></div><a class="btn btn-primary" asp-controller="Tasks" asp-action="Details" asp-route-slug="@Model.TaskSlug">@L["Submission_Editor"]</a></div>
 <section class="panel result-banner @Model.Status" aria-label="@L["Submission_Overview"]">
     <dl class="result-facts mt-0">
         <div><dt>@L["Common_Status"]</dt><dd id="submission-status" data-status="@Model.Status">@T[$"Status_{Model.Status}"]</dd></div>

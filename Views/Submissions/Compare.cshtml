@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = L["Diff_Title"];
     Csp.EnableMonacoStyles();
+    ViewData["Workspace"] = true;
 }
 <link rel="stylesheet" href="~/js/editor/code-editor.css" asp-append-version="true" />
 <div class="page-heading"><div><p class="eyebrow">@L["Diff_Eyebrow"]</p><h1>@L["Diff_Title"]</h1><p>@Model.Current.TaskTitle</p></div></div>

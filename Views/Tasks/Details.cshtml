@@ -1,19 +1,20 @@
 @model IntelligentProgrammingPlatform.ViewModels.Tasks.TaskDetailsViewModel
 @using IntelligentProgrammingPlatform.ViewModels.Tasks
 @using IntelligentProgrammingPlatform.Services.Submissions
-@{ ViewData["Title"] = Model.Title; }
+@{ ViewData["Title"] = Model.Title; ViewData["Workspace"] = true; }
+<div class="solve-grid learning-workspace">
+    <section class="panel problem-pane" aria-labelledby="problem-heading" tabindex="0">
 <a class="small" asp-controller="Tasks" asp-action="Index">@L["Task_Back"]</a>
 <div class="page-heading workspace-heading mt-3"><div><p class="eyebrow">@Model.TopicName</p><h1>@Model.Title</h1><div class="workspace-badges"><span class="difficulty @Model.Difficulty">@T[$"Difficulty_{Model.Difficulty}"]</span><span class="xp-reward">@T[Model.IsSolved ? "Xp_Earned" : "Xp_Reward", Model.XpReward]</span>@if (Model.IsSolved) { <span class="solved-badge">✓ @L["Tasks_Solved"]</span> }</div></div><partial name="_FavoriteButton" model="@(new FavoriteButtonViewModel(Model.Id, Model.IsFavorite))" /></div>
 <div class="workspace-meta"><span>@L["Task_TimeLimit"] @L["Common_Milliseconds", Model.TimeLimitMs]</span><span>@L["Task_MemoryLimit"] @L["Task_Memory", Model.MemoryLimitMb]</span><span>@string.Join(" / ", Model.Submission.Runtimes.Select(runtime => runtime.Text))</span>
 @if (Model.Journey?.TotalAttempts > 0) { <a asp-controller="Journeys" asp-action="Index" asp-route-slug="@Model.Journey.TaskSlug">@T["Workspace_Journey", Model.Journey.TotalAttempts]</a> }</div>
-<div class="solve-grid learning-workspace">
-    <section class="panel problem-pane" aria-labelledby="problem-heading" tabindex="0">
+        <nav class="problem-navigation" aria-label="@L["Task_Heading"]"><a href="#problem-heading">@L["Task_Heading"]</a><a href="#examples-heading">@L["Task_Examples"]</a></nav>
         <h2 id="problem-heading">@L["Task_Heading"]</h2>
         @foreach (var part in TaskStatementReader.Read(Model.Description))
         {
             <section class="problem-section"><h3 class="h6">@T[part.HeadingKey]</h3><div class="text-content task-description mb-4">@part.Text</div></section>
         }
-        <h2 class="h5">@L["Task_Examples"]</h2>
+        <h2 id="examples-heading" class="h5">@L["Task_Examples"]</h2>
         @if (Model.Examples.Count == 0) { <p class="text-muted">@L["Task_NoExamples"]</p> }
         @for (var index = 0; index < Model.Examples.Count; index++)
         {
@@ -47,5 +48,6 @@
         <partial name="_ValidationScriptsPartial" />
         <script type="module" src="~/js/editor/code-editor.js" asp-append-version="true"></script>
         <script type="module" src="~/js/custom-run.js" asp-append-version="true"></script>
+        <script src="~/js/workspace.js" asp-append-version="true"></script>
     }
 }

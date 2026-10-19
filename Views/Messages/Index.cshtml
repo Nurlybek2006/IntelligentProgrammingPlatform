@@ -28,6 +28,7 @@
         <header class="chat-header">
             <a class="chat-back" asp-action="Index">← @T["Social_Back"]</a>
             <a class="avatar-name social-profile-link" asp-controller="Users" asp-action="Profile" asp-route-id="@thread.OtherUser.Id"><partial name="_UserAvatar" model="thread.OtherUser.Avatar" /><strong class="social-name">@thread.OtherUser.DisplayName</strong></a>
+            <a class="chat-profile-action" asp-controller="Users" asp-action="Profile" asp-route-id="@thread.OtherUser.Id">@T["Social_PublicProfile"] →</a>
             <span class="small text-muted" data-connection-status role="status"></span>
         </header>
         <nav class="chat-history-nav" aria-label="@T["Social_History"]">
@@ -54,7 +55,7 @@
             <input type="hidden" name="ConversationId" value="@thread.Id" />
             <input type="hidden" name="ClientMessageId" value="@Model.ClientMessageId" />
             <label for="message-body">@T["Social_WriteMessage"]</label>
-            <textarea id="message-body" name="Body" class="form-control" rows="3" maxlength="2000" required aria-describedby="message-help" disabled="@(!thread.CanSend)"></textarea>
+            <textarea id="message-body" name="Body" class="form-control" rows="2" maxlength="2000" required aria-describedby="message-help" disabled="@(!thread.CanSend)"></textarea>
             <div class="chat-composer-footer"><span id="message-help" class="form-text">@T["Social_MessageHelp"] <span data-message-length>0 / 2000</span></span><button class="btn btn-primary" type="submit" disabled="@(!thread.CanSend)">@T["Social_Send"]</button></div>
         </form>
         <p data-chat-error class="text-danger mb-0" role="alert" hidden></p>

@@ -17,6 +17,8 @@ An ASP.NET Core MVC learning platform where students practice C++ and Python, in
 - Shared dark theme, responsive workspace, accessible form labels and safe error pages.
 - Three UI languages: **Қазақша**, **Русский**, **English**, including Admin and validation.
 
+The Ultimate UI redesign adds a shared violet/charcoal design system, grouped account/community navigation, a compact secure POST language dropdown, a personal dashboard, a connected Python lesson roadmap, a wide editor workspace and a unified chat layout. CSS is split into explicit local modules; no CDN, schema change or new business formula is required. See [study-ultimate-ui.md](study-ultimate-ui.md) and [manual-ultimate-ui-checklist.md](manual-ultimate-ui-checklist.md). New checks: `node scripts/verify_ultimate_ui.mjs` and, with the HTTPS app running, `python scripts/verify_ultimate_ui.py`. Browser rendering was unavailable during this redesign; the manual visual checks remain open.
+
 ## Technology
 
 ASP.NET Core MVC · .NET 10 · C# · Entity Framework Core · SQL Server · ASP.NET Core Identity · Docker · Monaco Editor · OpenAI Responses API (official .NET SDK) · Bootstrap 5.3 · Razor, CSS and JavaScript.

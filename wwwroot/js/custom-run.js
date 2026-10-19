@@ -28,7 +28,7 @@ if (form && run) {
         if (active || form.dataset.busy || run.disabled) return;
         form.dispatchEvent(new Event("source-sync"));
         result.hidden = false;
-        result.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
+        result.scrollIntoView?.({ block: "nearest", behavior: globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ? "auto" : "smooth" });
         output.textContent = "";
         time.textContent = "";
         summary.textContent = text.temporary;

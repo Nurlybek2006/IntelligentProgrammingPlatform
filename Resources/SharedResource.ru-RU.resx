@@ -290,5 +290,11 @@
   <data name="Social_NetworkError" xml:space="preserve"><value>Не удалось подтвердить доставку. Текст остаётся здесь; повторите отправку после восстановления связи.</value></data>
   <data name="Social_PrivacyHeading" xml:space="preserve"><value>Приватность общения</value></data>
   <data name="Social_PrivacyText" xml:space="preserve"><value>Открытые профили показывают имя, аватар и итоговые учебные показатели. Почта, код, избранное и подробная активность остаются личными. Личные сообщения хранятся как обычный текст в SQL Server без сквозного шифрования. В приложении их читают только участники; в Admin нет интерфейса чтения переписки. Удаление друга или блокировка запрещают новые сообщения, сохраняя историю.</value></data>
+  <data name="Ui_Welcome" xml:space="preserve"><value>С возвращением, {0}</value></data>
+  <data name="Ui_DashboardIntro" xml:space="preserve"><value>Небольшой шаг сегодня — уверенный код завтра.</value></data>
+  <data name="Ui_ContinueLearning" xml:space="preserve"><value>Продолжить обучение</value></data>
+  <data name="Ui_ContinueLearningText" xml:space="preserve"><value>Разберите тему и пример, затем закрепите знания на практике.</value></data>
+  <data name="Ui_PracticeIntro" xml:space="preserve"><value>Выберите следующую задачу или вернитесь к знакомой для повторения.</value></data>
+  <data name="Ui_Console" xml:space="preserve"><value>Консоль выполнения</value></data>
 </root>
 

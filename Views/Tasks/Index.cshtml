@@ -13,7 +13,7 @@
     <div class="col-lg-4"><label asp-for="Search" class="form-label">@L["Tasks_Search"]</label><input asp-for="Search" class="form-control" placeholder="@L["Tasks_SearchPlaceholder"]" /></div>
     <div class="col-sm-6 col-lg-3"><label asp-for="TopicId" class="form-label">@L["Common_Topic"]</label><select asp-for="TopicId" asp-items="Model.Topics" class="form-select"><option value="">@L["Tasks_AllTopics"]</option></select></div>
     <div class="col-sm-6 col-lg-3"><label asp-for="Difficulty" class="form-label">@L["Common_Difficulty"]</label><select asp-for="Difficulty" asp-items="difficulties" class="form-select"><option value="">@L["Tasks_AllDifficulties"]</option></select></div>
-    <div class="col-lg-2 d-flex align-items-end gap-1"><button class="btn btn-primary" type="submit">@L["Tasks_Filter"]</button><a asp-action="Index" class="btn btn-link">@L["Tasks_Reset"]</a></div>
+    <div class="col-lg-2 d-flex flex-wrap align-items-end gap-1"><button class="btn btn-primary" type="submit">@L["Tasks_Filter"]</button><a asp-action="Index" class="btn btn-link">@L["Tasks_Reset"]</a></div>
 </form>
 @if (Model.Tasks.Count == 0)
 {
@@ -26,7 +26,7 @@ else
         <tbody>
         @foreach (var task in Model.Tasks)
         {
-            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td>@task.TopicName</td><td><span class="difficulty @task.Difficulty">@T[$"Difficulty_{task.Difficulty}"]</span></td>
+            <tr><td><a asp-action="Details" asp-route-slug="@task.Slug">@task.Title</a></td><td><span class="topic-chip">@task.TopicName</span></td><td><span class="difficulty @task.Difficulty">@T[$"Difficulty_{task.Difficulty}"]</span></td>
                 @if (User.Identity?.IsAuthenticated == true) { <td><div class="catalog-personal">@if (task.IsSolved) { <span class="solved-badge">@L["Tasks_Solved"]</span> } else { <span class="text-muted">@L["Tasks_ToExplore"]</span> }<partial name="_FavoriteButton" model="@(new FavoriteButtonViewModel(task.Id, task.IsFavorite, true))" /></div></td> }
                 <td><a asp-action="Details" asp-route-slug="@task.Slug" class="btn btn-sm btn-outline-secondary" aria-label="@L["Tasks_SolveLabel", task.Title]">@L["Tasks_Solve"] <span aria-hidden="true">→</span></a></td></tr>
         }

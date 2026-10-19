@@ -1,8 +1,12 @@
 @model IntelligentProgrammingPlatform.ViewModels.Social.SocialCounts
-<li class="nav-item dropdown">
-    <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">@T["Social_Community"] <span class="badge bg-primary" data-social-count="total" hidden="@(Model.IncomingRequests + Model.UnreadMessages == 0)">@(Model.IncomingRequests + Model.UnreadMessages)</span></button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" asp-area="" asp-controller="Friends" asp-action="Index">@T["Social_Friends"] <span class="badge bg-primary" data-social-count="incomingRequests" hidden="@(Model.IncomingRequests == 0)">@Model.IncomingRequests</span></a></li>
-        <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Index">@T["Social_Messages"] <span class="badge bg-primary" data-social-count="unreadMessages" hidden="@(Model.UnreadMessages == 0)">@Model.UnreadMessages</span></a></li>
-    </ul>
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var inAdmin = ViewContext.RouteData.Values["area"]?.ToString() == "Admin";
+}
+<li class="nav-item"><details class="nav-dropdown community-nav">
+    <summary class="nav-link" aria-current="@(!inAdmin && (controller is "Friends" or "Messages" or "Users") ? "page" : null)">@T["Social_Community"] <span class="badge bg-primary" data-social-count="total" hidden="@(Model.IncomingRequests + Model.UnreadMessages == 0)">@(Model.IncomingRequests + Model.UnreadMessages)</span><span class="chevron" aria-hidden="true"></span></summary>
+    <div class="nav-dropdown-menu">
+        <a class="dropdown-item" aria-current="@(controller == "Friends" ? "page" : null)" asp-area="" asp-controller="Friends" asp-action="Index">@T["Social_Friends"] <span class="badge bg-primary" data-social-count="incomingRequests" hidden="@(Model.IncomingRequests == 0)">@Model.IncomingRequests</span></a>
+        <a class="dropdown-item" aria-current="@(controller == "Messages" ? "page" : null)" asp-area="" asp-controller="Messages" asp-action="Index">@T["Social_Messages"] <span class="badge bg-primary" data-social-count="unreadMessages" hidden="@(Model.UnreadMessages == 0)">@Model.UnreadMessages</span></a>
+    </div></details>
 </li>

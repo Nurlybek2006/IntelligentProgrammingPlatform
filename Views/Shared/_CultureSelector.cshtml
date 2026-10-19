@@ -1,10 +1,17 @@
-<form asp-area="" asp-controller="Culture" asp-action="Set" method="post" class="culture-selector">
-    <input type="hidden" name="returnUrl" value="@(Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString)" />
-    <label class="visually-hidden" for="culture-choice">@T["Culture_Label"]</label>
-    <select id="culture-choice" name="culture" class="form-select form-select-sm">
-        <option value="kk-KZ" selected="@(CultureInfo.CurrentUICulture.Name == "kk-KZ")" lang="kk">Қазақша</option>
-        <option value="ru-RU" selected="@(CultureInfo.CurrentUICulture.Name == "ru-RU")" lang="ru">Русский</option>
-        <option value="en-US" selected="@(CultureInfo.CurrentUICulture.Name == "en-US")" lang="en">English</option>
-    </select>
-    <button type="submit" class="btn btn-outline-secondary btn-sm">@T["Culture_Apply"]</button>
-</form>
+@{
+    var culture = CultureInfo.CurrentUICulture.Name;
+    var label = culture == "ru-RU" ? "Русский" : culture == "en-US" ? "English" : "Қазақша";
+}
+<details class="nav-dropdown culture-selector">
+    <summary class="nav-control" aria-label="@T["Culture_Label"]: @label">
+        <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/></svg>
+        <span>@label</span><span class="chevron" aria-hidden="true"></span>
+    </summary>
+    <form asp-area="" asp-controller="Culture" asp-action="Set" method="post" class="nav-dropdown-menu">
+        <input type="hidden" name="returnUrl" value="@(Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString)" />
+        <p class="dropdown-label">@T["Culture_Label"]</p>
+        <button type="submit" name="culture" value="kk-KZ" class="dropdown-item" lang="kk" aria-current="@(culture == "kk-KZ" ? "true" : null)">Қазақша</button>
+        <button type="submit" name="culture" value="ru-RU" class="dropdown-item" lang="ru" aria-current="@(culture == "ru-RU" ? "true" : null)">Русский</button>
+        <button type="submit" name="culture" value="en-US" class="dropdown-item" lang="en" aria-current="@(culture == "en-US" ? "true" : null)">English</button>
+    </form>
+</details>

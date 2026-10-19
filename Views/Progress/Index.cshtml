@@ -16,6 +16,7 @@
     <div class="col-sm-6 col-lg-4"><div class="panel metric-card"><h2>@L["Progress_AverageTime"]</h2><strong id="average-solve-time">@(Model.AverageSolveSeconds.HasValue ? L["Progress_Minutes", (Model.AverageSolveSeconds.Value / 60).ToString("0.0")] : L["Progress_NotAvailable"])</strong><p class="small text-muted mb-0 mt-2">@L["Progress_TimeHelp"]</p></div></div>
     <div class="col-sm-6 col-lg-4"><div class="panel metric-card accent"><h2>@L["Progress_Rating"]</h2><strong id="rating-score">@Model.Score</strong><p class="small text-muted mb-0 mt-2">@L["Progress_RatingHelp"]</p></div></div>
 </div>
+<partial name="_Experience" model="Model.Experience" />
 <div class="row g-4">
     <section class="col-lg-5" aria-labelledby="difficulty-heading"><div class="panel h-100">
         <h2 id="difficulty-heading" class="h5 mb-4">@L["Progress_ByDifficulty"]</h2>

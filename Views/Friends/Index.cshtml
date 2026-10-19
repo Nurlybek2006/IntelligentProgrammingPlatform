@@ -16,7 +16,7 @@
     </form>
 }
 @if (Model.Users.Count == 0)
-{ <div class="empty-state"><h2>@T["Social_Empty_" + Model.Section]</h2><p>@T["Social_EmptyHelp_" + Model.Section]</p></div> }
+{ <div class="empty-state"><h2>@T["Social_Empty_" + Model.Section]</h2><p>@T["Social_EmptyHelp_" + Model.Section]</p>@if (Model.Section != "search") { <a class="btn btn-outline-primary" asp-action="Index" asp-route-section="search">@T["Social_Tab_search"]</a> }</div> }
 else
 {
     <div class="social-grid">
