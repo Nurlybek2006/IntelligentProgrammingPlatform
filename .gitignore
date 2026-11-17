@@ -38,3 +38,4 @@ Thumbs.db
 # Runtime user images (keep only the empty directory marker)
 wwwroot/uploads/avatars/*
 !wwwroot/uploads/avatars/.gitkeep
+
